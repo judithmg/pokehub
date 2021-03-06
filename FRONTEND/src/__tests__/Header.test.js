@@ -3,9 +3,9 @@ import { render, screen } from '@testing-library/react';
 
 import HeaderComponent from '../pages/shared/header';
 
-describe('Given a Footer component', () => {
+describe('Given a Header component', () => {
   describe('When it is invoked', () => {
-    test('Then there should be a footer', () => {
+    test('Then there should be a header section', () => {
       render(
         <HeaderComponent />,
       );

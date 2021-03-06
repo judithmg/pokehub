@@ -5,7 +5,7 @@ import {
 
 import '../../styles/App.scss';
 
-import Landing from '../landing';
+import MainComponent from '../main';
 import Header from '../shared/header';
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
 
         <Route path="/">
           <Header />
-          <Landing />
+          <MainComponent />
         </Route>
       </Switch>
     </Router>
