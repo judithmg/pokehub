@@ -6,6 +6,7 @@ import {
 import '../../styles/App.scss';
 
 import Landing from '../landing';
+import Header from '../shared/header';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/welcome" />
 
         <Route path="/">
+          <Header />
           <Landing />
         </Route>
       </Switch>

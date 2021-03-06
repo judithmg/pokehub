@@ -1,0 +1,14 @@
+@import "./mixins.scss";
+@import "./colors.scss";
+
+header {
+  position: sticky;
+  background-color: $headercolor;
+  height: 60px;
+  @include flex(row, flex-end, center);
+  img {
+    width: 50px;
+    margin: 0 20px;
+    cursor: pointer;
+  }
+}
