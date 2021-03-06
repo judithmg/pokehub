@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="https://yui-s.yahooapis.com/pure/0.5.0/pure-min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://rawgit.com/tpreusse/radar-chart-d3/master/src/radar-chart.css"
+    />
+  </head>
+  <body>
+    <style>
+      body {
+        padding: 20px;
+      }
+    </style>
+
+    <style>
+      .radar-chart .area {
+        fill-opacity: 0.7;
+      }
+      .radar-chart.focus .area {
+        fill-opacity: 0.3;
+      }
+      .radar-chart.focus .area.focused {
+        fill-opacity: 0.9;
+      }
+      .area.germany,
+      .germany .circle {
+        fill: #ffd700;
+        stroke: none;
+      }
+      .area.argentina,
+      .argentina .circle {
+        fill: #add8e6;
+        stroke: none;
+      }
+    </style>
+
+    <script src="https://d3js.org/d3.v3.js"></script>
+    <script src="https://rawgit.com/tpreusse/radar-chart-d3/master/src/radar-chart.js"></script>
+
+    <script>
+      RadarChart.defaultConfig.color = function () {};
+      RadarChart.defaultConfig.radius = 3;
+      RadarChart.defaultConfig.w = 100;
+      RadarChart.defaultConfig.h = 100;
+    </script>
+
+    <span></span>
+
+    <script>
+      var data = [
+        {
+          className: "germany", // optional can be used for styling
+          axes: [
+            { axis: "HP", value: 55 },
+            { axis: "ATK", value: 25 },
+            { axis: "DEF", value: 50 },
+            { axis: "SP ATK", value: 9 },
+            { axis: "SP DEF", value: 20 },
+            { axis: "SPEED", value: 1 },
+          ],
+        },
+      ];
+      function getDataSet() {
+        return data.map(function (d) {
+          return {
+            className: d.className,
+            axes: d.axes.map(function (axis) {
+              return { axis: axis.axis, value: axis.value };
+            }),
+          };
+        });
+      }
+    </script>
+
+    <script>
+      var chart = RadarChart.chart();
+      var cfg = chart.config(); // retrieve default config
+      var svg = d3
+        .select("body")
+        .append("svg")
+        .attr("width", cfg.w)
+        .attr("height", cfg.h);
+      svg.append("g").classed("single", 1).datum(getDataSet()).call(chart);
+    </script>
+  </body>
+</html>
