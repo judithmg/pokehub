@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../styles/landing.scss';
 
 export default function LandingComponent() {
   return (

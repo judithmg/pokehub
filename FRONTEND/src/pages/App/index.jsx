@@ -12,7 +12,6 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/welcome" />
 
         <Route path="/">
           <Header />

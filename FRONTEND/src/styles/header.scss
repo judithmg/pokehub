@@ -5,7 +5,7 @@ header {
   position: sticky;
   background-color: $headercolor;
   height: 60px;
-  @include flex(row, flex-end, center);
+  @include flex(row, space-between, center);
   img {
     width: 50px;
     margin: 0 20px;
