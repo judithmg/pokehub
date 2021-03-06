@@ -1,9 +1,21 @@
-import '../../styles/App.scss';
 import React from 'react';
+import {
+  Route, Switch, BrowserRouter as Router,
+} from 'react-router-dom';
+
+import Landing from '../landing';
 
 function App() {
   return (
-    <div className="App" />
+    <Router>
+      <Switch>
+        <Route path="/welcome" />
+
+        <Route path="/">
+          <Landing />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
