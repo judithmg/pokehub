@@ -3,6 +3,8 @@ import {
   Route, Switch, BrowserRouter as Router,
 } from 'react-router-dom';
 
+import '../../styles/App.scss';
+
 import Landing from '../landing';
 
 function App() {
