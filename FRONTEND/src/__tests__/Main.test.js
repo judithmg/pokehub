@@ -9,9 +9,7 @@ describe('Given a Main component', () => {
       render(
         <MainComponent />,
       );
-
-      const main = screen.getByLabelText('main');
-
+      const main = screen.findByLabelText('main');
       expect(main).toBeTruthy();
     });
   });
