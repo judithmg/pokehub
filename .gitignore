@@ -347,3 +347,9 @@ auth-data.js
 
 /.expo
 .expo/
+
+
+# Added by judithmg
+
+.icons/
+pruebas.html
