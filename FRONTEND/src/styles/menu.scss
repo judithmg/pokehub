@@ -1,0 +1,12 @@
+@import "./mixins";
+@import "./colors";
+@import "./fonts";
+
+aside {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  background-color: $menucolor;
+  width: 200px;
+  height: 100vh;
+}
