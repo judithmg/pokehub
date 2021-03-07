@@ -1,5 +1,6 @@
 @import "./colors";
 @import "./fonts";
+@import "./types";
 
 .btn {
   background-color: transparent;
@@ -19,11 +20,14 @@
 }
 
 .btn-type {
-  font-size: 12px;
   width: 70px;
   margin: 2px;
-  text-align: center;
   border-radius: 10px;
+
+  color: #fff;
+
+  font-size: 12px;
+  text-align: center;
   text-shadow: 1px 1px #000000;
   box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 1);
 }

@@ -3,12 +3,13 @@ import '../../styles/button.scss';
 
 import PropTypes from 'prop-types';
 
-export default function ButtonType({ text }) {
+export default function ButtonType({ text, type }) {
   return (
-    <button type="button" className="btn-type">{text}</button>
+    <button type="button" className={`btn-type ${type}`}>{text.toUpperCase()}</button>
   );
 }
 
 ButtonType.propTypes = {
   text: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };

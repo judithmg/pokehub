@@ -16,8 +16,7 @@ export default function PokemonList({ pokemon }) {
         {pokemon.name}
       </th>
       <th className="pokedex__pokemon-type">
-        {pokemon.type}
-        <ButtonType text="FIRE" />
+        <ButtonType text={pokemon.type} type={pokemon.type} />
       </th>
       <th className="pokedex__pokemon-stats">
         {pokemon.stats.atk}
