@@ -62,6 +62,12 @@
 }
 
 //DASHBOARD
-.dashboard__component {
-  @include flex(row, center, center);
+
+.dashboard-component {
+}
+
+@media only screen and (min-width: 768px) {
+  .dashboard__component {
+    @include flex(row, center, center);
+  }
 }
