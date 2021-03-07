@@ -1,8 +1,13 @@
 import React from 'react';
 import '../../styles/menu.scss';
 
+import types from '../../data/types';
+import ButtonType from '../shared/ButtonType';
+
 export default function MenuComponent() {
   return (
-    <aside>yoooooooo</aside>
+    <aside>
+      {types.map((type) => <ButtonType text={type} type={type} />)}
+    </aside>
   );
 }
