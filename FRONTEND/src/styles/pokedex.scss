@@ -1,0 +1,12 @@
+@import "./mixins";
+@import "./colors";
+@import "./fonts";
+
+.pokedex__pokemon,
+.pokedex__header {
+  @include flex(row, flex-start, flex-start);
+  background-color: red;
+  th {
+    width: 100px;
+  }
+}

@@ -2,6 +2,48 @@
 @import "./colors";
 @import "./fonts";
 
+//GENERAL STYLES
+
+body {
+  background-color: $backgroundcolor;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+table,
+thead,
+tbody,
+tfoot,
+tr,
+th,
+td {
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-collapse: inherit;
+  border-spacing: 0;
+  border-color: inherit;
+  vertical-align: inherit;
+  text-align: left;
+  font-weight: inherit;
+  -webkit-border-horizontal-spacing: 0;
+  -webkit-border-vertical-spacing: 0;
+}
+th,
+td {
+  display: inline;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .--desktop {
   display: none;
 }
@@ -30,13 +72,6 @@
 
 ::-webkit-scrollbar-corner {
   background: transparent;
-}
-
-body {
-  background-color: $backgroundcolor;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
 
 @media only screen and (min-width: 768px) {
