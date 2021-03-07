@@ -12,11 +12,15 @@ export default function PokemonList({ pokemon }) {
       <th className="pokedex__pokemon-sprite">
         {pokemon.sprite}
       </th>
+      <th className="pokedex__pokemon-graph">
+        {pokemon.sprite}
+      </th>
       <th className="pokedex__pokemon-name">
         {pokemon.name}
       </th>
       <th className="pokedex__pokemon-type">
-        <ButtonType text={pokemon.type} type={pokemon.type} />
+        {pokemon.type.map((type) => <ButtonType text={type} type={type} />)}
+
       </th>
       <th className="pokedex__pokemon-stats">
         {pokemon.stats.atk}
