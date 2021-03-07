@@ -2,9 +2,19 @@
 @import "./colors";
 @import "./fonts";
 
+.--desktop {
+  display: none;
+}
+
 body {
   background-color: $backgroundcolor;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+@media only screen and (min-width: 768px) {
+  .--desktop {
+    display: block;
+  }
 }

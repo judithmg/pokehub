@@ -4,8 +4,18 @@
 
 .btn {
   outline: none;
-  border: 2px solid $menucolor;
+  background-color: transparent;
+
+  color: $menucolor;
+  font-family: $Montserrat;
+  font-weight: 700;
+  font-style: bold;
+  font-size: 18px;
+
+  border: 3px solid $menucolor;
   border-radius: 20px;
   padding: 5px;
   margin: 5px;
+
+  cursor: pointer;
 }
