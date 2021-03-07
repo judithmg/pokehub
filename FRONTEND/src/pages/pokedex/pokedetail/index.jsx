@@ -9,6 +9,16 @@ import pokemon from './pokemon';
 export default function PokeDetailComponent() {
   return (
     <>
+      <section>
+        <div className="pokemon__abstract" />
+        <div className="pokemon__detailed">
+          <div className="pokemon__ability" />
+          <div className="pokemon__moves">
+            <div className="pokemon__moves-lvl" />
+            <div className="pokemon__moves-egg" />
+          </div>
+        </div>
+      </section>
       {pokemon.name}
       {pokemon.name}
       {pokemon.name}
