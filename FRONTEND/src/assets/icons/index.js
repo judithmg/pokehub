@@ -1,4 +1,4 @@
-export { default as Avatar } from './Avatar';
+export { default as Ditto } from './Ditto';
 export { default as Pokeball } from './Pokeball';
-export { default as PokemonIrPik } from './PokemonIrPik';
-export { default as PokemonIr } from './PokemonIr';
+export { default as PokedexPika } from './PokedexPika';
+export { default as PokedexBall } from './PokedexBall';
