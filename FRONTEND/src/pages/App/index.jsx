@@ -1,7 +1,4 @@
 import React from 'react';
-import {
-  Route, Switch, BrowserRouter as Router,
-} from 'react-router-dom';
 
 import '../../styles/App.scss';
 
@@ -10,15 +7,10 @@ import Header from '../header';
 
 function App() {
   return (
-    <Router>
-      <Switch>
-
-        <Route path="/">
-          <Header />
-          <MainComponent />
-        </Route>
-      </Switch>
-    </Router>
+    <>
+      <Header />
+      <MainComponent />
+    </>
   );
 }
 
