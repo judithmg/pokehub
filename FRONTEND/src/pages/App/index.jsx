@@ -6,7 +6,7 @@ import {
 import '../../styles/App.scss';
 
 import MainComponent from '../main';
-import Header from '../shared/header';
+import Header from '../header';
 
 function App() {
   return (

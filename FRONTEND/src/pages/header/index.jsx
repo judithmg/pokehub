@@ -1,18 +1,21 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react';
-import '../../../styles/header.scss';
+import '../../styles/header.scss';
 import Menu from '../menu';
-import Button from '../buttons/Button';
+import Button from '../shared/Button';
 
-export default function LandingComponent() {
+export default function HeaderComponent() {
   const [menu, setMenu] = useState(false);
 
   return (
     <>
       <header>
-
-        <span className="header__logo">*logo goes here</span>
+        <img
+          src="https://trello-attachments.s3.amazonaws.com/6041f83090af1242e84592ce/389x127/0912ffc4b04806362cd149c9a1064112/logo-header.png"
+          className="header__logo"
+          alt="header logo"
+        />
         <div className="header--right">
           <Button text="Login" classes="header__login" />
           <img
