@@ -5,7 +5,7 @@
 .pokedex__pokemon,
 .pokedex__header {
   @include flex(row, flex-start, flex-start);
-  background-color: red;
+  background-color: #ccc;
   th {
     width: 100px;
   }
