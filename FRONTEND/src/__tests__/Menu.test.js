@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import MenuComponent from '../pages/shared/menu';
+import MenuComponent from '../pages/menu';
 
 describe('Given a Menu component', () => {
   describe('When it is invoked', () => {

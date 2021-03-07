@@ -4,8 +4,10 @@ import Button from './DashboardButton';
 
 export default function DashboardComponent() {
   return (
-    <>
-      <Button text="Pokedex" />
-    </>
+    <section className="dashboard__component">
+      <Button text="POKEDEX" />
+      <Button text="TEAMS" />
+      <Button text="BATTLE" />
+    </section>
   );
 }
