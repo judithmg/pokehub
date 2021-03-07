@@ -29,7 +29,7 @@ export default function PokedexComponent() {
           </thead>
           <tbody>
             {pokemons.map((pokemon) => (
-              <PokemonList pokemon={pokemon} />
+              <PokemonList pokemon={pokemon} key={pokemon.name} />
             ))}
           </tbody>
         </table>

@@ -10,16 +10,16 @@ export default function PokemonList({ pokemon }) {
         {pokemon.id}
       </th>
       <th className="pokedex__pokemon-sprite">
-        {pokemon.sprite}
+        {pokemon.id}
       </th>
       <th className="pokedex__pokemon-graph">
-        {pokemon.sprite}
+        sss
       </th>
       <th className="pokedex__pokemon-name">
         {pokemon.name}
       </th>
       <th className="pokedex__pokemon-type">
-        {pokemon.type.map((type) => <ButtonType text={type} type={type} />)}
+        {pokemon.type.map((type) => <ButtonType text={type} type={type} key={`${pokemon.name}-${pokemon.type[0]}`} />)}
 
       </th>
       <th className="pokedex__pokemon-stats">
@@ -31,5 +31,10 @@ export default function PokemonList({ pokemon }) {
 }
 
 PokemonList.propTypes = {
-  pokemon: PropTypes.arrayOf(PropTypes.object).isRequired,
+  pokemon: PropTypes.shape({
+    name: PropTypes.string,
+    id: PropTypes.number,
+    stats: PropTypes.objectOf(PropTypes.number),
+    type: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
 };

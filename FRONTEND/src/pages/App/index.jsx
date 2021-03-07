@@ -20,7 +20,7 @@ function App() {
       <main>
         <MainComponent />
         <Switch>
-          <Route path="/pokedex/:pokeId" component={PokeDetail} />
+          <Route path="/pokemon/:pokeId" component={PokeDetail} />
         </Switch>
         <Switch>
           <Route path="/pokedex" component={Pokedex} />

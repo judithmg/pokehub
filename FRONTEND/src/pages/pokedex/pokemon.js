@@ -13,7 +13,7 @@ const pokemon = [
     type: ['grass'],
   },
   {
-    name: 'Bulbasaur',
+    name: 'Charmander',
     id: 1,
     stats: {
       hp: 12,
@@ -26,7 +26,7 @@ const pokemon = [
     type: ['fire'],
   },
   {
-    name: 'Bulbasaur',
+    name: 'Abra',
     id: 1,
     stats: {
       hp: 12,
@@ -39,7 +39,7 @@ const pokemon = [
     type: ['psychic'],
   },
   {
-    name: 'Bulbasaur',
+    name: 'Shedinja',
     id: 1,
     stats: {
       hp: 12,
@@ -52,7 +52,7 @@ const pokemon = [
     type: ['ghost', 'bug'],
   },
   {
-    name: 'Bulbasaur',
+    name: 'Squirtle',
     id: 1,
     stats: {
       hp: 12,
