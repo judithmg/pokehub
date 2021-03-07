@@ -5,7 +5,12 @@ import '../../styles/dashboard.scss';
 
 export default function DashboardButton({ text }) {
   return (
-    <button type="button">{text}</button>
+    <div className="dashboard__button">
+      <div className="svg-container">aa</div>
+      <span>
+        {text}
+      </span>
+    </div>
   );
 }
 

@@ -2,6 +2,9 @@
 
 .main__logo {
   width: 700px;
-  float: right;
   margin: 20px 100px;
+}
+
+main {
+  @include flex(column, center, flex-end);
 }

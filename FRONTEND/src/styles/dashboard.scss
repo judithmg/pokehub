@@ -1,3 +1,15 @@
 @import "./mixins";
 @import "./colors";
 @import "./fonts";
+
+//BUTTON
+
+.dashboard__button {
+  background: $headercolor;
+  box-shadow: 0px 1px 1px #000000;
+  border-radius: 25px;
+
+  padding: 50px;
+}
+
+//DASHBOARD
