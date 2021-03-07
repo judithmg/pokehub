@@ -1,3 +1,11 @@
 @import "./mixins";
 @import "./colors";
 @import "./fonts";
+
+.btn {
+  outline: none;
+  border: 2px solid $menucolor;
+  border-radius: 20px;
+  padding: 5px;
+  margin: 5px;
+}
