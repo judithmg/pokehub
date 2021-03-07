@@ -2,18 +2,20 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import MainComponent from '../pages/main';
+import PokedexComponent from '../pages/pokedex';
 
-describe('Given a Main component', () => {
+describe('Given a Pokedex component', () => {
   describe('When it is invoked', () => {
-    test('Then there should be a main section', () => {
+    test('Then there should be a table', () => {
       render(
         <BrowserRouter>
-          <MainComponent />
+          <PokedexComponent />
         </BrowserRouter>,
       );
-      const main = screen.findByLabelText('main');
-      expect(main).toBeTruthy();
+
+      const table = screen.findByLabelText('table');
+
+      expect(table).toBeTruthy();
     });
   });
 });

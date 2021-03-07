@@ -7,7 +7,7 @@ import ButtonType from '../shared/ButtonType';
 export default function MenuComponent() {
   return (
     <aside>
-      {types.map((type) => <ButtonType text={type} type={type} />)}
+      {types.map((type) => <ButtonType text={type} type={type} key={type} />)}
     </aside>
   );
 }
