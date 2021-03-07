@@ -6,8 +6,8 @@ export default function DashboardComponent() {
   return (
     <section className="dashboard__component">
       <Link to="/pokedex"><Button text="POKEDEX" /></Link>
-      <Button text="TEAMS" />
-      <Button text="BATTLE" />
+      <Link to="/teams"><Button text="TEAMS" /></Link>
+      <Link to="/"><Button text="BATTLE" /></Link>
     </section>
   );
 }
