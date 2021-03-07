@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import ButtonType from '../shared/ButtonType';
+
 export default function PokemonList({ pokemon }) {
   return (
     <tr className="pokedex__pokemon">
@@ -15,6 +17,7 @@ export default function PokemonList({ pokemon }) {
       </th>
       <th className="pokedex__pokemon-type">
         {pokemon.type}
+        <ButtonType text="FIRE" />
       </th>
       <th className="pokedex__pokemon-stats">
         {pokemon.stats.atk}

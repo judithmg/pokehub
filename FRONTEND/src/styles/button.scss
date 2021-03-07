@@ -2,7 +2,6 @@
 @import "./fonts";
 
 .btn {
-  outline: none;
   background-color: transparent;
 
   color: $menucolor;
@@ -17,4 +16,14 @@
   margin: 5px;
 
   cursor: pointer;
+}
+
+.btn-type {
+  font-size: 12px;
+  width: 70px;
+  margin: 2px;
+  text-align: center;
+  border-radius: 10px;
+  text-shadow: 1px 1px #000000;
+  box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 1);
 }
