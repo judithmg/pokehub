@@ -7,6 +7,8 @@ export default {
     description: 'This Pokemon can only be damaged by supereffective moves and indirect damage.',
   },
   id: 1,
+  kg: 3,
+  m: 0.75,
   stats: {
     hp: 42,
     atk: 42,

@@ -7,16 +7,16 @@ import 'react-svg-radar-chart/build/css/index.css';
 import pokemon from './pokemon';
 
 import '../../../styles/pokedetail.scss';
+import '../../../styles/_types.scss';
 
 export default function PokeDetailComponent() {
   return (
     <>
       <section>
-        <div className="pokemon__abstract">
+        <div className={`pokemon__abstract ${pokemon.type[0]}`}>
           <div className="pokemon__abstract-main">
             <div className="abstract__sprite">
               <img src={pokemon.sprite} alt="pokemon sprite" />
-
             </div>
             <div className="abstract__data">
               <div className="abstract__name">
@@ -81,13 +81,6 @@ export default function PokeDetailComponent() {
           </div>
         </div>
       </section>
-
-      {pokemon.name}
-      {pokemon.name}
-      {pokemon.name}
-      {pokemon.name}
-      {pokemon.name}
-
     </>
   );
 }
