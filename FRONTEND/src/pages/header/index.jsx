@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import '../../styles/header.scss';
 import { Link } from 'react-router-dom';
 import Menu from '../menu';
-import Button from '../shared/Button';
+import Button from '../shared/ButtonComponent';
 
 export default function HeaderComponent() {
   const [menu, setMenu] = useState(false);

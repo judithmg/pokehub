@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import Button from '../pages/shared/Button';
+import Button from '../pages/shared/ButtonComponent';
 
 describe('Given a Button component', () => {
   describe('When it is invoked', () => {
