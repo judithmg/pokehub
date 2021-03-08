@@ -17,8 +17,8 @@ export default function PokeDetailComponent() {
         <div className={`pokemon__abstract ${pokemon.type[0]}`}>
           <div className="pokemon__abstract-main">
             <div className="abstract__sprite">
-              <img src={pokemon.sprite} alt="pokemon sprite" />
               <div className="svg-container"><Pokeball /></div>
+              <img src={pokemon.sprite} alt="pokemon sprite" />
             </div>
             <div className="abstract__data">
               <div className="abstract__name">
