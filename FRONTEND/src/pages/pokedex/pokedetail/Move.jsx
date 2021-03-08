@@ -3,6 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import 'react-svg-radar-chart/build/css/index.css';
 
+import ButtonType from '../../shared/ButtonType';
+
 import '../../../styles/pokedetail.scss';
 
 export default function Move({ move }) {
@@ -10,7 +12,10 @@ export default function Move({ move }) {
     <tr className="pokemon__move" key={move.name}>
       <td className="pokemon__move-lvl">1</td>
       <td className="pokemon__move-name">{move.name}</td>
-      <td className="pokemon__move-type">{move.type}</td>
+      <td className="pokemon__move-type">
+        <ButtonType text={move.type} type={move.type.toLowerCase()} key={`${move.type[0]}`} />
+
+      </td>
       <td className="pokemon__move-pp">{move.pp}</td>
     </tr>
   );
