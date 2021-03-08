@@ -2,17 +2,41 @@
 @import "./colors";
 @import "./fonts";
 
-.abstract__sprite {
-  position: relative;
-  .svg-container {
+.pokemon__abstract {
+  .pokemon__abstract-main {
     @include flex(row, center, center);
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    svg {
-      width: 70%;
-      height: 70%;
+    .abstract__sprite {
+      position: relative;
+      .svg-container {
+        @include flex(row, center, center);
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        svg {
+          width: 70%;
+          height: 70%;
+        }
+      }
+    }
+    .abstract__data {
+      @include flex(column, center, center);
+      .abstract__name {
+        @include flex(column, center, center);
+      }
+      .abstract__id {
+      }
+      .abstract__size {
+        @include flex(column, center, center);
+      }
+    }
+  }
+  .pokemon__abstract-visual {
+    @include flex(row, center, center);
+    .abstract__stats {
+    }
+    .abstract__evochain {
+      @include flex(column, center, center);
     }
   }
 }
