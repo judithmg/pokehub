@@ -1,6 +1,7 @@
 const pokemon = [
   {
     name: 'Bulbasaur',
+    'name-jap': 'キュウコン',
     id: 1,
     stats: {
       hp: 12,
