@@ -69,16 +69,26 @@ export default function PokeDetailComponent() {
                     meta: { color: '#58FCEC' },
                   },
                 ]}
-                size={100}
+                size={150}
               />
             </div>
             <div className="abstract__evochain">{pokemon.evo.map((evo) => (<img src={evo} alt={evo} />))}</div>
           </div>
         </div>
         <div className="pokemon__details">
-          <div className="pokemon__ability" />
+          <div className="pokemon__ability">
+            <span className="pokemon__ability-title">ABILITY</span>
+            <span className="pokemon__ability-name">
+              {pokemon.ability.name}
+            </span>
+            <span className="pokemon__ability.description">{pokemon.ability.description}</span>
+          </div>
           <div className="pokemon__moves">
-            <div className="pokemon__moves-lvl" />
+            <div className="pokemon__moves-lvl">
+              <span className="pokemon__moves-title">
+                MOVES
+              </span>
+            </div>
             <div className="pokemon__moves-egg" />
           </div>
         </div>

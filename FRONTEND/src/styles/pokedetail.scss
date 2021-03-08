@@ -2,74 +2,113 @@
 @import "./colors";
 @import "./fonts";
 
-.pokemon__abstract {
-  border-radius: 10px;
-  margin: 10px;
-  padding: 10px;
-  color: #fff;
+section {
   font-family: $Montserrat;
+  margin: 0 50px;
 
-  .pokemon__abstract-main {
-    @include flex(row, flex-start, center);
-    .abstract__sprite {
-      width: 50%;
-      position: relative;
-      @include flex(row, center, center);
+  .pokemon__abstract {
+    border: 2px solid green;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    color: #fff;
 
-      img {
+    .pokemon__abstract-main {
+      border: 2px solid yellow;
+      @include flex(row, flex-start, center);
+
+      .abstract__sprite {
+        border: 2px solid yellow;
+
+        width: 50%;
         position: relative;
-        z-index: 1;
-      }
-      .svg-container {
         @include flex(row, center, center);
-        position: absolute;
-        top: 0;
-        left: 0;
-        svg {
-          width: 100%;
-          height: 100%;
-          fill: rgba(255, 255, 255, 0.4);
+
+        img {
+          z-index: 1;
+        }
+        .svg-container {
+          border: 2px solid purple;
+
+          @include flex(row, center, center);
+          position: absolute;
+          top: -50;
+          svg {
+            border: 2px solid coral;
+
+            width: 70%;
+            fill: rgba(255, 255, 255, 0.4);
+          }
         }
       }
-    }
-    .abstract__data {
-      @include flex(column, center, flex-start);
-      width: 50%;
-      margin: 10px;
+      .abstract__data {
+        @include flex(column, center, flex-start);
+        border: 2px solid green;
+        width: 50%;
+        margin: 10px;
 
-      .abstract__name {
-        span {
-          text-transform: uppercase;
+        .abstract__name {
+          span {
+            text-transform: uppercase;
+            font-weight: 700;
+            text-shadow: 0px 1px 1px #000000;
+          }
+          @include flex(column, center, center);
+        }
+        .abstract__id {
           font-weight: 700;
           text-shadow: 0px 1px 1px #000000;
         }
-        @include flex(column, center, center);
+        .abstract__size {
+          @include flex(column, center, center);
+          text-shadow: 0px 1px 1px #000000;
+        }
       }
-      .abstract__id {
-        font-weight: 700;
-        text-shadow: 0px 1px 1px #000000;
+    }
+    .pokemon__abstract-visual {
+      border: 2px solid green;
+
+      @include flex(row, center, center);
+      .abstract__stats {
+        width: 50%;
+
+        border: 2px solid yellow;
+
+        @include flex(row, center, center);
+        margin: 10px;
       }
-      .abstract__size {
+      .abstract__evochain {
+        width: 50%;
+
+        border: 2px solid yellow;
+
+        background-color: rgba(255, 255, 255, 0.4);
+        border-radius: 10px;
+
+        margin: 10px;
+        padding: 15px;
         @include flex(column, center, center);
-        text-shadow: 0px 1px 1px #000000;
+        img {
+          margin: 5px;
+        }
       }
     }
   }
-  .pokemon__abstract-visual {
-    @include flex(row, center, center);
-    .abstract__stats {
-      @include flex(row, center, center);
-      margin: 10px;
+  .pokemon__details {
+    .pokemon__ability {
+      @include flex(column, center, flex-start);
+      .pokemon__ability-title,
+      .pokemon__ability-name {
+        font-weight: 700;
+      }
     }
-    .abstract__evochain {
-      background-color: rgba(255, 255, 255, 0.4);
-      border-radius: 10px;
-
-      margin: 10px;
-      padding: 15px;
-      @include flex(column, center, center);
-      img {
-        margin: 5px;
+    .pokemon__moves {
+      @include flex(column, center, flex-start);
+      .pokemon__moves-egg,
+      .pokemon__moves-lvl {
+        .pokemon__moves-title {
+          font-weight: 700;
+        }
       }
     }
   }
