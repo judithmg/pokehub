@@ -26,7 +26,7 @@ function App() {
           <Route path="/pokedex" component={Pokedex} />
         </Switch>
         <Switch>
-          <Route path="/teams/:teamId" component={TeamDetail} />
+          <Route path="/teamdetail/:teamId" component={TeamDetail} />
         </Switch>
         <Switch>
           <Route path="/teams" component={Teams} />
