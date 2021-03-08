@@ -46,6 +46,7 @@
         @include flex(column, center, center);
       }
       .abstract__id {
+        font-weight: 700;
         text-shadow: 0px 1px 1px #000000;
       }
       .abstract__size {
