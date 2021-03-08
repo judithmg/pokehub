@@ -113,3 +113,24 @@ section {
     }
   }
 }
+
+.table__moveset {
+  thead {
+    .moveset__header {
+      background-color: rgb(153, 153, 153);
+    }
+  }
+  tbody {
+    background-color: #ccc;
+  }
+}
+
+.moveset__header,
+.pokemon__move {
+  @include flex(row, flex-start, center);
+
+  td,
+  th {
+    width: 100px;
+  }
+}

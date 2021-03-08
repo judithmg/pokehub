@@ -7,14 +7,13 @@ import 'react-svg-radar-chart/build/css/index.css';
 
 export default function Moveset({ moves }) {
   return (
-    <table>
+    <table className="table__moveset">
       <thead>
         <tr className="moveset__header">
           <th className="moveset__header-lvl">Lvl </th>
-          <tr className="moveset__header-name"> Name</tr>
-          <tr className="moveset__header-type"> Type</tr>
-          <tr className="moveset__header-power">Power </tr>
-          <tr className="moveset__header-accuracy"> Acc</tr>
+          <th className="moveset__header-name"> Name</th>
+          <th className="moveset__header-type"> Type</th>
+          <th className="moveset__header-pp">PP </th>
         </tr>
       </thead>
       <tbody>

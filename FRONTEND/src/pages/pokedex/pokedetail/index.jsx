@@ -7,6 +7,8 @@ import pokemon from './pokemon';
 
 import '../../../styles/pokedetail.scss';
 import '../../../styles/_types.scss';
+
+import Moveset from './Moveset';
 import MainInfo from './MainInfo';
 import VisualInfoComponent from './VisualInfo';
 
@@ -31,6 +33,7 @@ export default function PokeDetailComponent() {
               <span className="pokemon__moves-title">
                 MOVES
               </span>
+              <Moveset moves={pokemon.moves} />
             </div>
             <div className="pokemon__moves-egg" />
           </div>
