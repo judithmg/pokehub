@@ -9,6 +9,9 @@ export default function PokedexComponent() {
     <>
       <section className="teams__container">
         {teamData.map((team) => <Team team={team} key={team.id} />)}
+        {teamData.map((team) => <Team team={team} key={team.id} />)}
+        {teamData.map((team) => <Team team={team} key={team.id} />)}
+        {teamData.map((team) => <Team team={team} key={team.id} />)}
       </section>
     </>
   );

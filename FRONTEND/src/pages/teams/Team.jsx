@@ -7,11 +7,11 @@ export default function TeamComponent({ team }) {
       <div className="teams__sprites">
         {team.pokemons.map((pokemon) => (<img src={pokemon.sprite} alt="poke sprite" />))}
       </div>
-      <div className="teams__id">
+      <span className="teams__id">
         #
         {' '}
         {team.id}
-      </div>
+      </span>
     </div>
   );
 }

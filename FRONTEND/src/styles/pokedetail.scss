@@ -118,12 +118,12 @@ section {
   thead {
     .moveset__header {
       border-radius: 10px 10px 0 0;
-      background-color: rgb(153, 153, 153);
+      background-color: $grayodd;
     }
   }
   tbody {
     tr:not(:last-child) {
-      background-color: #ccc;
+      background-color: $grayeven;
     }
   }
 }
@@ -139,5 +139,5 @@ section {
 }
 tbody tr:last-child {
   border-radius: 0 0 10px 10px;
-  background-color: #ccc;
+  background-color: $grayeven;
 }

@@ -13,9 +13,9 @@
 
 .pokedex__pokemon {
   &:nth-child(odd) {
-    background-color: #ccc;
+    background-color: $grayodd;
   }
   &:nth-child(even) {
-    background-color: rgb(153, 153, 153);
+    background-color: $grayeven;
   }
 }
