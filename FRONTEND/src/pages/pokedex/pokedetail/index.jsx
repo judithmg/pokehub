@@ -18,12 +18,12 @@ export default function PokeDetailComponent() {
           <div className="pokemon__abstract-main">
             <div className="abstract__sprite">
               <img src={pokemon.sprite} alt="pokemon sprite" />
-              <div className="svg-container"><Pokeball fill="#fff" /></div>
+              <div className="svg-container"><Pokeball /></div>
             </div>
             <div className="abstract__data">
               <div className="abstract__name">
-                <div className="abstract__name--eng">{pokemon.name}</div>
-                <div className="abstract__name--jap">{pokemon['name-jap']}</div>
+                <span className="abstract__name--eng">{pokemon.name}</span>
+                <span className="abstract__name--jap">{pokemon['name-jap']}</span>
               </div>
               <div className="abstract__id">
                 #
