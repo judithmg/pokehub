@@ -4,7 +4,7 @@ import teamData from './teamData';
 
 import Team from './Team';
 
-export default function PokedexComponent() {
+export default function UserTeamsComponent() {
   return (
     <>
       <section className="teams__container">
