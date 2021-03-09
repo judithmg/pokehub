@@ -13,6 +13,7 @@ import Teams from '../teams';
 import TeamDetail from '../teams/team-detail'; import MainComponent from '../main';
 import Header from '../header';
 import Modal from '../pokedex/pokedetail/_ModalAtk';
+import Footer from '../footer';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route exact path="/" component={Dashboard} />
         </Switch>
       </main>
+      <Footer />
     </Router>
   );
 }

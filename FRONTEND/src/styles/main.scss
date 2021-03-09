@@ -6,6 +6,8 @@
 }
 
 main {
+  position: relative;
+  min-height: calc(100vh - 40px);
   @include flex(column, center, center);
 }
 
