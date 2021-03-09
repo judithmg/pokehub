@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import RadarChart from './RadarChart';
+import RadarChart from '../../shared/RadarChart';
 
 export default function VisualInfoComponent({ pokemon }) {
   return (

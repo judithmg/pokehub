@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import RadarChart from '../../pokedex/pokedetail/RadarChart';
+import RadarChart from '../../shared/RadarChart';
 
 import '../../../styles/teams.scss';
 
