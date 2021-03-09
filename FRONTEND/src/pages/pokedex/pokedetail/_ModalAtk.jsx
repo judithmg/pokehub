@@ -1,4 +1,5 @@
 import React from 'react';
+
 import ButtonType from '../../shared/ButtonType';
 import '../../../styles/modal-atk.scss';
 
@@ -30,6 +31,7 @@ export default function ModalMoveComponent() {
         <div className="pokemove__description">{move.desc}</div>
         <div className="pokemove__type">
           <ButtonType type={move.type.toLowerCase()} text={move.type}> </ButtonType>
+
         </div>
         <div className="pokemove__stats">
 
