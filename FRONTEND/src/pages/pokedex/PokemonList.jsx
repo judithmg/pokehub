@@ -7,16 +7,13 @@ import ButtonType from '../shared/ButtonType';
 export default function PokemonList({ pokemon }) {
   return (
     <tr className="pokedex__pokemon">
-      { console.log(pokemon)}
-      { console.log(pokemon.types)}
       <th className="pokedex__pokemon-id">
-        {pokemon.id}
+        #
+        {' '}
+        {pokemon.num}
       </th>
       <th className="pokedex__pokemon-sprite">
-        {pokemon.id}
-      </th>
-      <th className="pokedex__pokemon-graph">
-        sss
+        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/icons/${pokemon.num}.png`} alt={pokemon.name} />
       </th>
       <th className="pokedex__pokemon-name">
         {pokemon.name}
@@ -27,6 +24,11 @@ export default function PokemonList({ pokemon }) {
       </th>
       <th className="pokedex__pokemon-stats">
         {pokemon.baseStats.atk}
+        {pokemon.baseStats.hp}
+        {pokemon.baseStats.def}
+        {pokemon.baseStats.spa}
+        {pokemon.baseStats.spd}
+        {pokemon.baseStats.spe}
       </th>
 
     </tr>
