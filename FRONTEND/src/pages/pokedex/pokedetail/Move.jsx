@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 import 'react-svg-radar-chart/build/css/index.css';
 
 import ButtonType from '../../shared/ButtonType';
+import ModalAtk from './_ModalAtk';
 
 import '../../../styles/pokedetail.scss';
 
 export default function Move({ move }) {
+  const [isShowing, setIsShowing] = useState(false);
   return (
-    <tr className="pokemon__move" key={move.name}>
+    <tr
+      className="pokemon__move"
+      key={move.name}
+      onMouseEnter={() => setIsShowing(true)}
+      onMouseLeave={() => setIsShowing(false)}
+    >
       <td className="pokemon__move-lvl">1</td>
       <td className="pokemon__move-name">{move.name}</td>
       <td className="pokemon__move-type">
@@ -17,6 +24,7 @@ export default function Move({ move }) {
 
       </td>
       <td className="pokemon__move-pp">{move.pp}</td>
+      {isShowing && <ModalAtk /> }
     </tr>
   );
 }

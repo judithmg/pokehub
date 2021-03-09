@@ -4,8 +4,10 @@
 @import "./types";
 
 .pokemove__modal {
+  position: absolute;
   font-family: $Montserrat;
   margin: 10px;
+  z-index: 100;
   .pokemove__title {
     padding: 5px;
     border-radius: 20px 20px 0 0;
@@ -18,7 +20,7 @@
     font-size: 13px;
     padding: 5px;
     border-radius: 0 0 20px 20px;
-    background-color: $grayeven;
+    background-color: $grayodd;
     .pokemove__description {
       margin: 5px;
     }
