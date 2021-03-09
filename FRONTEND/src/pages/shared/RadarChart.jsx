@@ -19,10 +19,10 @@ export default function RadarChartComponent({ stats }) {
           data: {
             hp: +(stats.hp / 255).toFixed(2),
             atk: +(stats.atk / 255).toFixed(2),
-            'sp-atk': +(stats['sp-atk'] / 255).toFixed(2),
+            'sp-atk': +(stats.spa / 255).toFixed(2),
             def: +(stats.def / 255).toFixed(2),
-            'sp-def': +(stats['sp-def'] / 255).toFixed(2),
-            speed: +(stats.speed / 255).toFixed(2),
+            'sp-def': +(stats.spd / 255).toFixed(2),
+            speed: +(stats.spe / 255).toFixed(2),
           },
           meta: { color: '#58FCEC' },
         },

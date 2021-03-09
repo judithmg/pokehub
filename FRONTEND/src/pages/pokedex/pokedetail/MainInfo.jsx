@@ -8,7 +8,7 @@ export default function MainInfoComponent({ pokemon }) {
     <div className="pokemon__abstract-main">
       <div className="abstract__sprite">
         <div className="svg-container"><Pokeball /></div>
-        <img src={pokemon.sprite} alt="pokemon sprite" />
+        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.num}.png`} alt="pokemon sprite" />
       </div>
       <div className="abstract__data">
         <div className="abstract__name">

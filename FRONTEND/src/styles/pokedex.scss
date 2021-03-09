@@ -17,10 +17,29 @@
   font-size: 13px;
   @include flex(row, center, center);
 
-  th {
-    width: 20%;
-    @include flex(row, flex-start, center);
+  th:not(:last-child),
+  td:not(:last-child) {
   }
+}
+.pokedex__pokemon-id {
+  width: 15%;
+}
+.pokedex__pokemon-sprite {
+  @include flex(row, center, center);
+  width: 20%;
+}
+.pokedex__pokemon-name {
+  width: 30%;
+}
+.pokedex__pokemon-type {
+  @include flex(row, center, center);
+  width: 50%;
+  button {
+    margin: 0 5px;
+  }
+}
+.pokedex__pokemon-stats {
+  width: 10%;
 }
 
 .pokedex__pokemon {
@@ -53,5 +72,42 @@
   }
   100% {
     transform: translatey(0px);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .pokedex__container {
+    @include flex(row, flex-end, center);
+    table {
+      width: 700px;
+    }
+  }
+
+  .pokedex__pokemon-id {
+    width: 7%;
+  }
+  .pokedex__pokemon-sprite {
+    @include flex(row, center, center);
+    width: 10%;
+  }
+  .pokedex__pokemon-name {
+    width: 15%;
+  }
+  .pokedex__pokemon-type {
+    width: 23%;
+    @include flex(row, center, center);
+    button {
+      margin: 0 5px;
+    }
+  }
+  .pokedex__pokemon-stats {
+    width: 45%;
+    @include flex(row, center, center);
+    &.pokedex__pokemon-header {
+      font-size: 10px;
+    }
+    p {
+      width: 20%;
+    }
   }
 }
