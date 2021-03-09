@@ -16,7 +16,7 @@ export default function PokeDetailComponent() {
   return (
     <>
       <section>
-        <div className={`pokemon__abstract ${pokemon.types[0]}`}>
+        <div className={`pokemon__abstract ${pokemon.type[0]}`}>
           <MainInfo pokemon={pokemon} />
           <VisualInfoComponent pokemon={pokemon} />
         </div>

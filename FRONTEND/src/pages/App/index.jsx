@@ -14,6 +14,8 @@ import TeamDetail from '../teams/team-detail'; import MainComponent from '../mai
 import Header from '../header';
 import Footer from '../footer';
 
+import pruebas from './pruebas';
+
 function App() {
   return (
     <Router>
@@ -22,6 +24,9 @@ function App() {
         <MainComponent />
         <Switch>
           <Route path="/pokemon/:pokeId" component={PokeDetail} />
+        </Switch>
+        <Switch>
+          <Route path="/pruebas" component={pruebas} />
         </Switch>
         <Switch>
           <Route path="/pokedex" component={Pokedex} />

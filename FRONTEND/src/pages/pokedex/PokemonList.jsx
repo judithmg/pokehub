@@ -26,7 +26,7 @@ export default function PokemonList({ pokemon }) {
 
       </th>
       <th className="pokedex__pokemon-stats">
-        {pokemon.stats.atk}
+        {pokemon.baseStats.atk}
       </th>
 
     </tr>

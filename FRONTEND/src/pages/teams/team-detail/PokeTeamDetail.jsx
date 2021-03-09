@@ -14,7 +14,7 @@ export default function TeamDetailPokemonComponent({ pokemon }) {
 
       </div>
       <div className="pokemon__data">
-        <div className="pokemon__stats"><RadarChart stats={pokemon.stats} /></div>
+        <div className="pokemon__stats"><RadarChart stats={pokemon.baseStats} /></div>
         <div className="pokemon__ability">
           <span>Ability</span>
           {pokemon.ability.name}

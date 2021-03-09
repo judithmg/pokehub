@@ -2,15 +2,14 @@ import React from 'react';
 
 import '../../styles/pokedex.scss';
 
-import pokemonData from '../../data/pokemini.json';
+import pokemonData from '../../data/pokemon.json';
 import PokemonList from './PokemonList';
 
 export default function PokedexComponent() {
-  const pokemons = pokemonData.map((pokemon) => Object.entries(pokemon));
   return (
     <>
       <section className="pokedex__container">
-
+        {console.log(pokemonData[0][0])}
         <table>
           <thead>
             <tr className="pokedex__header">
@@ -30,8 +29,8 @@ export default function PokedexComponent() {
             </tr>
           </thead>
           <tbody>
-            {pokemons && pokemons.map((pokemon) => (
-              <PokemonList pokemon={pokemon[1]} key={pokemon[1].name} />
+            {pokemonData && pokemonData.map((pokemon) => (
+              <PokemonList pokemon={pokemon} key={pokemon.name} />
             ))}
           </tbody>
         </table>
