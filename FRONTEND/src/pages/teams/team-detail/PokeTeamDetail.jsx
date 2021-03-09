@@ -7,9 +7,8 @@ import '../../../styles/teams.scss';
 export default function TeamDetailPokemonComponent({ pokemon }) {
   return (
     <div className="teamdetail__pokemon">
-      {console.log(pokemon)}
       {' '}
-      <div className={`pokemon__sprite ${pokemon.type[0]}`}>
+      <div className={`pokemon__sprite ${pokemon.types[0]}`}>
         <span>{pokemon.name}</span>
         <img alt="sprite" src={pokemon.sprite} />
 

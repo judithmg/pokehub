@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -6,6 +7,8 @@ import ButtonType from '../shared/ButtonType';
 export default function PokemonList({ pokemon }) {
   return (
     <tr className="pokedex__pokemon">
+      { console.log(pokemon)}
+      { console.log(pokemon.types)}
       <th className="pokedex__pokemon-id">
         {pokemon.id}
       </th>
@@ -19,7 +22,7 @@ export default function PokemonList({ pokemon }) {
         {pokemon.name}
       </th>
       <th className="pokedex__pokemon-type">
-        {pokemon.type.map((type) => <ButtonType text={type} type={type} key={`${pokemon.name}-${pokemon.type[0]}`} />)}
+        {pokemon.types.map((type) => <ButtonType text={type} type={type} key={`${pokemon.name}-${pokemon.types[0]}`} />)}
 
       </th>
       <th className="pokedex__pokemon-stats">
