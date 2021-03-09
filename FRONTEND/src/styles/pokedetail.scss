@@ -119,6 +119,7 @@ section {
     .moveset__header {
       border-radius: 10px 10px 0 0;
       background-color: $grayodd;
+      padding: 5px;
     }
   }
   tbody {
@@ -135,6 +136,7 @@ section {
   td,
   th {
     width: 100px;
+    padding: 0 5px;
   }
 }
 tbody tr:last-child {
