@@ -4,6 +4,7 @@ import React from 'react';
 import Move from './Move';
 
 import 'react-svg-radar-chart/build/css/index.css';
+import keyGenerator from '../../../assets/keyGenerator';
 
 export default function Moveset({ moves }) {
   const fakeMoves = [
@@ -121,7 +122,7 @@ export default function Moveset({ moves }) {
       </thead>
       <tbody>
         {fakeMoves?.map((move) => (
-          <Move move={move} key={move.name} />
+          <Move move={move} key={keyGenerator(5)} />
         ))}
       </tbody>
     </table>

@@ -12,6 +12,7 @@ section {
     margin: 10px;
     padding: 10px;
     color: #fff;
+    text-shadow: $blackshadow;
 
     .pokemon__abstract-main {
       border: 2px solid yellow;
@@ -51,17 +52,14 @@ section {
           span {
             text-transform: uppercase;
             font-weight: 700;
-            text-shadow: $blackshadow;
           }
           @include flex(column, center, center);
         }
         .abstract__id {
           font-weight: 700;
-          text-shadow: $blackshadow;
         }
         .abstract__size {
           @include flex(column, center, center);
-          text-shadow: $blackshadow;
         }
       }
     }
@@ -79,7 +77,8 @@ section {
       }
       .abstract__evochain {
         width: 50%;
-
+        font-weight: 700;
+        font-size: 14px;
         border: 2px solid yellow;
 
         background-color: rgba(255, 255, 255, 0.4);

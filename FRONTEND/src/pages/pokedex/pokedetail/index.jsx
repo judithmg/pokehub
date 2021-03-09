@@ -1,6 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
 import 'react-svg-radar-chart/build/css/index.css';
@@ -15,15 +15,17 @@ import MainInfo from './MainInfo';
 import VisualInfoComponent from './VisualInfo';
 
 export default function PokeDetailComponent(props) {
+  const [pokemon, setPokemon] = useState('');
   const [pokeId] = useState(props?.match?.params?.pokeId);
-  const pokemon = pokemons.find((poke) => poke.name.toLowerCase() === pokeId);
+  // tengo que meter esto dentro de un useEffect
+  useEffect(() => {
+    setPokemon(pokemons.find((poke) => poke.name.toLowerCase() === pokeId));
+  }, [pokeId]);
 
   return (
     <>
       <section>
         {console.log(pokemon)}
-        ;
-
         { pokemon && (
         <>
           <div className={`pokemon__abstract ${pokemon.types[0].toLowerCase()}`}>

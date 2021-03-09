@@ -7,20 +7,21 @@ import ButtonType from '../../shared/ButtonType';
 import ModalAtk from './ModalAtk';
 
 import '../../../styles/pokedetail.scss';
+import keyGenerator from '../../../assets/keyGenerator';
 
 export default function Move({ move }) {
   const [isShowing, setIsShowing] = useState(false);
   return (
     <tr
       className="pokemon__move"
-      key={move.name}
+      key={keyGenerator(5)}
       onMouseEnter={() => setIsShowing(true)}
       onMouseLeave={() => setIsShowing(false)}
     >
       <td className="pokemon__move-lvl">1</td>
       <td className="pokemon__move-name">{move.name}</td>
       <td className="pokemon__move-type">
-        <ButtonType text={move.type} type={move.type.toLowerCase()} key={`${move.type[0]}`} />
+        <ButtonType text={move.type} type={move.type.toLowerCase()} key={keyGenerator(5)} />
 
       </td>
       <td className="pokemon__move-pp">{move.pp}</td>

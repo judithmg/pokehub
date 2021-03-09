@@ -5,6 +5,8 @@ import '../../styles/pokedex.scss';
 import pokemonData from '../../data/pokemon.json';
 import PokemonList from './PokemonList';
 
+import keyGenerator from '../../assets/keyGenerator';
+
 export default function PokedexComponent() {
   return (
     <>
@@ -34,7 +36,7 @@ export default function PokedexComponent() {
           </thead>
           <tbody>
             {pokemonData && pokemonData.map((pokemon) => (
-              <PokemonList pokemon={pokemon} key={pokemon.name} />
+              <PokemonList pokemon={pokemon} key={keyGenerator(5)} />
             ))}
           </tbody>
         </table>

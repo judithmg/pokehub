@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import ButtonType from '../shared/ButtonType';
+import keyGenerator from '../../assets/keyGenerator';
 
 export default function PokemonList({ pokemon }) {
   return (
-    <tr className="pokedex__pokemon">
+    <tr className="pokedex__pokemon" key={keyGenerator(5)}>
       <td className="pokedex__pokemon-id">
         #
         {' '}
@@ -22,7 +23,7 @@ export default function PokemonList({ pokemon }) {
         </Link>
       </td>
       <td className="pokedex__pokemon-type">
-        {pokemon.types.map((type) => <ButtonType text={type} type={type} key={`${pokemon.name}-${pokemon.types[0]}`} />)}
+        {pokemon.types.map((type) => <ButtonType text={type} type={type} key={keyGenerator(5)} />)}
 
       </td>
       <td className="pokedex__pokemon-stats --desktop">

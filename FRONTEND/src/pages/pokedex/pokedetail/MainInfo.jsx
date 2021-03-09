@@ -22,12 +22,12 @@ export default function MainInfoComponent({ pokemon }) {
         </div>
         <div className="abstract__size">
           <div className="abract__weight">
-            {pokemon.kg}
+            {pokemon.weightkg}
             {' '}
             kg
           </div>
           <div className="abstract__height">
-            {pokemon.m}
+            {pokemon.heightm}
             {' '}
             m
           </div>
