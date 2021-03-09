@@ -2,3 +2,33 @@
 @import "./colors";
 @import "./fonts";
 @import "./types";
+
+.pokemove__modal {
+  font-family: $Montserrat;
+  margin: 10px;
+  .pokemove__title {
+    padding: 5px;
+    border-radius: 20px 20px 0 0;
+    @include flex(row, center, center);
+    color: #fff;
+    text-shadow: $blackshadow;
+    font-weight: 700;
+  }
+  .pokemove__info {
+    font-size: 13px;
+    padding: 5px;
+    border-radius: 0 0 20px 20px;
+    background-color: $grayeven;
+    .pokemove__description {
+      margin: 5px;
+    }
+
+    .pokemove__stats {
+      margin: 5px;
+      @include flex(column, center, flex-start);
+      span {
+        font-weight: 500;
+      }
+    }
+  }
+}

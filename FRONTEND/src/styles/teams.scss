@@ -24,7 +24,7 @@
       }
     }
     .teams__id {
-      text-shadow: 0px 1px 1px #000000;
+      text-shadow: $blackshadow;
       color: #fff;
       font-weight: bold;
       font-size: 30px;
@@ -50,7 +50,7 @@
       color: #fff;
       font-weight: bold;
       font-size: 25px;
-      text-shadow: 1px 1px #000000;
+      text-shadow: $blackshadow;
     }
     img {
       filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));

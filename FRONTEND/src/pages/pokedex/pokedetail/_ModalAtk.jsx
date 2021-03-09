@@ -1,5 +1,6 @@
 import React from 'react';
 import ButtonType from '../../shared/ButtonType';
+import '../../../styles/modal-atk.scss';
 
 export default function ModalMoveComponent() {
   const move = {
@@ -24,19 +25,34 @@ export default function ModalMoveComponent() {
 
   return (
     <div className="pokemove__modal">
-      <div className="pokemove__title">{move.name}</div>
+      <div className={`pokemove__title ${move.type.toLowerCase()}`}>{move.name.toUpperCase()}</div>
       <div className="pokemove__info">
         <div className="pokemove__description">{move.desc}</div>
-        <div className="pokemove__type" />
+        <div className="pokemove__type">
+          <ButtonType type={move.type.toLowerCase()} text={move.type}> </ButtonType>
+        </div>
         <div className="pokemove__stats">
-          <em>Category: </em>
-          <span className="pokemove__category">
-            <ButtonType type={move.type.toLowerCase()} text={move.type}> </ButtonType>
-          </span>
-          <em>Accuracy: </em>
-          <span className="pokemove__accuracy">{move.accuracy}</span>
-          <em>PP: </em>
-          <span className="pokemove__pp">{move.pp}</span>
+
+          <strong>
+            Category:
+            {' '}
+            <span className="pokemove__category">
+              aaa
+            </span>
+
+          </strong>
+
+          <strong>
+            Accuracy:
+            {' '}
+            <span className="pokemove__accuracy">{move.accuracy}</span>
+          </strong>
+
+          <strong>
+            PP:
+            {' '}
+            <span className="pokemove__pp">{move.pp}</span>
+          </strong>
 
         </div>
       </div>
