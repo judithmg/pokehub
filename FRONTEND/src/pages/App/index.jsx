@@ -12,6 +12,7 @@ import PokeDetail from '../pokedex/pokedetail';
 import Teams from '../teams';
 import TeamDetail from '../teams/team-detail'; import MainComponent from '../main';
 import Header from '../header';
+import Modal from '../pokedex/pokedetail/_ModalAtk';
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
         <MainComponent />
         <Switch>
           <Route path="/pokemon/:pokeId" component={PokeDetail} />
+        </Switch>
+        <Switch>
+          <Route path="/modal" component={Modal} />
         </Switch>
         <Switch>
           <Route path="/pokedex" component={Pokedex} />
