@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { PropTypes } from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import '../../styles/pokedex.scss';
-
-import pokemonData from '../../data/pokemon.json';
+import { loadPokelist } from '../../redux/actions/pokedexActions';
 import PokemonList from './PokemonList';
 
 import keyGenerator from '../../assets/keyGenerator';
 
-export default function PokedexComponent() {
+import '../../styles/pokedex.scss';
+
+export function PokedexComponent({ pokedex, actions }) {
+  // eslint-disable-next-line no-debugger
+  debugger;
+  useEffect(() => {
+    // eslint-disable-next-line no-debugger
+    debugger;
+    actions.loadPokelist();
+  }, []);
   return (
     <>
       <section className="pokedex__container">
+        {console.log(pokedex)}
         <table>
           <thead>
             <tr className="pokedex__header">
@@ -35,7 +46,7 @@ export default function PokedexComponent() {
             </tr>
           </thead>
           <tbody>
-            {pokemonData && pokemonData.map((pokemon) => (
+            {pokedex && pokedex.map((pokemon) => (
               <PokemonList pokemon={pokemon} key={keyGenerator(5)} />
             ))}
           </tbody>
@@ -44,3 +55,24 @@ export default function PokedexComponent() {
     </>
   );
 }
+
+PokedexComponent.propTypes = {
+  pokedex: PropTypes.arrayOf(PropTypes.object).isRequired,
+  actions: PropTypes.shape({
+    loadPokelist: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+function mapStateToProps(state) {
+  return {
+    pokedex: state.pokedexReducer,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({ loadPokelist }, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PokedexComponent);

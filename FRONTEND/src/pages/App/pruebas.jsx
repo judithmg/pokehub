@@ -1,12 +1,12 @@
-import React from 'react';
-import pokemons from '../../data/pokemon.json';
+// import React from 'react';
+// import pokemons from '../../data/learnset-check.json';
 
-export default function Pruebas() {
-  const array = pokemons.map((pokemon) => pokemon.slice(1));
+// export default function Pruebas() {
+//   // const array = pokemons.map((pokemon) => {pokemon.learnset?.flat()});
 
-  return (
-    <>
-      {JSON.stringify(array)}
-    </>
-  );
-}
+//   return (
+//     <>
+//       {JSON.stringify(pokemons)}
+//     </>
+//   );
+// }
