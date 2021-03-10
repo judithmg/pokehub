@@ -53,7 +53,7 @@ a {
 }
 
 .--desktop {
-  visibility: hidden;
+  display: none;
 }
 
 //SCROLLBAR
@@ -84,6 +84,6 @@ a {
 
 @media only screen and (min-width: 768px) {
   .--desktop {
-    visibility: visible;
+    display: flex;
   }
 }

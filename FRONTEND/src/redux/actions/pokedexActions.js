@@ -1,7 +1,10 @@
 import axios from 'axios';
 import actionTypes from './actionTypes';
 
-// const dbUrl = 'http://localhost:5000/pokehub/pokedex';
+// const pokedexUrl = 'http://localhost:5000/pokehub/pokedex';
+// const movesUrl = 'http://localhost:5000/pokehub/moves';
+// const learnsetUrl = 'http://localhost:5000/pokehub/learnset';
+// const abilitiesUrl = 'http://localhost:5000/pokehub/abilities';
 
 function loadPokelist() {
   return async (dispatch) => {
@@ -14,8 +17,41 @@ function loadPokelist() {
   };
 }
 
-function fjf() {
-
+function loadPokemonDetail(pokeId) {
+  return {
+    type: actionTypes.LOAD_POKEMON,
+    pokeId,
+  };
 }
 
-export { loadPokelist, fjf };
+function loadMoves() {
+  return async (dispatch) => {
+    const { data } = await axios.get('./moves.json');
+    dispatch({
+      type: actionTypes.LOAD_MOVES,
+      data,
+    });
+  };
+}
+function loadLearnset() {
+  return async (dispatch) => {
+    const { data } = await axios.get('./learnset.json');
+    dispatch({
+      type: actionTypes.LOAD_LEARNSET,
+      data,
+    });
+  };
+}
+function loadAbilities() {
+  return async (dispatch) => {
+    const { data } = await axios.get('./abilities.json');
+    dispatch({
+      type: actionTypes.LOAD_ABILITIES,
+      data,
+    });
+  };
+}
+
+export {
+  loadPokelist, loadPokemonDetail, loadMoves, loadLearnset, loadAbilities,
+};

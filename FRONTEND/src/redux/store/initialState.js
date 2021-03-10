@@ -1,3 +1,6 @@
 export default {
-  pokedex: [],
+  pokedexReducer: {
+    pokedex: [],
+    pokemon: {},
+  },
 };

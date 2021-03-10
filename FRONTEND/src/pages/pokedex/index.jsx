@@ -60,7 +60,7 @@ PokedexComponent.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    pokedex: state.pokedexReducer,
+    pokedex: state.pokedexReducer.pokedex,
   };
 }
 

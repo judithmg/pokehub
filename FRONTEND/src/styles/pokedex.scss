@@ -39,6 +39,7 @@
   }
 }
 .pokedex__pokemon-stats {
+  @include flex(row, center, center);
   width: 10%;
 }
 
@@ -102,7 +103,6 @@
   }
   .pokedex__pokemon-stats {
     width: 45%;
-    @include flex(row, center, center);
     &.pokedex__pokemon-header {
       font-size: 10px;
     }

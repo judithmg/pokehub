@@ -8,7 +8,7 @@ export default function VisualInfoComponent({ pokemon }) {
   return (
     <div className="pokemon__abstract-visual">
       <div className="abstract__stats">
-        <RadarChart stats={pokemon.baseStats} />
+        <RadarChart stats={pokemon?.baseStats} />
       </div>
       {pokemon.evos && (
       <div className="abstract__evochain">
