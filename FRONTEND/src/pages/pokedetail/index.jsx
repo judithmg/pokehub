@@ -6,15 +6,15 @@ import 'react-svg-radar-chart/build/css/index.css';
 
 // import pokemons from '../../../data/pokemon.json';
 
-import '../../../styles/pokedetail.scss';
-import '../../../styles/_types.scss';
+import '../../styles/pokedetail.scss';
+import '../../styles/_types.scss';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Moveset from './Moveset';
 import MainInfo from './MainInfo';
 import VisualInfoComponent from './VisualInfo';
-import { loadPokemonDetail, loadPokelist, loadPokemonAbilities } from '../../../redux/actions/pokedexActions';
+import { loadPokemonDetail, loadPokelist, loadPokemonAbilities } from '../../redux/actions/pokedexActions';
 
 export function PokeDetailComponent({
   pokedex, pokemon, pokemonAbilities, actions,
@@ -27,9 +27,10 @@ export function PokeDetailComponent({
     if (!pokedex.length) {
       actions.loadPokelist();
     }
+    console.log(pokedex);
     actions.loadPokemonDetail(pokeId);
     actions.loadPokemonAbilities(pokeId);
-  }, []);
+  }, [pokedex.length]);
 
   return (
     <>
@@ -45,7 +46,7 @@ export function PokeDetailComponent({
               <span className="pokemon__ability-title">ABILITY</span>
               <span className="pokemon__ability-name">
                 {console.log(pokemonAbilities)}
-                {pokemonAbilities && pokemonAbilities[1].name}
+                {pokemonAbilities && pokemonAbilities[1]?.name}
               </span>
               <span className="pokemon__ability.description">kdjksf dskfjsd fskdjf fklsdj dlkj</span>
             </div>

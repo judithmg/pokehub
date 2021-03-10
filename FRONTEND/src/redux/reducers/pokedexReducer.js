@@ -31,12 +31,10 @@ export default function pokedexReducer(state =
       return { ...state, pokemon };
 
     case actionTypes.LOAD_POKEMON_LEARNSET:
-      pokemonLearnset = state.learnset.find((poke) => poke.name === action.pokeId);
-      return { ...state, pokemonLearnset };
 
-    case actionTypes.LOAD_POKEMON_MOVESET:
-      pokemonMoveset = state.moves.find((poke) => poke.name.toLowerCase() === action.pokeId);
-      return { ...state, pokemonMoveset };
+      pokemonLearnset = state.learnset.find((poke) => poke.name === action.pokeId);
+      pokemonLearnset.learnset.map((pokemove) => state.moves.filter(((move) => move.name.replace(/[^a-zA-Z ]/g, '') === pokemove)));
+      return { ...state, pokemonLearnset };
 
     case actionTypes.LOAD_POKEMON_ABILITIES:
       pokemonAbilities = state.abilities

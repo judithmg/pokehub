@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import RadarChart from '../../shared/RadarChart';
+import RadarChart from '../shared/RadarChart';
 
 export default function VisualInfoComponent({ pokemon }) {
   return (

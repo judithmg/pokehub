@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import 'react-svg-radar-chart/build/css/index.css';
 
-import ButtonType from '../../shared/ButtonType';
+import ButtonType from '../shared/ButtonType';
 import ModalAtk from './ModalAtk';
 
-import '../../../styles/pokedetail.scss';
-import keyGenerator from '../../../assets/keyGenerator';
+import '../../styles/pokedetail.scss';
+import keyGenerator from '../../assets/keyGenerator';
 
 export default function MoveComponent({ move }) {
   const [isShowing, setIsShowing] = useState(false);

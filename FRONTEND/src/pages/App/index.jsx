@@ -7,7 +7,7 @@ import store from '../../redux/store/configureStore';
 
 import Dashboard from '../dashboard';
 import Pokedex from '../pokedex';
-import PokeDetail from '../pokedex/pokedetail';
+import PokeDetail from '../pokedetail';
 import Teams from '../teams';
 import TeamDetail from '../teams/team-detail'; import MainComponent from '../main';
 import Header from '../header';

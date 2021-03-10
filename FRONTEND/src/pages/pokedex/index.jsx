@@ -14,10 +14,10 @@ import '../../styles/pokedex.scss';
 
 export function PokedexComponent({ pokedex, actions }) {
   useEffect(() => {
-    actions.loadPokelist();
+    actions.loadAbilities();
     actions.loadMoves();
     actions.loadLearnset();
-    actions.loadAbilities();
+    actions.loadPokelist();
   }, []);
   return (
     <>

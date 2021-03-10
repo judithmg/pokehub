@@ -4,7 +4,7 @@ import React from 'react';
 import Move from './Move';
 
 import 'react-svg-radar-chart/build/css/index.css';
-import keyGenerator from '../../../assets/keyGenerator';
+import keyGenerator from '../../assets/keyGenerator';
 
 export default function MovesetComponent({ moves }) {
   const fakeMoves = [

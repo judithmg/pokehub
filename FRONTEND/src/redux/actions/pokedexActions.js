@@ -1,14 +1,14 @@
 import axios from 'axios';
 import actionTypes from './actionTypes';
 
-// const pokedexUrl = 'http://localhost:5000/pokehub/pokedex';
+const pokedexUrl = 'http://localhost:5000/pokehub/pokedex';
 // const movesUrl = 'http://localhost:5000/pokehub/moves';
 // const learnsetUrl = 'http://localhost:5000/pokehub/learnset';
 // const abilitiesUrl = 'http://localhost:5000/pokehub/abilities';
 
 function loadPokelist() {
   return async (dispatch) => {
-    const { data } = await axios.get('./pokemon.json');
+    const { data } = await axios.get(pokedexUrl);
     dispatch({
       type: actionTypes.LOAD_POKELIST,
       data,

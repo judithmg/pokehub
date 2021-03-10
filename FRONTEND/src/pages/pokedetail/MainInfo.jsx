@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 
-import Pokeball from '../../../assets/icons/Pokeball';
+import Pokeball from '../../assets/icons/Pokeball';
 
 export default function MainInfoComponent({ pokemon }) {
   return (
