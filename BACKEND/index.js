@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const chalk = require('chalk');
 const debug = require('debug')('app');
 const mongoose = require('mongoose');
+const cors = require('cors');
 require('dotenv').config();
 
 const pokemonRoute = require('./src/routes/pokemonRoutes');
@@ -14,6 +15,7 @@ const dbUrl = process.env.MONGO_DDBB;
 mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(morgan('dev'));
+app.use(cors());
 
 app.use(express.urlencoded({ extend: true }));
 app.use(express.json());
