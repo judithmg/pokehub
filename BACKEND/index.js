@@ -11,7 +11,7 @@ const route = require('./src/routes/route');
 const app = express();
 const port = process.env.PORT || 5000;
 
-connect('mongodb+srv://judith:judith@cluster0.sloat.mongodb.net/pokehub', { useNewUrlParser: true, useUnifiedTopology: true });
+connect(process.env.DB_MONGO, { useNewUrlParser: true, useUnifiedTopology: true });
 const hello = [];
 
 app.use(morgan('dev'));
