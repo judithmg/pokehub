@@ -9,15 +9,15 @@ export default [{
   id: 1,
   kg: 3,
   m: 0.75,
-  stats: {
+  baseStats: {
     hp: 42,
     atk: 42,
-    'sp-atk': 42,
+    spa: 42,
     def: 43,
-    'sp-def': 48,
-    speed: 50,
+    spd: 48,
+    spe: 50,
   },
-  type: ['ghost', 'bug'],
+  types: ['ghost', 'bug'],
 }, {
   name: 'Shedinja',
   'name-jap': 'キュウコン',
@@ -29,15 +29,15 @@ export default [{
   id: 1,
   kg: 3,
   m: 0.75,
-  stats: {
+  baseStats: {
     hp: 42,
     atk: 42,
-    'sp-atk': 42,
+    spa: 42,
     def: 43,
-    'sp-def': 48,
-    speed: 50,
+    spd: 48,
+    spe: 50,
   },
-  type: ['ghost', 'bug'],
+  types: ['ghost', 'bug'],
 }, {
   name: 'Shedinja',
   'name-jap': 'キュウコン',
@@ -49,15 +49,15 @@ export default [{
   id: 1,
   kg: 3,
   m: 0.75,
-  stats: {
+  baseStats: {
     hp: 42,
     atk: 42,
-    'sp-atk': 42,
+    spa: 42,
     def: 43,
-    'sp-def': 48,
-    speed: 50,
+    spd: 48,
+    spe: 50,
   },
-  type: ['ghost', 'bug'],
+  types: ['ghost', 'bug'],
 }, {
   name: 'Shedinja',
   'name-jap': 'キュウコン',
@@ -69,15 +69,15 @@ export default [{
   id: 1,
   kg: 3,
   m: 0.75,
-  stats: {
+  baseStats: {
     hp: 42,
     atk: 42,
-    'sp-atk': 42,
+    spa: 42,
     def: 43,
-    'sp-def': 48,
-    speed: 50,
+    spd: 48,
+    spe: 50,
   },
-  type: ['ghost', 'bug'],
+  types: ['ghost', 'bug'],
 }, {
   name: 'Shedinja',
   'name-jap': 'キュウコン',
@@ -89,15 +89,15 @@ export default [{
   id: 1,
   kg: 3,
   m: 0.75,
-  stats: {
+  baseStats: {
     hp: 42,
     atk: 42,
-    'sp-atk': 42,
+    spa: 42,
     def: 43,
-    'sp-def': 48,
-    speed: 50,
+    spd: 48,
+    spe: 50,
   },
-  type: ['ghost', 'bug'],
+  types: ['ghost', 'bug'],
 }, {
   name: 'Shedinja',
   'name-jap': 'キュウコン',
@@ -109,13 +109,13 @@ export default [{
   id: 1,
   kg: 3,
   m: 0.75,
-  stats: {
+  baseStats: {
     hp: 42,
     atk: 42,
-    'sp-atk': 42,
+    spa: 42,
     def: 43,
-    'sp-def': 48,
-    speed: 50,
+    spd: 48,
+    spe: 50,
   },
-  type: ['ghost', 'bug'],
+  types: ['ghost', 'bug'],
 }];
