@@ -14,11 +14,11 @@ import { connect } from 'react-redux';
 import Moveset from './Moveset';
 import MainInfo from './MainInfo';
 import VisualInfoComponent from './VisualInfo';
-import { loadPokemonDetail, loadPokelist } from '../../../redux/actions/pokedexActions';
+import { loadPokemonDetail, loadPokelist, loadPokemonAbilities } from '../../../redux/actions/pokedexActions';
 
-export function PokeDetailComponent({ pokedex, pokemon, actions }) {
-  // eslint-disable-next-line no-debugger
-  debugger;
+export function PokeDetailComponent({
+  pokedex, pokemon, pokemonAbilities, actions,
+}) {
   const { pokeId } = useParams();
 
   // setPokemon(pokemons.find((poke) => poke.name.toLowerCase() === pokeId));
@@ -28,6 +28,7 @@ export function PokeDetailComponent({ pokedex, pokemon, actions }) {
       actions.loadPokelist();
     }
     actions.loadPokemonDetail(pokeId);
+    actions.loadPokemonAbilities(pokeId);
   }, []);
 
   return (
@@ -43,9 +44,8 @@ export function PokeDetailComponent({ pokedex, pokemon, actions }) {
             <div className="pokemon__ability">
               <span className="pokemon__ability-title">ABILITY</span>
               <span className="pokemon__ability-name">
-                {pokemon.abilities && pokemon.abilities[0]}
-                {' '}
-                {pokemon.abilities && pokemon.abilities[0]}
+                {console.log(pokemonAbilities)}
+                {pokemonAbilities && pokemonAbilities[1].name}
               </span>
               <span className="pokemon__ability.description">kdjksf dskfjsd fskdjf fklsdj dlkj</span>
             </div>
@@ -68,11 +68,12 @@ export function PokeDetailComponent({ pokedex, pokemon, actions }) {
 
 PokeDetailComponent.propTypes = {
   pokedex: PropTypes.arrayOf(PropTypes.object).isRequired,
+  pokemonAbilities: PropTypes.arrayOf(PropTypes.string).isRequired,
   pokemon: PropTypes.objectOf(PropTypes.string).isRequired,
   actions: PropTypes.shape({
     loadPokemonDetail: PropTypes.func.isRequired,
     loadPokelist: PropTypes.func.isRequired,
-
+    loadPokemonAbilities: PropTypes.func.isRequired,
   }).isRequired,
 };
 
@@ -80,13 +81,18 @@ function mapStateToProps(state) {
   return {
     pokemon: state.pokedexReducer.pokemon,
     pokedex: state.pokedexReducer.pokedex,
+    pokemonAbilities: state.pokedexReducer.pokemonAbilities,
 
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ loadPokemonDetail, loadPokelist }, dispatch),
+    actions: bindActionCreators({
+      loadPokemonDetail,
+      loadPokelist,
+      loadPokemonAbilities,
+    }, dispatch),
   };
 }
 

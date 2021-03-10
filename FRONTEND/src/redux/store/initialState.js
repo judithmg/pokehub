@@ -1,6 +1,12 @@
 export default {
   pokedexReducer: {
-    pokedex: [],
     pokemon: {},
+    pokemonLearnset: {},
+    pokemonMoveset: {},
+    pokemonAbilities: [],
+    pokedex: [],
+    moves: [],
+    abilities: [],
+    learnset: [],
   },
 };

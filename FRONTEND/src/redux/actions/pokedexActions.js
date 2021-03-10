@@ -51,7 +51,25 @@ function loadAbilities() {
     });
   };
 }
+function loadPokemonLearnset(pokeId) {
+  return {
+    type: actionTypes.LOAD_POKEMON_LEARNSET,
+    pokeId,
+  };
+}
+function loadPokemonAbilities(pokeId) {
+  return {
+    type: actionTypes.LOAD_POKEMON_ABILITIES,
+    pokeId,
+  };
+}
 
 export {
-  loadPokelist, loadPokemonDetail, loadMoves, loadLearnset, loadAbilities,
+  loadPokelist,
+  loadPokemonDetail,
+  loadMoves,
+  loadLearnset,
+  loadAbilities,
+  loadPokemonLearnset,
+  loadPokemonAbilities,
 };

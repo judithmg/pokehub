@@ -3,7 +3,9 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { loadPokelist } from '../../redux/actions/pokedexActions';
+import {
+  loadPokelist, loadMoves, loadLearnset, loadAbilities,
+} from '../../redux/actions/pokedexActions';
 import PokemonList from './PokemonList';
 
 import keyGenerator from '../../assets/keyGenerator';
@@ -13,6 +15,9 @@ import '../../styles/pokedex.scss';
 export function PokedexComponent({ pokedex, actions }) {
   useEffect(() => {
     actions.loadPokelist();
+    actions.loadMoves();
+    actions.loadLearnset();
+    actions.loadAbilities();
   }, []);
   return (
     <>
@@ -55,18 +60,26 @@ PokedexComponent.propTypes = {
   pokedex: PropTypes.arrayOf(PropTypes.object).isRequired,
   actions: PropTypes.shape({
     loadPokelist: PropTypes.func.isRequired,
+    loadMoves: PropTypes.func.isRequired,
+    loadLearnset: PropTypes.func.isRequired,
+    loadAbilities: PropTypes.func.isRequired,
   }).isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     pokedex: state.pokedexReducer.pokedex,
+    moves: state.pokedexReducer.moves,
+    abilities: state.pokedexReducer.abilities,
+    learnset: state.pokedexReducer.learnset,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ loadPokelist }, dispatch),
+    actions: bindActionCreators({
+      loadPokelist, loadMoves, loadLearnset, loadAbilities,
+    }, dispatch),
   };
 }
 
