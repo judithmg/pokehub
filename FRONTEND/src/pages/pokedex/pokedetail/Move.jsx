@@ -9,7 +9,7 @@ import ModalAtk from './ModalAtk';
 import '../../../styles/pokedetail.scss';
 import keyGenerator from '../../../assets/keyGenerator';
 
-export default function Move({ move }) {
+export default function MoveComponent({ move }) {
   const [isShowing, setIsShowing] = useState(false);
   return (
     <tr
@@ -30,7 +30,7 @@ export default function Move({ move }) {
   );
 }
 
-Move.propTypes = {
+MoveComponent.propTypes = {
   move: PropTypes.shape({
     name: PropTypes.string,
     lvl: PropTypes.number,

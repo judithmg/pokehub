@@ -1,20 +1,36 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, unmountComponentAtNode } from 'react-dom';
+import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 
 import PokeDetailComponent from '../pages/pokedex/pokedetail';
 
-describe('Given a Pokedetail component', () => {
+xdescribe('Given a Pokedetail component', () => {
+    describe('When it is invoked', () => {
+    let container = null;
+
+    beforeEach(() => {
+      container = document.createElement('div');
+      document.body.appendChild(container);
+    });
+
+    afterEach(() => {
+      unmountComponentAtNode(container);
+      container.remove();
+      container = null;
+    });
   describe('When it is invoked', () => {
     test('Then there should be a section', () => {
-      render(
-        <BrowserRouter>
-          <PokeDetailComponent />
-        </BrowserRouter>,
-      );
+      act(() => {
+        render(
+          <BrowserRouter>
+            <PokeDetailComponent />
+          </BrowserRouter>, container,
+        );
+      });
 
-      // const dashboard = screen.findByLabelText('section');
-      expect(true).toBe(true);
+      // const dashboard = sdocument.querySelector('section');
+      expect(dashboard).toBe(true);
     });
   });
 });
