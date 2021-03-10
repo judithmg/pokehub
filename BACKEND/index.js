@@ -2,25 +2,24 @@ const express = require('express');
 const morgan = require('morgan');
 const chalk = require('chalk');
 const debug = require('debug')('app');
-const { connect } = require('mongoose');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
-const model = require('./src/models/model');
-
-const route = require('./src/routes/route');
+const pokemonRoute = require('./src/routes/pokemonRoutes');
 
 const app = express();
 const port = process.env.PORT || 5000;
+const dbUrl = process.env.MONGO_DDBB;
 
-connect(process.env.DB_MONGO, { useNewUrlParser: true, useUnifiedTopology: true });
-const hello = [];
+mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(morgan('dev'));
 
 app.use(express.urlencoded({ extend: true }));
 app.use(express.json());
 
-app.use('/pokehub', route);
+app.use('/pokehub/pokedex', pokemonRoute);
 
 app.listen(port, () => {
-  debug(`PROMOFARMA is running in ${chalk.bgGreen.bold(`http://localhost:${port}`)}`);
+  debug(`POKEHUB is running in ${chalk.bgGreen.bold(`http://localhost:${port}`)}`);
 });
