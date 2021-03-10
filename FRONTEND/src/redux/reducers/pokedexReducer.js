@@ -11,7 +11,6 @@ export default function pokedexReducer(state =
 }, action) {
   let pokemon;
   let pokemonLearnset;
-  let pokemonMoveset;
   let pokemonAbilities;
   switch (action.type) {
     case actionTypes.LOAD_POKELIST:
