@@ -10,10 +10,7 @@ export default function PokemonList({ pokemon }) {
   return (
     <tr className="pokedex__pokemon" key={keyGenerator(5)}>
       <td className="pokedex__pokemon-id">
-        {console.log(pokemon)}
-        #
-        {' '}
-        {pokemon.num}
+        {`# ${pokemon.num}`}
       </td>
       <td className="pokedex__pokemon-sprite">
         <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/icons/${pokemon.num}.png`} alt={pokemon.name} />

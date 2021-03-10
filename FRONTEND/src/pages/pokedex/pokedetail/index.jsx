@@ -25,7 +25,6 @@ export default function PokeDetailComponent(props) {
   return (
     <>
       <section>
-        {console.log(pokemon)}
         { pokemon && (
         <>
           <div className={`pokemon__abstract ${pokemon.types[0].toLowerCase()}`}>

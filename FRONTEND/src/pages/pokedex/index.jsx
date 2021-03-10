@@ -11,17 +11,12 @@ import keyGenerator from '../../assets/keyGenerator';
 import '../../styles/pokedex.scss';
 
 export function PokedexComponent({ pokedex, actions }) {
-  // eslint-disable-next-line no-debugger
-  debugger;
   useEffect(() => {
-    // eslint-disable-next-line no-debugger
-    debugger;
     actions.loadPokelist();
   }, []);
   return (
     <>
       <section className="pokedex__container">
-        {console.log(pokedex)}
         <table>
           <thead>
             <tr className="pokedex__header">
