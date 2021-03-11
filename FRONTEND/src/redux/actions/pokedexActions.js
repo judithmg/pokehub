@@ -67,11 +67,10 @@ function loadPokemonAbilities(pokeId) {
     pokeId,
   };
 }
-
-function loadPokemonFromType(pokeType) {
+function loadPokemonFromType(pokemonTypeFiltered) {
   return {
     type: actionTypes.LOAD_POKEMON_FROM_TYPE,
-    pokeType,
+    pokemonTypeFiltered,
   };
 }
 

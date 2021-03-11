@@ -6,20 +6,30 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { loadPokemonFromType } from '../../redux/actions/pokedexActions';
 
-export function ButtonTypeComponent({ actions, text, type }) {
+export function ButtonTypeComponent({ actions, type }) {
   const [pokeType, setPokeType] = useState('');
 
   useEffect(() => {
-    actions.loadPokemonFromType(pokeType);
-    setPokeType('hello');
+    // eslint-disable-next-line no-debugger
+    debugger;
+    if (pokeType.length) {
+      console.log(pokeType);
+      actions.loadPokemonFromType(pokeType);
+    }
   }, [pokeType]);
   return (
-    <button type="button" value={type.toLowerCase()} onClick={(event) => console.log(event.target.value)} className={`btn-type ${type.toLowerCase()}`}>{text.toUpperCase()}</button>
+    <button
+      type="button"
+      value={type}
+      onClick={(event) => setPokeType(event.target.value)}
+      className={`btn-type ${type.toLowerCase()}`}
+    >
+      {type.toUpperCase()}
+    </button>
   );
 }
 
 ButtonTypeComponent.propTypes = {
-  text: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   actions: PropTypes.shape({
     loadPokemonFromType: PropTypes.func.isRequired,
@@ -28,7 +38,7 @@ ButtonTypeComponent.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    pokemonsShown: state.pokedexReducer.pokemonsShown,
+    pokemonTypeFiltered: state.pokedexReducer.pokemonTypeFiltered,
   };
 }
 

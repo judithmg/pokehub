@@ -11,5 +11,7 @@ export default {
 
     pokemonLearnset: {},
     pokemonAbilities: [],
+
+    pokemonTypeFiltered: '',
   },
 };

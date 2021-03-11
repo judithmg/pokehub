@@ -14,13 +14,18 @@ export default function pokedexReducer(state =
 
   pokemonLearnset: initialState.pokemonLearnset,
   pokemonAbilities: initialState.pokemonAbilities,
+
+  pokemonTypeFiltered: initialState.pokemonTypeFiltered,
 }, action) {
   let pokemon;
+  let pokedex;
+  let pokemonsShown;
   let pokemonLearnset;
   let pokemonAbilities;
   switch (action.type) {
     case actionTypes.LOAD_POKEDEX:
-      return { ...state, pokedex: action.data };
+      pokedex = action.data.sort((a, b) => a.num - b.num);
+      return { ...state, pokedex };
 
     case actionTypes.LOAD_LEARNSET:
       return { ...state, learnset: action.data };
@@ -29,7 +34,6 @@ export default function pokedexReducer(state =
       return { ...state, moves: action.data };
 
     case actionTypes.LOAD_ABILITIES:
-      console.log(state);
       return { ...state, abilities: action.data };
 
     case actionTypes.LOAD_POKEMON_SHOWN:
@@ -54,6 +58,18 @@ export default function pokedexReducer(state =
       || ability.name === state.pokemon.abilities[1]
       || ability.name === state.pokemon.abilities.H);
       return { ...state, pokemonAbilities };
+
+    case actionTypes.LOAD_POKEMON_FROM_TYPE:
+      // eslint-disable-next-line no-debugger
+      debugger;
+      pokemonsShown = state.pokedex
+        .filter((poke) => poke.types.includes(action.pokemonTypeFiltered));
+      console.log(pokemonsShown);
+      return {
+        ...state,
+        pokemonsShown,
+        pokemonTypeFiltered: action.pokemonTypeFiltered,
+      };
 
     default:
       return state;
