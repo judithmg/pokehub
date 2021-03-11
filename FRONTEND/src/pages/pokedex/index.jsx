@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import ReactPaginate from 'react-paginate';
 
 import {
   loadPokedex, loadMoves, loadLearnset, loadAbilities, loadPokemonShown,
@@ -15,6 +16,7 @@ import '../../styles/pokedex.scss';
 export function PokedexComponent({
   page = 0, pokemonShown, pokedex, actions,
 }) {
+  const [pagination, setPagination] = useState(1);
   useEffect(() => {
     if (!pokedex.length) {
       actions.loadAbilities();
@@ -25,6 +27,9 @@ export function PokedexComponent({
     actions.loadPokemonShown(page);
   }, [pokedex.length, page]);
 
+  useEffect(() => {
+    actions.loadPokemonShown(pagination);
+  }, [pagination]);
   return (
     <>
       <section className="pokedex__container">
@@ -56,6 +61,15 @@ export function PokedexComponent({
               <PokemonList pokemon={pokemon} key={keyGenerator(5)} />
             ))}
           </tbody>
+          <ReactPaginate
+            pageCount={45}
+            previousLabel="previous"
+            nextLabel="next"
+            breakLabel="..."
+            onPageChange={({ selected }) => {
+              setPagination(selected);
+            }}
+          />
         </table>
       </section>
     </>
