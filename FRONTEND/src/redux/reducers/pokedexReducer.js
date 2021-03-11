@@ -60,15 +60,12 @@ export default function pokedexReducer(state =
       return { ...state, pokemonAbilities };
 
     case actionTypes.LOAD_POKEMON_FROM_TYPE:
-      // eslint-disable-next-line no-debugger
-      debugger;
       pokemonsShown = state.pokedex
         .filter((poke) => poke.types.includes(action.pokemonTypeFiltered));
-      console.log(pokemonsShown);
       return {
         ...state,
-        pokemonsShown,
         pokemonTypeFiltered: action.pokemonTypeFiltered,
+        pokemonsShown,
       };
 
     default:

@@ -10,10 +10,7 @@ export function ButtonTypeComponent({ actions, type }) {
   const [pokeType, setPokeType] = useState('');
 
   useEffect(() => {
-    // eslint-disable-next-line no-debugger
-    debugger;
     if (pokeType.length) {
-      console.log(pokeType);
       actions.loadPokemonFromType(pokeType);
     }
   }, [pokeType]);
