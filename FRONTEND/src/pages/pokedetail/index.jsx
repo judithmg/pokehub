@@ -18,12 +18,14 @@ import {
   loadLearnsets,
   loadAbilities,
 
+  loadPokemonLearnset,
   loadPokemonDetail,
   loadPokemonAbilities,
 } from '../../redux/actions/pokedexActions';
 
 export function PokeDetailComponent({
   pokemonAbilities,
+  pokemonLearnset,
   pokemon,
   actions,
   pokedex,
@@ -34,16 +36,20 @@ export function PokeDetailComponent({
   const { pokeId } = useParams();
 
   useEffect(() => {
-    if (!pokedex.length || abilities.length || moves.length || learnsets.length) {
+    if (!pokedex.length || !abilities.length || !moves.length || !learnsets.length) {
+      actions.loadLearnsets();
       actions.loadAbilities();
       actions.loadMoves();
-      actions.loadLearnsets();
       actions.loadPokedex();
     }
-  }, [pokedex.length]);
+    actions.loadPokemonDetail(pokeId);
+    actions.loadPokemonLearnset(pokeId);
+    actions.loadPokemonAbilities(pokeId);
+  }, [learnsets.length, pokedex.length, moves.length]);
 
   useEffect(() => {
     actions.loadPokemonDetail(pokeId);
+    actions.loadPokemonLearnset(pokeId);
     actions.loadPokemonAbilities(pokeId);
   }, [pokeId]);
 
@@ -56,6 +62,7 @@ export function PokeDetailComponent({
             <MainInfo pokemon={pokemon} />
             <VisualInfoComponent pokemon={pokemon} />
           </div>
+
           <div className="pokemon__details">
             <div className="pokemon__ability">
               <span className="pokemon__ability-title">ABILITY</span>
@@ -63,18 +70,20 @@ export function PokeDetailComponent({
               pokemonAbilities
               && pokemonAbilities.map((ability) => <PokemonAbilities ability={ability} />)
               }
-
             </div>
+
             <div className="pokemon__moves">
               <div className="pokemon__moves-lvl">
                 <span className="pokemon__moves-title">
                   MOVES
                 </span>
                 <Moveset moves={pokemon.name} />
+                {console.log(pokemonLearnset)}
               </div>
               <div className="pokemon__moves-egg" />
             </div>
           </div>
+
         </>
         )}
       </section>
@@ -89,13 +98,16 @@ PokeDetailComponent.propTypes = {
   learnsets: PropTypes.arrayOf(PropTypes.object).isRequired,
 
   pokemonAbilities: PropTypes.arrayOf(PropTypes.string).isRequired,
+  pokemonLearnset: PropTypes.arrayOf(PropTypes.string).isRequired,
   pokemon: PropTypes.objectOf(PropTypes.string).isRequired,
+
   actions: PropTypes.shape({
     loadPokedex: PropTypes.func.isRequired,
     loadMoves: PropTypes.func.isRequired,
     loadLearnsets: PropTypes.func.isRequired,
     loadAbilities: PropTypes.func.isRequired,
 
+    loadPokemonLearnset: PropTypes.func.isRequired,
     loadPokemonDetail: PropTypes.func.isRequired,
     loadPokemonAbilities: PropTypes.func.isRequired,
   }).isRequired,
@@ -106,11 +118,11 @@ function mapStateToProps(state) {
     pokedex: state.pokedexReducer.pokedex,
     moves: state.pokedexReducer.moves,
     abilities: state.pokedexReducer.abilities,
-    learnset: state.pokedexReducer.learnset,
+    learnsets: state.pokedexReducer.learnsets,
 
     pokemon: state.pokedexReducer.pokemon,
     pokemonAbilities: state.pokedexReducer.pokemonAbilities,
-
+    pokemonLearnset: state.pokedexReducer.pokemonLearnset,
   };
 }
 
@@ -123,6 +135,7 @@ function mapDispatchToProps(dispatch) {
       loadMoves,
       loadLearnsets,
       loadAbilities,
+      loadPokemonLearnset,
     }, dispatch),
   };
 }

@@ -4,7 +4,6 @@ import initialState from '../store/initialState';
 export default function pokedexReducer(state =
 {
   pokedex: initialState.pokedex,
-  pokemonsShown: initialState.pokemonsShown,
   pokedexPage: initialState.pokedexPage,
   pokemon: initialState.pokemon,
 
@@ -12,6 +11,7 @@ export default function pokedexReducer(state =
   abilities: initialState.abilities,
   learnsets: initialState.learnsets,
 
+  pokemonsShown: initialState.pokemonsShown,
   pokemonLearnset: initialState.pokemonLearnset,
   pokemonAbilities: initialState.pokemonAbilities,
 
@@ -20,8 +20,10 @@ export default function pokedexReducer(state =
   let pokemon;
   let pokedex;
   let pokemonsShown;
-  let pokemonLearnset;
   let pokemonAbilities;
+  let pokemonLearnset;
+  let filteredMoves;
+
   switch (action.type) {
     case actionTypes.LOAD_POKEDEX:
       pokedex = action.data.sort((a, b) => a.num - b.num);
@@ -48,8 +50,12 @@ export default function pokedexReducer(state =
 
     case actionTypes.LOAD_POKEMON_LEARNSET:
 
-      pokemonLearnset = state.learnsets.find((poke) => poke.name === action.pokeId);
-      pokemonLearnset.learnset.map((pokemove) => state.moves.filter(((move) => move.name.replace(/[^a-zA-Z ]/g, '') === pokemove)));
+      pokemonLearnset = state.learnsets?.find((poke) => poke.name === pokemon);
+      filteredMoves = pokemonLearnset && pokemonLearnset
+        .learnset.map((pokemove) => state.moves.map(
+          (move) => console.log(move.name, pokemove),
+        ));
+      console.log(filteredMoves);
       return { ...state, pokemonLearnset };
 
     case actionTypes.LOAD_POKEMON_ABILITIES:

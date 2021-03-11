@@ -9,7 +9,7 @@ export default {
     abilities: [],
     learnsets: [],
 
-    pokemonLearnset: {},
+    pokemonLearnset: [],
     pokemonAbilities: [],
 
     pokemonTypeFiltered: '',
