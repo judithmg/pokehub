@@ -4,7 +4,7 @@ import initialState from '../store/initialState';
 export default function pokedexReducer(state =
 {
   pokedex: initialState.pokedex,
-  pokemonShown: initialState.pokemonShown,
+  pokemonsShown: initialState.pokemonsShown,
   pokedexPage: initialState.pokedexPage,
   pokemon: initialState.pokemon,
 
@@ -35,7 +35,7 @@ export default function pokedexReducer(state =
     case actionTypes.LOAD_POKEMON_SHOWN:
       return {
         ...state,
-        pokemonShown: state.pokedex.slice((action.page) * 20, (action.page + 1) * 20),
+        pokemonsShown: state.pokedex.slice((action.page) * 20, (action.page + 1) * 20),
       };
 
     case actionTypes.LOAD_POKEMON_DETAIL:

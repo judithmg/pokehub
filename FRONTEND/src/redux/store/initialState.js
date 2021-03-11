@@ -1,7 +1,7 @@
 export default {
   pokedexReducer: {
     pokedex: [],
-    pokemonShown: [],
+    pokemonsShown: [],
     pokedexPage: 1,
     pokemon: {},
 
