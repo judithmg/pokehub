@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import {
-  loadPokelist, loadMoves, loadLearnset, loadAbilities,
+  loadPokedex, loadMoves, loadLearnset, loadAbilities, loadPokemonShown,
 } from '../../redux/actions/pokedexActions';
 import PokemonList from './PokemonList';
 
@@ -12,13 +12,19 @@ import keyGenerator from '../../assets/keyGenerator';
 
 import '../../styles/pokedex.scss';
 
-export function PokedexComponent({ pokedex, actions }) {
+export function PokedexComponent({
+  page = 0, pokemonShown, pokedex, actions,
+}) {
   useEffect(() => {
-    actions.loadAbilities();
-    actions.loadMoves();
-    actions.loadLearnset();
-    actions.loadPokelist();
-  }, []);
+    if (!pokedex.length) {
+      actions.loadAbilities();
+      actions.loadMoves();
+      actions.loadLearnset();
+      actions.loadPokedex();
+    }
+    actions.loadPokemonShown(page);
+  }, [pokedex.length, page]);
+
   return (
     <>
       <section className="pokedex__container">
@@ -46,7 +52,7 @@ export function PokedexComponent({ pokedex, actions }) {
             </tr>
           </thead>
           <tbody>
-            {pokedex && pokedex.map((pokemon) => (
+            {pokemonShown && pokemonShown.map((pokemon) => (
               <PokemonList pokemon={pokemon} key={keyGenerator(5)} />
             ))}
           </tbody>
@@ -57,18 +63,23 @@ export function PokedexComponent({ pokedex, actions }) {
 }
 
 PokedexComponent.propTypes = {
+  pokemonShown: PropTypes.arrayOf(PropTypes.object).isRequired,
   pokedex: PropTypes.arrayOf(PropTypes.object).isRequired,
+  page: PropTypes.number.isRequired,
   actions: PropTypes.shape({
-    loadPokelist: PropTypes.func.isRequired,
+    loadPokedex: PropTypes.func.isRequired,
     loadMoves: PropTypes.func.isRequired,
     loadLearnset: PropTypes.func.isRequired,
     loadAbilities: PropTypes.func.isRequired,
+    loadPokemonShown: PropTypes.func.isRequired,
   }).isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     pokedex: state.pokedexReducer.pokedex,
+    page: state.pokedexReducer.page,
+    pokemonShown: state.pokedexReducer.pokemonShown,
     moves: state.pokedexReducer.moves,
     abilities: state.pokedexReducer.abilities,
     learnset: state.pokedexReducer.learnset,
@@ -78,7 +89,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      loadPokelist, loadMoves, loadLearnset, loadAbilities,
+      loadPokedex, loadMoves, loadLearnset, loadAbilities, loadPokemonShown,
     }, dispatch),
   };
 }

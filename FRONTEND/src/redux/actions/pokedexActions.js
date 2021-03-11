@@ -6,14 +6,21 @@ const pokedexUrl = 'http://localhost:5000/pokehub/pokedex';
 // const learnsetUrl = 'http://localhost:5000/pokehub/learnset';
 // const abilitiesUrl = 'http://localhost:5000/pokehub/abilities';
 
-function loadPokelist() {
+function loadPokedex() {
   return async (dispatch) => {
     const { data } = await axios.get(pokedexUrl);
     dispatch({
-      type: actionTypes.LOAD_POKELIST,
+      type: actionTypes.LOAD_POKEDEX,
       data,
 
     });
+  };
+}
+
+function loadPokemonShown(page) {
+  return {
+    type: actionTypes.LOAD_POKEMON_SHOWN,
+    page,
   };
 }
 
@@ -65,7 +72,8 @@ function loadPokemonAbilities(pokeId) {
 }
 
 export {
-  loadPokelist,
+  loadPokedex,
+  loadPokemonShown,
   loadPokemonDetail,
   loadMoves,
   loadLearnset,

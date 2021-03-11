@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import Moveset from './Moveset';
 import MainInfo from './MainInfo';
 import VisualInfoComponent from './VisualInfo';
-import { loadPokemonDetail, loadPokelist, loadPokemonAbilities } from '../../redux/actions/pokedexActions';
+import { loadPokemonDetail, loadPokedex, loadPokemonAbilities } from '../../redux/actions/pokedexActions';
 
 export function PokeDetailComponent({
   pokedex, pokemon, pokemonAbilities, actions,
@@ -25,7 +25,7 @@ export function PokeDetailComponent({
 
   useEffect(() => {
     if (!pokedex.length) {
-      actions.loadPokelist();
+      actions.loadPokedex();
     }
     console.log(pokedex);
     actions.loadPokemonDetail(pokeId);
@@ -73,7 +73,7 @@ PokeDetailComponent.propTypes = {
   pokemon: PropTypes.objectOf(PropTypes.string).isRequired,
   actions: PropTypes.shape({
     loadPokemonDetail: PropTypes.func.isRequired,
-    loadPokelist: PropTypes.func.isRequired,
+    loadPokedex: PropTypes.func.isRequired,
     loadPokemonAbilities: PropTypes.func.isRequired,
   }).isRequired,
 };
@@ -91,7 +91,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       loadPokemonDetail,
-      loadPokelist,
+      loadPokedex,
       loadPokemonAbilities,
     }, dispatch),
   };

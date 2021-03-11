@@ -4,16 +4,22 @@ import initialState from '../store/initialState';
 export default function pokedexReducer(state =
 {
   pokedex: initialState.pokedex,
+  pokemonShown: initialState.pokemonShown,
+  pokedexPage: initialState.pokedexPage,
   pokemon: initialState.pokemon,
+
   moves: initialState.moves,
   abilities: initialState.abilities,
   learnset: initialState.learnset,
+
+  pokemonLearnset: initialState.pokemonLearnset,
+  pokemonAbilities: initialState.pokemonAbilities,
 }, action) {
   let pokemon;
   let pokemonLearnset;
   let pokemonAbilities;
   switch (action.type) {
-    case actionTypes.LOAD_POKELIST:
+    case actionTypes.LOAD_POKEDEX:
       return { ...state, pokedex: action.data };
 
     case actionTypes.LOAD_LEARNSET:
@@ -26,7 +32,13 @@ export default function pokedexReducer(state =
       console.log(state);
       return { ...state, abilities: action.data };
 
-    case actionTypes.LOAD_POKEMON:
+    case actionTypes.LOAD_POKEMON_SHOWN:
+      return {
+        ...state,
+        pokemonShown: state.pokedex.slice((action.page) * 20, (action.page + 1) * 20),
+      };
+
+    case actionTypes.LOAD_POKEMON_DETAIL:
       pokemon = state.pokedex.find((poke) => poke.name.toLowerCase() === action.pokeId);
       return { ...state, pokemon };
 
