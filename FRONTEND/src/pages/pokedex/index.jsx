@@ -32,7 +32,7 @@ export function PokedexComponent({
   }, [pagination]);
   return (
     <>
-      <section className="pokedex__container">
+      <section className="pokedex__container" id="jump">
         <table>
           <thead>
             <tr className="pokedex__header">
@@ -63,12 +63,17 @@ export function PokedexComponent({
           </tbody>
           <ReactPaginate
             pageCount={45}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
             previousLabel="previous"
             nextLabel="next"
             breakLabel="..."
-            onPageChange={({ selected }) => {
-              setPagination(selected);
-            }}
+            containerClassName="pokedex__pagination"
+            pageClassName="pokedex__pagination-page"
+            activeClassName="pokedex__pagination-active"
+            nextLinkClassName="pokedex__pagination-next"
+            previosLinkClassName="pokedex__pagination-previous"
+            onPageChange={({ selected }) => setPagination(selected)}
           />
         </table>
       </section>

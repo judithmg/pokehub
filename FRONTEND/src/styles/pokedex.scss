@@ -75,6 +75,24 @@
     transform: translatey(0px);
   }
 }
+.pokedex__pagination {
+  @include flex(row, center, center);
+  cursor: pointer;
+  margin: 5px 0;
+  color: #fff;
+  text-shadow: $blackshadow;
+  li {
+    outline: none;
+    margin: 0 5px;
+    padding: 4px;
+    border-radius: 10px;
+    background-color: $headercolor;
+  }
+  .pokedex__pagination-active {
+    background-color: $menucolor;
+    font-weight: 700;
+  }
+}
 
 @media only screen and (min-width: 768px) {
   .pokedex__container {
