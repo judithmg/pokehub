@@ -7,7 +7,7 @@ export default {
 
     moves: [],
     abilities: [],
-    learnset: [],
+    learnsets: [],
 
     pokemonLearnset: {},
     pokemonAbilities: [],

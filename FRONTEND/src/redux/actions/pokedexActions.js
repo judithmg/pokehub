@@ -3,7 +3,7 @@ import actionTypes from './actionTypes';
 
 const pokedexUrl = 'http://localhost:5000/pokehub/pokedex';
 const movesUrl = 'http://localhost:5000/pokehub/pokedex/moves';
-const learnsetUrl = 'http://localhost:5000/pokehub/pokedex/learnsets';
+const learnsetsUrl = 'http://localhost:5000/pokehub/pokedex/learnsets';
 const abilitiesUrl = 'http://localhost:5000/pokehub/pokedex/abilities';
 
 function loadPokedex() {
@@ -12,7 +12,6 @@ function loadPokedex() {
     dispatch({
       type: actionTypes.LOAD_POKEDEX,
       data,
-
     });
   };
 }
@@ -24,7 +23,7 @@ function loadPokemonsShown(page) {
 }
 function loadPokemonDetail(pokeId) {
   return {
-    type: actionTypes.LOAD_POKEMON,
+    type: actionTypes.LOAD_POKEMON_DETAIL,
     pokeId,
   };
 }
@@ -37,11 +36,11 @@ function loadMoves() {
     });
   };
 }
-function loadLearnset() {
+function loadLearnsets() {
   return async (dispatch) => {
-    const { data } = await axios.get(learnsetUrl);
+    const { data } = await axios.get(learnsetsUrl);
     dispatch({
-      type: actionTypes.LOAD_LEARNSET,
+      type: actionTypes.LOAD_LEARNSETS,
       data,
     });
   };
@@ -79,7 +78,7 @@ export {
   loadPokemonsShown,
   loadPokemonDetail,
   loadMoves,
-  loadLearnset,
+  loadLearnsets,
   loadAbilities,
   loadPokemonLearnset,
   loadPokemonAbilities,

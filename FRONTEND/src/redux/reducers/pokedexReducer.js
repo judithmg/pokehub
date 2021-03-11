@@ -10,7 +10,7 @@ export default function pokedexReducer(state =
 
   moves: initialState.moves,
   abilities: initialState.abilities,
-  learnset: initialState.learnset,
+  learnsets: initialState.learnsets,
 
   pokemonLearnset: initialState.pokemonLearnset,
   pokemonAbilities: initialState.pokemonAbilities,
@@ -27,8 +27,8 @@ export default function pokedexReducer(state =
       pokedex = action.data.sort((a, b) => a.num - b.num);
       return { ...state, pokedex };
 
-    case actionTypes.LOAD_LEARNSET:
-      return { ...state, learnset: action.data };
+    case actionTypes.LOAD_LEARNSETS:
+      return { ...state, learnsets: action.data };
 
     case actionTypes.LOAD_MOVES:
       return { ...state, moves: action.data };
@@ -48,11 +48,12 @@ export default function pokedexReducer(state =
 
     case actionTypes.LOAD_POKEMON_LEARNSET:
 
-      pokemonLearnset = state.learnset.find((poke) => poke.name === action.pokeId);
+      pokemonLearnset = state.learnsets.find((poke) => poke.name === action.pokeId);
       pokemonLearnset.learnset.map((pokemove) => state.moves.filter(((move) => move.name.replace(/[^a-zA-Z ]/g, '') === pokemove)));
       return { ...state, pokemonLearnset };
 
     case actionTypes.LOAD_POKEMON_ABILITIES:
+      console.log(state.abilities);
       pokemonAbilities = state.abilities
         .filter((ability) => ability.name === state.pokemon.abilities[0]
       || ability.name === state.pokemon.abilities[1]

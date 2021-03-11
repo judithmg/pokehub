@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import ReactPaginate from 'react-paginate';
 
 import {
-  loadPokedex, loadMoves, loadLearnset, loadAbilities, loadPokemonsShown,
+  loadPokedex, loadMoves, loadLearnsets, loadAbilities, loadPokemonsShown,
 } from '../../redux/actions/pokedexActions';
 import PokemonList from './PokemonList';
 
@@ -14,14 +14,20 @@ import keyGenerator from '../../assets/keyGenerator';
 import '../../styles/pokedex.scss';
 
 export function PokedexComponent({
-  page = 0, pokemonsShown, pokedex, actions,
+  page = 0,
+  pokemonsShown,
+  pokedex,
+  actions,
+  moves,
+  abilities,
+  learnsets,
 }) {
   const [pagination, setPagination] = useState(1);
   useEffect(() => {
-    if (!pokedex.length) {
+    if (!pokedex.length || abilities.length || moves.length || learnsets.length) {
       actions.loadAbilities();
       actions.loadMoves();
-      actions.loadLearnset();
+      actions.loadLearnsets();
       actions.loadPokedex();
     }
     actions.loadPokemonsShown(page);
@@ -86,10 +92,13 @@ PokedexComponent.propTypes = {
   pokemonsShown: PropTypes.arrayOf(PropTypes.object).isRequired,
   pokedex: PropTypes.arrayOf(PropTypes.object).isRequired,
   page: PropTypes.number.isRequired,
+  abilities: PropTypes.arrayOf(PropTypes.object).isRequired,
+  moves: PropTypes.arrayOf(PropTypes.object).isRequired,
+  learnsets: PropTypes.arrayOf(PropTypes.object).isRequired,
   actions: PropTypes.shape({
     loadPokedex: PropTypes.func.isRequired,
     loadMoves: PropTypes.func.isRequired,
-    loadLearnset: PropTypes.func.isRequired,
+    loadLearnsets: PropTypes.func.isRequired,
     loadAbilities: PropTypes.func.isRequired,
     loadPokemonsShown: PropTypes.func.isRequired,
   }).isRequired,
@@ -109,7 +118,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      loadPokedex, loadMoves, loadLearnset, loadAbilities, loadPokemonsShown,
+      loadPokedex, loadMoves, loadLearnsets, loadAbilities, loadPokemonsShown,
     }, dispatch),
   };
 }

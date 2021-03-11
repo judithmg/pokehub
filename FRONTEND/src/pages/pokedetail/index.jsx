@@ -4,8 +4,6 @@ import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import 'react-svg-radar-chart/build/css/index.css';
 
-// import pokemons from '../../../data/pokemon.json';
-
 import '../../styles/pokedetail.scss';
 import '../../styles/_types.scss';
 
@@ -27,7 +25,6 @@ export function PokeDetailComponent({
     if (!pokedex.length) {
       actions.loadPokedex();
     }
-    console.log(pokedex);
     actions.loadPokemonDetail(pokeId);
     actions.loadPokemonAbilities(pokeId);
   }, [pokedex.length]);
