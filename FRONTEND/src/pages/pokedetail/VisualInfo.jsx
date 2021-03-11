@@ -1,8 +1,9 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
+
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import RadarChart from '../shared/RadarChart';
+import EvolutionChain from './EvolutionChain';
 
 export default function VisualInfoComponent({ pokemon }) {
   return (
@@ -10,20 +11,26 @@ export default function VisualInfoComponent({ pokemon }) {
       <div className="abstract__stats">
         <RadarChart stats={pokemon?.baseStats} />
       </div>
-      {pokemon.evos && (
-      <div className="abstract__evochain">
-        {' '}
-        <span className="abstract__evochain-text">NEXT EVOLUTION</span>
-        <Link to={`/pokemon/${pokemon.evos[0].toLowerCase()}`}>
-          <img
-            alt="pokemon evo"
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/icons/${pokemon.num + 1}.png`}
-          />
 
-        </Link>
-
-      </div>
+      {(pokemon.evos || pokemon.prevo) && (
+        <EvolutionChain
+          evos={pokemon.evos}
+          prevo={pokemon.prevo}
+          pokemon={pokemon}
+        />
       )}
     </div>
   );
 }
+
+VisualInfoComponent.propTypes = {
+  pokemon: PropTypes.shape({
+    name: PropTypes.string,
+    num: PropTypes.number,
+    types: PropTypes.arrayOf(PropTypes.string),
+    evos: PropTypes.arrayOf(PropTypes.string),
+    prevo: PropTypes.arrayOf(PropTypes.string),
+    baseStats: PropTypes.objectOf(PropTypes.num).isRequired,
+  }).isRequired,
+
+};

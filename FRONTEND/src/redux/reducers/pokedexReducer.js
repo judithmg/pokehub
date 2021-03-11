@@ -53,7 +53,6 @@ export default function pokedexReducer(state =
       return { ...state, pokemonLearnset };
 
     case actionTypes.LOAD_POKEMON_ABILITIES:
-      console.log(state.abilities);
       pokemonAbilities = state.abilities
         .filter((ability) => ability.name === state.pokemon.abilities[0]
       || ability.name === state.pokemon.abilities[1]

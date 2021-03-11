@@ -76,6 +76,8 @@ section {
         margin: 10px;
       }
       .abstract__evochain {
+        @include flex(column, center, center);
+
         width: 50%;
         font-weight: 700;
         font-size: 14px;
@@ -86,11 +88,26 @@ section {
 
         margin: 10px;
         padding: 15px;
-        @include flex(column, center, center);
-        img {
-          margin: 5px;
+        .abstract__evochain-sprites {
+          @include flex(row, center, center);
+          img {
+            filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+            transform: translatey(0px);
+            animation: float 2s ease-in-out infinite;
+          }
         }
       }
+    }
+  }
+  @keyframes float {
+    0% {
+      transform: translatey(0px);
+    }
+    50% {
+      transform: translatey(-10px);
+    }
+    100% {
+      transform: translatey(0px);
     }
   }
   .pokemon__details {

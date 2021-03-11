@@ -5,7 +5,11 @@ import { bindActionCreators } from 'redux';
 import ReactPaginate from 'react-paginate';
 
 import {
-  loadPokedex, loadMoves, loadLearnsets, loadAbilities, loadPokemonsShown,
+  loadPokedex,
+  loadMoves,
+  loadLearnsets,
+  loadAbilities,
+  loadPokemonsShown,
 } from '../../redux/actions/pokedexActions';
 import PokemonList from './PokemonList';
 
@@ -16,8 +20,8 @@ import '../../styles/pokedex.scss';
 export function PokedexComponent({
   page = 0,
   pokemonsShown,
-  pokedex,
   actions,
+  pokedex,
   moves,
   abilities,
   learnsets,
@@ -89,17 +93,20 @@ export function PokedexComponent({
 }
 
 PokedexComponent.propTypes = {
-  pokemonsShown: PropTypes.arrayOf(PropTypes.object).isRequired,
   pokedex: PropTypes.arrayOf(PropTypes.object).isRequired,
-  page: PropTypes.number.isRequired,
+  pokemonsShown: PropTypes.arrayOf(PropTypes.object).isRequired,
+
   abilities: PropTypes.arrayOf(PropTypes.object).isRequired,
   moves: PropTypes.arrayOf(PropTypes.object).isRequired,
   learnsets: PropTypes.arrayOf(PropTypes.object).isRequired,
+
+  page: PropTypes.number.isRequired,
   actions: PropTypes.shape({
     loadPokedex: PropTypes.func.isRequired,
     loadMoves: PropTypes.func.isRequired,
     loadLearnsets: PropTypes.func.isRequired,
     loadAbilities: PropTypes.func.isRequired,
+
     loadPokemonsShown: PropTypes.func.isRequired,
   }).isRequired,
 };
@@ -107,18 +114,23 @@ PokedexComponent.propTypes = {
 function mapStateToProps(state) {
   return {
     pokedex: state.pokedexReducer.pokedex,
-    page: state.pokedexReducer.page,
     pokemonsShown: state.pokedexReducer.pokemonsShown,
+
     moves: state.pokedexReducer.moves,
     abilities: state.pokedexReducer.abilities,
     learnset: state.pokedexReducer.learnset,
+    page: state.pokedexReducer.page,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      loadPokedex, loadMoves, loadLearnsets, loadAbilities, loadPokemonsShown,
+      loadPokedex,
+      loadMoves,
+      loadLearnsets,
+      loadAbilities,
+      loadPokemonsShown,
     }, dispatch),
   };
 }

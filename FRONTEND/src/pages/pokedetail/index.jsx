@@ -1,33 +1,51 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import 'react-svg-radar-chart/build/css/index.css';
+import { connect } from 'react-redux';
 
+import 'react-svg-radar-chart/build/css/index.css';
 import '../../styles/pokedetail.scss';
 import '../../styles/_types.scss';
 
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import Moveset from './Moveset';
+import PokemonAbilities from './PokemonAbilities';
 import MainInfo from './MainInfo';
 import VisualInfoComponent from './VisualInfo';
-import { loadPokemonDetail, loadPokedex, loadPokemonAbilities } from '../../redux/actions/pokedexActions';
+import {
+  loadPokedex,
+  loadMoves,
+  loadLearnsets,
+  loadAbilities,
+
+  loadPokemonDetail,
+  loadPokemonAbilities,
+} from '../../redux/actions/pokedexActions';
 
 export function PokeDetailComponent({
-  pokedex, pokemon, pokemonAbilities, actions,
+  pokemonAbilities,
+  pokemon,
+  actions,
+  pokedex,
+  moves,
+  abilities,
+  learnsets,
 }) {
   const { pokeId } = useParams();
 
-  // setPokemon(pokemons.find((poke) => poke.name.toLowerCase() === pokeId));
-
   useEffect(() => {
-    if (!pokedex.length) {
+    if (!pokedex.length || abilities.length || moves.length || learnsets.length) {
+      actions.loadAbilities();
+      actions.loadMoves();
+      actions.loadLearnsets();
       actions.loadPokedex();
     }
+  }, [pokedex.length]);
+
+  useEffect(() => {
     actions.loadPokemonDetail(pokeId);
     actions.loadPokemonAbilities(pokeId);
-  }, [pokedex.length]);
+  }, [pokeId]);
 
   return (
     <>
@@ -41,11 +59,11 @@ export function PokeDetailComponent({
           <div className="pokemon__details">
             <div className="pokemon__ability">
               <span className="pokemon__ability-title">ABILITY</span>
-              <span className="pokemon__ability-name">
-                {console.log(pokemonAbilities)}
-                {pokemonAbilities && pokemonAbilities[1]?.name}
-              </span>
-              <span className="pokemon__ability.description">kdjksf dskfjsd fskdjf fklsdj dlkj</span>
+              {
+              pokemonAbilities
+              && pokemonAbilities.map((ability) => <PokemonAbilities ability={ability} />)
+              }
+
             </div>
             <div className="pokemon__moves">
               <div className="pokemon__moves-lvl">
@@ -66,19 +84,31 @@ export function PokeDetailComponent({
 
 PokeDetailComponent.propTypes = {
   pokedex: PropTypes.arrayOf(PropTypes.object).isRequired,
+  abilities: PropTypes.arrayOf(PropTypes.object).isRequired,
+  moves: PropTypes.arrayOf(PropTypes.object).isRequired,
+  learnsets: PropTypes.arrayOf(PropTypes.object).isRequired,
+
   pokemonAbilities: PropTypes.arrayOf(PropTypes.string).isRequired,
   pokemon: PropTypes.objectOf(PropTypes.string).isRequired,
   actions: PropTypes.shape({
-    loadPokemonDetail: PropTypes.func.isRequired,
     loadPokedex: PropTypes.func.isRequired,
+    loadMoves: PropTypes.func.isRequired,
+    loadLearnsets: PropTypes.func.isRequired,
+    loadAbilities: PropTypes.func.isRequired,
+
+    loadPokemonDetail: PropTypes.func.isRequired,
     loadPokemonAbilities: PropTypes.func.isRequired,
   }).isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    pokemon: state.pokedexReducer.pokemon,
     pokedex: state.pokedexReducer.pokedex,
+    moves: state.pokedexReducer.moves,
+    abilities: state.pokedexReducer.abilities,
+    learnset: state.pokedexReducer.learnset,
+
+    pokemon: state.pokedexReducer.pokemon,
     pokemonAbilities: state.pokedexReducer.pokemonAbilities,
 
   };
@@ -90,6 +120,9 @@ function mapDispatchToProps(dispatch) {
       loadPokemonDetail,
       loadPokedex,
       loadPokemonAbilities,
+      loadMoves,
+      loadLearnsets,
+      loadAbilities,
     }, dispatch),
   };
 }
