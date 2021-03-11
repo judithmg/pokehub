@@ -20,7 +20,7 @@ function getAbilitiesList(req, res) {
   Abilities.find(query, (err, abilitiesList) => {
     if (err) {
       res.status(404);
-      res.send('There was an error and Pokemon List could not be found');
+      res.send('There was an error and Abilities List could not be found');
     } else {
       res.json(abilitiesList);
     }
@@ -32,7 +32,7 @@ function getMoveList(req, res) {
   Moves.find(query, (err, moveList) => {
     if (err) {
       res.status(404);
-      res.send('There was an error and Pokemon List could not be found');
+      res.send('There was an error and Moves List could not be found');
     } else {
       res.json(moveList);
     }
@@ -44,7 +44,7 @@ function getLearnsetList(req, res) {
   Learnsets.find(query, (err, learnsetList) => {
     if (err) {
       res.status(404);
-      res.send('There was an error and Pokemon List could not be found');
+      res.send('There was an error and Learnsets List could not be found');
     } else {
       res.json(learnsetList);
     }
