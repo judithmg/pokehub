@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import ReactPaginate from 'react-paginate';
 
 import {
-  loadPokedex, loadMoves, loadLearnset, loadAbilities, loadpokemonsShown,
+  loadPokedex, loadMoves, loadLearnset, loadAbilities, loadPokemonsShown,
 } from '../../redux/actions/pokedexActions';
 import PokemonList from './PokemonList';
 
@@ -24,11 +24,11 @@ export function PokedexComponent({
       actions.loadLearnset();
       actions.loadPokedex();
     }
-    actions.loadpokemonsShown(page);
-  }, [pokedex.length, page]);
+    actions.loadPokemonsShown(page);
+  }, [pokedex.length]);
 
   useEffect(() => {
-    actions.loadpokemonsShown(pagination);
+    actions.loadPokemonsShown(pagination);
   }, [pagination]);
   return (
     <>
@@ -65,6 +65,7 @@ export function PokedexComponent({
             pageCount={45}
             marginPagesDisplayed={2}
             pageRangeDisplayed={5}
+            initialPage={0}
             previousLabel="previous"
             nextLabel="next"
             breakLabel="..."
@@ -90,7 +91,7 @@ PokedexComponent.propTypes = {
     loadMoves: PropTypes.func.isRequired,
     loadLearnset: PropTypes.func.isRequired,
     loadAbilities: PropTypes.func.isRequired,
-    loadpokemonsShown: PropTypes.func.isRequired,
+    loadPokemonsShown: PropTypes.func.isRequired,
   }).isRequired,
 };
 
@@ -108,7 +109,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      loadPokedex, loadMoves, loadLearnset, loadAbilities, loadpokemonsShown,
+      loadPokedex, loadMoves, loadLearnset, loadAbilities, loadPokemonsShown,
     }, dispatch),
   };
 }
