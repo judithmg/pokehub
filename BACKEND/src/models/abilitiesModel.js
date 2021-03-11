@@ -14,4 +14,4 @@ const abilitiesSchema = new Schema({
   },
 });
 
-module.exports = model('Ability', abilitiesSchema);
+module.exports = model('Abilities', abilitiesSchema);
