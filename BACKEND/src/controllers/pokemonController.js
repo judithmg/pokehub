@@ -1,4 +1,7 @@
 const Pokemon = require('../models/pokemonModel');
+const Abilities = require('../models/abilitiesModel');
+const Moves = require('../models/movesModel');
+const Learnsets = require('../models/learnsetsModel');
 
 function getPokemonList(req, res) {
   const query = {};
@@ -12,13 +15,45 @@ function getPokemonList(req, res) {
   });
 }
 
-function createPokemon(req, res) {
-  const newProduct = new Pokemon(req.body);
-  newProduct.save();
-  res.json(newProduct);
+function getAbilitiesList(req, res) {
+  const query = {};
+  Abilities.find(query, (err, abilitiesList) => {
+    if (err) {
+      res.status(404);
+      res.send('There was an error and Pokemon List could not be found');
+    } else {
+      res.json(abilitiesList);
+    }
+  });
+}
+
+function getMoveList(req, res) {
+  const query = {};
+  Moves.find(query, (err, moveList) => {
+    if (err) {
+      res.status(404);
+      res.send('There was an error and Pokemon List could not be found');
+    } else {
+      res.json(moveList);
+    }
+  });
+}
+
+function getLearnsetList(req, res) {
+  const query = {};
+  Learnsets.find(query, (err, learnsetList) => {
+    if (err) {
+      res.status(404);
+      res.send('There was an error and Pokemon List could not be found');
+    } else {
+      res.json(learnsetList);
+    }
+  });
 }
 
 module.exports = {
   getPokemonList,
-  createPokemon,
+  getAbilitiesList,
+  getMoveList,
+  getLearnsetList,
 };
