@@ -8,6 +8,7 @@ import 'react-svg-radar-chart/build/css/index.css';
 import '../../styles/pokedetail.scss';
 import '../../styles/_types.scss';
 
+import keyGenerator from '../../assets/keyGenerator';
 import Moveset from './Moveset';
 import PokemonAbilities from './PokemonAbilities';
 import MainInfo from './MainInfo';
@@ -68,7 +69,12 @@ export function PokeDetailComponent({
               <span className="pokemon__ability-title">ABILITY</span>
               {
               pokemonAbilities
-              && pokemonAbilities.map((ability) => <PokemonAbilities ability={ability} />)
+              && pokemonAbilities.map((ability) => (
+                <PokemonAbilities
+                  ability={ability}
+                  key={keyGenerator(5)}
+                />
+              ))
               }
             </div>
 
@@ -97,9 +103,12 @@ PokeDetailComponent.propTypes = {
   moves: PropTypes.arrayOf(PropTypes.object).isRequired,
   learnsets: PropTypes.arrayOf(PropTypes.object).isRequired,
 
-  pokemonAbilities: PropTypes.arrayOf(PropTypes.string).isRequired,
+  pokemonAbilities: PropTypes.arrayOf(PropTypes.object).isRequired,
   pokemonLearnset: PropTypes.arrayOf(PropTypes.string).isRequired,
-  pokemon: PropTypes.objectOf(PropTypes.string).isRequired,
+  pokemon: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    types: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
 
   actions: PropTypes.shape({
     loadPokedex: PropTypes.func.isRequired,
@@ -113,7 +122,7 @@ PokeDetailComponent.propTypes = {
   }).isRequired,
 };
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   return {
     pokedex: state.pokedexReducer.pokedex,
     moves: state.pokedexReducer.moves,

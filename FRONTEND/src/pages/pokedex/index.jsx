@@ -71,22 +71,22 @@ export function PokedexComponent({
               <PokemonList pokemon={pokemon} key={keyGenerator(5)} />
             ))}
           </tbody>
-          <ReactPaginate
-            pageCount={45}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={5}
-            initialPage={0}
-            previousLabel="previous"
-            nextLabel="next"
-            breakLabel="..."
-            containerClassName="pokedex__pagination"
-            pageClassName="pokedex__pagination-page"
-            activeClassName="pokedex__pagination-active"
-            nextLinkClassName="pokedex__pagination-next"
-            previosLinkClassName="pokedex__pagination-previous"
-            onPageChange={({ selected }) => setPagination(selected)}
-          />
         </table>
+        <ReactPaginate
+          pageCount={45}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          initialPage={0}
+          previousLabel="previous"
+          nextLabel="next"
+          breakLabel="..."
+          containerClassName="pokedex__pagination"
+          pageClassName="pokedex__pagination-page"
+          activeClassName="pokedex__pagination-active"
+          nextLinkClassName="pokedex__pagination-next"
+          previosLinkClassName="pokedex__pagination-previous"
+          onPageChange={({ selected }) => setPagination(selected)}
+        />
       </section>
     </>
   );

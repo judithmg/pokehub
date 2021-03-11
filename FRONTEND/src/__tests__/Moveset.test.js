@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import MovesetComponent from '../pages/pokedex/pokedetail/Moveset';
+import MovesetComponent from '../pages/pokedetail/Moveset';
 
 describe('Given a Move component', () => {
   describe('When it is invoked', () => {

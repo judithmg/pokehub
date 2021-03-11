@@ -30,7 +30,16 @@ VisualInfoComponent.propTypes = {
     types: PropTypes.arrayOf(PropTypes.string),
     evos: PropTypes.arrayOf(PropTypes.string),
     prevo: PropTypes.arrayOf(PropTypes.string),
-    baseStats: PropTypes.objectOf(PropTypes.num).isRequired,
+    baseStats: PropTypes.shape(
+      {
+        hp: PropTypes.number,
+        spa: PropTypes.number,
+        atk: PropTypes.number,
+        spe: PropTypes.number,
+        def: PropTypes.number,
+        spd: PropTypes.number,
+      },
+    ).isRequired,
   }).isRequired,
 
 };

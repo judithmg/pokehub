@@ -16,3 +16,6 @@ export default function Pruebas() {
     </div>
   );
 }
+
+pokemonLearnset = state.learnsets.find((poke) => poke.name === pokemon);
+filteredMoves = pokemonLearnset.learnset.map((pokemove) => state.moves.filter((move) => move.name.replaceAll(/\W/ig, '').toLowerCase() === pokemove));
