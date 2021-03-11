@@ -1,50 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import '../../styles/button.scss';
 
-import { PropTypes } from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { loadPokemonFromType } from '../../redux/actions/pokedexActions';
+import PropTypes from 'prop-types';
 
-export function ButtonTypeComponent({ actions, type }) {
-  const [pokeType, setPokeType] = useState('');
-
-  useEffect(() => {
-    if (pokeType.length) {
-      actions.loadPokemonFromType(pokeType);
-    }
-  }, [pokeType]);
+export default function ButtonType({ text, type }) {
   return (
-    <button
-      type="button"
-      value={type}
-      onClick={(event) => setPokeType(event.target.value)}
-      className={`btn-type ${type.toLowerCase()}`}
-    >
-      {type.toUpperCase()}
-    </button>
+    <button type="button" className={`btn-type ${type.toLowerCase()}`}>{text.toUpperCase()}</button>
   );
 }
 
-ButtonTypeComponent.propTypes = {
+ButtonType.propTypes = {
+  text: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  actions: PropTypes.shape({
-    loadPokemonFromType: PropTypes.func.isRequired,
-  }).isRequired,
 };
-
-function mapStateToProps(state) {
-  return {
-    pokemonTypeFiltered: state.pokedexReducer.pokemonTypeFiltered,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators({
-      loadPokemonFromType,
-    }, dispatch),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ButtonTypeComponent);

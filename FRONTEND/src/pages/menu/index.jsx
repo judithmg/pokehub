@@ -1,7 +1,7 @@
 import React from 'react';
 
-import types from '../../data/types';
-import ButtonType from '../shared/ButtonType';
+import types from '../../constants/types';
+import ButtonType from './ButtonTypeFilter';
 import keyGenerator from '../../assets/keyGenerator';
 
 import '../../styles/menu.scss';
