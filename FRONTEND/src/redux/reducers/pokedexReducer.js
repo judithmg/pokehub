@@ -56,14 +56,13 @@ export default function pokedexReducer(state =
         .learnset.map((pokemove) => state.moves.filter(
           (move) => move.name.replaceAll(/\W/ig, '').toLowerCase() === pokemove,
         ));
-      console.log(filteredMoves);
-      return { ...state, pokemonLearnset };
+      return { ...state, pokemonLearnset: filteredMoves };
 
     case actionTypes.LOAD_POKEMON_ABILITIES:
       pokemonAbilities = state?.abilities
-        ?.filter((ability) => ability.name === state.pokemon.abilities[0]
-      || ability.name === state.pokemon.abilities[1]
-      || ability.name === state.pokemon.abilities.H);
+        ?.filter((ability) => ability.name === state.pokemon?.abilities[0]
+      || ability.name === state.pokemon?.abilities[1]
+      || ability.name === state.pokemon?.abilities.H);
       return { ...state, pokemonAbilities };
 
     case actionTypes.LOAD_POKEMON_FROM_TYPE:

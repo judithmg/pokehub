@@ -18,14 +18,13 @@ export default function MoveComponent({ move }) {
       onMouseEnter={() => setIsShowing(true)}
       onMouseLeave={() => setIsShowing(false)}
     >
-      <td className="pokemon__move-lvl">1</td>
       <td className="pokemon__move-name">{move.name}</td>
       <td className="pokemon__move-type">
-        <ButtonType text={move.type} type={move.type.toLowerCase()} key={keyGenerator(5)} />
+        <ButtonType type={move.type} key={keyGenerator(5)} />
 
       </td>
       <td className="pokemon__move-pp">{move.pp}</td>
-      {isShowing && <ModalAtk /> }
+      {isShowing && <ModalAtk move={move} /> }
     </tr>
   );
 }
@@ -33,8 +32,8 @@ export default function MoveComponent({ move }) {
 MoveComponent.propTypes = {
   move: PropTypes.shape({
     name: PropTypes.string,
-    lvl: PropTypes.number,
     pp: PropTypes.number,
+    basePower: PropTypes.number,
     type: PropTypes.string,
 
   }).isRequired,

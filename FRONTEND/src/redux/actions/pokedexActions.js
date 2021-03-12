@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger */
 import axios from 'axios';
 import actionTypes from './actionTypes';
 
@@ -38,7 +37,6 @@ function loadMoves() {
   };
 }
 function loadLearnsets() {
-  debugger;
   return async (dispatch) => {
     const { data } = await axios.get(learnsetsUrl);
     dispatch({
@@ -57,7 +55,6 @@ function loadAbilities() {
   };
 }
 function loadPokemonLearnset(pokeId) {
-  debugger;
   return {
     type: actionTypes.LOAD_POKEMON_LEARNSET,
     pokeId,

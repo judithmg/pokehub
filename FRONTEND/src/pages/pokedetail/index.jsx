@@ -83,7 +83,10 @@ export function PokeDetailComponent({
                 <span className="pokemon__moves-title">
                   MOVES
                 </span>
-                <Moveset moves={pokemon.name} />
+                {
+                  pokemonLearnset
+                  && <Moveset moves={pokemonLearnset} />
+                }
                 {console.log(pokemonLearnset)}
               </div>
               <div className="pokemon__moves-egg" />
