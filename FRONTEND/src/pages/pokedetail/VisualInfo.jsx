@@ -17,6 +17,7 @@ export default function VisualInfoComponent({ pokemon }) {
           evos={pokemon.evos}
           prevo={pokemon.prevo}
           pokemon={pokemon}
+          key={Math.random()}
         />
       )}
     </div>
@@ -29,7 +30,7 @@ VisualInfoComponent.propTypes = {
     num: PropTypes.number,
     types: PropTypes.arrayOf(PropTypes.string),
     evos: PropTypes.arrayOf(PropTypes.string),
-    prevo: PropTypes.arrayOf(PropTypes.string),
+    prevo: PropTypes.string,
     baseStats: PropTypes.shape(
       {
         hp: PropTypes.number,

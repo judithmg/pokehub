@@ -9,7 +9,7 @@ describe('Given a Pokedetail component', () => {
   describe('When it is invoked', () => {
     let container = null;
     const pokemonAbilities = [{ name: 'jkksjs', num: 1 }];
-    const pokemonLearnset = ['pokemon'];
+    const pokemonLearnset = [[{ type: 'fire' }]];
     const pokemon = {
       name: 'Bulbasaur',
       types: ['pokemon'],
@@ -32,7 +32,7 @@ describe('Given a Pokedetail component', () => {
       loadPokemonLearnset: jest.fn(),
     };
     let pokedex = [{}];
-    let moves = [{}];
+    let moves = [[{ type: 'fire' }]];
     let abilities = [{}];
     let learnsets = [{}];
 
@@ -241,61 +241,34 @@ describe('Given a Pokedetail component', () => {
 
 describe('Given a mapStateToProps function', () => {
   describe('When redux state is passed to it', () => {
-    let pokedex;
-    let moves;
-    let abilities;
-    let learnsets;
-    let pokemon;
-    let pokemonAbilities;
-    let pokemonLearnset;
-
-    let state = {
-      pokedexReducer: {
-        pokedex,
-        moves,
-        abilities,
-        learnsets,
-        pokemon,
-        pokemonAbilities,
-        pokemonLearnset,
-      },
-    };
-    pokemonAbilities = [{ name: 'jkksjs', num: 1 }];
-    pokemonLearnset = ['pokemon'];
-    pokemon = {
-      name: 'Bulbasaur',
-      types: ['pokemon'],
-      baseStats: {
-        hp: 1,
-        spa: 1,
-        atk: 1,
-        spe: 1,
-        def: 1,
-        spd: 1,
-      },
-    };
-    pokedex = [{}];
-    moves = [{}];
-    abilities = [{}];
-    learnsets = [{}];
-    test('Then it should return an object with the current state', () => {
+    let state;
+    test('Then it should return an object with the current state**********', () => {
       state = {
-        pokedex,
-        moves,
-        abilities,
-        learnsets,
-        pokemon,
-        pokemonAbilities,
-        pokemonLearnset,
+        pokedexReducer: {
+          pokedex: [],
+          pokemonsShown: [],
+          pokedexPage: 1,
+          pokemon: {},
+
+          moves: [],
+          abilities: [],
+          learnsets: [],
+
+          pokemonLearnset: [],
+          pokemonAbilities: [],
+
+          pokemonTypeFiltered: '',
+        },
       };
       expect(mapStateToProps(state)).toEqual({
-        pokedex,
-        moves,
-        abilities,
-        learnsets,
-        pokemon,
-        pokemonAbilities,
-        pokemonLearnset,
+        pokedex: state.pokedexReducer.pokedex,
+        moves: state.pokedexReducer.moves,
+        abilities: state.pokedexReducer.abilities,
+        learnsets: state.pokedexReducer.learnsets,
+
+        pokemon: state.pokedexReducer.pokemon,
+        pokemonAbilities: state.pokedexReducer.pokemonAbilities,
+        pokemonLearnset: state.pokedexReducer.pokemonLearnset,
       });
     });
   });

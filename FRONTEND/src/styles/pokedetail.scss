@@ -121,10 +121,8 @@ section {
     .pokemon__moves {
       @include flex(column, center, flex-start);
       .pokemon__moves-egg,
-      .pokemon__moves-lvl {
-        .pokemon__moves-title {
-          font-weight: 700;
-        }
+      .pokemon__moves-title {
+        font-weight: 700;
       }
     }
   }

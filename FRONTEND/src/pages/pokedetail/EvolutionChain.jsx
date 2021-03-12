@@ -21,7 +21,7 @@ export default function EvolutionChainComponent({ evos, prevo, pokemon }) {
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/icons/${pokemon.num}.png`}
         />
         {evos && evos.map((poke) => (
-          <Link to={`/pokemon/${poke.toLowerCase()}`}>
+          <Link to={`/pokemon/${poke.toLowerCase()}`} key={Math.random()}>
             <img
               alt="pokemon evo"
               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/icons/${pokemon.num + 1}.png`}
@@ -44,6 +44,6 @@ EvolutionChainComponent.propTypes = {
   pokemon: PropTypes.shape({
     num: PropTypes.number,
     evos: PropTypes.arrayOf(PropTypes.string),
-    prevo: PropTypes.arrayOf(PropTypes.string),
+    prevo: PropTypes.string,
   }).isRequired,
 };

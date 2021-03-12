@@ -10,9 +10,10 @@ import '../../styles/_types.scss';
 
 import keyGenerator from '../../assets/keyGenerator';
 import Moveset from './Moveset';
-import PokemonAbilities from './PokemonAbilities';
+import PokemonAbilities from './Abilities';
 import MainInfo from './MainInfo';
 import VisualInfoComponent from './VisualInfo';
+
 import {
   loadPokedex,
   loadMoves,
@@ -79,20 +80,15 @@ export function PokeDetailComponent({
             </div>
 
             <div className="pokemon__moves">
-              <div className="pokemon__moves-lvl">
-                <span className="pokemon__moves-title">
-                  MOVES
-                </span>
-                {
+              <span className="pokemon__moves-title">
+                MOVES
+              </span>
+              {
                   pokemonLearnset
                   && <Moveset moves={pokemonLearnset} />
                 }
-                {console.log(pokemonLearnset)}
-              </div>
-              <div className="pokemon__moves-egg" />
             </div>
           </div>
-
         </>
         )}
       </section>
@@ -103,11 +99,29 @@ export function PokeDetailComponent({
 PokeDetailComponent.propTypes = {
   pokedex: PropTypes.arrayOf(PropTypes.object).isRequired,
   abilities: PropTypes.arrayOf(PropTypes.object).isRequired,
-  moves: PropTypes.arrayOf(PropTypes.object).isRequired,
+  moves: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    category: PropTypes.string,
+    desc: PropTypes.string,
+    shortDesc: PropTypes.string,
+    pp: PropTypes.number,
+    basePower: PropTypes.number,
+    type: PropTypes.string,
+    accuracy: PropTypes.arrayOf(PropTypes.number),
+  }))).isRequired,
   learnsets: PropTypes.arrayOf(PropTypes.object).isRequired,
 
   pokemonAbilities: PropTypes.arrayOf(PropTypes.object).isRequired,
-  pokemonLearnset: PropTypes.arrayOf(PropTypes.string).isRequired,
+  pokemonLearnset: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    category: PropTypes.string,
+    desc: PropTypes.string,
+    shortDesc: PropTypes.string,
+    pp: PropTypes.number,
+    basePower: PropTypes.number,
+    type: PropTypes.string,
+    accuracy: PropTypes.arrayOf(PropTypes.number),
+  }))).isRequired,
   pokemon: PropTypes.shape({
     name: PropTypes.string.isRequired,
     types: PropTypes.arrayOf(PropTypes.string).isRequired,

@@ -15,5 +15,10 @@ export default function PokemonAbilitiesComponent({ ability }) {
 }
 
 PokemonAbilitiesComponent.propTypes = {
-  ability: PropTypes.arrayOf(PropTypes.string).isRequired,
+  ability: PropTypes.shape({
+    name: PropTypes.string,
+    desc: PropTypes.string,
+    shortDesc: PropTypes.string,
+
+  }).isRequired,
 };

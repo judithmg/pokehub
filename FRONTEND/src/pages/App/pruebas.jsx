@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 // import learnset from '../../data/learnset.json';
-import moves from '../../data/moves.json';
+// import moves from '../../data/moves.json';
 
 export default function Pruebas() {
   // const pokemon = 'mimikyu';
@@ -11,9 +11,7 @@ export default function Pruebas() {
   // // const filtered = pokemonLearnset?.learnset.map((pokemove) =>
   // // state.moves.filter(((move) => move.name.replace(/[^a-zA-Z ]/g, '') === pokemove)));
   return (
-    <div>
-      {console.log(moves)}
-    </div>
+    <div />
   );
 }
 
