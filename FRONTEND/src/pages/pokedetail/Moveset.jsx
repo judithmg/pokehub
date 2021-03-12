@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import Move from './Move';
 
 import 'react-svg-radar-chart/build/css/index.css';
-import keyGenerator from '../../assets/keyGenerator';
 
 export default function MovesetComponent({ moves }) {
   return (
@@ -18,7 +17,7 @@ export default function MovesetComponent({ moves }) {
       </thead>
       <tbody>
         {moves && moves?.map((move) => (
-          move[0] && <Move move={move[0]} key={keyGenerator(5)} />
+          move[0] && <Move move={move[0]} key={Math.random()} />
         ))}
       </tbody>
     </table>

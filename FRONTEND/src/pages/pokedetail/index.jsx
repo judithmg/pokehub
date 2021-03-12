@@ -8,7 +8,6 @@ import 'react-svg-radar-chart/build/css/index.css';
 import '../../styles/pokedetail.scss';
 import '../../styles/_types.scss';
 
-import keyGenerator from '../../assets/keyGenerator';
 import Moveset from './Moveset';
 import PokemonAbilities from './Abilities';
 import MainInfo from './MainInfo';
@@ -75,7 +74,7 @@ export function PokeDetailComponent({
               && pokemonAbilities.map((ability) => (
                 <PokemonAbilities
                   ability={ability}
-                  key={keyGenerator(5)}
+                  key={Math.random()}
                 />
               ))
               }

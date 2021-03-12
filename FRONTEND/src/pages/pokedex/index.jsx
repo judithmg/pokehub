@@ -13,8 +13,6 @@ import {
 } from '../../redux/actions/pokedexActions';
 import PokemonList from './PokemonList';
 
-import keyGenerator from '../../assets/keyGenerator';
-
 import '../../styles/pokedex.scss';
 
 export function PokedexComponent({
@@ -62,7 +60,7 @@ export function PokedexComponent({
           </thead>
           <tbody>
             {pokemonsShown && pokemonsShown.map((pokemon) => (
-              <PokemonList pokemon={pokemon} key={keyGenerator(5)} />
+              <PokemonList pokemon={pokemon} key={Math.random()} />
             ))}
           </tbody>
         </table>

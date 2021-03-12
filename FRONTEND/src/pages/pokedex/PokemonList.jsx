@@ -4,11 +4,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import ButtonType from '../shared/ButtonType';
-import keyGenerator from '../../assets/keyGenerator';
 
 export default function PokemonList({ pokemon }) {
   return (
-    <tr className="pokedex__pokemon" key={keyGenerator(5)}>
+    <tr className="pokedex__pokemon" key={Math.random()}>
       <td className="pokedex__pokemon-id">
         {`# ${pokemon.num}`}
       </td>
@@ -21,7 +20,7 @@ export default function PokemonList({ pokemon }) {
         </Link>
       </td>
       <td className="pokedex__pokemon-type">
-        {pokemon.types.map((type) => <ButtonType text={type} type={type} key={keyGenerator(5)} />)}
+        {pokemon.types.map((type) => <ButtonType text={type} type={type} key={Math.random()} />)}
 
       </td>
       <td className="pokedex__pokemon-stats --desktop">
