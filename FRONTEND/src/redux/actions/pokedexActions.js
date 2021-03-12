@@ -21,12 +21,6 @@ function loadPokemonsShown(page) {
     page,
   };
 }
-function loadPokemonDetail(pokeId) {
-  return {
-    type: actionTypes.LOAD_POKEMON_DETAIL,
-    pokeId,
-  };
-}
 function loadMoves() {
   return async (dispatch) => {
     const { data } = await axios.get(movesUrl);
@@ -54,18 +48,6 @@ function loadAbilities() {
     });
   };
 }
-function loadPokemonLearnset(pokeId) {
-  return {
-    type: actionTypes.LOAD_POKEMON_LEARNSET,
-    pokeId,
-  };
-}
-function loadPokemonAbilities(pokeId) {
-  return {
-    type: actionTypes.LOAD_POKEMON_ABILITIES,
-    pokeId,
-  };
-}
 function loadPokemonFromType(pokemonTypeFiltered) {
   return {
     type: actionTypes.LOAD_POKEMON_FROM_TYPE,
@@ -76,11 +58,8 @@ function loadPokemonFromType(pokemonTypeFiltered) {
 export {
   loadPokedex,
   loadPokemonsShown,
-  loadPokemonDetail,
   loadMoves,
   loadLearnsets,
   loadAbilities,
-  loadPokemonLearnset,
-  loadPokemonAbilities,
   loadPokemonFromType,
 };

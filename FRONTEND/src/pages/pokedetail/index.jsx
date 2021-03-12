@@ -19,11 +19,13 @@ import {
   loadMoves,
   loadLearnsets,
   loadAbilities,
+} from '../../redux/actions/pokedexActions';
 
+import {
   loadPokemonLearnset,
   loadPokemonDetail,
   loadPokemonAbilities,
-} from '../../redux/actions/pokedexActions';
+} from '../../redux/actions/pokemonActions';
 
 export function PokeDetailComponent({
   pokemonAbilities,

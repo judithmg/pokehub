@@ -3,7 +3,6 @@ import initialState from '../store/initialState';
 
 export default function pokedexReducer(state = initialState.pokedexReducer, action) {
   let pokemon;
-  let pokemonsShown;
   let pokemonAbilities;
   let pokemonLearnset;
   let filteredMoves;
@@ -30,15 +29,6 @@ export default function pokedexReducer(state = initialState.pokedexReducer, acti
       || ability.name === state.pokemon?.abilities[1]
       || ability.name === state.pokemon?.abilities.H);
       return { ...state, pokemonAbilities };
-
-    case actionTypes.LOAD_POKEMON_FROM_TYPE:
-      pokemonsShown = state.pokedex
-        .filter((poke) => poke.types.includes(action.pokemonTypeFiltered));
-      return {
-        ...state,
-        pokemonTypeFiltered: action.pokemonTypeFiltered,
-        pokemonsShown,
-      };
 
     default:
       return state;
