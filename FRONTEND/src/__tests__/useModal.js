@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import useModal from '../assets/useModal';
+import useModal from '../hooks/useModal';
 
 function TestHook({ callback }) {
   callback();

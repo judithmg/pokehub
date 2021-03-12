@@ -1,10 +1,23 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, unmountComponentAtNode } from 'react-dom';
+import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 
 import MovesetComponent from '../pages/pokedetail/Moveset';
 
 describe('Given a Move component', () => {
+  let container = null;
+
+  beforeEach(() => {
+    container = document.createElement('div');
+    document.body.appendChild(container);
+  });
+
+  afterEach(() => {
+    unmountComponentAtNode(container);
+    container.remove();
+    container = null;
+  });
   describe('When it is invoked', () => {
     const move = [[{
       num: 446,
@@ -28,15 +41,43 @@ describe('Given a Move component', () => {
       contestType: 'Cool',
     }]];
     test('Then there should be a table with a header', () => {
-      render(
-        <BrowserRouter>
-          <MovesetComponent moves={move} />
-        </BrowserRouter>,
-      );
+      act(() => {
+        render(
+          <BrowserRouter>
+            <MovesetComponent moves={move} />
+          </BrowserRouter>, container,
+        );
+      });
 
-      const table = screen.findByLabelText('thead');
+      const table = container.querySelector('thead');
 
       expect(table).toBeTruthy();
+    });
+    test('Then there should be a table with a text Stealth Rock', () => {
+      act(() => {
+        render(
+          <BrowserRouter>
+            <MovesetComponent moves={move} />
+          </BrowserRouter>, container,
+        );
+      });
+
+      const { innerHTML } = container.querySelector('.pokemon__move-name');
+
+      expect(innerHTML).toBe('Stealth Rock');
+    });
+    test('Then there should be a table with a header Name', () => {
+      act(() => {
+        render(
+          <BrowserRouter>
+            <MovesetComponent moves={move} />
+          </BrowserRouter>, container,
+        );
+      });
+
+      const { innerHTML } = container.querySelector('.moveset__header-name');
+
+      expect(innerHTML).toBe('Name');
     });
   });
 });
