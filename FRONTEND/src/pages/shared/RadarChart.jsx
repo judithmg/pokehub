@@ -1,4 +1,5 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
+
 import React from 'react';
 import RadarChart from 'react-svg-radar-chart';
 import radarChartData from '../../constants/radarChartData';
@@ -24,3 +25,16 @@ export default function RadarChartComponent({ stats }) {
     />
   );
 }
+
+RadarChartComponent.propTypes = {
+  stats: PropTypes.shape(
+    {
+      hp: PropTypes.number,
+      spa: PropTypes.number,
+      atk: PropTypes.number,
+      spe: PropTypes.number,
+      def: PropTypes.number,
+      spd: PropTypes.number,
+    },
+  ).isRequired,
+};

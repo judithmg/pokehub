@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import '../../styles/header.scss';
 import { Link } from 'react-router-dom';
-import Menu from '../Menu';
+import Menu from '../menu';
 import Button from '../shared/ButtonComponent';
 
 import { websiteImages } from '../../constants/images';

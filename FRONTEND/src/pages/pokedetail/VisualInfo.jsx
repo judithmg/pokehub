@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import RadarChart from '../shared/RadarChart';
-import EvolutionChain from './EvolutionChain';
+import EvolutionChainComponent from './Evolution';
 
 export default function VisualInfoComponent({ pokemon }) {
   return (
@@ -13,7 +13,7 @@ export default function VisualInfoComponent({ pokemon }) {
       </div>
 
       {(pokemon.evos || pokemon.prevo) && (
-        <EvolutionChain
+        <EvolutionChainComponent
           evos={pokemon.evos}
           prevo={pokemon.prevo}
           pokemon={pokemon}

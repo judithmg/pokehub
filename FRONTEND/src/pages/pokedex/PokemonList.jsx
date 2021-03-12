@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -39,8 +38,8 @@ export default function PokemonList({ pokemon }) {
 PokemonList.propTypes = {
   pokemon: PropTypes.shape({
     name: PropTypes.string,
-    id: PropTypes.number,
-    stats: PropTypes.objectOf(PropTypes.number),
-    type: PropTypes.arrayOf(PropTypes.string),
+    num: PropTypes.number,
+    baseStats: PropTypes.objectOf(PropTypes.number),
+    types: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
 };

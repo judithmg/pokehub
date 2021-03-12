@@ -13,8 +13,8 @@ import TeamDetail from './teams/team-detail'; import MainComponent from './main'
 import Header from './header';
 import Footer from './footer';
 
-import '../../styles/App.scss';
-import pruebas from './App/pruebas';
+import '../styles/App.scss';
+import pruebas from './pruebas';
 
 function App() {
   return (
