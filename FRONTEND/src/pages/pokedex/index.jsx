@@ -46,16 +46,10 @@ export function PokedexComponent({
         <table>
           <thead>
             <tr className="pokedex__header">
-              <th className="pokedex__pokemon-id pokedex__pokemon-header">
-                {' '}
-              </th>
-              <th className="pokedex__pokemon-sprite pokedex__pokemon-header">{' '}</th>
-              <th className="pokedex__pokemon-name pokedex__pokemon-header">
-                {' '}
-              </th>
-              <th className="pokedex__pokemon-type pokedex__pokemon-header">
-                {' '}
-              </th>
+              <th className="pokedex__pokemon-id --hidden">-</th>
+              <th className="pokedex__pokemon-sprite --hidden">-</th>
+              <th className="pokedex__pokemon-name --hidden">-</th>
+              <th className="pokedex__pokemon-type --hidden">-</th>
               <th className="pokedex__pokemon-stats pokedex__pokemon-header --desktop">
                 <p>ATK</p>
                 <p>HP</p>

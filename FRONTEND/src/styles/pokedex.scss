@@ -44,6 +44,7 @@
 }
 
 .pokedex__pokemon {
+  cursor: pointer;
   &:nth-child(odd) {
     background-color: $grayodd;
   }
@@ -128,4 +129,8 @@
       width: 20%;
     }
   }
+}
+
+.--hidden {
+  visibility: hidden;
 }

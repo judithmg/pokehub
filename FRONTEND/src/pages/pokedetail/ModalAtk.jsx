@@ -12,20 +12,16 @@ export default function ModalMoveComponent({ move }) {
         <div className="pokemove__description">{move?.desc || move?.shortDesc}</div>
         <div className="pokemove__type">
           <ButtonType type={move?.type.toLowerCase()} text={move?.type}> </ButtonType>
-
         </div>
         <div className="pokemove__stats">
           <strong>
-            Category:
-            {' '}
+            {'Category: '}
             <span className="pokemove__category">
               {move?.category}
             </span>
-
           </strong>
           <strong>
-            PP:
-            {' '}
+            {'PP: '}
             <span className="pokemove__pp">{move?.pp}</span>
           </strong>
 

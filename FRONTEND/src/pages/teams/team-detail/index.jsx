@@ -14,7 +14,6 @@ export default function TeamDetailComponent() {
           key={keyGenerator(5)}
         />
       ))}
-      {' '}
     </section>
   );
 }

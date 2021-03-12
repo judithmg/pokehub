@@ -10,8 +10,7 @@ export default function TeamComponent({ team }) {
       </div>
       <span className="teams__id">
         #
-        {' '}
-        {team.id}
+        {`# ${team.id}`}
       </span>
     </div>
   );

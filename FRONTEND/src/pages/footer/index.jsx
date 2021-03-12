@@ -8,8 +8,7 @@ export default function FooterComponent() {
 
         Created by
         <a href="https://github.com/judithmg">
-          {' '}
-          Judith Martínez
+          {' Judith Martínez'}
         </a>
         . Pokémon and Pokémon character names are trademarks of Nintendo.
       </span>
