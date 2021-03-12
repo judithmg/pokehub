@@ -12,16 +12,28 @@ export default function pokedexReducer(state = initialState.pokedexReducer, acti
   switch (action.type) {
     case actionTypes.LOAD_POKEDEX:
       pokedex = action.data.sort((a, b) => a.num - b.num);
-      return { ...state, pokedex };
+      return { ...state, pokedex, pokedexLoadingBool: false };
 
     case actionTypes.LOAD_LEARNSETS:
-      return { ...state, learnsets: action.data };
+      return { ...state, learnsets: action.data, learnsetsLoadingBool: false };
 
     case actionTypes.LOAD_MOVES:
-      return { ...state, moves: action.data };
+      return { ...state, moves: action.data, movesLoadingBool: false };
 
     case actionTypes.LOAD_ABILITIES:
-      return { ...state, abilities: action.data };
+      return { ...state, abilities: action.data, abilitiesLoadingBool: false };
+
+    case actionTypes.ABILITIES_LOADING:
+      return { ...state, abilitiesLoadingBool: true };
+
+    case actionTypes.LEARNSETS_LOADING:
+      return { ...state, learnsetsLoadingBool: true };
+
+    case actionTypes.MOVES_LOADING:
+      return { ...state, movesLoadingBool: true };
+
+    case actionTypes.POKEDEX_LOADING:
+      return { ...state, pokedexLoadingBool: true };
 
     case actionTypes.LOAD_POKEMON_SHOWN:
       return {

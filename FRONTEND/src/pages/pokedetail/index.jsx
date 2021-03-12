@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+import PropTypes from './propTypes';
 import 'react-svg-radar-chart/build/css/index.css';
 import '../../styles/pokedetail.scss';
 import '../../styles/_types.scss';
@@ -26,6 +25,12 @@ import {
   loadPokemonAbilities,
 } from '../../redux/actions/pokemonActions';
 
+import {
+  abilitiesLoading, pokedexLoading,
+  movesLoading,
+  learnsetsLoading,
+} from '../../redux/actions/loadingActions';
+
 export function PokeDetailComponent({
   pokemonAbilities,
   pokemonLearnset,
@@ -35,41 +40,62 @@ export function PokeDetailComponent({
   moves,
   abilities,
   learnsets,
+  abilitiesLoadingBool,
+  pokedexLoadingBool,
+  movesLoadingBool,
+  learnsetsLoadingBool,
 }) {
   const { pokeId } = useParams();
 
   useEffect(() => {
-    if (!pokedex.length || !abilities.length || !moves.length || !learnsets.length) {
-      actions.loadLearnsets();
-      actions.loadAbilities();
-      actions.loadMoves();
+    if (!pokedex.length) {
       actions.loadPokedex();
     }
-    actions.loadPokemonDetail(pokeId);
-    actions.loadPokemonLearnset(pokeId);
-    actions.loadPokemonAbilities(pokeId);
-  }, [learnsets.length, pokedex.length, moves.length]);
+  }, [pokedex.length]);
+
+  useEffect(() => {
+    if (!abilities.length) {
+      actions.loadAbilities();
+    }
+  }, [abilities.length]);
+  useEffect(() => {
+    if (!moves.length) {
+      actions.loadMoves();
+    }
+  }, [moves.length]);
+  useEffect(() => {
+    if (!learnsets.length) {
+      actions.loadLearnsets();
+    }
+  }, [learnsets.length]);
 
   useEffect(() => {
     actions.loadPokemonDetail(pokeId);
     actions.loadPokemonLearnset(pokeId);
     actions.loadPokemonAbilities(pokeId);
-  }, [pokeId]);
+    actions.abilitiesLoading();
+    actions.pokedexLoading();
+    actions.movesLoading();
+    actions.learnsetsLoading();
+  }, [pokeId, pokedex.length, abilities.length, moves.length, learnsets.length]);
 
   return (
     <>
       <section>
-        { pokemon && (
-        <>
-          <div className={`pokemon__abstract ${pokemon.types && pokemon.types[0].toLowerCase()}`}>
-            <MainInfo pokemon={pokemon} />
-            <VisualInfoComponent pokemon={pokemon} />
-          </div>
+        { pokemon && abilitiesLoadingBool
+         && pokedexLoadingBool
+&& movesLoadingBool
+&& learnsetsLoadingBool && (
+<>
+  <div className={`pokemon__abstract ${pokemon.types && pokemon.types[0].toLowerCase()}`}>
+    <MainInfo pokemon={pokemon} />
+    <VisualInfoComponent pokemon={pokemon} />
+  </div>
 
-          <div className="pokemon__details">
-            <div className="pokemon__ability">
-              <span className="pokemon__ability-title">ABILITY</span>
-              {
+  <div className="pokemon__details">
+    <div className="pokemon__ability">
+      <span className="pokemon__ability-title">ABILITY</span>
+      {
               pokemonAbilities
               && pokemonAbilities.map((ability) => (
                 <PokemonAbilities
@@ -78,67 +104,26 @@ export function PokeDetailComponent({
                 />
               ))
               }
-            </div>
+    </div>
 
-            <div className="pokemon__moves">
-              <span className="pokemon__moves-title">
-                MOVES
-              </span>
-              {
+    <div className="pokemon__moves">
+      <span className="pokemon__moves-title">
+        MOVES
+      </span>
+      {
                   pokemonLearnset
                   && <Moveset moves={pokemonLearnset} />
                 }
-            </div>
-          </div>
-        </>
+    </div>
+  </div>
+</>
         )}
       </section>
     </>
   );
 }
 
-PokeDetailComponent.propTypes = {
-  pokedex: PropTypes.arrayOf(PropTypes.object).isRequired,
-  abilities: PropTypes.arrayOf(PropTypes.object).isRequired,
-  moves: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string,
-    category: PropTypes.string,
-    desc: PropTypes.string,
-    shortDesc: PropTypes.string,
-    pp: PropTypes.number,
-    basePower: PropTypes.number,
-    type: PropTypes.string,
-    accuracy: PropTypes.arrayOf(PropTypes.number),
-  }))).isRequired,
-  learnsets: PropTypes.arrayOf(PropTypes.object).isRequired,
-
-  pokemonAbilities: PropTypes.arrayOf(PropTypes.object).isRequired,
-  pokemonLearnset: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string,
-    category: PropTypes.string,
-    desc: PropTypes.string,
-    shortDesc: PropTypes.string,
-    pp: PropTypes.number,
-    basePower: PropTypes.number,
-    type: PropTypes.string,
-    accuracy: PropTypes.arrayOf(PropTypes.number),
-  }))).isRequired,
-  pokemon: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
-  }).isRequired,
-
-  actions: PropTypes.shape({
-    loadPokedex: PropTypes.func.isRequired,
-    loadMoves: PropTypes.func.isRequired,
-    loadLearnsets: PropTypes.func.isRequired,
-    loadAbilities: PropTypes.func.isRequired,
-
-    loadPokemonLearnset: PropTypes.func.isRequired,
-    loadPokemonDetail: PropTypes.func.isRequired,
-    loadPokemonAbilities: PropTypes.func.isRequired,
-  }).isRequired,
-};
+PokeDetailComponent.propTypes = PropTypes;
 
 export function mapStateToProps(state) {
   return {
@@ -150,6 +135,11 @@ export function mapStateToProps(state) {
     pokemon: state.pokedexReducer.pokemon,
     pokemonAbilities: state.pokedexReducer.pokemonAbilities,
     pokemonLearnset: state.pokedexReducer.pokemonLearnset,
+
+    abilitiesLoadingBool: state.pokedexReducer.abilitiesLoadingBool,
+    pokedexLoadingBool: state.pokedexReducer.pokedexLoadingBool,
+    movesLoadingBool: state.pokedexReducer.movesLoadingBool,
+    learnsetsLoadingBool: state.pokedexReducer.learnsetsLoadingBool,
   };
 }
 
@@ -163,6 +153,10 @@ function mapDispatchToProps(dispatch) {
       loadLearnsets,
       loadAbilities,
       loadPokemonLearnset,
+      abilitiesLoading,
+      pokedexLoading,
+      movesLoading,
+      learnsetsLoading,
     }, dispatch),
   };
 }

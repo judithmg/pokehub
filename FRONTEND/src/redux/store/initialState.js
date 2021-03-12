@@ -13,5 +13,11 @@ export default {
     pokemonAbilities: [],
 
     pokemonTypeFiltered: '',
+
+    abilitiesLoadingBool: false,
+    pokedexLoadingBool: false,
+    movesLoadingBool: false,
+    learnsetsLoadingBool: false,
   },
+
 };
