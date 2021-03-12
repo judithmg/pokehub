@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 export default function ButtonType({ type }) {
   return (
-    <button type="button" className={`btn-type ${type.toLowerCase()}`}>{type.toUpperCase()}</button>
+    <button type="button" className={`btn-type ${type?.toLowerCase()}`}>{type?.toUpperCase()}</button>
   );
 }
 

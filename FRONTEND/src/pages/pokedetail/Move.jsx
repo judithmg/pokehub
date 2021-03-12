@@ -18,12 +18,12 @@ export default function MoveComponent({ move }) {
       onMouseEnter={() => setIsShowing(true)}
       onMouseLeave={() => setIsShowing(false)}
     >
-      <td className="pokemon__move-name">{move.name}</td>
+      <td className="pokemon__move-name">{move?.name}</td>
       <td className="pokemon__move-type">
-        <ButtonType type={move.type} key={keyGenerator(5)} />
+        <ButtonType type={move?.type} key={keyGenerator(5)} />
 
       </td>
-      <td className="pokemon__move-pp">{move.pp}</td>
+      <td className="pokemon__move-pp">{move?.pp}</td>
       {isShowing && <ModalAtk move={move} /> }
     </tr>
   );

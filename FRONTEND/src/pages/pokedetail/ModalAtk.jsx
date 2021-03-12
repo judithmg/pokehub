@@ -7,11 +7,11 @@ import '../../styles/modal-atk.scss';
 export default function ModalMoveComponent({ move }) {
   return (
     <div className="pokemove__modal">
-      <div className={`pokemove__title ${move.type.toLowerCase()}`}>{move.name.toUpperCase()}</div>
+      <div className={`pokemove__title ${move?.type.toLowerCase()}`}>{move?.name.toUpperCase()}</div>
       <div className="pokemove__info">
-        <div className="pokemove__description">{move.desc || move.shortDesc}</div>
+        <div className="pokemove__description">{move?.desc || move?.shortDesc}</div>
         <div className="pokemove__type">
-          <ButtonType type={move.type.toLowerCase()} text={move.type}> </ButtonType>
+          <ButtonType type={move?.type.toLowerCase()} text={move?.type}> </ButtonType>
 
         </div>
         <div className="pokemove__stats">
@@ -19,14 +19,14 @@ export default function ModalMoveComponent({ move }) {
             Category:
             {' '}
             <span className="pokemove__category">
-              {move.category}
+              {move?.category}
             </span>
 
           </strong>
           <strong>
             PP:
             {' '}
-            <span className="pokemove__pp">{move.pp}</span>
+            <span className="pokemove__pp">{move?.pp}</span>
           </strong>
 
         </div>

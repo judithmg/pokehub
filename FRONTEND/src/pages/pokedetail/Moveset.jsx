@@ -18,7 +18,7 @@ export default function MovesetComponent({ moves }) {
       </thead>
       <tbody>
         {moves && moves?.map((move) => (
-          <Move move={move[0]} key={keyGenerator(5)} />
+          move[0] && <Move move={move[0]} key={keyGenerator(5)} />
         ))}
       </tbody>
     </table>

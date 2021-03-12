@@ -54,7 +54,7 @@ export default function pokedexReducer(state =
         ?.find((poke) => poke.name === action.pokeId);
       filteredMoves = pokemonLearnset && pokemonLearnset
         .learnset.map((pokemove) => state.moves.filter(
-          (move) => move.name.replaceAll(/\W/ig, '').toLowerCase() === pokemove,
+          (move) => move.id === pokemove,
         ));
       return { ...state, pokemonLearnset: filteredMoves };
 
