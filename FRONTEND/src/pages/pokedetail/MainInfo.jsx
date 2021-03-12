@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import Pokeball from '../icons/Pokeball';
@@ -34,3 +34,15 @@ export default function MainInfoComponent({ pokemon }) {
     </div>
   );
 }
+
+MainInfoComponent.propTypes = {
+  pokemon: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    'name-jap': PropTypes.string.isRequired,
+    num: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    weightkg: PropTypes.number.isRequired,
+    heightm: PropTypes.number.isRequired,
+    types: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
+};

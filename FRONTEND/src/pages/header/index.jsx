@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react';
 import '../../styles/header.scss';
 import { Link } from 'react-router-dom';
@@ -23,12 +21,13 @@ export default function HeaderComponent() {
         </Link>
         <div className="header--right">
           <Button text="Login" classes="header__login" />
-          <img
-            src={websiteImages.headerPokeball}
-            alt="pokeball"
-            className="header__pokeball"
-            onClick={() => setMenu(!menu)}
-          />
+          <button type="button" className="header__button-menu" onClick={() => setMenu(!menu)}>
+            <img
+              src={websiteImages.headerPokeball}
+              alt="pokeball"
+              className="header__pokeball"
+            />
+          </button>
         </div>
       </header>
       {menu && (<Menu />)}

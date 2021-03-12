@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import RadarChart from '../../shared/RadarChart';
 
 import '../../../styles/teams.scss';
@@ -39,3 +40,9 @@ export default function TeamDetailPokemonComponent({ pokemon }) {
     </div>
   );
 }
+TeamDetailPokemonComponent.propTypes = {
+  pokemon: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    types: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
+};
