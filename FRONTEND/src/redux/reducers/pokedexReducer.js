@@ -1,22 +1,7 @@
 import actionTypes from '../actions/actionTypes';
 import initialState from '../store/initialState';
 
-export default function pokedexReducer(state =
-{
-  pokedex: initialState.pokedex,
-  pokedexPage: initialState.pokedexPage,
-  pokemon: initialState.pokemon,
-
-  moves: initialState.moves,
-  abilities: initialState.abilities,
-  learnsets: initialState.learnsets,
-
-  pokemonsShown: initialState.pokemonsShown,
-  pokemonLearnset: initialState.pokemonLearnset,
-  pokemonAbilities: initialState.pokemonAbilities,
-
-  pokemonTypeFiltered: initialState.pokemonTypeFiltered,
-}, action) {
+export default function pokedexReducer(state = initialState.pokedexReducer, action) {
   let pokemon;
   let pokedex;
   let pokemonsShown;
@@ -52,6 +37,7 @@ export default function pokedexReducer(state =
 
       pokemonLearnset = state?.learnsets
         ?.find((poke) => poke.name === action.pokeId);
+
       filteredMoves = pokemonLearnset && pokemonLearnset
         .learnset.map((pokemove) => state.moves.filter(
           (move) => move.id === pokemove,

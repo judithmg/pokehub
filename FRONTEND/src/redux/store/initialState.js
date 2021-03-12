@@ -1,7 +1,6 @@
 export default {
   pokedexReducer: {
     pokedex: [],
-    pokemonsShown: [],
     pokedexPage: 1,
     pokemon: {},
 
@@ -9,6 +8,7 @@ export default {
     abilities: [],
     learnsets: [],
 
+    pokemonsShown: [],
     pokemonLearnset: [],
     pokemonAbilities: [],
 
