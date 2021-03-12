@@ -2,13 +2,14 @@
 import React from 'react';
 
 import Pokeball from '../../assets/icons/Pokeball';
+import { pokemonSprites } from '../../constants/images';
 
 export default function MainInfoComponent({ pokemon }) {
   return (
     <div className="pokemon__abstract-main">
       <div className="abstract__sprite">
         <div className="svg-container"><Pokeball /></div>
-        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.num}.png`} alt="pokemon sprite" />
+        <img src={`${pokemonSprites.httpSprite}${pokemon.num}.png`} alt="pokemon sprite" />
       </div>
       <div className="abstract__data">
         <div className="abstract__name">

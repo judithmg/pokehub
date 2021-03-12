@@ -1,6 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
+import { pokemonSprites } from '../../constants/images';
 
 export default function EvolutionChainComponent({ evos, prevo, pokemon }) {
   return (
@@ -12,19 +13,19 @@ export default function EvolutionChainComponent({ evos, prevo, pokemon }) {
         <Link to={`/pokemon/${prevo.toLowerCase()}`}>
           <img
             alt="pokemon evo"
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/icons/${pokemon.num - 1}.png`}
+            src={`${pokemonSprites.httpIcon}${pokemon.num - 1}.png`}
           />
         </Link>
         )}
         <img
           alt="pokemon evo"
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/icons/${pokemon.num}.png`}
+          src={`${pokemonSprites.httpIcon}${pokemon.num}.png`}
         />
         {evos && evos.map((poke) => (
           <Link to={`/pokemon/${poke.toLowerCase()}`} key={Math.random()}>
             <img
               alt="pokemon evo"
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/icons/${pokemon.num + 1}.png`}
+              src={`${pokemonSprites.httpIcon}${pokemon.num + 1}.png`}
             />
           </Link>
         ))}

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import ButtonType from '../shared/ButtonType';
+import { pokemonSprites } from '../../constants/images';
 
 export default function PokemonList({ pokemon }) {
   return (
@@ -12,7 +13,7 @@ export default function PokemonList({ pokemon }) {
         {`# ${pokemon.num}`}
       </td>
       <td className="pokedex__pokemon-sprite">
-        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/icons/${pokemon.num}.png`} alt={pokemon.name} />
+        <img src={`${pokemonSprites.httpIcon}${pokemon.num}.png`} alt={pokemon.name} />
       </td>
       <td className="pokedex__pokemon-name">
         <Link to={`/pokemon/${pokemon.name.toLowerCase()}`}>

@@ -1,19 +1,12 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import RadarChart from 'react-svg-radar-chart';
+import radarChartData from '../../constants/radarChartData';
 
 export default function RadarChartComponent({ stats }) {
   return (
     <RadarChart
-      captions={{
-        // columns
-        hp: 'HP',
-        atk: 'ATK',
-        'sp-atk': 'SP ATK',
-        def: 'DEF',
-        'sp-def': 'SP DEF',
-        speed: 'SPEED',
-      }}
+      captions={radarChartData}
       data={[
         {
           data: {

@@ -1,14 +1,18 @@
 import axios from 'axios';
 import actionTypes from './actionTypes';
+import constants from '../../constants/dbUrls';
 
-const pokedexUrl = 'http://localhost:5000/pokehub/pokedex';
-const movesUrl = 'http://localhost:5000/pokehub/pokedex/moves';
-const learnsetsUrl = 'http://localhost:5000/pokehub/pokedex/learnsets';
-const abilitiesUrl = 'http://localhost:5000/pokehub/pokedex/abilities';
+const {
+  baseUrl,
+  pokedexUrl,
+  movesUrl,
+  learnsetsUrl,
+  abilitiesUrl,
+} = constants;
 
 function loadPokedex() {
   return async (dispatch) => {
-    const { data } = await axios.get(pokedexUrl);
+    const { data } = await axios.get(`${baseUrl}${pokedexUrl}`);
     dispatch({
       type: actionTypes.LOAD_POKEDEX,
       data,
@@ -23,7 +27,7 @@ function loadPokemonsShown(page) {
 }
 function loadMoves() {
   return async (dispatch) => {
-    const { data } = await axios.get(movesUrl);
+    const { data } = await axios.get(`${baseUrl}${movesUrl}`);
     dispatch({
       type: actionTypes.LOAD_MOVES,
       data,
@@ -32,7 +36,7 @@ function loadMoves() {
 }
 function loadLearnsets() {
   return async (dispatch) => {
-    const { data } = await axios.get(learnsetsUrl);
+    const { data } = await axios.get(`${baseUrl}${learnsetsUrl}`);
     dispatch({
       type: actionTypes.LOAD_LEARNSETS,
       data,
@@ -41,7 +45,7 @@ function loadLearnsets() {
 }
 function loadAbilities() {
   return async (dispatch) => {
-    const { data } = await axios.get(abilitiesUrl);
+    const { data } = await axios.get(`${baseUrl}${abilitiesUrl}`);
     dispatch({
       type: actionTypes.LOAD_ABILITIES,
       data,

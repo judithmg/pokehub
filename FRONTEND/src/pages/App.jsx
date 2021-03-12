@@ -3,18 +3,18 @@ import {
   Route, Switch, BrowserRouter as Router,
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from '../../redux/store/configureStore';
+import store from '../redux/store/configureStore';
 
-import Dashboard from '../dashboard';
-import Pokedex from '../pokedex';
-import PokeDetail from '../pokedetail';
-import Teams from '../teams';
-import TeamDetail from '../teams/team-detail'; import MainComponent from '../main';
-import Header from '../header';
-import Footer from '../footer';
+import Dashboard from './dashboard';
+import Pokedex from './pokedex';
+import PokeDetail from './pokedetail';
+import Teams from './teams';
+import TeamDetail from './teams/team-detail'; import MainComponent from './main';
+import Header from './header';
+import Footer from './footer';
 
 import '../../styles/App.scss';
-import pruebas from './pruebas';
+import pruebas from './App/pruebas';
 
 function App() {
   return (
