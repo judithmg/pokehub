@@ -26,11 +26,11 @@ import {
   loadPokemonAbilities,
 } from '../../redux/actions/pokemonActions';
 
-import {
-  abilitiesLoading, pokedexLoading,
-  movesLoading,
-  learnsetsLoading,
-} from '../../redux/actions/loadingActions';
+// import {
+//   abilitiesLoading, pokedexLoading,
+//   movesLoading,
+//   learnsetsLoading,
+// } from '../../redux/actions/loadingActions';
 
 export function PokeDetailComponent({
   pokemonAbilities,
@@ -41,10 +41,10 @@ export function PokeDetailComponent({
   moves,
   abilities,
   learnsets,
-  abilitiesLoadingBool,
-  pokedexLoadingBool,
-  movesLoadingBool,
-  learnsetsLoadingBool,
+  // abilitiesLoadingBool,
+  // pokedexLoadingBool,
+  // movesLoadingBool,
+  // learnsetsLoadingBool,
 }) {
   const { pokeId } = useParams();
 
@@ -74,34 +74,27 @@ export function PokeDetailComponent({
     actions.loadPokemonDetail(pokeId);
     actions.loadPokemonLearnset(pokeId);
     actions.loadPokemonAbilities(pokeId);
-    actions.abilitiesLoading();
-    actions.pokedexLoading();
-    actions.movesLoading();
-    actions.learnsetsLoading();
+    // actions.abilitiesLoading();
+    // actions.pokedexLoading();
+    // actions.movesLoading();
+    // actions.learnsetsLoading();
   }, [pokeId, pokedex.length, abilities.length, moves.length, learnsets.length]);
 
   return (
     <>
       <section>
 
-        { (!abilitiesLoadingBool || !pokedexLoadingBool
-        || !movesLoadingBool || !learnsetsLoadingBool)
-        && (<div>LOADING</div>)}
+        { pokemon && (
+        <>
+          <div className={`pokemon__abstract ${pokemon.types && pokemon.types[0].toLowerCase()}`}>
+            <MainInfo pokemon={pokemon} />
+            <VisualInfoComponent pokemon={pokemon} />
+          </div>
 
-        { pokemon && abilitiesLoadingBool
-         && pokedexLoadingBool
-&& movesLoadingBool
-&& learnsetsLoadingBool && (
-<>
-  <div className={`pokemon__abstract ${pokemon.types && pokemon.types[0].toLowerCase()}`}>
-    <MainInfo pokemon={pokemon} />
-    <VisualInfoComponent pokemon={pokemon} />
-  </div>
-
-  <div className="pokemon__details">
-    <div className="pokemon__ability">
-      <span className="pokemon__ability-title">ABILITY</span>
-      {
+          <div className="pokemon__details">
+            <div className="pokemon__ability">
+              <span className="pokemon__ability-title">ABILITY</span>
+              {
               pokemonAbilities
               && pokemonAbilities.map((ability) => (
                 <PokemonAbilities
@@ -110,19 +103,19 @@ export function PokeDetailComponent({
                 />
               ))
               }
-    </div>
+            </div>
 
-    <div className="pokemon__moves">
-      <span className="pokemon__moves-title">
-        MOVES
-      </span>
-      {
+            <div className="pokemon__moves">
+              <span className="pokemon__moves-title">
+                MOVES
+              </span>
+              {
                   pokemonLearnset
                   && <Moveset moves={pokemonLearnset} />
                 }
-    </div>
-  </div>
-</>
+            </div>
+          </div>
+        </>
         )}
       </section>
     </>
@@ -159,10 +152,10 @@ function mapDispatchToProps(dispatch) {
       loadLearnsets,
       loadAbilities,
       loadPokemonLearnset,
-      abilitiesLoading,
-      pokedexLoading,
-      movesLoading,
-      learnsetsLoading,
+      // abilitiesLoading,
+      // pokedexLoading,
+      // movesLoading,
+      // learnsetsLoading,
     }, dispatch),
   };
 }

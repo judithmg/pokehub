@@ -1,16 +1,20 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
-import RadarChart from '../../shared/RadarChart';
+import { Link } from 'react-router-dom';
 
-import '../../../styles/teams.scss';
+import RadarChart from '../shared/RadarChart';
+
+import '../../styles/teams.scss';
 
 export default function TeamDetailPokemonComponent({ pokemon }) {
   return (
     <div className="teamdetail__pokemon">
-      <div className={`pokemon__sprite ${pokemon.types[0]}`}>
+      <div className={`pokemon__sprite ${pokemon.type[0]}`}>
         <span>{pokemon.name}</span>
-        <img alt="sprite" src={pokemon.sprite} />
+        <Link to={`/pokemon/${pokemon.name.toLowerCase()}`}>
+          <img alt="sprite" src={pokemon.sprite} />
+        </Link>
       </div>
       <div className="pokemon__data">
         <div className="pokemon__stats"><RadarChart stats={pokemon.baseStats} /></div>

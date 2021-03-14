@@ -9,7 +9,7 @@ import Dashboard from './dashboard';
 import Pokedex from './pokedex';
 import PokeDetail from './pokedetail';
 import Teams from './teams';
-import TeamDetail from './teams/team-detail'; import MainComponent from './main';
+import TeamDetail from './team-detail'; import MainComponent from './main';
 import Header from './header';
 import Footer from './footer';
 
@@ -33,7 +33,7 @@ function App() {
             <Route path="/pokedex" component={Pokedex} />
           </Switch>
           <Switch>
-            <Route path="/teamdetail/:teamId" component={TeamDetail} />
+            <Route path="/team-detail/:teamId" component={TeamDetail} />
           </Switch>
           <Switch>
             <Route path="/teams" component={Teams} />

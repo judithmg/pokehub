@@ -1,18 +1,46 @@
-import React from 'react';
-import '../../styles/teams.scss';
-import teamData from './teamData';
+/* eslint-disable react/prop-types */
 
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Team from './Team';
 
-export default function UserTeamsComponent() {
+import { loadTeams } from '../../redux/actions/teamManagerActions';
+
+export function TeamManagerComponent({ teams, actions }) {
+  useEffect(() => {
+    if (!teams?.length) {
+      actions.loadTeams();
+    }
+  }, [teams?.length]);
   return (
     <>
+      {
+      teams && (
       <section className="teams__container">
-        {teamData.map((team) => <Team team={team} key={Math.random()} />)}
-        {teamData.map((team) => <Team team={team} key={Math.random()} />)}
-        {teamData.map((team) => <Team team={team} key={Math.random()} />)}
-        {teamData.map((team) => <Team team={team} key={Math.random()} />)}
+        {teams.map((team) => <Team team={team} key={Math.random()} />)}
+        {teams.map((team) => <Team team={team} key={Math.random()} />)}
+        {teams.map((team) => <Team team={team} key={Math.random()} />)}
+        {teams.map((team) => <Team team={team} key={Math.random()} />)}
       </section>
+      )
+    }
+
     </>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    teams: state.teamsReducer.teams,
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      loadTeams,
+    }, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TeamManagerComponent);
