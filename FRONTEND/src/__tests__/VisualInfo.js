@@ -19,6 +19,23 @@ describe('Given a VisualInfo component', () => {
       container.remove();
       container = null;
     });
+    const pokedex = [{
+      num: 2,
+      name: 'Ivysaur',
+      types: ['Grass', 'Poison'],
+      genderRatio: { M: 0.875, F: 0.125 },
+      baseStats: {
+        hp: 60, atk: 62, def: 63, spa: 80, spd: 80, spe: 60,
+      },
+      abilities: { 0: 'Overgrow', H: 'Chlorophyll' },
+      heightm: 1,
+      weightkg: 13,
+      color: 'Green',
+      prevo: 'Bulbasaur',
+      evoLevel: 16,
+      evos: ['Venusaur'],
+      eggGroups: ['Monster', 'Grass'],
+    }];
     const pokemon = {
       num: 2,
       name: 'Ivysaur',
@@ -40,7 +57,7 @@ describe('Given a VisualInfo component', () => {
       act(() => {
         render(
           <BrowserRouter>
-            <VisualInfoComponent pokemon={pokemon} />
+            <VisualInfoComponent pokemon={pokemon} pokedex={pokedex} />
           </BrowserRouter>, container,
         );
       });

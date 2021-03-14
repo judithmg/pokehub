@@ -3,7 +3,7 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 
-import { TeamManagerComponent } from '../pages/teams';
+import TeamCreatorComponent from '../pages/team-creator';
 
 describe('Given a UserTeamsComponent component', () => {
   describe('When it is invoked', () => {
@@ -19,18 +19,18 @@ describe('Given a UserTeamsComponent component', () => {
       container.remove();
       container = null;
     });
-    test('Then there should be a button element', () => {
+    test('Then there should be a section element', () => {
       act(() => {
         render(
           <BrowserRouter>
-            <TeamManagerComponent />
+            <TeamCreatorComponent />
             ,
           </BrowserRouter>, container,
         );
       });
-      const button = container.querySelector('button');
+      const section = container.querySelector('section');
 
-      expect(button).toBeTruthy();
+      expect(section).toBeTruthy();
     });
   });
 });

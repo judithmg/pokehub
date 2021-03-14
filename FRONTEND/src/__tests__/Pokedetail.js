@@ -11,7 +11,9 @@ describe('Given a Pokedetail component', () => {
     const pokemonAbilities = [{ name: 'jkksjs', num: 1 }];
     const pokemonLearnset = [[{ type: 'fire' }]];
     const pokemon = {
+      'name-jap': 'Bulbasaur',
       name: 'Bulbasaur',
+      num: 1,
       types: ['pokemon'],
       baseStats: {
         hp: 1,

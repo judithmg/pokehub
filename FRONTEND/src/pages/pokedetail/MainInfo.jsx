@@ -40,7 +40,6 @@ MainInfoComponent.propTypes = {
     name: PropTypes.string.isRequired,
     'name-jap': PropTypes.string.isRequired,
     num: PropTypes.number.isRequired,
-    id: PropTypes.number.isRequired,
     weightkg: PropTypes.number.isRequired,
     heightm: PropTypes.number.isRequired,
     types: PropTypes.arrayOf(PropTypes.string).isRequired,

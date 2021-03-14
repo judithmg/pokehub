@@ -71,7 +71,7 @@ export function PokeDetailComponent({
   }, [learnsets.length]);
 
   useEffect(() => {
-    const id = pokeId.toLowerCase();
+    const id = pokeId?.toLowerCase();
     actions.loadPokemonDetail(id);
     actions.loadPokemonLearnset(id);
     actions.loadPokemonAbilities(id);
