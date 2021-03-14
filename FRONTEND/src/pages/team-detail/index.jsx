@@ -21,7 +21,6 @@ export function TeamDetailComponent({ team, teams, actions }) {
   }, [teamId]);
   return (
     <section className="teamdetail__container">
-      {console.log(team)}
       {
       team
         && team[0]?.pokemons?.map((pokemon) => (

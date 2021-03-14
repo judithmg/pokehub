@@ -71,9 +71,10 @@ export function PokeDetailComponent({
   }, [learnsets.length]);
 
   useEffect(() => {
-    actions.loadPokemonDetail(pokeId);
-    actions.loadPokemonLearnset(pokeId);
-    actions.loadPokemonAbilities(pokeId);
+    const id = pokeId.toLowerCase();
+    actions.loadPokemonDetail(id);
+    actions.loadPokemonLearnset(id);
+    actions.loadPokemonAbilities(id);
     // actions.abilitiesLoading();
     // actions.pokedexLoading();
     // actions.movesLoading();
@@ -88,7 +89,7 @@ export function PokeDetailComponent({
         <>
           <div className={`pokemon__abstract ${pokemon.types && pokemon.types[0].toLowerCase()}`}>
             <MainInfo pokemon={pokemon} />
-            <VisualInfoComponent pokemon={pokemon} />
+            <VisualInfoComponent pokemon={pokemon} pokedex={pokedex} />
           </div>
 
           <div className="pokemon__details">

@@ -7,6 +7,9 @@ const websiteImages = {
 const pokemonSprites = {
   httpIcon: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/icons/',
   httpSprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/',
+  httpBackSprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/',
+  httpShinySprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/',
+  httpBackShinySprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/',
 
 };
 

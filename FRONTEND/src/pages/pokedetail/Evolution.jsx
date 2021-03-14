@@ -3,7 +3,14 @@ import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { pokemonSprites } from '../../constants/images';
 
-export default function EvolutionChainComponent({ evos, prevo, pokemon }) {
+function findPokemonNumber(evo, pokedex) {
+  const poke = pokedex.filter((pokemon) => pokemon.name.toLowerCase() === evo.toLowerCase());
+
+  return poke[0].num;
+}
+export default function EvolutionChainComponent({
+  evos, prevo, pokemon, pokedex,
+}) {
   return (
     <div className="abstract__evochain">
       <span className="abstract__evochain-title">EVOLUTION CHAIN</span>
@@ -13,7 +20,7 @@ export default function EvolutionChainComponent({ evos, prevo, pokemon }) {
         <Link to={`/pokemon/${prevo.toLowerCase()}`}>
           <img
             alt="pokemon evo"
-            src={`${pokemonSprites.httpIcon}${pokemon.num - 1}.png`}
+            src={`${pokemonSprites.httpIcon}${findPokemonNumber(prevo, pokedex)}.png`}
           />
         </Link>
         )}
@@ -21,11 +28,11 @@ export default function EvolutionChainComponent({ evos, prevo, pokemon }) {
           alt="pokemon evo"
           src={`${pokemonSprites.httpIcon}${pokemon.num}.png`}
         />
-        {evos && evos.map((poke) => (
-          <Link to={`/pokemon/${poke.toLowerCase()}`} key={Math.random()}>
+        {evos && evos.map((pokeevo) => (
+          <Link to={`/pokemon/${pokeevo.toLowerCase()}`} key={Math.random()}>
             <img
               alt="pokemon evo"
-              src={`${pokemonSprites.httpIcon}${pokemon.num + 1}.png`}
+              src={`${pokemonSprites.httpIcon}${findPokemonNumber(pokeevo, pokedex)}.png`}
             />
           </Link>
         ))}
@@ -40,6 +47,7 @@ EvolutionChainComponent.defaultProps = {
   prevo: '',
 };
 EvolutionChainComponent.propTypes = {
+  pokedex: PropTypes.arrayOf(PropTypes.object).isRequired,
   evos: PropTypes.arrayOf(PropTypes.string),
   prevo: PropTypes.string,
   pokemon: PropTypes.shape({

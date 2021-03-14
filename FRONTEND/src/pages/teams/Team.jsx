@@ -10,7 +10,6 @@ export function TeamComponent({ poketeam, actions }) {
   return (
     <div className="teams__team">
       <div className="teams__sprites">
-        {console.log(poketeam)}
         {
         poketeam
         && poketeam.pokemons.map((pokemon) => (<img src={pokemon.sprite} alt="poke sprite" key={Math.random()} />))
@@ -31,7 +30,6 @@ export function TeamComponent({ poketeam, actions }) {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     teams: state.teamsReducer.teams,
   };

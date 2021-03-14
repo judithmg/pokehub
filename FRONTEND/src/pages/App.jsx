@@ -14,7 +14,7 @@ import Header from './header';
 import Footer from './footer';
 
 import '../styles/App.scss';
-import pruebas from './pruebas';
+import pruebas from '../bin/pruebas';
 
 function App() {
   return (

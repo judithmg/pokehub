@@ -6,8 +6,6 @@ export default function teamsReducer(state = initialState.teamsReducer, action) 
   let userteam;
   // eslint-disable-next-line no-debugger
   debugger;
-  console.log(action.teamId);
-  console.log(state.teams);
   switch (action.type) {
     case actionTypes.LOAD_TEAMS:
       return { ...state, teams: action.teamData };
@@ -23,7 +21,6 @@ export default function teamsReducer(state = initialState.teamsReducer, action) 
       return { ...state, teams };
     case actionTypes.LOAD_ONE_TEAM:
       userteam = state.teams.filter((team) => team.id === action.teamId);
-      console.log('this', userteam);
       return { ...state, team: userteam };
     case actionTypes.TEAM_LOADING:
       return { ...state, teamLoading: true };

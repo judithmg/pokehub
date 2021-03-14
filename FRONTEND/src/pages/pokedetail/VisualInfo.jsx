@@ -5,7 +5,7 @@ import React from 'react';
 import RadarChart from '../shared/RadarChart';
 import EvolutionChainComponent from './Evolution';
 
-export default function VisualInfoComponent({ pokemon }) {
+export default function VisualInfoComponent({ pokemon, pokedex }) {
   return (
     <div className="pokemon__abstract-visual">
       <div className="abstract__stats">
@@ -18,6 +18,7 @@ export default function VisualInfoComponent({ pokemon }) {
           prevo={pokemon.prevo}
           pokemon={pokemon}
           key={Math.random()}
+          pokedex={pokedex}
         />
       )}
     </div>
@@ -25,6 +26,7 @@ export default function VisualInfoComponent({ pokemon }) {
 }
 
 VisualInfoComponent.propTypes = {
+  pokedex: PropTypes.arrayOf(PropTypes.object).isRequired,
   pokemon: PropTypes.shape({
     name: PropTypes.string,
     num: PropTypes.number,
