@@ -12,6 +12,7 @@ import Teams from './teams';
 import TeamDetail from './team-detail'; import MainComponent from './main';
 import Header from './header';
 import Footer from './footer';
+import TeamCreator from './team-creator';
 
 import '../styles/App.scss';
 import pruebas from '../bin/pruebas';
@@ -31,6 +32,9 @@ function App() {
           </Switch>
           <Switch>
             <Route path="/pokedex" component={Pokedex} />
+          </Switch>
+          <Switch>
+            <Route path="/team-creator" component={TeamCreator} />
           </Switch>
           <Switch>
             <Route path="/team-detail/:teamId" component={TeamDetail} />

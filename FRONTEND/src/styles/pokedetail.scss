@@ -30,6 +30,11 @@ section {
         select {
           z-index: 1;
         }
+        img {
+          width: 80px;
+          height: 80px;
+          object-fit: none;
+        }
         .svg-container {
           border: 2px solid purple;
 

@@ -4,8 +4,6 @@ import initialState from '../store/initialState';
 export default function teamsReducer(state = initialState.teamsReducer, action) {
   let teams;
   let userteam;
-  // eslint-disable-next-line no-debugger
-  debugger;
   switch (action.type) {
     case actionTypes.LOAD_TEAMS:
       return { ...state, teams: action.teamData };
