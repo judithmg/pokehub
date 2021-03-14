@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+// import MoonLoader from 'react-spinners/MoonLoader';
 import { useParams } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -82,6 +83,11 @@ export function PokeDetailComponent({
   return (
     <>
       <section>
+
+        { (!abilitiesLoadingBool || !pokedexLoadingBool
+        || !movesLoadingBool || !learnsetsLoadingBool)
+        && (<div>LOADING</div>)}
+
         { pokemon && abilitiesLoadingBool
          && pokedexLoadingBool
 && movesLoadingBool

@@ -20,4 +20,10 @@ export default {
     learnsetsLoadingBool: false,
   },
 
+  teamsReducer: {
+    teams: [],
+    team: {},
+    teamLoading: true,
+  },
+
 };
