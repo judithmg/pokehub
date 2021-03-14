@@ -4,25 +4,36 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { createTeam, addPokemonToTeam } from '../../redux/actions/teamCreatorActions';
+import { createTeam, addPokemonToTeam, submitTeam } from '../../redux/actions/teamCreatorActions';
 import { loadTeams } from '../../redux/actions/teamManagerActions';
-
+import {
+  loadPokedex,
+} from '../../redux/actions/pokedexActions';
 import { pokemonSprites } from '../../constants/images';
 import Ditto from '../icons/Ditto';
 
-export function CreateTeamComponent({ actions, teams, newTeam }) {
+export function CreateTeamComponent({
+  actions, teams, newTeam, pokedex,
+}) {
   useEffect(() => {
     if (!teams?.length) {
       actions?.loadTeams();
     }
   }, [teams?.length]);
 
+  useEffect(() => {
+    if (!pokedex.length) {
+      actions.loadPokedex();
+    }
+  }, [pokedex.length]);
+
   return (
     <>
       {teams
           && (
           <div className="team-creator__creator">
-            <button type="button" onClick={() => actions.createTeam()}>create team</button>
+            {!newTeam.id && <button type="button" onClick={() => actions.createTeam()}>new team</button>}
+
             {newTeam.id && newTeam.pokemons.map((poke) => (
               poke.num
                 ? (<img alt="pokemon ico" src={`${pokemonSprites.httpIcon}${poke.num}.png`} />
@@ -32,6 +43,7 @@ export function CreateTeamComponent({ actions, teams, newTeam }) {
                 )
             ))}
 
+            {newTeam.id && <button type="button" onClick={() => actions.submitTeam()}>add team</button>}
           </div>
           )}
       <div className="team-creator__pokelist">
@@ -53,6 +65,7 @@ function mapStateToProps(state) {
   return {
     teams: state.teamsReducer.teams,
     newTeam: state.teamsReducer.newTeam,
+    pokedex: state.pokedexReducer.pokedex,
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -61,7 +74,8 @@ function mapDispatchToProps(dispatch) {
       createTeam,
       loadTeams,
       addPokemonToTeam,
-
+      submitTeam,
+      loadPokedex,
     }, dispatch),
   };
 }

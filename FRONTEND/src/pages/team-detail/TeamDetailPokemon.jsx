@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import RadarChart from '../shared/RadarChart';
+import { pokemonSprites } from '../../constants/images';
 
 import '../../styles/teams.scss';
 
@@ -13,7 +14,10 @@ export default function TeamDetailPokemonComponent({ pokemon }) {
       <div className={`pokemon__sprite ${pokemon.type[0]}`}>
         <span>{pokemon.name}</span>
         <Link to={`/pokemon/${pokemon.name.toLowerCase()}`}>
-          <img alt="sprite" src={pokemon.sprite} />
+          <img
+            src={`${pokemonSprites.httpSprite}${pokemon.num}.png`}
+            alt="pokemon sprite"
+          />
         </Link>
       </div>
       <div className="pokemon__data">

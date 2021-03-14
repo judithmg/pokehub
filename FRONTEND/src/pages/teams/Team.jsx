@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { pokemonSprites } from '../../constants/images';
 import { deleteOneTeam } from '../../redux/actions/teamManagerActions';
 
 export function TeamComponent({ poketeam, actions }) {
@@ -12,7 +13,12 @@ export function TeamComponent({ poketeam, actions }) {
       <div className="teams__sprites">
         {
         poketeam
-        && poketeam.pokemons.map((pokemon) => (<img src={pokemon.sprite} alt="poke sprite" key={Math.random()} />))
+        && poketeam.pokemons.map((pokemon) => (
+          <img
+            src={`${pokemonSprites.httpSprite}${pokemon.num}.png`}
+            alt="pokemon sprite"
+          />
+        ))
         }
       </div>
       {poketeam && (

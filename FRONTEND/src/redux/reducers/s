@@ -1,0 +1,14 @@
+      console.log(state);
+      // pokemon = state.pokedex.filter((poke) => poke.num === action.num);
+      index = state.newTeam.pokemons.findIndex((poke) => !poke.num);
+      if (index === -1) index = 0;
+      pokemon = {
+        // ...pokemon,
+        ...state.newTeam.pokemons[index].id,
+        num: action.num,
+      };
+      pokemons = state.newTeam.pokemons.filter((poke) => poke.id !== pokemon.id);
+      pokemons = [...pokemons, pokemon];
+      pokemons.sort((a, b) => a.id - b.id);
+      newTeam = { ...state.newTeam, pokemons };
+      return { ...state, newTeam };

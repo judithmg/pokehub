@@ -15,8 +15,9 @@ export function PokemonListTeamComponent({ actions }) {
         <img
           alt="pokemon icon"
           className="team-creator__pokeico"
+          id={i}
           src={`${pokemonSprites.httpIcon}${i + 1}.png`}
-          onClick={() => actions.addPokemonToTeam()}
+          onClick={(e) => actions.addPokemonToTeam(e.currentTarget.id)}
         />
       ))}
     </div>
@@ -26,6 +27,7 @@ export function PokemonListTeamComponent({ actions }) {
 function mapStateToProps(state) {
   return {
     teams: state.teamsReducer.teams,
+    newTeam: state.teamsReducer.newTeam,
   };
 }
 function mapDispatchToProps(dispatch) {

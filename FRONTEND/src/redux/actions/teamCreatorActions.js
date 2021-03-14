@@ -8,9 +8,15 @@ export function createTeam(team) {
 }
 
 export function addPokemonToTeam(num) {
-  console.log(num);
   return {
     type: actionTypes.ADD_POKEMON_TO_TEAM,
     num,
+  };
+}
+
+export function submitTeam() {
+  return {
+    type: actionTypes.SUBMIT_TEAM,
+
   };
 }

@@ -48,6 +48,9 @@ export default function teamsReducer(state = initialState.teamsReducer, action) 
       pokemons.sort((a, b) => a.id - b.id);
       newTeam = { ...state.newTeam, pokemons };
       return { ...state, newTeam };
+    case actionTypes.SUBMIT_TEAM:
+      teams = [...state.teams, state.newTeam];
+      return { ...state, teams };
 
     default:
       return state;
