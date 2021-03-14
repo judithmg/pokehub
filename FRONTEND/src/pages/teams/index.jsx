@@ -18,10 +18,7 @@ export function TeamManagerComponent({ teams, actions }) {
       {
       teams && (
       <section className="teams__container">
-        {teams.map((team) => <Team team={team} key={Math.random()} />)}
-        {teams.map((team) => <Team team={team} key={Math.random()} />)}
-        {teams.map((team) => <Team team={team} key={Math.random()} />)}
-        {teams.map((team) => <Team team={team} key={Math.random()} />)}
+        {teams.map((team) => <Team poketeam={team} key={Math.random()} />)}
       </section>
       )
     }

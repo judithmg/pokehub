@@ -2,18 +2,46 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function TeamComponent({ team }) {
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { deleteOneTeam } from '../../redux/actions/teamManagerActions';
+
+export function TeamComponent({ poketeam, actions }) {
   return (
     <div className="teams__team">
       <div className="teams__sprites">
-        {team.pokemons.map((pokemon) => (<img src={pokemon.sprite} alt="poke sprite" key={Math.random()} />))}
+        {console.log(poketeam)}
+        {
+        poketeam
+        && poketeam.pokemons.map((pokemon) => (<img src={pokemon.sprite} alt="poke sprite" key={Math.random()} />))
+        }
       </div>
-      <span className="teams__id">
-        <Link to={`/team-detail/${team.id}`}>
-          {`# ${team.id}`}
-        </Link>
-      </span>
-      <button type="button">delete</button>
+      {poketeam && (
+      <>
+        <span className="teams__id">
+          <Link to={`/team-detail/${poketeam.id}`}>
+            {`# ${poketeam.id}`}
+          </Link>
+        </span>
+        <button type="button" onClick={() => actions.deleteOneTeam(poketeam.id)}>delete</button>
+      </>
+      )}
     </div>
   );
 }
+
+function mapStateToProps(state) {
+  console.log(state);
+  return {
+    teams: state.teamsReducer.teams,
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      deleteOneTeam,
+    }, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TeamComponent);
