@@ -4,9 +4,11 @@ import initialState from '../store/initialState';
 export default function teamsReducer(state = initialState.teamsReducer, action) {
   let teams;
   let userteam;
-  let pokemon;
-  let newteam;
+  let newTeam;
   let maxid;
+  let index;
+  let pokemon;
+  let pokemons;
   switch (action.type) {
     case actionTypes.LOAD_TEAMS:
       return { ...state, teams: action.teamData };
@@ -16,13 +18,11 @@ export default function teamsReducer(state = initialState.teamsReducer, action) 
           (max, character) => (character.id > max ? character.id : max),
           0,
         );
-      newteam = {
+      newTeam = {
         id: maxid + 1,
-        pokemons: [],
+        pokemons: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }],
       };
-      teams = [...state.teams, newteam];
-      console.log(state.teams);
-      return { ...state, teams };
+      return { ...state, newTeam };
     case actionTypes.DELETE_ONE_TEAM:
       teams = state.teams.filter((team) => team.id !== action.teamId);
       return { ...state, teams };
@@ -35,9 +35,19 @@ export default function teamsReducer(state = initialState.teamsReducer, action) 
       return { ...state, team: userteam };
     case actionTypes.TEAM_LOADING:
       return { ...state, teamLoading: true };
+
     case actionTypes.ADD_POKEMON_TO_TEAM:
-      teams = [...state, pokemon];
-      return { ...state, teams };
+      index = state.newTeam.pokemons.findIndex((poke) => !poke.num);
+      if (index === -1) index = 0;
+      pokemon = {
+        ...state.newTeam.pokemons[index],
+        num: action.num,
+      };
+      pokemons = state.newTeam.pokemons.filter((poke) => poke.id !== pokemon.id);
+      pokemons = [...pokemons, pokemon];
+      pokemons.sort((a, b) => a.id - b.id);
+      newTeam = { ...state.newTeam, pokemons };
+      return { ...state, newTeam };
 
     default:
       return state;

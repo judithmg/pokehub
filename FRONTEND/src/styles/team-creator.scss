@@ -2,12 +2,23 @@
 @import "./colors";
 @import "./fonts";
 .team-creator__container {
-  div {
+  .team-creator__creator,
+  .team-creator__pokelist {
     background-color: #fff;
     border-radius: 10px;
     border-top: 5px solid $headercolor;
     border-bottom: 5px solid $headercolor;
     margin: 20px;
+
+    svg {
+      width: 50px;
+      height: 50px;
+
+      margin: 5px;
+      padding: 5px;
+      border: 2px solid red;
+      border-radius: 10px;
+    }
   }
 }
 

@@ -7,10 +7,10 @@ export function createTeam(team) {
   };
 }
 
-export function addPokemonToTeam(pokemon) {
-  console.log('hello');
+export function addPokemonToTeam(num) {
+  console.log(num);
   return {
     type: actionTypes.ADD_POKEMON_TO_TEAM,
-    pokemon,
+    num,
   };
 }

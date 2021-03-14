@@ -23,7 +23,7 @@ export default {
   teamsReducer: {
     teams: [],
     team: {},
-    creatingTeam: {},
+    newTeam: {},
     teamLoading: true,
   },
 

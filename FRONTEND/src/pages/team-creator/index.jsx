@@ -1,13 +1,11 @@
 import React from 'react';
 import '../../styles/team-creator.scss';
-import PokemonListTeamComponent from './PokemonListTeam';
-import CreateTeamComponent from './CreateTeam';
+import CreateTeam from './CreateTeam';
 
 export default function TeamCreatorComponent() {
   return (
     <section className="team-creator__container">
-      <CreateTeamComponent />
-      <PokemonListTeamComponent />
+      <CreateTeam />
     </section>
   );
 }
