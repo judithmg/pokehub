@@ -10,6 +10,7 @@ const pokemonSprites = {
   httpBackSprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/',
   httpShinySprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/',
   httpBackShinySprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/',
+  httpVersionsFront: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/',
 
 };
 

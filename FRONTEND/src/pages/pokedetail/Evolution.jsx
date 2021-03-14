@@ -3,26 +3,44 @@ import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { pokemonSprites } from '../../constants/images';
 
-function findPokemonNumber(evo, pokedex) {
+export function findPokemonNumber(evo, pokedex) {
   const poke = pokedex.filter((pokemon) => pokemon.name.toLowerCase() === evo.toLowerCase());
 
-  return poke[0].num;
+  return poke[0];
 }
+
 export default function EvolutionChainComponent({
   evos, prevo, pokemon, pokedex,
 }) {
+  let pokeprevo;
+  if (prevo) {
+    pokeprevo = findPokemonNumber(prevo, pokedex);
+  }
   return (
     <div className="abstract__evochain">
       <span className="abstract__evochain-title">EVOLUTION CHAIN</span>
       <div className="abstract__evochain-sprites">
 
+        {
+          pokeprevo?.prevo && (
+          <Link to={`/pokemon/${pokeprevo?.prevo.toLowerCase()}`}>
+            <img
+              alt="pokemon evo"
+              src={`${pokemonSprites.httpIcon}${findPokemonNumber(pokeprevo.prevo, pokedex).num}.png`}
+            />
+          </Link>
+          )
+        }
+
         {prevo && (
-        <Link to={`/pokemon/${prevo.toLowerCase()}`}>
-          <img
-            alt="pokemon evo"
-            src={`${pokemonSprites.httpIcon}${findPokemonNumber(prevo, pokedex)}.png`}
-          />
-        </Link>
+          <>
+            <Link to={`/pokemon/${prevo.toLowerCase()}`}>
+              <img
+                alt="pokemon evo"
+                src={`${pokemonSprites.httpIcon}${findPokemonNumber(prevo, pokedex).num}.png`}
+              />
+            </Link>
+          </>
         )}
         <img
           alt="pokemon evo"
@@ -32,7 +50,7 @@ export default function EvolutionChainComponent({
           <Link to={`/pokemon/${pokeevo.toLowerCase()}`} key={Math.random()}>
             <img
               alt="pokemon evo"
-              src={`${pokemonSprites.httpIcon}${findPokemonNumber(pokeevo, pokedex)}.png`}
+              src={`${pokemonSprites.httpIcon}${findPokemonNumber(pokeevo, pokedex).num}.png`}
             />
           </Link>
         ))}

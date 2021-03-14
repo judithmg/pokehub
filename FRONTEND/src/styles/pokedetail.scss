@@ -26,7 +26,8 @@ section {
         @include flex(row, center, center);
 
         img,
-        button {
+        button,
+        select {
           z-index: 1;
         }
         .svg-container {
