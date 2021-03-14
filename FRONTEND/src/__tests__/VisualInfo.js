@@ -53,6 +53,7 @@ describe('Given a VisualInfo component', () => {
       evos: ['Venusaur'],
       eggGroups: ['Monster', 'Grass'],
     };
+
     test('Then there should be a radar chart (svg) showing its stats ', () => {
       act(() => {
         render(

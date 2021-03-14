@@ -1,0 +1,33 @@
+@import "./mixins";
+@import "./colors";
+@import "./fonts";
+.team-creator__container {
+  div {
+    background-color: #fff;
+    border-radius: 10px;
+    border-top: 5px solid $headercolor;
+    border-bottom: 5px solid $headercolor;
+    margin: 20px;
+  }
+}
+
+.team-creator__pokelist {
+  img {
+    width: 55px;
+    height: 55px;
+    object-fit: none;
+    border: 5px solid transparent;
+    &:hover {
+      background-color: $menucolor;
+      border-right: 5px solid $greencolor;
+      border-bottom: 5px solid $greencolor;
+      cursor: pointer;
+    }
+  }
+}
+.team-creator__creator {
+  background-color: #fff;
+  border-radius: 10px;
+  border-top: 5px solid $headercolor;
+  border-bottom: 5px solid $headercolor;
+}

@@ -32,5 +32,31 @@ describe('Given a UserTeamsComponent component', () => {
 
       expect(section).toBeTruthy();
     });
+    test('Then there should be a section with class team-creator__container', () => {
+      act(() => {
+        render(
+          <BrowserRouter>
+            <TeamCreatorComponent />
+            ,
+          </BrowserRouter>, container,
+        );
+      });
+      const section = container.querySelector('.team-creator__container');
+
+      expect(section).toBeTruthy();
+    });
+    test('Then there should be a pokemon icon sprite', () => {
+      act(() => {
+        render(
+          <BrowserRouter>
+            <TeamCreatorComponent />
+            ,
+          </BrowserRouter>, container,
+        );
+      });
+      const icon = container.querySelector('.team-creator__pokeico');
+
+      expect(icon).toBeTruthy();
+    });
   });
 });

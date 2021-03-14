@@ -19,11 +19,15 @@ describe('Given a UserTeamsComponent component', () => {
       container.remove();
       container = null;
     });
+    const actions = {
+      loadTeams: jest.fn(),
+    };
+    const teams = [{}];
     test('Then there should be a button element', () => {
       act(() => {
         render(
           <BrowserRouter>
-            <TeamManagerComponent />
+            <TeamManagerComponent actions={actions} teams={teams} />
             ,
           </BrowserRouter>, container,
         );
