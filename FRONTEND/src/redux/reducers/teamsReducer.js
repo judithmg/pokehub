@@ -9,6 +9,7 @@ export default function teamsReducer(state = initialState, action) {
   let index;
   let pokemon;
   let pokemons;
+  let pokeFromPokedex;
   switch (action.type) {
     case actionTypes.LOAD_TEAMS:
       return { ...state, teams: action.teamData };
@@ -37,17 +38,19 @@ export default function teamsReducer(state = initialState, action) {
       return { ...state, teamLoading: true };
 
     case actionTypes.ADD_POKEMON_TO_TEAM:
-      console.log(state);
+      [pokeFromPokedex] = action.pokedex.filter((poke) => poke.num === +action.num);
       index = state.newTeam.pokemons.findIndex((poke) => !poke.num);
       if (index === -1) index = 0;
       pokemon = {
-        ...state.newTeam.pokemons[index],
+        ...pokeFromPokedex,
+        id: state.newTeam.pokemons[index].id,
         num: action.num,
       };
       pokemons = state.newTeam.pokemons.filter((poke) => poke.id !== pokemon.id);
       pokemons = [...pokemons, pokemon];
       pokemons.sort((a, b) => a.id - b.id);
       newTeam = { ...state.newTeam, pokemons };
+      console.log(newTeam);
       return { ...state, newTeam };
     case actionTypes.SUBMIT_TEAM:
       teams = [...state.teams, state.newTeam];

@@ -51,10 +51,10 @@ export function CreateTeamComponent({
           <img
             alt="pokemon icon"
             className="team-creator__pokeico"
-            id={i}
+            id={i + 1}
             key={Math.random()}
             src={`${pokemonSprites.httpIcon}${i + 1}.png`}
-            onClick={(e) => actions.addPokemonToTeam(e.currentTarget.id)}
+            onClick={(e) => actions.addPokemonToTeam(e.currentTarget.id, pokedex)}
           />
         ))}
       </div>

@@ -17,6 +17,7 @@ export function TeamComponent({ poketeam, actions }) {
           <img
             src={`${pokemonSprites.httpSprite}${pokemon.num}.png`}
             alt="pokemon sprite"
+            key={Math.random()}
           />
         ))
         }

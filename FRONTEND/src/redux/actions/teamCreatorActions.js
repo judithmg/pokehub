@@ -1,16 +1,17 @@
 import actionTypes from './actionTypes';
 
-export function createTeam(team) {
+export function createTeam() {
   return {
     type: actionTypes.CREATE_TEAM,
-    team,
+
   };
 }
 
-export function addPokemonToTeam(num) {
+export function addPokemonToTeam(num, pokedex) {
   return {
     type: actionTypes.ADD_POKEMON_TO_TEAM,
     num,
+    pokedex,
   };
 }
 
