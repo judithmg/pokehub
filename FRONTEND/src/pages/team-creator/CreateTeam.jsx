@@ -8,8 +8,6 @@ import { createTeam, addPokemonToTeam, submitTeam } from '../../redux/actions/te
 import { loadTeams } from '../../redux/actions/teamManagerActions';
 import {
   loadPokedex,
-  loadMoves,
-  loadLearnsets,
 } from '../../redux/actions/pokedexActions';
 import { pokemonSprites } from '../../constants/images';
 import Ditto from '../icons/Ditto';
@@ -19,8 +17,6 @@ export function CreateTeamComponent({
   teams,
   newTeam,
   pokedex,
-  moves,
-  learnsets,
 
 }) {
   useEffect(() => {
@@ -35,16 +31,6 @@ export function CreateTeamComponent({
     }
   }, [pokedex.length]);
 
-  useEffect(() => {
-    if (!moves.length) {
-      actions.loadMoves();
-    }
-  }, [moves.length]);
-  useEffect(() => {
-    if (!learnsets.length) {
-      actions.loadLearnsets();
-    }
-  }, [learnsets.length]);
   return (
     <>
       {teams
@@ -73,9 +59,7 @@ export function CreateTeamComponent({
             key={Math.random()}
             src={`${pokemonSprites.httpIcon}${i + 1}.png`}
             onClick={(e) => actions.addPokemonToTeam(e.currentTarget.id,
-              pokedex,
-              moves,
-              learnsets)}
+              pokedex)}
           />
         ))}
       </div>
@@ -88,8 +72,7 @@ function mapStateToProps(state) {
     teams: state.teamsReducer.teams,
     newTeam: state.teamsReducer.newTeam,
     pokedex: state.pokedexReducer.pokedex,
-    moves: state.pokedexReducer.moves,
-    learnsets: state.pokedexReducer.learnsets,
+
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -100,8 +83,6 @@ function mapDispatchToProps(dispatch) {
       addPokemonToTeam,
       submitTeam,
       loadPokedex,
-      loadMoves,
-      loadLearnsets,
     }, dispatch),
   };
 }

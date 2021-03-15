@@ -61,14 +61,8 @@ export default function teamsReducer(state = initialState, action) {
       [pokeFromPokedex] = action.pokedex.filter((poke) => poke.num === +action.num);
       index = state.newTeam.pokemons.findIndex((poke) => !poke.num);
       if (index === -1) index = 0;
-      pokemonLearnset = action.learnsets
-        .find((poke) => poke.name.toLowerCase() === pokeFromPokedex.name.toLowerCase());
-      filteredMoves = pokemonLearnset?.learnset
-        ?.map((pokemove) => action.moves
-          .filter((move) => move.id === pokemove));
       pokemon = {
         ...pokeFromPokedex,
-        learnset: filteredMoves,
         id: state.newTeam.pokemons[index].id,
         num: action.num,
       };

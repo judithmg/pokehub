@@ -8,17 +8,11 @@ export function createTeam() {
 }
 
 export function addPokemonToTeam(num,
-  pokedex,
-  moves,
-  learnsets,
-  abilities) {
+  pokedex) {
   return {
     type: actionTypes.ADD_POKEMON_TO_TEAM,
     num,
     pokedex,
-    moves,
-    learnsets,
-    abilities,
   };
 }
 
