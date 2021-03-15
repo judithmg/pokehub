@@ -17,6 +17,7 @@ export default function teamsReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.LOAD_TEAMS:
       return { ...state, teams: action.teamData };
+
     case actionTypes.CREATE_TEAM:
       maxid = state.teams
         .reduce(
@@ -28,9 +29,11 @@ export default function teamsReducer(state = initialState, action) {
         pokemons: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }],
       };
       return { ...state, newTeam };
+
     case actionTypes.DELETE_ONE_TEAM:
       teams = state.teams.filter((team) => team.id !== action.teamId);
       return { ...state, teams };
+
     case actionTypes.MODIFY_TEAM:
       teams = state.teams.filter((team) => team.id === action.data.id);
       teams = [...teams, action.data];
@@ -40,7 +43,7 @@ export default function teamsReducer(state = initialState, action) {
       [userteam] = state.teams.filter((team) => team.id === action.teamId);
       modifiedTeam = userteam.pokemons.map((pokeFromTeam) => {
         pokemonLearnset = action.learnsets
-          .find((pokeLearnset) => pokeLearnset.name.toLowerCase()
+          .find((pokeLearnset) => pokeLearnset?.name.toLowerCase()
         === pokeFromTeam.name.toLowerCase());
         filteredMoves = pokemonLearnset?.learnset
           ?.map((pokemove) => action.moves
@@ -51,6 +54,7 @@ export default function teamsReducer(state = initialState, action) {
         };
       });
       return { ...state, team: { id: userteam.id, pokemons: modifiedTeam } };
+
     case actionTypes.TEAM_LOADING:
       return { ...state, teamLoading: true };
 
@@ -68,9 +72,27 @@ export default function teamsReducer(state = initialState, action) {
       pokemons.sort((a, b) => a.id - b.id);
       newTeam = { ...state.newTeam, pokemons };
       return { ...state, newTeam };
+
     case actionTypes.SUBMIT_TEAM:
       teams = [...state.teams, state.newTeam];
       return { ...state, teams, newTeam: {} };
+
+    case actionTypes.MODIFY_POKEMON:
+      pokemon = {
+        ...action.pokemon,
+        moveset: action.pokemonMoves,
+      };
+      modifiedTeam = {
+        id: action.teamId,
+        pokemons: [...state.team.pokemons.filter((poke) => poke.id !== pokemon.id), pokemon],
+      };
+      teams = state.teams.filter((team) => team.id !== modifiedTeam.id);
+
+      return {
+        ...state,
+        team: modifiedTeam,
+        teams: { ...teams, modifiedTeam },
+      };
 
     default:
       return state;

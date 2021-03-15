@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useParams } from 'react-router-dom';
-import { loadOneTeam, loadTeams } from '../../redux/actions/teamManagerActions';
+import { loadOneTeam, loadTeams, modifyTeam } from '../../redux/actions/teamManagerActions';
 import {
   loadMoves,
   loadLearnsets,
@@ -42,11 +42,12 @@ export function TeamDetailComponent({
     actions.loadOneTeam(+teamId,
       moves,
       learnsets);
-  }, [teamId, moves.length, learnsets.length]);
+  }, [teamId, moves.length, learnsets.length, teams.length]);
 
   return (
     moves.length && learnsets.length && (
       <section className="teamdetail__container">
+        <button onClick={() => modifyTeam(teamId, team)} type="button">MODIFY TEAM</button>
         {
       team
         && team?.pokemons?.map((pokemon) => (
@@ -80,6 +81,7 @@ function mapDispatchToProps(dispatch) {
       loadOneTeam,
       loadMoves,
       loadLearnsets,
+      modifyTeam,
     }, dispatch),
   };
 }

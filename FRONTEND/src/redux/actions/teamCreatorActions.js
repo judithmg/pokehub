@@ -22,3 +22,14 @@ export function submitTeam() {
 
   };
 }
+
+export function modifyPokemon(teamId,
+  pokemon,
+  pokemonMoves) {
+  return {
+    type: actionTypes.MODIFY_POKEMON,
+    teamId: +teamId,
+    pokemon,
+    pokemonMoves,
+  };
+}
