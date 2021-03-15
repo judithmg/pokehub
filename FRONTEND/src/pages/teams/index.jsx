@@ -13,6 +13,7 @@ export function TeamManagerComponent({ teams, actions }) {
       actions.loadTeams();
     }
   }, [teams?.length]);
+  teams?.sort((a, b) => a.id - b.id);
   return (
     <>
       {

@@ -37,7 +37,34 @@ export default function TeamDetailPokemonComponent({ pokemon }) {
         <div className="pokemon__moves">
           <div className="pokemon__moves-name">
             <span>Moves</span>
-            {pokemon.name}
+            <select>
+              {pokemon.learnset && pokemon.learnset.map((move) => (
+                <option>
+                  {move[0]?.name}
+                </option>
+              ))}
+            </select>
+            <select>
+              {pokemon.learnset && pokemon.learnset.map((move) => (
+                <option>
+                  {move[0]?.name}
+                </option>
+              ))}
+            </select>
+            <select>
+              {pokemon.learnset && pokemon.learnset.map((move) => (
+                <option>
+                  {move[0]?.name}
+                </option>
+              ))}
+            </select>
+            <select>
+              {pokemon.learnset && pokemon.learnset.map((move) => (
+                <option>
+                  {move[0]?.name}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="pokemon__moves-pp">
             <span>PP</span>

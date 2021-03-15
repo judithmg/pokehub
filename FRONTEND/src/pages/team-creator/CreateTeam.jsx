@@ -8,12 +8,22 @@ import { createTeam, addPokemonToTeam, submitTeam } from '../../redux/actions/te
 import { loadTeams } from '../../redux/actions/teamManagerActions';
 import {
   loadPokedex,
+  loadAbilities,
+  loadMoves,
+  loadLearnsets,
 } from '../../redux/actions/pokedexActions';
 import { pokemonSprites } from '../../constants/images';
 import Ditto from '../icons/Ditto';
 
 export function CreateTeamComponent({
-  actions, teams, newTeam, pokedex,
+  actions,
+  teams,
+  newTeam,
+  pokedex,
+  abilities,
+  moves,
+  learnsets,
+
 }) {
   useEffect(() => {
     if (!teams?.length) {
@@ -27,6 +37,21 @@ export function CreateTeamComponent({
     }
   }, [pokedex.length]);
 
+  useEffect(() => {
+    if (!abilities.length) {
+      actions.loadAbilities();
+    }
+  }, [abilities.length]);
+  useEffect(() => {
+    if (!moves.length) {
+      actions.loadMoves();
+    }
+  }, [moves.length]);
+  useEffect(() => {
+    if (!learnsets.length) {
+      actions.loadLearnsets();
+    }
+  }, [learnsets.length]);
   return (
     <>
       {teams
@@ -54,7 +79,11 @@ export function CreateTeamComponent({
             id={i + 1}
             key={Math.random()}
             src={`${pokemonSprites.httpIcon}${i + 1}.png`}
-            onClick={(e) => actions.addPokemonToTeam(e.currentTarget.id, pokedex)}
+            onClick={(e) => actions.addPokemonToTeam(e.currentTarget.id,
+              pokedex,
+              moves,
+              learnsets,
+              abilities)}
           />
         ))}
       </div>
@@ -67,6 +96,9 @@ function mapStateToProps(state) {
     teams: state.teamsReducer.teams,
     newTeam: state.teamsReducer.newTeam,
     pokedex: state.pokedexReducer.pokedex,
+    abilities: state.pokedexReducer.abilities,
+    moves: state.pokedexReducer.moves,
+    learnsets: state.pokedexReducer.learnsets,
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -77,6 +109,9 @@ function mapDispatchToProps(dispatch) {
       addPokemonToTeam,
       submitTeam,
       loadPokedex,
+      loadAbilities,
+      loadMoves,
+      loadLearnsets,
     }, dispatch),
   };
 }
