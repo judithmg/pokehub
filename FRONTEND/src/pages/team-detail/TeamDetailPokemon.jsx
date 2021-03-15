@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import RadarChart from '../shared/RadarChart';
+import TeamDetailPokemonMoves from './TeamDetailPokemonMoves';
 import { pokemonSprites } from '../../constants/images';
 
 import '../../styles/teams.scss';
@@ -23,10 +24,14 @@ export default function TeamDetailPokemonComponent({ pokemon }) {
         </Link>
       </div>
       <div className="pokemon__data">
-        <div className="pokemon__stats"><RadarChart stats={pokemon.baseStats} /></div>
+        <div className="pokemon__stats">
+          <RadarChart stats={pokemon.baseStats} />
+        </div>
         <div className="pokemon__ability">
           <span>Ability</span>
-          {pokemon.abilities && pokemon.abilities.map((ability) => (<div>{ability}</div>))}
+          {pokemon.abilities && pokemon.abilities.map((ability) => (
+            <div>{ability}</div>
+          ))}
         </div>
         <div className="pokemon__lvl">
           <span>Lvl</span>
@@ -36,43 +41,7 @@ export default function TeamDetailPokemonComponent({ pokemon }) {
           <span>Shiny</span>
           No
         </div>
-        <div className="pokemon__moves">
-          <div className="pokemon__moves-name">
-            <span>Moves</span>
-            <select>
-              {pokemon.learnset && pokemon.learnset.map((move) => (
-                <option>
-                  {move[0]?.name}
-                </option>
-              ))}
-            </select>
-            <select>
-              {pokemon.learnset && pokemon.learnset.map((move) => (
-                <option>
-                  {move[0]?.name}
-                </option>
-              ))}
-            </select>
-            <select>
-              {pokemon.learnset && pokemon.learnset.map((move) => (
-                <option>
-                  {move[0]?.name}
-                </option>
-              ))}
-            </select>
-            <select>
-              {pokemon.learnset && pokemon.learnset.map((move) => (
-                <option>
-                  {move[0]?.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="pokemon__moves-pp">
-            <span>PP</span>
-            {pokemon.name}
-          </div>
-        </div>
+        <TeamDetailPokemonMoves pokemon={pokemon} />
       </div>
     </div>
     )

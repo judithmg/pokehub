@@ -43,8 +43,8 @@ export function TeamDetailComponent({
       moves,
       learnsets);
   }, [teamId, moves.length, learnsets.length]);
-  return (
 
+  return (
     moves.length && learnsets.length && (
       <section className="teamdetail__container">
         {
@@ -60,10 +60,8 @@ export function TeamDetailComponent({
           )
         ))
 }
-
       </section>
     )
-
   );
 }
 
