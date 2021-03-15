@@ -27,19 +27,50 @@ export default function TeamDetailPokemonComponent({ pokemon }) {
         <div className="pokemon__stats">
           <RadarChart stats={pokemon.baseStats} />
         </div>
-        <div className="pokemon__ability">
-          <span>Ability</span>
-          {pokemon.abilities && pokemon.abilities.map((ability) => (
-            <div>{ability}</div>
-          ))}
+        <div className="pokemon__info">
+          <h2>Base stats</h2>
+          <div className="pokemon__base-stats">
+            <div>
+              <span>HP</span>
+              <span>{pokemon.baseStats.hp}</span>
+            </div>
+            <div>
+              <span>ATK</span>
+              <span>{pokemon.baseStats.atk}</span>
+            </div>
+            <div>
+              <span>DEF</span>
+              <span>{pokemon.baseStats.def}</span>
+            </div>
+            <div>
+              <span>SPEED</span>
+              <span>{pokemon.baseStats.spe}</span>
+            </div>
+            <div>
+              <span>SP ATK</span>
+              <span>{pokemon.baseStats.spa}</span>
+            </div>
+            <div>
+              <span>SPEED</span>
+              <span>{pokemon.baseStats.spd}</span>
+            </div>
+          </div>
         </div>
-        <div className="pokemon__lvl">
-          <span>Lvl</span>
-          100
-        </div>
-        <div className="pokemon__shiny">
-          <span>Shiny</span>
-          No
+        <div>
+          <div className="pokemon__info">
+            <h2>Ability</h2>
+            {pokemon.abilities && pokemon.abilities.map((ability) => (
+              ability
+            ))}
+          </div>
+          <div className="pokemon__info">
+            <h2>Lvl</h2>
+            100
+          </div>
+          <div className="pokemon__info">
+            <h2>Shiny</h2>
+            No
+          </div>
         </div>
         <TeamDetailPokemonMoves pokemon={pokemon} />
       </div>

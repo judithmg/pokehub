@@ -59,16 +59,32 @@
   .pokemon__data {
     @include flex(row, center, center);
 
-    div {
+    .pokemon__info {
       @include flex(column, center, flex-start);
       font-size: 13px;
-      margin: 5px;
-      span {
+      margin: 0 15px;
+      h2 {
+        font-size: 13px;
+        margin: 0px;
         font-weight: bold;
       }
     }
     .pokemon__moves {
-      @include flex(row, center, flex-start);
+      @include flex(column, flex-start, flex-start);
+    }
+  }
+}
+
+.pokemon__base-stats {
+  div {
+    @include flex(row, space-between, flex-start);
+
+    span:nth-child(odd) {
+      margin-right: 7px;
+      font-weight: bold;
+      span {
+        font-weight: normal;
+      }
     }
   }
 }

@@ -23,46 +23,41 @@ export default function TeamDetailPokemonMovesComponent({ pokemon }) {
       moveId: id,
     });
     setPokemonMoveset(updatedArray);
-    console.log(updatedArray);
   }
   return (
 
-    <div className="pokemon__moves">
-      <div className="pokemon__moves-name">
-        <span>Moves</span>
-        <select onChange={(e) => handleChange(e.target.id, e.target.value)} id={`${pokemon.name.toLowerCase()}-move-1`}>
-          {pokemon.learnset && pokemon.learnset.map((move) => (
+    <div className="pokemon__moves pokemon__info">
+      <h2>Moves</h2>
+      <select onChange={(e) => handleChange(e.target.id, e.target.value)} id={`${pokemon.name.toLowerCase()}-move-1`}>
+        {pokemon.learnset && pokemon.learnset.map((move) => (
+          <>
             <option>
               {move[0]?.name}
             </option>
-          ))}
-        </select>
-        <select onChange={(e) => handleChange(e.target.id, e.target.value)} id={`${pokemon.name.toLowerCase()}-move-2`}>
-          {pokemon.learnset && pokemon.learnset.map((move) => (
-            <option id={`${pokemon.name.toLowerCase()}-move-1`}>
-              {move[0]?.name}
-            </option>
-          ))}
-        </select>
-        <select onChange={(e) => handleChange(e.target.id, e.target.value)} id={`${pokemon.name.toLowerCase()}-move-3`}>
-          {pokemon.learnset && pokemon.learnset.map((move) => (
-            <option id={`${pokemon.name.toLowerCase()}-move-1`}>
-              {move[0]?.name}
-            </option>
-          ))}
-        </select>
-        <select onChange={(e) => handleChange(e.target.id, e.target.value)} id={`${pokemon.name.toLowerCase()}-move-4`}>
-          {pokemon.learnset && pokemon.learnset.map((move) => (
-            <option id={`${pokemon.name.toLowerCase()}-move-1`}>
-              {move[0]?.name}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="pokemon__moves-pp">
-        <span>PP</span>
-        {pokemon.name.toLowerCase()}
-      </div>
+          </>
+        ))}
+      </select>
+      <select onChange={(e) => handleChange(e.target.id, e.target.value)} id={`${pokemon.name.toLowerCase()}-move-2`}>
+        {pokemon.learnset && pokemon.learnset.map((move) => (
+          <option id={`${pokemon.name.toLowerCase()}-move-1`}>
+            {move[0]?.name}
+          </option>
+        ))}
+      </select>
+      <select onChange={(e) => handleChange(e.target.id, e.target.value)} id={`${pokemon.name.toLowerCase()}-move-3`}>
+        {pokemon.learnset && pokemon.learnset.map((move) => (
+          <option id={`${pokemon.name.toLowerCase()}-move-1`}>
+            {move[0]?.name}
+          </option>
+        ))}
+      </select>
+      <select onChange={(e) => handleChange(e.target.id, e.target.value)} id={`${pokemon.name.toLowerCase()}-move-4`}>
+        {pokemon.learnset && pokemon.learnset.map((move) => (
+          <option id={`${pokemon.name.toLowerCase()}-move-1`}>
+            {move[0]?.name}
+          </option>
+        ))}
+      </select>
     </div>
   );
 }

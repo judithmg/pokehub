@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --collect-coverage",
+    "test": "jest --watchAll --verbose --testEnvironment=node --collect-coverage",
     "start": "set DEBUG=app && nodemon index.js"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "keywords": [],
   "author": "",
