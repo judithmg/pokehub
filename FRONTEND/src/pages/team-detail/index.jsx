@@ -31,6 +31,7 @@ export function TeamDetailComponent({
       actions.loadMoves();
     }
   }, [moves.length]);
+
   useEffect(() => {
     if (!learnsets.length) {
       actions.loadLearnsets();
@@ -41,21 +42,28 @@ export function TeamDetailComponent({
     actions.loadOneTeam(+teamId,
       moves,
       learnsets);
-  }, [teamId]);
+  }, [teamId, moves.length, learnsets.length]);
   return (
-    <section className="teamdetail__container">
-      {console.log(team)}
-      {
+
+    moves.length && learnsets.length && (
+      <section className="teamdetail__container">
+        {
       team
         && team?.pokemons?.map((pokemon) => (
-          <TeamDetailPokemon
-            pokemon={pokemon}
-            key={Math.random()}
-          />
+          pokemon.learnset && (
+            <>
+              <TeamDetailPokemon
+                pokemon={pokemon}
+                key={Math.random()}
+              />
+            </>
+          )
         ))
 }
 
-    </section>
+      </section>
+    )
+
   );
 }
 

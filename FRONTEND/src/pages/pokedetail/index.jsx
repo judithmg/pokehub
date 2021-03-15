@@ -87,7 +87,7 @@ export function PokeDetailComponent({
 
         { pokemon && (
         <>
-          <div className={`pokemon__abstract ${pokemon.types && pokemon.types[0].toLowerCase()}`}>
+          <div className={`pokemon__abstract ${pokemon?.types && pokemon?.types[0].toLowerCase()}`}>
             <MainInfo pokemon={pokemon} />
             <VisualInfoComponent pokemon={pokemon} pokedex={pokedex} />
           </div>

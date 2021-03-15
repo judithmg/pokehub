@@ -40,7 +40,10 @@ ModalMoveComponent.propTypes = {
     pp: PropTypes.number,
     basePower: PropTypes.number,
     type: PropTypes.string,
-    accuracy: PropTypes.arrayOf(PropTypes.number),
+    accuracy: PropTypes.arrayOf(PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.number,
+    ])),
 
   }).isRequired,
 };

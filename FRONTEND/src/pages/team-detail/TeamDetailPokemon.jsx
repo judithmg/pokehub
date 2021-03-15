@@ -10,6 +10,8 @@ import '../../styles/teams.scss';
 
 export default function TeamDetailPokemonComponent({ pokemon }) {
   return (
+    pokemon.learnset
+    && (
     <div className="teamdetail__pokemon">
       <div className={`pokemon__sprite ${pokemon.types[0]}`}>
         <span>{pokemon.name}</span>
@@ -73,6 +75,7 @@ export default function TeamDetailPokemonComponent({ pokemon }) {
         </div>
       </div>
     </div>
+    )
   );
 }
 TeamDetailPokemonComponent.propTypes = {

@@ -11,20 +11,20 @@ export default function MainInfoComponent({ pokemon }) {
         <SpritesComponent pokemon={pokemon} />
         <div className="abstract__data">
           <div className="abstract__name">
-            <span className="abstract__name--eng">{pokemon.name}</span>
+            <span className="abstract__name--eng">{pokemon?.name}</span>
             <span className="abstract__name--jap">{pokemon['name-jap']}</span>
           </div>
           <div className="abstract__id">
-            {`# ${pokemon.num}`}
+            {`# ${pokemon?.num}`}
 
           </div>
           <div className="abstract__size">
             <div className="abract__weight">
-              {`${pokemon.weightkg} kg`}
+              {`${pokemon?.weightkg} kg`}
 
             </div>
             <div className="abstract__height">
-              {`${pokemon.heightm} m`}
+              {`${pokemon?.heightm} m`}
 
             </div>
           </div>

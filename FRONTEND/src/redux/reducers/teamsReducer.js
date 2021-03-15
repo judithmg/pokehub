@@ -45,14 +45,11 @@ export default function teamsReducer(state = initialState, action) {
         filteredMoves = pokemonLearnset?.learnset
           ?.map((pokemove) => action.moves
             .filter((move) => move.id === pokemove));
-
         return {
           ...pokeFromTeam,
-          hello: 'hello',
           learnset: filteredMoves,
         };
       });
-      console.log({ id: userteam.id, pokemons: modifiedTeam });
       return { ...state, team: { id: userteam.id, pokemons: modifiedTeam } };
     case actionTypes.TEAM_LOADING:
       return { ...state, teamLoading: true };
@@ -73,7 +70,7 @@ export default function teamsReducer(state = initialState, action) {
       return { ...state, newTeam };
     case actionTypes.SUBMIT_TEAM:
       teams = [...state.teams, state.newTeam];
-      return { ...state, teams };
+      return { ...state, teams, newTeam: {} };
 
     default:
       return state;

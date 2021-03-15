@@ -57,6 +57,8 @@ export default function SpritesComponent({ pokemon }) {
           <>
             <option value="generation-i/red-blue/transparent/">red-blue</option>
             <option value="generation-i/yellow/transparent/">yellow</option>
+            <option value="generation-iii/firered-leafgreen/">firered-leafgreen</option>
+
           </>
           )}
             { pokemon.num < 252
@@ -72,7 +74,6 @@ export default function SpritesComponent({ pokemon }) {
           && (
           <>
             <option value="generation-iii/emerald/">emerald</option>
-            <option value="generation-iii/firered-leafgreen/">firered-leafgreen</option>
             <option value="generation-iii/ruby-sapphire/">ruby-sapphire</option>
           </>
           )}
