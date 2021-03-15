@@ -26,18 +26,31 @@ export function PokedexComponent({
 }) {
   const [pagination, setPagination] = useState(1);
   useEffect(() => {
-    if (!pokedex.length || abilities.length || moves.length || learnsets.length) {
-      actions.loadAbilities();
-      actions.loadMoves();
-      actions.loadLearnsets();
+    if (!pokedex?.length) {
       actions.loadPokedex();
+      actions.loadPokemonsShown(page);
     }
-    actions.loadPokemonsShown(page);
-  }, [pokedex.length]);
+  }, [pokedex?.length]);
+
+  useEffect(() => {
+    if (!abilities?.length) {
+      actions.loadAbilities();
+    }
+  }, [abilities?.length]);
+  useEffect(() => {
+    if (!moves.length) {
+      actions.loadMoves();
+    }
+  }, [moves?.length]);
+  useEffect(() => {
+    if (!learnsets?.length) {
+      actions.loadLearnsets();
+    }
+  }, [learnsets?.length]);
 
   useEffect(() => {
     actions.loadPokemonsShown(pagination);
-  }, [pagination]);
+  }, [pagination, pokedex.length]);
   return (
     <>
       <section className="pokedex__container" id="jump">

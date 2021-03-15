@@ -3,9 +3,9 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 
-import TeamCreatorComponent from '../pages/team-creator';
+import { CreateTeamComponent } from '../pages/team-creator/CreateTeam';
 
-describe('Given a UserTeamsComponent component', () => {
+describe('Given a TeamCreatorComponent component', () => {
   describe('When it is invoked', () => {
     let container = null;
 
@@ -19,29 +19,35 @@ describe('Given a UserTeamsComponent component', () => {
       container.remove();
       container = null;
     });
-    test('Then there should be a section element', () => {
-      act(() => {
-        render(
-          <BrowserRouter>
-            <TeamCreatorComponent />
-            ,
-          </BrowserRouter>, container,
-        );
-      });
-      const section = container.querySelector('section');
+    const actions = {
+      createTeam: jest.fn(),
+      loadTeams: jest.fn(),
+      addPokemonToTeam: jest.fn(),
+      submitTeam: jest.fn(),
+      loadPokedex: jest.fn(),
+    };
+    const teams = [{}];
+    const newTeam = {
+      id: 8,
+      pokemons: [{}],
+    };
+    const pokedex = [{}];
 
-      expect(section).toBeTruthy();
-    });
-    test('Then there should be a section with class team-creator__container', () => {
+    test('Then there should be a div with class team-creator__creator', () => {
       act(() => {
         render(
           <BrowserRouter>
-            <TeamCreatorComponent />
+            <CreateTeamComponent
+              actions={actions}
+              teams={teams}
+              newTeam={newTeam}
+              pokedex={pokedex}
+            />
             ,
           </BrowserRouter>, container,
         );
       });
-      const section = container.querySelector('.team-creator__container');
+      const section = container.querySelector('.team-creator__creator');
 
       expect(section).toBeTruthy();
     });
@@ -49,7 +55,12 @@ describe('Given a UserTeamsComponent component', () => {
       act(() => {
         render(
           <BrowserRouter>
-            <TeamCreatorComponent />
+            <CreateTeamComponent
+              actions={actions}
+              teams={teams}
+              newTeam={newTeam}
+              pokedex={pokedex}
+            />
             ,
           </BrowserRouter>, container,
         );

@@ -18,7 +18,7 @@ export default function EvolutionChainComponent({
   }
   if (evos.length) {
     const findevo = findPokemonNumber(evos[evos.length - 1], pokedex);
-    pokeevo = findevo.evos;
+    pokeevo = findevo?.evos;
   }
   return (
     <div className="abstract__evochain">
@@ -30,7 +30,7 @@ export default function EvolutionChainComponent({
           <Link to={`/pokemon/${pokeprevo?.prevo.toLowerCase()}`}>
             <img
               alt="pokemon evo"
-              src={`${pokemonSprites.httpIcon}${findPokemonNumber(pokeprevo.prevo, pokedex).num}.png`}
+              src={`${pokemonSprites.httpIcon}${findPokemonNumber(pokeprevo.prevo, pokedex)?.num}.png`}
             />
           </Link>
           )
@@ -41,7 +41,7 @@ export default function EvolutionChainComponent({
             <Link to={`/pokemon/${prevo.toLowerCase()}`}>
               <img
                 alt="pokemon evo"
-                src={`${pokemonSprites.httpIcon}${findPokemonNumber(prevo, pokedex).num}.png`}
+                src={`${pokemonSprites.httpIcon}${findPokemonNumber(prevo, pokedex)?.num}.png`}
               />
             </Link>
           </>
@@ -54,7 +54,7 @@ export default function EvolutionChainComponent({
           <Link to={`/pokemon/${evo.toLowerCase()}`} key={Math.random()}>
             <img
               alt="pokemon evo"
-              src={`${pokemonSprites.httpIcon}${findPokemonNumber(evo, pokedex).num}.png`}
+              src={`${pokemonSprites.httpIcon}${findPokemonNumber(evo, pokedex)?.num}.png`}
             />
           </Link>
         ))}
@@ -63,7 +63,7 @@ export default function EvolutionChainComponent({
             <Link to={`/pokemon/${evo.toLowerCase()}`} key={Math.random()}>
               <img
                 alt="pokemon evo"
-                src={`${pokemonSprites.httpIcon}${findPokemonNumber(evo, pokedex).num}.png`}
+                src={`${pokemonSprites.httpIcon}${findPokemonNumber(evo, pokedex)?.num}.png`}
               />
             </Link>
           ))

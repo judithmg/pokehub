@@ -36,10 +36,10 @@ export function CreateTeamComponent({
 
             {newTeam.id && newTeam.pokemons.map((poke) => (
               poke.num
-                ? (<img alt="pokemon ico" src={`${pokemonSprites.httpIcon}${poke.num}.png`} />
+                ? (<img alt="pokemon ico" src={`${pokemonSprites.httpIcon}${poke.num}.png`} key={Math.random()} />
                 )
                 : (
-                  <Ditto fill="#458cdd" value={poke.id} />
+                  <Ditto fill="#458cdd" key={Math.random()} value={poke.id} />
                 )
             ))}
 
@@ -52,6 +52,7 @@ export function CreateTeamComponent({
             alt="pokemon icon"
             className="team-creator__pokeico"
             id={i}
+            key={Math.random()}
             src={`${pokemonSprites.httpIcon}${i + 1}.png`}
             onClick={(e) => actions.addPokemonToTeam(e.currentTarget.id)}
           />

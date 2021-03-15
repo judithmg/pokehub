@@ -1,7 +1,7 @@
 import actionTypes from '../actions/actionTypes';
 import initialState from '../store/initialState';
 
-export default function teamsReducer(state = initialState.teamsReducer, action) {
+export default function teamsReducer(state = initialState, action) {
   let teams;
   let userteam;
   let newTeam;
@@ -37,6 +37,7 @@ export default function teamsReducer(state = initialState.teamsReducer, action) 
       return { ...state, teamLoading: true };
 
     case actionTypes.ADD_POKEMON_TO_TEAM:
+      console.log(state);
       index = state.newTeam.pokemons.findIndex((poke) => !poke.num);
       if (index === -1) index = 0;
       pokemon = {

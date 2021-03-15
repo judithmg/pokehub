@@ -54,7 +54,7 @@ describe('Given a VisualInfo component', () => {
       eggGroups: ['Monster', 'Grass'],
     };
 
-    test('Then there should be a radar chart (svg) showing its stats ', () => {
+    test('Then there should be a div with a radar chart', () => {
       act(() => {
         render(
           <BrowserRouter>
@@ -63,9 +63,9 @@ describe('Given a VisualInfo component', () => {
         );
       });
 
-      const svg = document.querySelector('svg');
+      const div = document.querySelector('.abstract__stats');
 
-      expect(svg).toBeTruthy();
+      expect(div).toBeTruthy();
     });
   });
 });
