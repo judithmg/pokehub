@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import actionTypes from '../actions/actionTypes';
 import initialState from '../store/initialState';
 
@@ -12,6 +13,7 @@ export default function teamsReducer(state = initialState, action) {
   let pokeFromPokedex;
   let pokemonLearnset;
   let filteredMoves;
+  let modifiedTeam;
   switch (action.type) {
     case actionTypes.LOAD_TEAMS:
       return { ...state, teams: action.teamData };
@@ -33,9 +35,25 @@ export default function teamsReducer(state = initialState, action) {
       teams = state.teams.filter((team) => team.id === action.data.id);
       teams = [...teams, action.data];
       return { ...state, teams };
+
     case actionTypes.LOAD_ONE_TEAM:
-      userteam = state.teams.filter((team) => team.id === action.teamId);
-      return { ...state, team: userteam };
+      [userteam] = state.teams.filter((team) => team.id === action.teamId);
+      modifiedTeam = userteam.pokemons.map((pokeFromTeam) => {
+        pokemonLearnset = action.learnsets
+          .find((pokeLearnset) => pokeLearnset.name.toLowerCase()
+        === pokeFromTeam.name.toLowerCase());
+        filteredMoves = pokemonLearnset?.learnset
+          ?.map((pokemove) => action.moves
+            .filter((move) => move.id === pokemove));
+
+        return {
+          ...pokeFromTeam,
+          hello: 'hello',
+          learnset: filteredMoves,
+        };
+      });
+      console.log({ id: userteam.id, pokemons: modifiedTeam });
+      return { ...state, team: { id: userteam.id, pokemons: modifiedTeam } };
     case actionTypes.TEAM_LOADING:
       return { ...state, teamLoading: true };
 

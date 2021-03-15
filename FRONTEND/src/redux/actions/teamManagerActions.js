@@ -27,9 +27,12 @@ export function modifyTeam(teamId, team) {
     teamId,
   };
 }
-export function loadOneTeam(teamId) {
+export function loadOneTeam(teamId, moves,
+  learnsets) {
   return {
     type: actionTypes.LOAD_ONE_TEAM,
     teamId,
+    moves,
+    learnsets,
   };
 }
