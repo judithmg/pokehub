@@ -6,7 +6,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-const pokemonRoute = require('./src/routes/pokemonRoutes');
+const pokemonRoutes = require('./src/routes/pokemonRoutes');
+const userRoutes = require('./src/routes/userRoutes');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -20,7 +21,8 @@ app.use(cors());
 app.use(express.urlencoded({ extend: true }));
 app.use(express.json());
 
-app.use('/pokehub/pokedex', pokemonRoute);
+app.use('/pokehub/pokedex', pokemonRoutes);
+app.use('/pokehub/users', userRoutes);
 
 app.listen(port, () => {
   debug(`POKEHUB is running in ${chalk.bgGreen.bold(`http://localhost:${port}`)}`);
