@@ -3,52 +3,55 @@ import {
   Route, Switch, BrowserRouter as Router,
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { AuthProvider } from '../context/AuthContext';
+import PrivateRoute from './PrivateRoute';
 import store from '../redux/store/configureStore';
 
 import Dashboard from './dashboard';
+import Footer from './footer';
+import ForgotPassword from './Login/ForgotPassword';
+import Header from './header';
+import Login from './Login';
 import Pokedex from './pokedex';
 import PokeDetail from './pokedetail';
+import Profile from './Profile';
+import SignUp from './SignUp';
 import Teams from './teams';
 import TeamDetail from './team-detail'; import MainComponent from './main';
-import Header from './header';
-import Footer from './footer';
 import TeamCreator from './team-creator';
+import UpdateProfile from './Profile/UpdateProfile';
 
 import '../styles/App.scss';
 import pruebas from '../bin/pruebas';
 
 function App() {
   return (
-    <Provider store={store()}>
-      <Router>
-        <Header />
-        <main>
-          <MainComponent />
-          <Switch>
-            <Route path="/pokemon/:pokeId" component={PokeDetail} />
-          </Switch>
-          <Switch>
-            <Route path="/pruebas" component={pruebas} />
-          </Switch>
-          <Switch>
-            <Route path="/pokedex" component={Pokedex} />
-          </Switch>
-          <Switch>
-            <Route path="/team-creator" component={TeamCreator} />
-          </Switch>
-          <Switch>
-            <Route path="/team-detail/:teamId" component={TeamDetail} />
-          </Switch>
-          <Switch>
-            <Route path="/teams" component={Teams} />
-          </Switch>
-          <Switch>
-            <Route exact path="/" component={Dashboard} />
-          </Switch>
-        </main>
-        <Footer />
-      </Router>
-    </Provider>
+    <AuthProvider>
+      <Provider store={store()}>
+        <Router>
+          <Header />
+          <main>
+            <MainComponent />
+            <Switch>
+              <Route path="/login" component={Login} />
+              <Route path="/login/forgot-password" component={ForgotPassword} />
+              <Route path="/pokemon/:pokeId" component={PokeDetail} />
+              <Route path="/pokedex" component={Pokedex} />
+              <Route path="/pruebas" component={pruebas} />
+              <Route path="/signup" component={SignUp} />
+              <Route exact path="/" component={Dashboard} />
+              <PrivateRoute path="/profile" component={Profile} />
+              <PrivateRoute path="/team-creator" component={TeamCreator} />
+              <PrivateRoute path="/team-detail/:teamId" component={TeamDetail} />
+              <PrivateRoute path="/teams" component={Teams} />
+              <PrivateRoute path="/profile/update" component={UpdateProfile} />
+            </Switch>
+          </main>
+          <Footer />
+        </Router>
+      </Provider>
+    </AuthProvider>
+
   );
 }
 
