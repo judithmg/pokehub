@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import SpritesComponent from './Sprites';
+import SpritesComponent from './SpritesComponent';
 
 export default function MainInfoComponent({ pokemon }) {
   return (

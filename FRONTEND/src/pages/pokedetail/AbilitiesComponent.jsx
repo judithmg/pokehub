@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-export default function PokemonAbilitiesComponent({ ability }) {
+export default function AbilitiesComponent({ ability }) {
   return (
     <>
       <span className="pokemon__ability-name">
@@ -14,7 +14,7 @@ export default function PokemonAbilitiesComponent({ ability }) {
   );
 }
 
-PokemonAbilitiesComponent.propTypes = {
+AbilitiesComponent.propTypes = {
   ability: PropTypes.shape({
     name: PropTypes.string,
     desc: PropTypes.string,

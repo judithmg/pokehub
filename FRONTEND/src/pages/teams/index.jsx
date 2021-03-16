@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Team from './Team';
+import Team from './TeamComponent';
 
 import { loadTeams } from '../../redux/actions/teamManagerActions';
 

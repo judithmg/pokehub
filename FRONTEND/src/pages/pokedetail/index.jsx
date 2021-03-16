@@ -8,10 +8,10 @@ import 'react-svg-radar-chart/build/css/index.css';
 import '../../styles/pokedetail.scss';
 import '../../styles/_types.scss';
 
-import Moveset from './Moveset';
-import PokemonAbilities from './Abilities';
-import MainInfo from './MainInfo';
-import VisualInfoComponent from './VisualInfo';
+import Moveset from './MovesetComponent';
+import PokemonAbilities from './AbilitiesComponent';
+import MainInfo from './MainInfoComponent';
+import VisualInfoComponent from './VisualInfoComponent';
 
 import {
   loadPokedex,

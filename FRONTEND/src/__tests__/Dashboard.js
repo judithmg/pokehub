@@ -11,6 +11,13 @@ describe('Given a Dashboard component', () => {
   beforeEach(() => {
     container = document.createElement('div');
     document.body.appendChild(container);
+    act(() => {
+      render(
+        <BrowserRouter>
+          <DashboardElement />
+        </BrowserRouter>, container,
+      );
+    });
   });
 
   afterEach(() => {
@@ -20,27 +27,11 @@ describe('Given a Dashboard component', () => {
   });
   describe('When it is invoked', () => {
     test('Then there should be a section', () => {
-      act(() => {
-        render(
-          <BrowserRouter>
-            <DashboardElement />
-          </BrowserRouter>, container,
-        );
-      });
-
       const dashboard = container.querySelector('section');
 
       expect(dashboard).toBeTruthy();
     });
     test('Then there should be a button with text POKEDEX', () => {
-      act(() => {
-        render(
-          <BrowserRouter>
-            <DashboardElement />
-          </BrowserRouter>, container,
-        );
-      });
-
       const button = document.querySelectorAll('span');
 
       expect(button[0].innerHTML).toBe('POKEDEX');

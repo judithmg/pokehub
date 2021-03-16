@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import 'react-svg-radar-chart/build/css/index.css';
 
 import ButtonType from '../shared/ButtonType';
-import ModalAtk from './ModalAtk';
+import ModalAtk from './ModalMoveComponent';
 
 import '../../styles/pokedetail.scss';
 

@@ -11,6 +11,14 @@ describe('Given a Footer component', () => {
     beforeEach(() => {
       container = document.createElement('div');
       document.body.appendChild(container);
+      act(() => {
+        render(
+          <BrowserRouter>
+            <Footer />
+            ,
+          </BrowserRouter>, container,
+        );
+      });
     });
 
     afterEach(() => {
@@ -19,26 +27,10 @@ describe('Given a Footer component', () => {
       container = null;
     });
     test('Then there should be a footer element', () => {
-      act(() => {
-        render(
-          <BrowserRouter>
-            <Footer />
-            ,
-          </BrowserRouter>, container,
-        );
-      });
       const footer = container.querySelector('footer');
       expect(footer).toBeTruthy();
     });
     test('Then there should be an anchor tag with innerHTML "Judith Martinez"', () => {
-      act(() => {
-        render(
-          <BrowserRouter>
-            <Footer />
-            ,
-          </BrowserRouter>, container,
-        );
-      });
       const { innerHTML } = container.querySelector('a');
       expect(innerHTML).toBe(' Judith Martínez');
     });

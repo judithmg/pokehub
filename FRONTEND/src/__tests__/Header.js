@@ -14,6 +14,19 @@ describe('Given a Header component', () => {
   beforeEach(() => {
     container = document.createElement('div');
     document.body.appendChild(container);
+    const store = configureStore();
+
+    act(() => {
+      render(
+        <Provider store={store}>
+
+          <BrowserRouter>
+            <HeaderComponent />
+          </BrowserRouter>
+        </Provider>, container,
+
+      );
+    });
   });
 
   afterEach(() => {
@@ -23,66 +36,19 @@ describe('Given a Header component', () => {
   });
   describe('When it is invoked', () => {
     test('Then there should be a header section', () => {
-      act(() => {
-        render(
-          <BrowserRouter>
-            <HeaderComponent />
-          </BrowserRouter>, container,
-        );
-      });
-
       const header = container.querySelector('header');
 
       expect(header).toBeTruthy();
     });
-    test('Then there should be a button with text "Login"', () => {
-      act(() => {
-        render(
-          <BrowserRouter>
-            <HeaderComponent />
-          </BrowserRouter>, container,
-        );
-      });
-
-      const { innerHTML } = container.querySelector('button');
-
-      expect(innerHTML).toBe('Login');
-    });
   });
   describe('When the menu button is clicked', () => {
     test('An aside should render', () => {
-      const store = configureStore();
-
-      act(() => {
-        render(
-          <Provider store={store}>
-
-            <BrowserRouter>
-              <HeaderComponent />
-            </BrowserRouter>
-          </Provider>, container,
-
-        );
-      });
       const img = container.querySelector('.header__pokeball');
       fireEvent.click(img);
       const aside = container.querySelector('aside');
       expect(aside).toBeTruthy();
     });
     test('A button with a type should be rendered', () => {
-      const store = configureStore();
-
-      act(() => {
-        render(
-          <Provider store={store}>
-
-            <BrowserRouter>
-              <HeaderComponent />
-            </BrowserRouter>
-          </Provider>, container,
-
-        );
-      });
       const img = container.querySelector('.header__pokeball');
       fireEvent.click(img);
       const btn = container.querySelector('.btn-type--filter');

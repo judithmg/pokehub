@@ -41,6 +41,22 @@ describe('Given a Pokedetail component', () => {
     beforeEach(() => {
       container = document.createElement('div');
       document.body.appendChild(container);
+      act(() => {
+        render(
+          <BrowserRouter>
+            <PokeDetailComponent
+              pokemonAbilities={pokemonAbilities}
+              pokemonLearnset={pokemonLearnset}
+              pokemon={pokemon}
+              actions={actions}
+              pokedex={pokedex}
+              moves={moves}
+              abilities={abilities}
+              learnsets={learnsets}
+            />
+          </BrowserRouter>, container,
+        );
+      });
     });
 
     afterEach(() => {
@@ -50,106 +66,21 @@ describe('Given a Pokedetail component', () => {
     });
     describe('When it is invoked', () => {
       test('Then there should be a section', () => {
-        act(() => {
-          render(
-            <BrowserRouter>
-              <PokeDetailComponent
-                pokemonAbilities={pokemonAbilities}
-                pokemonLearnset={pokemonLearnset}
-                pokemon={pokemon}
-                actions={actions}
-                pokedex={pokedex}
-                moves={moves}
-                abilities={abilities}
-                learnsets={learnsets}
-              />
-            </BrowserRouter>, container,
-          );
-        });
-
         const dashboard = document.querySelector('section');
         expect(dashboard).toBeTruthy();
       });
       test('Then there should be a span with a MOVES text', () => {
-        act(() => {
-          render(
-            <BrowserRouter>
-              <PokeDetailComponent
-                pokemonAbilities={pokemonAbilities}
-                pokemonLearnset={pokemonLearnset}
-                pokemon={pokemon}
-                actions={actions}
-                pokedex={pokedex}
-                moves={moves}
-                abilities={abilities}
-                learnsets={learnsets}
-              />
-            </BrowserRouter>, container,
-          );
-        });
-
         const { innerHTML } = document.querySelector('.pokemon__moves-title');
         expect(innerHTML).toBe('MOVES');
       });
       describe('When the url params are read', () => {
         test('Then loadPokemonDetail should be called', () => {
-          act(() => {
-            render(
-              <BrowserRouter>
-                <PokeDetailComponent
-                  pokemonAbilities={pokemonAbilities}
-                  pokemonLearnset={pokemonLearnset}
-                  pokemon={pokemon}
-                  actions={actions}
-                  pokedex={pokedex}
-                  moves={moves}
-                  abilities={abilities}
-                  learnsets={learnsets}
-                />
-              </BrowserRouter>, container,
-            );
-          });
-
           expect(actions.loadPokemonDetail).toHaveBeenCalled();
         });
         test('Then loadPokemonLearnset should be called', () => {
-          act(() => {
-            render(
-              <BrowserRouter>
-                <PokeDetailComponent
-                  pokemonAbilities={pokemonAbilities}
-                  pokemonLearnset={pokemonLearnset}
-                  pokemon={pokemon}
-                  actions={actions}
-                  pokedex={pokedex}
-                  moves={moves}
-                  abilities={abilities}
-                  learnsets={learnsets}
-                />
-              </BrowserRouter>, container,
-            );
-          });
-
           expect(actions.loadPokemonLearnset).toHaveBeenCalled();
         });
         test('Then loadPokemonAbilities should be called', () => {
-          act(() => {
-            render(
-              <BrowserRouter>
-                <PokeDetailComponent
-                  pokemonAbilities={pokemonAbilities}
-                  pokemonLearnset={pokemonLearnset}
-                  pokemon={pokemon}
-                  actions={actions}
-                  pokedex={pokedex}
-                  moves={moves}
-                  abilities={abilities}
-                  learnsets={learnsets}
-                />
-              </BrowserRouter>, container,
-            );
-          });
-
           expect(actions.loadPokemonAbilities).toHaveBeenCalled();
         });
         describe('When data is not found on the state', () => {
@@ -157,9 +88,7 @@ describe('Given a Pokedetail component', () => {
             pokedex = [];
             moves = [];
             abilities = [];
-            learnsets = [];
-          });
-          test('Then loadLearnsets should be called', () => {
+            learnsets = '';
             act(() => {
               render(
                 <BrowserRouter>
@@ -176,63 +105,17 @@ describe('Given a Pokedetail component', () => {
                 </BrowserRouter>, container,
               );
             });
+          });
+          test('Then loadLearnsets should be called', () => {
             expect(actions.loadLearnsets).toHaveBeenCalled();
           });
           test('Then loadAbilities should be called', () => {
-            act(() => {
-              render(
-                <BrowserRouter>
-                  <PokeDetailComponent
-                    pokemonAbilities={pokemonAbilities}
-                    pokemonLearnset={pokemonLearnset}
-                    pokemon={pokemon}
-                    actions={actions}
-                    pokedex={pokedex}
-                    moves={moves}
-                    abilities={abilities}
-                    learnsets={learnsets}
-                  />
-                </BrowserRouter>, container,
-              );
-            });
             expect(actions.loadAbilities).toHaveBeenCalled();
           });
           test('Then loadMoves should be called', () => {
-            act(() => {
-              render(
-                <BrowserRouter>
-                  <PokeDetailComponent
-                    pokemonAbilities={pokemonAbilities}
-                    pokemonLearnset={pokemonLearnset}
-                    pokemon={pokemon}
-                    actions={actions}
-                    pokedex={pokedex}
-                    moves={moves}
-                    abilities={abilities}
-                    learnsets={learnsets}
-                  />
-                </BrowserRouter>, container,
-              );
-            });
             expect(actions.loadMoves).toHaveBeenCalled();
           });
           test('Then loadPokedex should be called', () => {
-            act(() => {
-              render(
-                <BrowserRouter>
-                  <PokeDetailComponent
-                    pokemonAbilities={pokemonAbilities}
-                    pokemonLearnset={pokemonLearnset}
-                    pokemon={pokemon}
-                    actions={actions}
-                    pokedex={pokedex}
-                    moves={moves}
-                    abilities={abilities}
-                    learnsets={learnsets}
-                  />
-                </BrowserRouter>, container,
-              );
-            });
             expect(actions.loadPokedex).toHaveBeenCalled();
           });
         });

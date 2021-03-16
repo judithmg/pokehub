@@ -3,13 +3,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import RadarChart from '../shared/RadarChart';
-import TeamDetailPokemonMoves from './TeamDetailPokemonMoves';
+import RadarChart from '../shared/RadarChartComponent';
+import TeamDetailPokemonMoves from './TeamMovesComponent';
 import { pokemonSprites } from '../../constants/images';
 
 import '../../styles/teams.scss';
 
-export default function TeamDetailPokemonComponent({ pokemon }) {
+export default function TeamPokemonComponent({ pokemon }) {
   return (
     pokemon.learnset
     && (
@@ -78,7 +78,7 @@ export default function TeamDetailPokemonComponent({ pokemon }) {
     )
   );
 }
-TeamDetailPokemonComponent.propTypes = {
+TeamPokemonComponent.propTypes = {
   pokemon: PropTypes.shape({
     name: PropTypes.string.isRequired,
     types: PropTypes.arrayOf(PropTypes.string).isRequired,

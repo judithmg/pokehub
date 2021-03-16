@@ -8,17 +8,6 @@ import { CreateTeamComponent } from '../pages/team-creator/CreateTeam';
 describe('Given a TeamCreatorComponent component', () => {
   describe('When it is invoked', () => {
     let container = null;
-
-    beforeEach(() => {
-      container = document.createElement('div');
-      document.body.appendChild(container);
-    });
-
-    afterEach(() => {
-      unmountComponentAtNode(container);
-      container.remove();
-      container = null;
-    });
     const actions = {
       createTeam: jest.fn(),
       loadTeams: jest.fn(),
@@ -32,8 +21,9 @@ describe('Given a TeamCreatorComponent component', () => {
       pokemons: [{}],
     };
     const pokedex = [{}];
-
-    test('Then there should be a div with class team-creator__creator', () => {
+    beforeEach(() => {
+      container = document.createElement('div');
+      document.body.appendChild(container);
       act(() => {
         render(
           <BrowserRouter>
@@ -47,24 +37,20 @@ describe('Given a TeamCreatorComponent component', () => {
           </BrowserRouter>, container,
         );
       });
+    });
+
+    afterEach(() => {
+      unmountComponentAtNode(container);
+      container.remove();
+      container = null;
+    });
+
+    test('Then there should be a div with class team-creator__creator', () => {
       const section = container.querySelector('.team-creator__creator');
 
       expect(section).toBeTruthy();
     });
     test('Then there should be a pokemon icon sprite', () => {
-      act(() => {
-        render(
-          <BrowserRouter>
-            <CreateTeamComponent
-              actions={actions}
-              teams={teams}
-              newTeam={newTeam}
-              pokedex={pokedex}
-            />
-            ,
-          </BrowserRouter>, container,
-        );
-      });
       const icon = container.querySelector('.team-creator__pokeico');
 
       expect(icon).toBeTruthy();

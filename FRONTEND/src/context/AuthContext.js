@@ -28,22 +28,22 @@ export function AuthProvider({ children }) {
     return auth.sendPasswordResetEmail(email);
   }
 
+  function signInAnonnymusly() {
+    return auth.signInAnonymously();
+  }
+
   function updateEmail(email) {
-    return currentUser.updateEmail(email);
+    return currentUser?.updateEmail(email);
   }
 
   function updatePassword(password) {
     return currentUser.updatePassword(password);
   }
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
-      setLoading(false);
-    });
-
-    return unsubscribe;
-  }, []);
+  useEffect(() => auth.onAuthStateChanged((user) => {
+    setCurrentUser(user);
+    setLoading(false);
+  }), []);
 
   const value = {
     currentUser,
@@ -53,6 +53,7 @@ export function AuthProvider({ children }) {
     resetPassword,
     updateEmail,
     updatePassword,
+    signInAnonnymusly,
   };
 
   return (

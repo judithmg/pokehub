@@ -17,16 +17,15 @@ describe('Given pokedexActions', () => {
   let store;
   beforeEach(() => {
     store = configureStore();
+    axios.get = jest.fn().mockImplementationOnce(() => Promise.resolve({
+      data: 'falseData',
+    }));
+
+    store.dispatch = jest.fn();
   });
 
   describe('When loadMoves is invoked', () => {
     test('Then dispatch is called with the data return from axios', async () => {
-      axios.get = jest.fn().mockImplementationOnce(() => Promise.resolve({
-        data: 'falseData',
-      }));
-
-      store.dispatch = jest.fn();
-
       const dispatchFunction = loadMoves();
       await dispatchFunction(store.dispatch);
 
@@ -39,12 +38,6 @@ describe('Given pokedexActions', () => {
 
   describe('When loadLearnsets is invoked', () => {
     test('Then dispatch is called with the data return from axios', async () => {
-      axios.get = jest.fn().mockImplementationOnce(() => Promise.resolve({
-        data: 'falseData',
-      }));
-
-      store.dispatch = jest.fn();
-
       const dispatchFunction = loadLearnsets();
       await dispatchFunction(store.dispatch);
 
@@ -57,12 +50,6 @@ describe('Given pokedexActions', () => {
 
   describe('When loadAbilities is invoked', () => {
     test('Then dispatch is called with the data return from axios', async () => {
-      axios.get = jest.fn().mockImplementationOnce(() => Promise.resolve({
-        data: 'falseData',
-      }));
-
-      store.dispatch = jest.fn();
-
       const dispatchFunction = loadAbilities();
       await dispatchFunction(store.dispatch);
 
@@ -75,12 +62,6 @@ describe('Given pokedexActions', () => {
 
   describe('When loadPokedex is invoked', () => {
     test('Then dispatch is called with the data return from axios', async () => {
-      axios.get = jest.fn().mockImplementationOnce(() => Promise.resolve({
-        data: 'falseData',
-      }));
-
-      store.dispatch = jest.fn();
-
       const dispatchFunction = loadPokedex();
       await dispatchFunction(store.dispatch);
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Move from './Move';
+import Move from './MoveComponent';
 
 import 'react-svg-radar-chart/build/css/index.css';
 

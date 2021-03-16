@@ -9,7 +9,7 @@ import {
   loadLearnsets,
 } from '../../redux/actions/pokedexActions';
 
-import TeamDetailPokemon from './TeamDetailPokemon';
+import TeamDetailPokemon from './TeamPokemonComponent';
 
 export function TeamDetailComponent({
   team,

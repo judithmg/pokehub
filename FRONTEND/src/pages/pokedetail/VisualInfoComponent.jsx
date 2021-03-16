@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 
 import React from 'react';
 
-import RadarChart from '../shared/RadarChart';
-import EvolutionChainComponent from './Evolution';
+import RadarChart from '../shared/RadarChartComponent';
+import EvolutionChainComponent from './EvolutionChainComponent';
 
 export default function VisualInfoComponent({ pokemon, pokedex }) {
   return (

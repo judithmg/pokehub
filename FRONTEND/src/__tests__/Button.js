@@ -12,6 +12,14 @@ describe('Given a Button component', () => {
     beforeEach(() => {
       container = document.createElement('div');
       document.body.appendChild(container);
+      act(() => {
+        render(
+          <BrowserRouter>
+            <Button text="text" classes="classes" />
+            ,
+          </BrowserRouter>, container,
+        );
+      });
     });
 
     afterEach(() => {
@@ -20,27 +28,11 @@ describe('Given a Button component', () => {
       container = null;
     });
     test('Then there should be a button element', () => {
-      act(() => {
-        render(
-          <BrowserRouter>
-            <Button text="text" classes="classes" />
-            ,
-          </BrowserRouter>, container,
-        );
-      });
       const button = container.querySelector('button');
 
       expect(button).toBeTruthy();
     });
     test('Then its innerHTML should be the props passed as text', () => {
-      act(() => {
-        render(
-          <BrowserRouter>
-            <Button text="text" classes="classes" />
-            ,
-          </BrowserRouter>, container,
-        );
-      });
       const { innerHTML } = container.querySelector('button');
 
       expect(innerHTML).toBe('text');
