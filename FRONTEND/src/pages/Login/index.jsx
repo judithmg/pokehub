@@ -1,11 +1,15 @@
 import React, { useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   Form, Button, Card, Alert,
 } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { useAuth } from '../../context/AuthContext';
+import { loginUser } from '../../redux/actions/userActions';
 
-export default function LoginComponent() {
+export function LoginComponent({ actions }) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const { login } = useAuth();
@@ -19,7 +23,8 @@ export default function LoginComponent() {
     try {
       setError('');
       setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
+      await login(emailRef.current.value, passwordRef.current.value)
+        .then((user) => actions.loginUser(user.user.email));
       history.push('/');
     } catch (err) {
       setError(err.message);
@@ -60,3 +65,25 @@ export default function LoginComponent() {
     </>
   );
 }
+
+LoginComponent.propTypes = {
+  actions: PropTypes.shape({
+    loginUser: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+function mapStateToProps(state) {
+  return {
+    user: state.userReducer.user,
+
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      loginUser,
+    }, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);

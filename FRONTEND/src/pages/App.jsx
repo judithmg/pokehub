@@ -22,6 +22,7 @@ import TeamCreator from './team-creator';
 import UpdateProfile from './Profile/UpdateProfile';
 
 import '../styles/App.scss';
+
 import pruebas from '../bin/pruebas';
 
 function App() {

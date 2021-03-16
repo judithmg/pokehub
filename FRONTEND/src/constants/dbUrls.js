@@ -4,4 +4,6 @@ export default {
   movesUrl: '/pokedex/moves',
   learnsetsUrl: '/pokedex/learnsets',
   abilitiesUrl: '/pokedex/abilities',
+  signUp: '/users/signup',
+  login: '/users/login',
 };

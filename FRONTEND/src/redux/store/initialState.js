@@ -27,4 +27,7 @@ export default {
     teamLoading: true,
   },
 
+  userReducer: {
+    user: {},
+  },
 };

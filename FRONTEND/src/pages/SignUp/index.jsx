@@ -1,17 +1,21 @@
 /* eslint-disable consistent-return */
 import React, { useRef, useState } from 'react';
+import PropTypes from 'prop-types';
+
 import {
   Form,
   Button,
   Card,
   Alert,
 } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 import { Link, useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { useAuth } from '../../context/AuthContext';
 
-export default function SignupComponent() {
+import { signupUser } from '../../redux/actions/userActions';
+
+export function SignupComponent({ actions }) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -30,10 +34,11 @@ export default function SignupComponent() {
     try {
       setError('');
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
+      await signup(emailRef.current.value, passwordRef.current.value)
+        .then((user) => actions.signupUser(user.user.email));
       history.push('/');
     } catch (err) {
-      setError(err.message);
+      setError(err);
     }
 
     setLoading(false);
@@ -72,3 +77,25 @@ export default function SignupComponent() {
     </>
   );
 }
+
+SignupComponent.propTypes = {
+  actions: PropTypes.shape({
+    signupUser: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+function mapStateToProps(state) {
+  return {
+    user: state.userReducer.user,
+
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      signupUser,
+    }, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignupComponent);
