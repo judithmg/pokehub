@@ -263,14 +263,6 @@ temp/
 # End of https://www.gitignore.io/api/node
 
 #media files
-### Images ###
-# JPEG
-*.jpg
-*.jpeg
-*.jpe
-*.jif
-*.jfif
-*.jfi
 
 # JPEG 2000
 *.jp2
@@ -285,17 +277,11 @@ temp/
 *.hdp
 *.wdp
 
-# Graphics Interchange Format
-*.gif
-
 # RAWf
 *.raw
 
 # Web P
 *.webp
-
-# Portable Network Graphics
-*.png
 
 # Animated Portable Network Graphics
 *.apng
@@ -316,9 +302,6 @@ temp/
 # BMP
 *.bmp
 *.dib
-
-# ICO
-*.ico
 
 # 3D Images
 *.3dm
