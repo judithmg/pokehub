@@ -26,3 +26,6 @@ describe('Given a useModal function', () => {
     });
   });
 });
+
+// testearlo como una función, no como un hook
+// llamar a toggle

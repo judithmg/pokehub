@@ -44,6 +44,8 @@ export default function pokedexReducer(state = initialState.pokedexReducer, acti
     case actionTypes.LOAD_POKEMON_DETAIL:
       pokemon = state.pokedex.find((poke) => poke.name.toLowerCase() === action.pokeId);
       return { ...state, pokemon };
+      //       loadPokemon(...action...)
+      // return { ...state, };
 
     case actionTypes.LOAD_POKEMON_LEARNSET:
 

@@ -43,7 +43,11 @@ export function TeamDetailPokemonMovesComponent({ actions, pokemon }) {
             </>
           ))}
         </select>
-        <select onChange={(e) => handleChange(e.target.id, e.target.value)} id={`${pokemon.name.toLowerCase()}-move-2`}>
+        <select
+        // value={....moveset...}
+          onChange={(e) => handleChange(e.target.id, e.target.value)}
+          id={`${pokemon.name.toLowerCase()}-move-2`}
+        >
           {pokemon.learnset && pokemon.learnset.map((move) => (
             <option id={`${pokemon.name.toLowerCase()}-move-1`}>
               {move[0]?.name}
