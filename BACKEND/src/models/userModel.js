@@ -7,6 +7,13 @@ const userSchema = new Schema({
     required: true,
   },
 
+  username: { type: String },
+
+  profilePicture: {
+    type: String,
+    default: '',
+  },
+
   creationDate: { type: Date, default: Date.now },
 
   teams: [
