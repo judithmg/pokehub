@@ -4,11 +4,14 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { getUserInfo } from '../../redux/actions/userActions';
+import { useAuth } from '../../context/AuthContext';
 import { createTeam, addPokemonToTeam, submitTeam } from '../../redux/actions/teamCreatorActions';
 import { loadTeams } from '../../redux/actions/teamManagerActions';
 import {
   loadPokedex,
 } from '../../redux/actions/pokedexActions';
+
 import { pokemonSprites } from '../../constants/images';
 import Ditto from '../icons/Ditto';
 
@@ -19,6 +22,15 @@ export function CreateTeamComponent({
   pokedex,
   user,
 }) {
+  const { currentUser } = useAuth();
+  const useremail = currentUser.email;
+
+  useEffect(() => {
+    if (!user.email) {
+      actions.getUserInfo(useremail);
+    }
+  }, [user?.length]);
+
   useEffect(() => {
     if (!teams?.length) {
       actions?.loadTeams();
@@ -47,8 +59,7 @@ export function CreateTeamComponent({
                 )
             ))}
 
-            {newTeam.id && <button type="button" onClick={() => actions.submitTeam(newTeam)}>add team</button>}
-            {console.log(user)}
+            {newTeam.id && <button type="button" onClick={() => actions.submitTeam(newTeam, user)}>add team</button>}
           </div>
           )}
       <div className="team-creator__pokelist">
@@ -84,6 +95,7 @@ function mapDispatchToProps(dispatch) {
       addPokemonToTeam,
       submitTeam,
       loadPokedex,
+      getUserInfo,
     }, dispatch),
   };
 }

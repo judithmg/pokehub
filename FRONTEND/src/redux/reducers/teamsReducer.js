@@ -15,10 +15,12 @@ export default function teamsReducer(state = initialState.teamsReducer, action) 
   let filteredMoves;
   let modifiedTeam;
 
+  // eslint-disable-next-line no-debugger
+  debugger;
   switch (action.type) {
     case actionTypes.LOAD_TEAMS:
 
-      return { ...state, teams: action.teamData };
+      return { ...state, teams: action.data };
 
     case actionTypes.CREATE_TEAM:
       maxid = state.teams
@@ -42,10 +44,14 @@ export default function teamsReducer(state = initialState.teamsReducer, action) 
       return { ...state, teams };
 
     case actionTypes.LOAD_ONE_TEAM:
-      [userteam] = state.teams.filter((team) => team.id === action.teamId);
-      modifiedTeam = userteam.pokemons.map((pokeFromTeam) => {
+      // find team from url params
+      [userteam] = state.teams.filter((team) => +team.id === +action.teamId);
+
+      console.log(action);
+      console.log(state.teams);
+      modifiedTeam = userteam?.pokemons?.map((pokeFromTeam) => {
         pokemonLearnset = action.learnsets
-          .find((pokeLearnset) => pokeLearnset?.name.toLowerCase()
+          ?.find((pokeLearnset) => pokeLearnset?.name.toLowerCase()
         === pokeFromTeam.name.toLowerCase());
         filteredMoves = pokemonLearnset?.learnset
           ?.map((pokemove) => action.moves
@@ -76,8 +82,7 @@ export default function teamsReducer(state = initialState.teamsReducer, action) 
       return { ...state, newTeam };
 
     case actionTypes.SUBMIT_TEAM:
-      console.log(action.data);
-      teams = [...state.teams, state.newTeam];
+      teams = [...state.teams, action.data.teams];
       return { ...state, teams, newTeam: {} };
 
     case actionTypes.MODIFY_POKEMON:

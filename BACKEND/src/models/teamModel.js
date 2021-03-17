@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const teamSchema = new Schema({
 
+  user: { type: Schema.Types.ObjectId, ref: 'User' },
   id: {
     type: Number,
   },

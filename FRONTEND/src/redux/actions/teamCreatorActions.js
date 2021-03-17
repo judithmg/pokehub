@@ -32,16 +32,14 @@ export function submitTeamSuccess(data) {
   };
 }
 
-export function submitTeam(team) {
+export function submitTeam(team, user) {
   return async (dispatch) => {
     try {
-      console.log(team);
-
       const submit = {
-        ...team,
+        team,
+        email: user.email,
       };
-      console.log(submit);
-      const { data } = await axios.post(`${dbUrls.baseUrl}${dbUrls.teamsUrl}`, submit);
+      const { data } = await axios.put(`${dbUrls.baseUrl}${dbUrls.teamsUrl}`, submit);
       console.log(data);
       dispatch(submitTeamSuccess(data));
     } catch (error) {

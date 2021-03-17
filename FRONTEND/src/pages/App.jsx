@@ -42,7 +42,7 @@ function App() {
               <Route path="/signup" component={SignUp} />
               <PrivateRoute path="/profile/update" component={UpdateUserProfile} />
               <PrivateRoute path="/profile" component={Profile} />
-              <PrivateRoute path="/team-builder" component={TeamCreator} />
+              <PrivateRoute path="/team-creator" component={TeamCreator} />
               <PrivateRoute path="/team-detail/:teamId" component={TeamDetail} />
               <PrivateRoute path="/teams" component={Teams} />
               <Route exact path="/" component={Dashboard} />

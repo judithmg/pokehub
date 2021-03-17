@@ -11,6 +11,8 @@ export default function userReducer(state = initialState.userReducer, action) {
       return { ...state, user: null };
     case actionTypes.MODIFY_USER:
       return { ...state, user: action.data };
+    case actionTypes.SUBMIT_TEAM:
+      return { ...state, user: action.data };
     default:
       return state;
   }

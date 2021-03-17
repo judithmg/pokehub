@@ -16,7 +16,7 @@ function userActionsError(error) {
   };
 }
 
-export function loginUser(email) {
+export function getUserInfo(email) {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(`${dbUrls.baseUrl}${dbUrls.login}`, { email });

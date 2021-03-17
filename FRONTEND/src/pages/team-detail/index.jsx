@@ -3,11 +3,14 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useParams } from 'react-router-dom';
-import { loadOneTeam, loadTeams, modifyTeam } from '../../redux/actions/teamManagerActions';
+import { loadTeam, loadTeams, modifyTeam } from '../../redux/actions/teamManagerActions';
 import {
   loadMoves,
   loadLearnsets,
 } from '../../redux/actions/pokedexActions';
+
+import { getUserInfo } from '../../redux/actions/userActions';
+import { useAuth } from '../../context/AuthContext';
 
 import TeamDetailPokemon from './TeamPokemonComponent';
 
@@ -17,8 +20,17 @@ export function TeamDetailComponent({
   actions,
   moves,
   learnsets,
+  user,
 }) {
   const { teamId } = useParams();
+  const { currentUser } = useAuth();
+  const useremail = currentUser.email;
+
+  useEffect(() => {
+    if (!user.email) {
+      actions.getUserInfo(useremail);
+    }
+  }, [user]);
 
   useEffect(() => {
     if (!teams?.length) {
@@ -39,9 +51,7 @@ export function TeamDetailComponent({
   }, [learnsets.length]);
 
   useEffect(() => {
-    actions.loadOneTeam(+teamId,
-      moves,
-      learnsets);
+    actions.loadTeam(+teamId);
   }, [teamId, moves.length, learnsets.length, teams.length]);
 
   return (
@@ -72,16 +82,18 @@ function mapStateToProps(state) {
     team: state.teamsReducer.team,
     moves: state.pokedexReducer.moves,
     learnsets: state.pokedexReducer.learnsets,
+    user: state.userReducer.user,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       loadTeams,
-      loadOneTeam,
+      loadTeam,
       loadMoves,
       loadLearnsets,
       modifyTeam,
+      getUserInfo,
     }, dispatch),
   };
 }

@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { useParams } from 'react-router-dom';
 import { modifyPokemon } from '../../redux/actions/teamCreatorActions';
 
-export function TeamDetailPokemonMovesComponent({ actions, pokemon }) {
+export function TeamMovesComponent({ actions, pokemon }) {
   const { teamId } = useParams();
   const [pokemonMoveset, setPokemonMoveset] = useState([{
     name: pokemon.learnset[0][0].name,
@@ -92,7 +92,7 @@ export function TeamDetailPokemonMovesComponent({ actions, pokemon }) {
   );
 }
 
-TeamDetailPokemonMovesComponent.propTypes = {
+TeamMovesComponent.propTypes = {
   actions: PropTypes.shape({
     modifyPokemon: PropTypes.func,
   }).isRequired,
@@ -133,4 +133,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TeamDetailPokemonMovesComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(TeamMovesComponent);

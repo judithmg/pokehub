@@ -7,16 +7,12 @@ import { bindActionCreators } from 'redux';
 import { pokemonSprites } from '../../constants/images';
 import { deleteOneTeam } from '../../redux/actions/teamManagerActions';
 
-import { useAuth } from '../../context/AuthContext';
-
 export function TeamComponent({ poketeam, actions }) {
-  const { currentUser } = useAuth();
-  console.log(currentUser);
   return (
     <div className="teams__team">
       <div className="teams__sprites">
         {
-        poketeam
+        poketeam.pokemons
         && poketeam.pokemons.map((pokemon) => (
           <img
             src={`${pokemonSprites.httpSprite}${pokemon.num}.png`}

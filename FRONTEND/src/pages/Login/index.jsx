@@ -7,7 +7,7 @@ import { Link, useHistory, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useAuth } from '../../context/AuthContext';
-import { loginUser } from '../../redux/actions/userActions';
+import { getUserInfo } from '../../redux/actions/userActions';
 
 export function LoginComponent({ actions }) {
   const emailRef = useRef();
@@ -25,7 +25,7 @@ export function LoginComponent({ actions }) {
       setError('');
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value)
-        .then((data) => actions.loginUser(data.user.email));
+        .then((data) => actions.getUserInfo(data.user.email));
       history.push('/');
     } catch (err) {
       setError(err.message);
@@ -72,7 +72,7 @@ export function LoginComponent({ actions }) {
 
 LoginComponent.propTypes = {
   actions: PropTypes.shape({
-    loginUser: PropTypes.func.isRequired,
+    getUserInfo: PropTypes.func.isRequired,
   }).isRequired,
 };
 function mapStateToProps(state) {
@@ -84,7 +84,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      loginUser,
+      getUserInfo,
     }, dispatch),
   };
 }

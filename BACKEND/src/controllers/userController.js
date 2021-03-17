@@ -18,10 +18,23 @@ function getAllUsers(req, res) {
   });
 }
 
-async function getOneUser(req, res) {
+async function getOneUserByBody(req, res) {
   const { email } = req.body;
 
   await User.findOne({ email }, (error, user) => {
+    if (error) {
+      res.status(404);
+      res.send(`There was an error finding by req.body ${user}`);
+    } else {
+      res.status(200);
+      res.json(user);
+    }
+  });
+}
+async function getOneUserByParams(req, res) {
+  const { userId } = req.params;
+
+  await User.findById(userId, (error, user) => {
     if (error) {
       res.status(404);
       res.send(`There was an error finding by req.body ${user}`);
@@ -42,9 +55,21 @@ async function deleteUser(req, res) {
   });
 }
 
-async function modifyUser(req, res) {
-  const email = req.params?.userId || req.body.email;
+async function addTeamToUser(req, res) {
+  const { email, team } = req.body;
 
+  await User.findOneAndUpdate({ email }, { $push: { teams: team } },
+    { new: true }, (error, result) => {
+      if (error) {
+        res.send(error);
+      } else {
+        res.json(result);
+      }
+    });
+}
+
+async function modifyUser(req, res) {
+  const { email } = req.body;
   await User.findOneAndUpdate({ email }, req.body, { new: true }, (error, result) => {
     if (error) {
       res.send(error);
@@ -57,7 +82,9 @@ async function modifyUser(req, res) {
 module.exports = {
   createUser,
   getAllUsers,
-  getOneUser,
+  getOneUserByBody,
+  getOneUserByParams,
   deleteUser,
+  addTeamToUser,
   modifyUser,
 };
