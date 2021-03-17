@@ -4,11 +4,11 @@ const teamController = require('../controllers/teamController');
 function TeamRouter() {
   const router = Router();
 
-  router.route('/:teamId').get(teamController.getOneTeam);
-  router.route('/:teamId').put(teamController.modifyTeam);
-  router.route('/:teamId').delete(teamController.deleteTeam);
-  router.route('/').post(teamController.createTeam);
-  router.route('/').get(teamController.getAllTeams);
+  router.route('/teams/:teamId').get(teamController.getOneTeam);
+  router.route('/teams/:teamId').put(teamController.modifyTeam);
+  router.route('/teams/:teamId').delete(teamController.deleteTeam);
+  router.route('/teams').post(teamController.createTeam);
+  router.route('/teams').get(teamController.getAllTeams);
   return router;
 }
 

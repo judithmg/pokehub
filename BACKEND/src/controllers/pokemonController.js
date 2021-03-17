@@ -15,6 +15,20 @@ function getPokemonList(req, res) {
   });
 }
 
+async function getOnePokemon(req, res) {
+  const { pokeId } = req.params;
+
+  await Pokemon.findById(pokeId, (error, poke) => {
+    if (error) {
+      res.status(404);
+      res.send(`There was an error finding by req.body ${poke}`);
+    } else {
+      res.status(200);
+      res.json(poke);
+    }
+  });
+}
+
 function getAbilitiesList(req, res) {
   const query = {};
   Abilities.find(query, (err, abilitiesList) => {
@@ -53,6 +67,7 @@ function getLearnsetList(req, res) {
 
 module.exports = {
   getPokemonList,
+  getOnePokemon,
   getAbilitiesList,
   getMoveList,
   getLearnsetList,

@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extend: true }));
 app.use(express.json());
 
 app.use('/pokehub/pokedex', pokemonRoutes);
-app.use('/pokehub/teams', teamRoutes);
+app.use('/pokehub/users', teamRoutes);
 app.use('/pokehub/users', userRoutes);
 
 app.listen(port, () => {

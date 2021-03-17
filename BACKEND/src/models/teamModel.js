@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const teamSchema = new Schema({
+
   id: {
     type: Number,
   },
