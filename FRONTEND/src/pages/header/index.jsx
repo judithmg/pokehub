@@ -1,13 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../styles/header.scss';
+import { PropTypes } from 'prop-types';
+
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { useAuth } from '../../context/AuthContext';
+import { getUserInfo } from '../../redux/actions/userActions';
+import { loadTeams } from '../../redux/actions/teamManagerActions';
+import { websiteImages } from '../../constants/images';
 import Menu from '../menu';
 import Button from '../shared/ButtonComponent';
 
-import { websiteImages } from '../../constants/images';
-
-export default function HeaderComponent() {
+export function HeaderComponent({ actions, user, teams }) {
   const [menu, setMenu] = useState(false);
+  const currentUser = useAuth();
+  const useremail = currentUser?.currentUser?.email;
+
+  useEffect(() => {
+    if (!user?.email) {
+      actions.getUserInfo(useremail);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (!teams?.length) {
+      actions?.loadTeams();
+    }
+  }, [teams?.length]);
 
   return (
     <>
@@ -36,3 +56,36 @@ export default function HeaderComponent() {
     </>
   );
 }
+
+HeaderComponent.propTypes = {
+  teams: PropTypes.arrayOf(PropTypes.object).isRequired,
+  user: PropTypes.shape({
+    profilePicture: PropTypes.string,
+    _id: PropTypes.string,
+    email: PropTypes.string,
+    creationDate: PropTypes.string,
+    teams: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
+  actions: PropTypes.shape({
+    getUserInfo: PropTypes.func.isRequired,
+    loadTeams: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+function mapStateToProps(state) {
+  return {
+    teams: state.teamsReducer.teams,
+    user: state.userReducer.user,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      loadTeams,
+      getUserInfo,
+    }, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderComponent);

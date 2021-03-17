@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useParams } from 'react-router-dom';
-import { loadTeam, loadTeams, modifyTeam } from '../../redux/actions/teamManagerActions';
+import { loadOneTeam, loadTeams, modifyTeam } from '../../redux/actions/teamManagerActions';
 import {
   loadMoves,
   loadLearnsets,
@@ -51,7 +51,9 @@ export function TeamDetailComponent({
   }, [learnsets.length]);
 
   useEffect(() => {
-    actions.loadTeam(+teamId);
+    if (teams.length && user.email) {
+      actions.loadOneTeam(+teamId, moves, learnsets);
+    }
   }, [teamId, moves.length, learnsets.length, teams.length]);
 
   return (
@@ -89,7 +91,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       loadTeams,
-      loadTeam,
+      loadOneTeam,
       loadMoves,
       loadLearnsets,
       modifyTeam,

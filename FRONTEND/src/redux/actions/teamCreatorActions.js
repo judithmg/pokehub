@@ -9,6 +9,22 @@ export function createTeam() {
   };
 }
 
+export function deleteOneTeam(team) {
+  return async () => {
+    try {
+      const user = 'eloy@eloy.com';
+      const submit = {
+        team,
+        email: user,
+      };
+      const { data } = await axios.patch(`${dbUrls.baseUrl}${dbUrls.teamsUrl}/delete`, submit);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
 export function teamActionsError(error) {
   return {
     type: actionTypes.TEAM_ERROR,
@@ -40,7 +56,6 @@ export function submitTeam(team, user) {
         email: user.email,
       };
       const { data } = await axios.put(`${dbUrls.baseUrl}${dbUrls.teamsUrl}`, submit);
-      console.log(data);
       dispatch(submitTeamSuccess(data));
     } catch (error) {
       dispatch(teamActionsError(error));

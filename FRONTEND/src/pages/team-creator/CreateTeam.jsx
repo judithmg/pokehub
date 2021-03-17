@@ -37,12 +37,6 @@ export function CreateTeamComponent({
     }
   }, [teams?.length]);
 
-  useEffect(() => {
-    if (!pokedex.length) {
-      actions.loadPokedex();
-    }
-  }, [pokedex.length]);
-
   return (
     <>
       {teams

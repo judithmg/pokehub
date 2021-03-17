@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { pokemonSprites } from '../../constants/images';
-import { deleteOneTeam } from '../../redux/actions/teamManagerActions';
+import { deleteOneTeam } from '../../redux/actions/teamCreatorActions';
 
 export function TeamComponent({ poketeam, actions }) {
   return (
@@ -29,7 +29,7 @@ export function TeamComponent({ poketeam, actions }) {
             {`# ${poketeam.id}`}
           </Link>
         </span>
-        <button type="button" onClick={() => actions.deleteOneTeam(poketeam.id)}>delete</button>
+        <button type="button" onClick={() => actions.deleteOneTeam(poketeam)}>delete</button>
       </>
       )}
     </div>

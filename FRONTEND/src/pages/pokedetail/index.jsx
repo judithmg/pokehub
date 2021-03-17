@@ -14,13 +14,6 @@ import MainInfo from './MainInfoComponent';
 import VisualInfoComponent from './VisualInfoComponent';
 
 import {
-  loadPokedex,
-  loadMoves,
-  loadLearnsets,
-  loadAbilities,
-} from '../../redux/actions/pokedexActions';
-
-import {
   loadPokemonLearnset,
   loadPokemonDetail,
   loadPokemonAbilities,
@@ -47,28 +40,6 @@ export function PokeDetailComponent({
   // learnsetsLoadingBool,
 }) {
   const { pokeId } = useParams();
-
-  useEffect(() => {
-    if (!pokedex.length) {
-      actions.loadPokedex();
-    }
-  }, [pokedex.length]);
-
-  useEffect(() => {
-    if (!abilities.length) {
-      actions.loadAbilities();
-    }
-  }, [abilities.length]);
-  useEffect(() => {
-    if (!moves.length) {
-      actions.loadMoves();
-    }
-  }, [moves.length]);
-  useEffect(() => {
-    if (!learnsets.length) {
-      actions.loadLearnsets();
-    }
-  }, [learnsets.length]);
 
   useEffect(() => {
     const id = pokeId?.toLowerCase();
@@ -147,11 +118,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       loadPokemonDetail,
-      loadPokedex,
       loadPokemonAbilities,
-      loadMoves,
-      loadLearnsets,
-      loadAbilities,
       loadPokemonLearnset,
       // abilitiesLoading,
       // pokedexLoading,

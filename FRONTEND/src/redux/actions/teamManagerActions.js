@@ -29,12 +29,6 @@ export function loadTeams(user) {
   };
 }
 
-export function createTeam(team) {
-  return {
-    type: actionTypes.CREATE_TEAM,
-    team,
-  };
-}
 export function deleteOneTeam(teamId) {
   return {
     type: actionTypes.DELETE_ONE_TEAM,

@@ -6,9 +6,6 @@ import ReactPaginate from 'react-paginate';
 
 import {
   loadPokedex,
-  loadMoves,
-  loadLearnsets,
-  loadAbilities,
   loadPokemonsShown,
 } from '../../redux/actions/pokedexActions';
 import PokemonList from './PokemonList';
@@ -20,9 +17,6 @@ export function PokedexComponent({
   pokemonsShown,
   actions,
   pokedex,
-  moves,
-  abilities,
-  learnsets,
 }) {
   const [pagination, setPagination] = useState(1);
   useEffect(() => {
@@ -31,22 +25,6 @@ export function PokedexComponent({
       actions.loadPokemonsShown(page);
     }
   }, [pokedex?.length]);
-
-  useEffect(() => {
-    if (!abilities?.length) {
-      actions.loadAbilities();
-    }
-  }, [abilities?.length]);
-  useEffect(() => {
-    if (!moves.length) {
-      actions.loadMoves();
-    }
-  }, [moves?.length]);
-  useEffect(() => {
-    if (!learnsets?.length) {
-      actions.loadLearnsets();
-    }
-  }, [learnsets?.length]);
 
   useEffect(() => {
     actions.loadPokemonsShown(pagination);
@@ -101,10 +79,6 @@ PokedexComponent.propTypes = {
   pokedex: PropTypes.arrayOf(PropTypes.object).isRequired,
   pokemonsShown: PropTypes.arrayOf(PropTypes.object).isRequired,
 
-  abilities: PropTypes.arrayOf(PropTypes.object).isRequired,
-  moves: PropTypes.arrayOf(PropTypes.object).isRequired,
-  learnsets: PropTypes.arrayOf(PropTypes.object).isRequired,
-
   page: PropTypes.number.isRequired,
   actions: PropTypes.shape({
     loadPokedex: PropTypes.func.isRequired,
@@ -132,9 +106,6 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       loadPokedex,
-      loadMoves,
-      loadLearnsets,
-      loadAbilities,
       loadPokemonsShown,
     }, dispatch),
   };

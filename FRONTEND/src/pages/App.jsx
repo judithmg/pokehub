@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Route, Switch, BrowserRouter as Router,
 } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { PropTypes } from 'prop-types';
+
+import { connect } from 'react-redux';
+
+import { bindActionCreators } from 'redux';
 import { AuthProvider } from '../context/AuthContext';
+
+import {
+  loadPokedex,
+  loadMoves,
+  loadLearnsets,
+  loadAbilities,
+  loadPokemonsShown,
+} from '../redux/actions/pokedexActions';
+
 import PrivateRoute from './PrivateRoute';
-import store from '../redux/store/configureStore';
 
 import Dashboard from './dashboard';
 import Footer from './footer';
@@ -25,35 +37,98 @@ import '../styles/App.scss';
 
 import pruebas from '../bin/pruebas';
 
-function App() {
+function App({
+  actions,
+  pokedex,
+  moves,
+  abilities,
+  learnsets,
+}) {
+  useEffect(() => {
+    if (!pokedex?.length) {
+      actions.loadPokedex();
+    }
+  }, [pokedex?.length]);
+
+  useEffect(() => {
+    if (!abilities?.length) {
+      actions.loadAbilities();
+    }
+  }, [abilities?.length]);
+  useEffect(() => {
+    if (!moves.length) {
+      actions.loadMoves();
+    }
+  }, [moves?.length]);
+  useEffect(() => {
+    if (!learnsets?.length) {
+      actions.loadLearnsets();
+    }
+  }, [learnsets?.length]);
   return (
     <AuthProvider>
-      <Provider store={store()}>
-        <Router>
-          <Header />
-          <main>
-            <MainComponent />
-            <Switch>
-              <Route path="/login/forgot-password" component={ForgotPassword} />
-              <Route path="/login" component={Login} />
-              <Route path="/pokemon/:pokeId" component={PokeDetail} />
-              <Route path="/pokedex" component={Pokedex} />
-              <Route path="/pruebas" component={pruebas} />
-              <Route path="/signup" component={SignUp} />
-              <PrivateRoute path="/profile/update" component={UpdateUserProfile} />
-              <PrivateRoute path="/profile" component={Profile} />
-              <PrivateRoute path="/team-creator" component={TeamCreator} />
-              <PrivateRoute path="/team-detail/:teamId" component={TeamDetail} />
-              <PrivateRoute path="/teams" component={Teams} />
-              <Route exact path="/" component={Dashboard} />
-            </Switch>
-          </main>
-          <Footer />
-        </Router>
-      </Provider>
+      <Router>
+        <Header />
+        <main>
+          <MainComponent />
+          <Switch>
+            <Route path="/login/forgot-password" component={ForgotPassword} />
+            <Route path="/login" component={Login} />
+            <Route path="/pokemon/:pokeId" component={PokeDetail} />
+            <Route path="/pokedex" component={Pokedex} />
+            <Route path="/pruebas" component={pruebas} />
+            <Route path="/signup" component={SignUp} />
+            <PrivateRoute path="/profile/update" component={UpdateUserProfile} />
+            <PrivateRoute path="/profile" component={Profile} />
+            <PrivateRoute path="/team-creator" component={TeamCreator} />
+            <PrivateRoute path="/team-detail/:teamId" component={TeamDetail} />
+            <PrivateRoute path="/teams" component={Teams} />
+            <Route exact path="/" component={Dashboard} />
+          </Switch>
+        </main>
+        <Footer />
+      </Router>
     </AuthProvider>
 
   );
 }
 
-export default App;
+App.propTypes = {
+  pokedex: PropTypes.arrayOf(PropTypes.object).isRequired,
+
+  abilities: PropTypes.arrayOf(PropTypes.object).isRequired,
+  moves: PropTypes.arrayOf(PropTypes.object).isRequired,
+  learnsets: PropTypes.arrayOf(PropTypes.object).isRequired,
+  actions: PropTypes.shape({
+    loadPokedex: PropTypes.func.isRequired,
+    loadMoves: PropTypes.func.isRequired,
+    loadLearnsets: PropTypes.func.isRequired,
+    loadAbilities: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+function mapStateToProps(state) {
+  return {
+    pokedex: state.pokedexReducer.pokedex,
+    pokemonsShown: state.pokedexReducer.pokemonsShown,
+
+    moves: state.pokedexReducer.moves,
+    abilities: state.pokedexReducer.abilities,
+    learnset: state.pokedexReducer.learnset,
+    page: state.pokedexReducer.page,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      loadPokedex,
+      loadMoves,
+      loadLearnsets,
+      loadAbilities,
+      loadPokemonsShown,
+    }, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
