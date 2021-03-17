@@ -17,7 +17,7 @@ export function CreateTeamComponent({
   teams,
   newTeam,
   pokedex,
-
+  user,
 }) {
   useEffect(() => {
     if (!teams?.length) {
@@ -47,7 +47,8 @@ export function CreateTeamComponent({
                 )
             ))}
 
-            {newTeam.id && <button type="button" onClick={() => actions.submitTeam()}>add team</button>}
+            {newTeam.id && <button type="button" onClick={() => actions.submitTeam(newTeam)}>add team</button>}
+            {console.log(user)}
           </div>
           )}
       <div className="team-creator__pokelist">
@@ -72,7 +73,7 @@ function mapStateToProps(state) {
     teams: state.teamsReducer.teams,
     newTeam: state.teamsReducer.newTeam,
     pokedex: state.pokedexReducer.pokedex,
-
+    user: state.userReducer.user,
   };
 }
 function mapDispatchToProps(dispatch) {

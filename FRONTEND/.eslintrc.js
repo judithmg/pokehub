@@ -21,6 +21,7 @@ module.exports = {
   rules: {
     'linebreak-style': 0,
     'global-require': 0,
+    'no-underscore-dangle': [0],
     'eslint linebreak-style': [0, 'error', 'windows'],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react/jsx-props-no-spreading': 0,

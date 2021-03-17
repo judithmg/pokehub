@@ -1,12 +1,16 @@
 /* eslint-disable consistent-return */
+import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
 import {
   Form, Button, Card, Alert,
 } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { useAuth } from '../../context/AuthContext';
+import { modifyUser } from '../../redux/actions/userActions';
 
-export default function UpdateProfile() {
+export function UpdateProfile({ actions }) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -33,7 +37,8 @@ export default function UpdateProfile() {
     }
 
     Promise.all(promises)
-      .then(() => {
+      .then((data) => {
+        actions.modifyUser(data);
         history.push('/');
       })
       .catch(() => {
@@ -88,3 +93,31 @@ export default function UpdateProfile() {
     </>
   );
 }
+
+UpdateProfile.propTypes = {
+  actions: PropTypes.shape({
+    modifyUser: PropTypes.func.isRequired,
+  }).isRequired,
+  user: PropTypes.shape({
+    profilePicture: PropTypes.string,
+    _id: PropTypes.string,
+    email: PropTypes.string,
+    creationDate: PropTypes.string,
+    teams: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
+};
+
+function mapStateToProps(state) {
+  return {
+    user: state.userReducer.user,
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      modifyUser,
+    }, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateProfile);

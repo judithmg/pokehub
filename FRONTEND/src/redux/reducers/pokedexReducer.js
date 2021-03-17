@@ -12,7 +12,7 @@ export default function pokedexReducer(state = initialState.pokedexReducer, acti
   switch (action.type) {
     case actionTypes.LOAD_POKEDEX:
       pokedex = action.data.sort((a, b) => a.num - b.num);
-      return { ...state, pokedex, pokedexLoadingBool: false };
+      return { ...state, pokedex };
 
     case actionTypes.LOAD_LEARNSETS:
       return { ...state, learnsets: action.data, learnsetsLoadingBool: false };

@@ -19,7 +19,7 @@ import SignUp from './SignUp';
 import Teams from './teams';
 import TeamDetail from './team-detail'; import MainComponent from './main';
 import TeamCreator from './team-creator';
-import UpdateProfile from './Profile/UpdateProfile';
+import UpdateUserProfile from './Profile/UpdateProfile';
 
 import '../styles/App.scss';
 
@@ -40,7 +40,7 @@ function App() {
               <Route path="/pokedex" component={Pokedex} />
               <Route path="/pruebas" component={pruebas} />
               <Route path="/signup" component={SignUp} />
-              <PrivateRoute path="/profile/update" component={UpdateProfile} />
+              <PrivateRoute path="/profile/update" component={UpdateUserProfile} />
               <PrivateRoute path="/profile" component={Profile} />
               <PrivateRoute path="/team-builder" component={TeamCreator} />
               <PrivateRoute path="/team-detail/:teamId" component={TeamDetail} />
