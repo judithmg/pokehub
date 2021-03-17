@@ -34,18 +34,18 @@ function App() {
           <main>
             <MainComponent />
             <Switch>
-              <Route path="/login" component={Login} />
               <Route path="/login/forgot-password" component={ForgotPassword} />
+              <Route path="/login" component={Login} />
               <Route path="/pokemon/:pokeId" component={PokeDetail} />
               <Route path="/pokedex" component={Pokedex} />
               <Route path="/pruebas" component={pruebas} />
               <Route path="/signup" component={SignUp} />
-              <Route exact path="/" component={Dashboard} />
+              <PrivateRoute path="/profile/update" component={UpdateProfile} />
               <PrivateRoute path="/profile" component={Profile} />
-              <PrivateRoute path="/team-creator" component={TeamCreator} />
+              <PrivateRoute path="/team-builder" component={TeamCreator} />
               <PrivateRoute path="/team-detail/:teamId" component={TeamDetail} />
               <PrivateRoute path="/teams" component={Teams} />
-              <PrivateRoute path="/profile/update" component={UpdateProfile} />
+              <Route exact path="/" component={Dashboard} />
             </Switch>
           </main>
           <Footer />

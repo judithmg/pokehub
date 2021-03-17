@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import { Card, Button, Alert } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Card, Button, Alert } from 'react-bootstrap';
+import { logoutUser } from '../../redux/actions/userActions';
 import { useAuth } from '../../context/AuthContext';
 
-export default function ProfileComponent() {
+export function ProfileComponent({ actions }) {
   const [error, setError] = useState('');
   const { currentUser, logout } = useAuth();
   const history = useHistory();
@@ -12,7 +17,8 @@ export default function ProfileComponent() {
     setError('');
 
     try {
-      await logout();
+      await logout()
+        .then(() => actions.logoutUser());
       history.push('/login');
     } catch (err) {
       setError(err.message);
@@ -41,3 +47,25 @@ export default function ProfileComponent() {
     </>
   );
 }
+
+ProfileComponent.propTypes = {
+  actions: PropTypes.shape({
+    logoutUser: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+function mapStateToProps(state) {
+  return {
+    user: state.userReducer.user,
+
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      logoutUser,
+    }, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileComponent);

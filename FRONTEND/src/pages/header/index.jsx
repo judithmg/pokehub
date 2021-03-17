@@ -21,6 +21,8 @@ export default function HeaderComponent() {
         </Link>
         <div className="header--right">
           <Link to="/login"><Button text="Login" classes="header__login" /></Link>
+          <Link to="/profile"><Button text="Profile" classes="header__login" /></Link>
+          <Link to="/"><Button text="logout" classes="header__login" /></Link>
           <button type="button" className="header__button-menu" onClick={() => setMenu(!menu)}>
             <img
               src={websiteImages.headerPokeball}
