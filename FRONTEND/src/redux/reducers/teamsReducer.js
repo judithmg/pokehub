@@ -17,7 +17,6 @@ export default function teamsReducer(state = initialState.teamsReducer, action) 
 
   switch (action.type) {
     case actionTypes.LOAD_TEAMS:
-
       return { ...state, teams: action.data };
 
     case actionTypes.CREATE_TEAM:
@@ -45,25 +44,34 @@ export default function teamsReducer(state = initialState.teamsReducer, action) 
       // find team from url params
       userteam = state.teams?.find((team) => +team.id === +action.teamId);
 
+      /* once the team is found, go through all pokemons on the team, and for each find its learnset
+      then for each move on its learnsets, get the full info from the movelist */
       modifiedTeam = userteam?.pokemons?.map((pokeFromTeam) => {
         pokemonLearnset = action.learnsets
           ?.find((pokeLearnset) => pokeLearnset?.name?.toLowerCase()
         === pokeFromTeam?.name?.toLowerCase());
+
         filteredMoves = pokemonLearnset?.learnset
           ?.map((pokemove) => action.moves
             .filter((move) => move.id === pokemove));
+
         return {
           ...pokeFromTeam,
           learnset: filteredMoves,
         };
       });
+
       return { ...state, team: { id: userteam.id, pokemons: modifiedTeam } };
 
     case actionTypes.TEAM_LOADING:
       return { ...state, teamLoading: true };
 
     case actionTypes.ADD_POKEMON_TO_TEAM:
+      /* find the num of the pokemon added on the pokedex list, then get its data
+      remove that pokemon from the newly created team, and add the new one with its full info
+      then sort by id (order of adding) */
       [pokeFromPokedex] = action.pokedex.filter((poke) => poke.num === +action.num);
+
       index = state.newTeam.pokemons.findIndex((poke) => !poke.num);
       if (index === -1) index = 0;
       pokemon = {
@@ -71,7 +79,9 @@ export default function teamsReducer(state = initialState.teamsReducer, action) 
         id: state.newTeam.pokemons[index].id,
         num: action.num,
       };
+
       pokemons = state.newTeam.pokemons.filter((poke) => poke.id !== pokemon.id);
+
       pokemons = [...pokemons, pokemon];
       pokemons.sort((a, b) => a.id - b.id);
       newTeam = { ...state.newTeam, pokemons };

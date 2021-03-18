@@ -2,33 +2,21 @@ import axios from 'axios';
 import actionTypes from './actionTypes';
 import dbUrls from '../../constants/dbUrls';
 
-export function createTeam() {
-  return {
-    type: actionTypes.CREATE_TEAM,
-
-  };
-}
-
-export function deleteOneTeam(team) {
-  return async () => {
-    try {
-      const user = 'eloy@eloy.com';
-      const submit = {
-        team,
-        email: user,
-      };
-      const { data } = await axios.patch(`${dbUrls.baseUrl}${dbUrls.teamsUrl}/delete`, submit);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
+// HANDLE ERROR
 
 export function teamActionsError(error) {
   return {
     type: actionTypes.TEAM_ERROR,
     error,
+  };
+}
+
+// CREATE
+
+export function createTeam() {
+  return {
+    type: actionTypes.CREATE_TEAM,
+
   };
 }
 
@@ -62,6 +50,33 @@ export function submitTeam(team, user) {
     }
   };
 }
+
+// DELETE
+
+function deleteOneTeamSuccess(data) {
+  return {
+    type: actionTypes.DELETE_ONE_TEAM,
+    data,
+  };
+}
+
+export function deleteOneTeam(team) {
+  return async (dispatch) => {
+    try {
+      const user = 'eloy@eloy.com';
+      const submit = {
+        team,
+        email: user,
+      };
+      const { data } = await axios.patch(`${dbUrls.baseUrl}${dbUrls.teamsUrl}/delete`, submit);
+      dispatch(deleteOneTeamSuccess(data));
+    } catch (error) {
+      dispatch(teamActionsError(error));
+    }
+  };
+}
+
+// MODIFY ONE POKEMON
 
 export function modifyPokemon(teamId,
   pokemon,

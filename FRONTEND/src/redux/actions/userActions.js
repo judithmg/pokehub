@@ -16,6 +16,7 @@ function userActionsError(error) {
   };
 }
 
+// this function is used both to login the user and to fetch user data if there is none on the state
 export function getUserInfo(email) {
   return async (dispatch) => {
     try {
