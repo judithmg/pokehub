@@ -1,40 +1,19 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { useParams } from 'react-router-dom';
 import { modifyOnePokemon } from '../../redux/actions/teamCreatorActions';
 
 export function TeamMovesComponent({
   actions, pokemon, team, user,
 }) {
-  const { teamId } = useParams();
-
   const [move0, setMove0] = useState(pokemon?.moveset[0]?.name || '');
   const [move1, setMove1] = useState(pokemon?.moveset[1]?.name || '');
   const [move2, setMove2] = useState(pokemon?.moveset[2]?.name || '');
   const [move3, setMove3] = useState(pokemon?.moveset[3]?.name || '');
 
-  const [pokeMoveset, setPokeMoveset] = useState(pokemon?.moveset || []);
-
   function handleSubmit() {
-    setPokeMoveset([
-      {
-        name: move0,
-      },
-      {
-        name: move1,
-      },
-      {
-        name: move2,
-      },
-      {
-        name: move3,
-      },
-    ]);
-
     actions.modifyOnePokemon(team,
       user,
       [
@@ -53,21 +32,6 @@ export function TeamMovesComponent({
       ],
       pokemon);
   }
-
-  const moveset = [
-    {
-      name: move0,
-    },
-    {
-      name: move1,
-    },
-    {
-      name: move2,
-    },
-    {
-      name: move3,
-    },
-  ];
 
   return (
     <>
@@ -122,9 +86,6 @@ export function TeamMovesComponent({
         <button
           type="button"
           onClick={() => handleSubmit()}
-            // actions.modifyOnePokemon(teamId,
-            // pokemon,
-            // pokemonMoveset)
         >
           SAVE
         </button>

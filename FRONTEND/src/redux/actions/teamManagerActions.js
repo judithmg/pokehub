@@ -1,13 +1,3 @@
-// import actionTypes from './actionTypes';
-// import teamData from '../../pages/teams/teamData';
-
-// export function loadTeams() {
-//   return {
-//     type: actionTypes.LOAD_TEAMS,
-//     teamData,
-//   };
-// }
-
 import axios from 'axios';
 import actionTypes from './actionTypes';
 import dbUrls from '../../constants/dbUrls';
@@ -18,6 +8,15 @@ const {
   movesUrl,
   learnsetsUrl,
 } = dbUrls;
+
+// HANDLE ERROR
+
+export function teamActionsError(error) {
+  return {
+    type: actionTypes.TEAM_ERROR,
+    error,
+  };
+}
 
 export function loadTeams(user) {
   return async (dispatch) => {
@@ -76,7 +75,7 @@ export function loadTeam(teamId) {
 
       dispatch(loadTeamSuccess(teamId, moves.data, learnsets.data));
     } catch (error) {
-      console.log(error);
+      teamActionsError(error);
     }
   };
 }

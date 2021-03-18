@@ -29,7 +29,7 @@ export function TeamCreatorComponent({
   const history = useHistory();
 
   useEffect(() => {
-    if (!user.email) {
+    if (!user?.email) {
       actions.getUserInfo(useremail);
     }
   }, [user?.length]);

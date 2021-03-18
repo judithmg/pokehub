@@ -18,6 +18,7 @@ import { signupUser } from '../../redux/actions/userActions';
 export function SignupComponent({ actions }) {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const nickRef = useRef();
   const passwordConfirmRef = useRef();
   const { signup } = useAuth();
   const [error, setError] = useState('');
@@ -36,10 +37,15 @@ export function SignupComponent({ actions }) {
       setError('');
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value)
-        .then((user) => actions.signupUser(user.user.email));
+        .then((result) => {
+          actions.signupUser(result.user.email);
+          result.user.updateProfile({
+            displayName: nickRef.current.value,
+          });
+        });
       history.push('/');
-    } catch (err) {
-      setError(err);
+    } catch {
+      setError('There is already a user with this username or email. Try again.');
     }
 
     setLoading(false);
@@ -54,6 +60,10 @@ export function SignupComponent({ actions }) {
             <h2 className="text-center mb-4">Sign Up</h2>
             {error && <Alert variant="danger">{error}</Alert>}
             <Form onSubmit={handleSubmit}>
+              <Form.Group id="nickname">
+                <Form.Label>Nickname</Form.Label>
+                <Form.Control type="text" ref={nickRef} required />
+              </Form.Group>
               <Form.Group id="email">
                 <Form.Label>Email</Form.Label>
                 <Form.Control type="email" ref={emailRef} required />

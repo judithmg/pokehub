@@ -19,9 +19,9 @@ export function ProfileComponent({ actions }) {
     try {
       await logout()
         .then(() => actions.logoutUser());
-      history.push('/login');
+      history.push('/');
     } catch (err) {
-      setError(err.message);
+      setError('Could not logout');
     }
   }
 
@@ -30,6 +30,7 @@ export function ProfileComponent({ actions }) {
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Profile</h2>
+          <img src={`https://avatars.dicebear.com/api/bottts/${currentUser.email}.svg`} alt="bot" />
           {error && <Alert variant="danger">{error}</Alert>}
           <strong>Email:</strong>
           {' '}

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import '../../styles/header.scss';
 import { PropTypes } from 'prop-types';
 
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useAuth } from '../../context/AuthContext';
-import { getUserInfo } from '../../redux/actions/userActions';
+import { getUserInfo, logoutUser } from '../../redux/actions/userActions';
 import { websiteImages } from '../../constants/images';
 import Menu from '../menu';
 import Button from '../shared/ButtonComponent';
@@ -14,10 +14,23 @@ import Button from '../shared/ButtonComponent';
 export function HeaderComponent({ actions, user }) {
   const [menu, setMenu] = useState(false);
   const currentUser = useAuth();
-  const useremail = currentUser?.currentUser?.email;
+  const [setError] = useState('');
+  const { logout } = useAuth();
+  const history = useHistory();
+
+  async function handleLogout() {
+    try {
+      await logout()
+        .then(() => actions.logoutUser());
+      history.push('/');
+    } catch (err) {
+      setError('Could not logout');
+    }
+  }
 
   useEffect(() => {
     if (!user?.email) {
+      const useremail = currentUser?.currentUser?.email;
       actions.getUserInfo(useremail);
     }
   }, [user]);
@@ -33,9 +46,13 @@ export function HeaderComponent({ actions, user }) {
           />
         </Link>
         <div className="header--right">
-          <Link to="/login"><Button text="Login" classes="header__login" /></Link>
-          <Link to="/profile"><Button text="Profile" classes="header__login" /></Link>
-          <Link to="/"><Button text="logout" classes="header__login" /></Link>
+          {user?.email ? (
+            <>
+              <Link to="/profile"><Button text="Profile" classes="header__login" /></Link>
+              <Link to="/" onClick={() => handleLogout()}><Button text="Logout" classes="header__login" /></Link>
+            </>
+          ) : (<Link to="/login"><Button text="Login" classes="header__login" /></Link>)}
+
           <button type="button" className="header__button-menu" onClick={() => setMenu(!menu)}>
             <img
               src={websiteImages.headerPokeball}
@@ -60,7 +77,7 @@ HeaderComponent.propTypes = {
   }).isRequired,
   actions: PropTypes.shape({
     getUserInfo: PropTypes.func.isRequired,
-    loadTeams: PropTypes.func.isRequired,
+    logoutUser: PropTypes.func.isRequired,
   }).isRequired,
 };
 
@@ -74,6 +91,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       getUserInfo,
+      logoutUser,
     }, dispatch),
   };
 }
