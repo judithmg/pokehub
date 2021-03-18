@@ -1,81 +1,43 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useParams } from 'react-router-dom';
-import { modifyOnePokemon } from '../../redux/actions/teamCreatorActions';
+import { modifyPokemon } from '../../redux/actions/teamCreatorActions';
 
-export function TeamMovesComponent({
-  actions, pokemon, team, user,
-}) {
+export function TeamMovesComponent({ actions, pokemon }) {
   const { teamId } = useParams();
+  const [pokemonMoveset, setPokemonMoveset] = useState([{
+    name: pokemon.learnset[0][0].name,
+    moveId: `${pokemon.name.toLowerCase()}-move-1`,
+  }, {
+    name: pokemon.learnset[0][0].name,
+    moveId: `${pokemon.name.toLowerCase()}-move-2`,
+  }, {
+    name: pokemon.learnset[0][0].name,
+    moveId: `${pokemon.name.toLowerCase()}-move-3`,
+  }, {
+    name: pokemon.learnset[0][0].name,
+    moveId: `${pokemon.name.toLowerCase()}-move-4`,
+  }]);
 
-  const [move0, setMove0] = useState(pokemon?.moveset[0]?.name || '');
-  const [move1, setMove1] = useState(pokemon?.moveset[1]?.name || '');
-  const [move2, setMove2] = useState(pokemon?.moveset[2]?.name || '');
-  const [move3, setMove3] = useState(pokemon?.moveset[3]?.name || '');
-
-  const [pokeMoveset, setPokeMoveset] = useState(pokemon?.moveset || []);
-
-  function handleSubmit() {
-    setPokeMoveset([
-      {
-        name: move0,
-      },
-      {
-        name: move1,
-      },
-      {
-        name: move2,
-      },
-      {
-        name: move3,
-      },
-    ]);
-
-    actions.modifyOnePokemon(team,
-      user,
-      [
-        {
-          name: move0,
-        },
-        {
-          name: move1,
-        },
-        {
-          name: move2,
-        },
-        {
-          name: move3,
-        },
-      ],
-      pokemon);
+  function handleChange(id, name) {
+    const updatedArray = pokemonMoveset.filter((move) => move.moveId !== id);
+    updatedArray.push({
+      name,
+      moveId: id,
+    });
+    setPokemonMoveset(updatedArray);
   }
-
-  const moveset = [
-    {
-      name: move0,
-    },
-    {
-      name: move1,
-    },
-    {
-      name: move2,
-    },
-    {
-      name: move3,
-    },
-  ];
 
   return (
     <>
       <div className="pokemon__moves pokemon__info">
         <h2>Moves</h2>
         <select
-          onChange={(e) => setMove0(e.target.value)}
-          defaultValue=""
+          onChange={(e) => handleChange(e.target.id, e.target.value)}
+          id={`${pokemon.name.toLowerCase()}-move-1`}
+          value={}
         >
           {pokemon.learnset && pokemon.learnset.map((move) => (
             <option>
@@ -85,34 +47,31 @@ export function TeamMovesComponent({
         </select>
         <select
         // value={....moveset...}
-          onChange={(e) => setMove1(e.target.value)}
-          defaultValue=""
+          onChange={(e) => handleChange(e.target.id, e.target.value)}
+          id={`${pokemon.name.toLowerCase()}-move-2`}
         >
           {pokemon.learnset && pokemon.learnset.map((move) => (
-            <option>
-              {' '}
+            <option id={`${pokemon.name.toLowerCase()}-move-1`}>
               {move[0]?.name}
             </option>
           ))}
         </select>
         <select
-          onChange={(e) => setMove2(e.target.value)}
-          defaultValue=""
+          onChange={(e) => handleChange(e.target.id, e.target.value)}
+          id={`${pokemon.name.toLowerCase()}-move-3`}
         >
           {pokemon.learnset && pokemon.learnset.map((move) => (
-            <option>
-              {' '}
+            <option id={`${pokemon.name.toLowerCase()}-move-1`}>
               {move[0]?.name}
             </option>
           ))}
         </select>
         <select
-          onChange={(e) => setMove3(e.target.value)}
-          defaultValue=""
+          onChange={(e) => handleChange(e.target.id, e.target.value)}
+          id={`${pokemon.name.toLowerCase()}-move-4`}
         >
           {pokemon.learnset && pokemon.learnset.map((move) => (
-            <option>
-              {' '}
+            <option id={`${pokemon.name.toLowerCase()}-move-1`}>
               {move[0]?.name}
             </option>
           ))}
@@ -121,10 +80,9 @@ export function TeamMovesComponent({
       <div>
         <button
           type="button"
-          onClick={() => handleSubmit()}
-            // actions.modifyOnePokemon(teamId,
-            // pokemon,
-            // pokemonMoveset)
+          onClick={() => actions.modifyPokemon(teamId,
+            pokemon,
+            pokemonMoveset)}
         >
           SAVE
         </button>
@@ -144,7 +102,7 @@ export function TeamMovesComponent({
 
 TeamMovesComponent.propTypes = {
   actions: PropTypes.shape({
-    modifyOnePokemon: PropTypes.func,
+    modifyPokemon: PropTypes.func,
   }).isRequired,
   pokemon: PropTypes.shape({
     name: PropTypes.string,
@@ -173,13 +131,12 @@ function mapStateToProps(state) {
   return {
     teams: state.teamsReducer.teams,
     team: state.teamsReducer.team,
-    user: state.userReducer.user,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      modifyOnePokemon,
+      modifyPokemon,
     }, dispatch),
   };
 }

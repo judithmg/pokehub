@@ -1,14 +1,13 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { getUserInfo } from '../../redux/actions/userActions';
 
 import { createTeam, submitTeam } from '../../redux/actions/teamCreatorActions';
-import { loadTeams } from '../../redux/actions/teamManagerActions';
 
 import { useAuth } from '../../context/AuthContext';
 
@@ -26,6 +25,8 @@ export function TeamCreatorComponent({
 }) {
   const { currentUser } = useAuth();
   const useremail = currentUser.email;
+  const [teamName, setTeamName] = useState(newTeam.id);
+  const history = useHistory();
 
   useEffect(() => {
     if (!user.email) {
@@ -33,11 +34,10 @@ export function TeamCreatorComponent({
     }
   }, [user?.length]);
 
-  useEffect(() => {
-    if (!teams?.length) {
-      actions?.loadTeams(user._id);
-    }
-  }, [teams?.length]);
+  function handleSubmit() {
+    actions.submitTeam(newTeam, user, teamName);
+    history.push('/teams');
+  }
 
   return (
     <section className="team-creator__container">
@@ -55,7 +55,12 @@ export function TeamCreatorComponent({
                 )
             ))}
 
-            {newTeam.id && <button type="button" onClick={() => actions.submitTeam(newTeam, user)}>add team</button>}
+            {newTeam.id && (
+              <form onSubmit={() => handleSubmit()}>
+                <input type="text" placeholder="team name" onChange={(event) => setTeamName(event.target.value)} required />
+                <input type="submit" value="add team" />
+              </form>
+            )}
           </div>
           )}
       <PokemonListTeam />
@@ -74,7 +79,6 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       createTeam,
-      loadTeams,
       submitTeam,
       getUserInfo,
     }, dispatch),

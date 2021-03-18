@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useParams } from 'react-router-dom';
-import { loadOneTeam, loadTeams, modifyTeam } from '../../redux/actions/teamManagerActions';
+import { loadOneTeam, modifyTeam } from '../../redux/actions/teamManagerActions';
 import {
   loadMoves,
   loadLearnsets,
@@ -33,12 +33,6 @@ export function TeamDetailComponent({
   }, [user]);
 
   useEffect(() => {
-    if (!teams?.length) {
-      actions.loadTeams(user._id);
-    }
-  }, [teams?.length]);
-
-  useEffect(() => {
     if (!moves.length) {
       actions.loadMoves();
     }
@@ -52,7 +46,7 @@ export function TeamDetailComponent({
 
   useEffect(() => {
     if (teams.length && user.email) {
-      actions.loadOneTeam(+teamId, moves, learnsets);
+      actions.loadOneTeam(teamId, moves, learnsets);
     }
   }, [teamId, moves.length, learnsets.length, teams.length]);
 
@@ -90,7 +84,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      loadTeams,
       loadOneTeam,
       loadMoves,
       loadLearnsets,

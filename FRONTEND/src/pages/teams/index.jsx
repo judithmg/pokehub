@@ -30,7 +30,7 @@ export function TeamManagerComponent({ teams, actions, user }) {
       {
         teams && (
           <section className="teams__container">
-            {teams.map((team) => <Team poketeam={team} key={Math.random()} />)}
+            {teams.map((team) => <Team poketeam={team} user={user.email} key={Math.random()} />)}
           </section>
         )
     }

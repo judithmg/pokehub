@@ -7,12 +7,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useAuth } from '../../context/AuthContext';
 import { getUserInfo } from '../../redux/actions/userActions';
-import { loadTeams } from '../../redux/actions/teamManagerActions';
 import { websiteImages } from '../../constants/images';
 import Menu from '../menu';
 import Button from '../shared/ButtonComponent';
 
-export function HeaderComponent({ actions, user, teams }) {
+export function HeaderComponent({ actions, user }) {
   const [menu, setMenu] = useState(false);
   const currentUser = useAuth();
   const useremail = currentUser?.currentUser?.email;
@@ -22,12 +21,6 @@ export function HeaderComponent({ actions, user, teams }) {
       actions.getUserInfo(useremail);
     }
   }, [user]);
-
-  useEffect(() => {
-    if (!teams?.length) {
-      actions?.loadTeams(user._id);
-    }
-  }, [teams?.length]);
 
   return (
     <>
@@ -58,7 +51,6 @@ export function HeaderComponent({ actions, user, teams }) {
 }
 
 HeaderComponent.propTypes = {
-  teams: PropTypes.arrayOf(PropTypes.object).isRequired,
   user: PropTypes.shape({
     profilePicture: PropTypes.string,
     _id: PropTypes.string,
@@ -74,7 +66,6 @@ HeaderComponent.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    teams: state.teamsReducer.teams,
     user: state.userReducer.user,
   };
 }
@@ -82,7 +73,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      loadTeams,
       getUserInfo,
     }, dispatch),
   };

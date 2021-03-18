@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import { pokemonSprites } from '../../constants/images';
 import { deleteOneTeam } from '../../redux/actions/teamCreatorActions';
 
-export function TeamComponent({ poketeam, actions }) {
+export function TeamComponent({ poketeam, actions, user }) {
   return (
     <div className="teams__team">
       <div className="teams__sprites">
@@ -29,7 +29,7 @@ export function TeamComponent({ poketeam, actions }) {
             {`# ${poketeam.id}`}
           </Link>
         </span>
-        <button type="button" onClick={() => actions.deleteOneTeam(poketeam)}>delete</button>
+        <button type="button" onClick={() => actions.deleteOneTeam(poketeam, user)}>delete</button>
       </>
       )}
     </div>

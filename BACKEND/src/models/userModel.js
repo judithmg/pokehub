@@ -11,7 +11,6 @@ const userSchema = new Schema({
 
   profilePicture: {
     type: String,
-    default: '',
   },
 
   creationDate: {
@@ -22,12 +21,12 @@ const userSchema = new Schema({
   teams: [
     {
       id: {
-        type: Number,
+        type: Schema.Types.Mixed,
       },
       pokemons: [
         {
           id: Number,
-          abbilities: [String],
+          abbilities: Schema.Types.Mixed,
           types: [String],
           baseStats: {
             hp: {
@@ -63,7 +62,6 @@ const userSchema = new Schema({
           name: String,
           moveset: [{
             name: String,
-            moveId: Number,
           }],
           num: Number,
         },

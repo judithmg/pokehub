@@ -37,7 +37,7 @@ async function getOneUserByParams(req, res) {
   await User.findById(userId, (error, user) => {
     if (error) {
       res.status(404);
-      res.send(`There was an error finding by req.body ${user}`);
+      res.send(`There was an error finding by req.params ${user}`);
     } else {
       res.status(200);
       res.json(user);

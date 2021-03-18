@@ -34,8 +34,6 @@ async function getOneTeam(req, res) {
 }
 
 function deleteTeamFromUser(req, res) {
-  console.log(req.body);
-  console.log('hello');
   const { email, team } = req.body;
   User.findOneAndUpdate({ email }, { $pull: { teams: team } },
     { new: true }, (error, result) => {
@@ -57,6 +55,19 @@ async function deleteTeamFromTeamDb(req, res) {
   });
 }
 
+function deleteTeamByParams(req, res) {
+  const { teamId } = req.params;
+
+  User.findOneAndUpdate({ }, { $pull: { teams: { _id: teamId } } },
+    { new: true }, (error, result) => {
+      if (error) {
+        res.send(error);
+      } else {
+        res.json(result);
+      }
+    });
+}
+
 async function modifyTeam(req, res) {
   const email = req.params?.teamId || req.body.email;
 
@@ -76,4 +87,5 @@ module.exports = {
   deleteTeamFromTeamDb,
   deleteTeamFromUser,
   modifyTeam,
+  deleteTeamByParams,
 };

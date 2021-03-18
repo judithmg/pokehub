@@ -6,7 +6,7 @@ export default function teamsReducer(state = initialState.teamsReducer, action) 
   let teams;
   let userteam;
   let newTeam;
-  let maxid;
+  let caseId;
   let index;
   let pokemon;
   let pokemons;
@@ -20,20 +20,19 @@ export default function teamsReducer(state = initialState.teamsReducer, action) 
       return { ...state, teams: action.data };
 
     case actionTypes.CREATE_TEAM:
-      maxid = state.teams
+      caseId = state.teams
         .reduce(
           (max, teamId) => (teamId.id > max ? teamId.id : max),
           0,
         );
       newTeam = {
-        id: maxid + 1,
+        id: caseId + 1,
         pokemons: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }],
       };
       return { ...state, newTeam };
 
     case actionTypes.DELETE_ONE_TEAM:
-      teams = state.teams.filter((team) => team.id !== action.teamId);
-      return { ...state, teams };
+      return { ...state, teams: action.data.teams };
 
     case actionTypes.MODIFY_TEAM:
       teams = state.teams.filter((team) => team.id === action.data.id);
@@ -42,7 +41,11 @@ export default function teamsReducer(state = initialState.teamsReducer, action) 
 
     case actionTypes.LOAD_ONE_TEAM:
       // find team from url params
-      userteam = state.teams?.find((team) => +team.id === +action.teamId);
+
+      /^\d+$/.test(action.teamId)
+        ? caseId = +action.teamId
+        : caseId = action.teamId;
+      userteam = state.teams?.find((team) => team.id === caseId);
 
       /* once the team is found, go through all pokemons on the team, and for each find its learnset
       then for each move on its learnsets, get the full info from the movelist */
@@ -61,7 +64,7 @@ export default function teamsReducer(state = initialState.teamsReducer, action) 
         };
       });
 
-      return { ...state, team: { id: userteam.id, pokemons: modifiedTeam } };
+      return { ...state, team: { id: userteam.id, pokemons: modifiedTeam, _id: userteam._id } };
 
     case actionTypes.TEAM_LOADING:
       return { ...state, teamLoading: true };
@@ -92,20 +95,9 @@ export default function teamsReducer(state = initialState.teamsReducer, action) 
       return { ...state, teams, newTeam: {} };
 
     case actionTypes.MODIFY_POKEMON:
-      pokemon = {
-        ...action.pokemon,
-        moveset: action.pokemonMoves,
-      };
-      modifiedTeam = {
-        id: action.teamId,
-        pokemons: [...state.team.pokemons.filter((poke) => poke.id !== pokemon.id), pokemon],
-      };
-      teams = state.teams.filter((team) => team.id !== modifiedTeam.id);
-
       return {
         ...state,
-        team: modifiedTeam,
-        teams: { ...teams, modifiedTeam },
+        team: action.team,
       };
 
     default:

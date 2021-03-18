@@ -36,14 +36,21 @@ export function submitTeamSuccess(data) {
   };
 }
 
-export function submitTeam(team, user) {
+export function submitTeam(team,
+  user,
+  name) {
+  const updatedteam = {
+    ...team,
+    id: name,
+  };
   return async (dispatch) => {
     try {
       const submit = {
-        team,
+        team: updatedteam,
         email: user.email,
       };
       const { data } = await axios.put(`${dbUrls.baseUrl}${dbUrls.teamsUrl}`, submit);
+      console.log(data);
       dispatch(submitTeamSuccess(data));
     } catch (error) {
       dispatch(teamActionsError(error));
@@ -60,10 +67,10 @@ function deleteOneTeamSuccess(data) {
   };
 }
 
-export function deleteOneTeam(team) {
+export function deleteOneTeam(team,
+  user) {
   return async (dispatch) => {
     try {
-      const user = 'eloy@eloy.com';
       const submit = {
         team,
         email: user,
@@ -78,13 +85,40 @@ export function deleteOneTeam(team) {
 
 // MODIFY ONE POKEMON
 
-export function modifyPokemon(teamId,
-  pokemon,
-  pokemonMoves) {
+function modifyOnePokemonSuccess(team) {
   return {
     type: actionTypes.MODIFY_POKEMON,
-    teamId: +teamId,
-    pokemon,
-    pokemonMoves,
+    team,
+  };
+}
+
+export function modifyOnePokemon(team,
+  user,
+  moveset,
+  pokemon) {
+  const newpoke = {
+    ...pokemon,
+    moveset,
+  };
+  const { pokemons } = team;
+  pokemons[pokemon.id - 1] = newpoke;
+  const updatedteam = {
+    id: team.id,
+    pokemons,
+  };
+  console.log(team);
+  console.log(updatedteam);
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(`${dbUrls.baseUrl}${dbUrls.teamsUrl}`, {
+        team: updatedteam,
+        email: user.email,
+      });
+      await axios.delete(`${dbUrls.baseUrl}${dbUrls.teamsUrl}/delete/${team._id}`);
+      console.log(data);
+      dispatch(modifyOnePokemonSuccess(updatedteam));
+    } catch (error) {
+      dispatch(teamActionsError(error));
+    }
   };
 }
