@@ -25,7 +25,7 @@ export function HeaderComponent({ actions, user, teams }) {
 
   useEffect(() => {
     if (!teams?.length) {
-      actions?.loadTeams();
+      actions?.loadTeams(user._id);
     }
   }, [teams?.length]);
 

@@ -34,7 +34,7 @@ export function TeamDetailComponent({
 
   useEffect(() => {
     if (!teams?.length) {
-      actions.loadTeams();
+      actions.loadTeams(user._id);
     }
   }, [teams?.length]);
 

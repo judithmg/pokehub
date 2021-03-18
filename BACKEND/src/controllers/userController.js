@@ -67,19 +67,6 @@ function addTeamToUser(req, res) {
       }
     });
 }
-function deleteTeam(req, res) {
-  console.log(req.body);
-  console.log('hello');
-  const { email, team } = req.body;
-  User.findOneAndUpdate({ email }, { $pull: { teams: team } },
-    { new: true }, (error, result) => {
-      if (error) {
-        res.send(error);
-      } else {
-        res.json(result);
-      }
-    });
-}
 
 async function modifyUser(req, res) {
   const { email } = req.body;
@@ -100,5 +87,4 @@ module.exports = {
   deleteUser,
   addTeamToUser,
   modifyUser,
-  deleteTeam,
 };

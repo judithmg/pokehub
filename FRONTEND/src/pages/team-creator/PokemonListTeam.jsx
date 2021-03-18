@@ -8,16 +8,18 @@ import { bindActionCreators } from 'redux';
 import { addPokemonToTeam } from '../../redux/actions/teamCreatorActions';
 import { pokemonSprites } from '../../constants/images';
 
-export function PokemonListTeamComponent({ actions }) {
+export function PokemonListTeamComponent({ actions, pokedex }) {
   return (
     <div className="team-creator__pokelist">
       {[...Array(893)].map((x, i) => (
         <img
           alt="pokemon icon"
           className="team-creator__pokeico"
-          id={i}
+          id={i + 1}
+          key={Math.random()}
           src={`${pokemonSprites.httpIcon}${i + 1}.png`}
-          onClick={(e) => actions.addPokemonToTeam(e.currentTarget.id)}
+          onClick={(e) => actions.addPokemonToTeam(e.currentTarget.id,
+            pokedex)}
         />
       ))}
     </div>
@@ -28,6 +30,8 @@ function mapStateToProps(state) {
   return {
     teams: state.teamsReducer.teams,
     newTeam: state.teamsReducer.newTeam,
+    pokedex: state.pokedexReducer.pokedex,
+
   };
 }
 function mapDispatchToProps(dispatch) {

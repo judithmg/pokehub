@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../styles/team-creator.scss';
-import CreateTeam from './CreateTeam';
+import CreateTeam from '../pages/team-creator';
 
 export default function TeamCreatorComponent() {
   return (

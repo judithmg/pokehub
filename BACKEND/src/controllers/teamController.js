@@ -1,4 +1,5 @@
 const Team = require('../models/teamModel');
+const User = require('../models/userModel');
 
 function createTeam(req, res) {
   const newTeam = new Team(req.body);
@@ -32,7 +33,21 @@ async function getOneTeam(req, res) {
   });
 }
 
-async function deleteTeam(req, res) {
+function deleteTeamFromUser(req, res) {
+  console.log(req.body);
+  console.log('hello');
+  const { email, team } = req.body;
+  User.findOneAndUpdate({ email }, { $pull: { teams: team } },
+    { new: true }, (error, result) => {
+      if (error) {
+        res.send(error);
+      } else {
+        res.json(result);
+      }
+    });
+}
+
+async function deleteTeamFromTeamDb(req, res) {
   await Team.findOneAndRemove(req.body, (error, deleted) => {
     if (error) {
       res.status(404);
@@ -58,6 +73,7 @@ module.exports = {
   createTeam,
   getAllTeams,
   getOneTeam,
-  deleteTeam,
+  deleteTeamFromTeamDb,
+  deleteTeamFromUser,
   modifyTeam,
 };

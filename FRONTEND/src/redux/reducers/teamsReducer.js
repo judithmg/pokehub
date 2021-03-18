@@ -22,7 +22,7 @@ export default function teamsReducer(state = initialState.teamsReducer, action) 
     case actionTypes.CREATE_TEAM:
       maxid = state.teams
         .reduce(
-          (max, character) => (character.id > max ? character.id : max),
+          (max, teamId) => (teamId.id > max ? teamId.id : max),
           0,
         );
       newTeam = {
@@ -88,7 +88,7 @@ export default function teamsReducer(state = initialState.teamsReducer, action) 
       return { ...state, newTeam };
 
     case actionTypes.SUBMIT_TEAM:
-      teams = [...state.teams, action.data.teams];
+      teams = [...state.teams, action.data.teams[action.data.teams.length - 1]];
       return { ...state, teams, newTeam: {} };
 
     case actionTypes.MODIFY_POKEMON:
