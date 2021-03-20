@@ -23,14 +23,14 @@ export function TeamComponent({ poketeam, actions, user }) {
         }
       </div>
       {poketeam && (
-      <>
+      <div className="teams__info">
         <span className="teams__id">
           <Link to={`/team-detail/${poketeam.id}`}>
             {`# ${poketeam.id}`}
           </Link>
         </span>
         <button className="teams__delete-btn" type="button" onClick={() => actions.deleteOneTeam(poketeam, user)}>delete</button>
-      </>
+      </div>
       )}
     </div>
   );
