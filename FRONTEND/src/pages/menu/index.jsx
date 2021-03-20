@@ -8,6 +8,9 @@ import '../../styles/menu.scss';
 export default function MenuComponent() {
   return (
     <aside>
+      <p>
+        Filter by type
+      </p>
       {types.map((type) => (
         <ButtonType
           type={type}
