@@ -91,7 +91,8 @@ a {
 $outline-width: 6px;
 $shadow-width: 4px;
 
-select {
+select,
+input {
   display: inline-block;
   background-color: rgba(118, 118, 118, 0.4);
   text-shadow: $blackshadow;
@@ -127,4 +128,7 @@ select {
     border-left: $outline-width black solid;
     border-right: $outline-width black solid;
   }
+}
+input {
+  text-shadow: none;
 }
