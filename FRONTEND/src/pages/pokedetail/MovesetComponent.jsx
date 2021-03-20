@@ -9,7 +9,7 @@ export default function MovesetComponent({ moves }) {
   return (
     <table className="table__moveset">
       <thead>
-        <tr className="moveset__header">
+        <tr data-aos="fade-in" className="moveset__header">
           <th className="moveset__header-name">Name</th>
           <th className="moveset__header-type">Type</th>
           <th className="moveset__header-pp">PP</th>

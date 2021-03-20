@@ -14,19 +14,19 @@ export default function MainInfoComponent({ pokemon }) {
             <span className="abstract__name--eng">{pokemon?.name}</span>
             <span className="abstract__name--jap">{pokemon['name-jap']}</span>
           </div>
+
           <div className="abstract__id">
             {`# ${pokemon?.num}`}
-
           </div>
+
           <div className="abstract__size">
             <div className="abract__weight">
               {`${pokemon?.weightkg} kg`}
-
             </div>
             <div className="abstract__height">
               {`${pokemon?.heightm} m`}
-
             </div>
+
           </div>
         </div>
       </div>
