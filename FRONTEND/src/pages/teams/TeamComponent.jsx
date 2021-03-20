@@ -15,7 +15,7 @@ export function TeamComponent({ poketeam, actions, user }) {
         poketeam.pokemons
         && poketeam.pokemons.map((pokemon) => (
           <img
-            src={`${pokemonSprites.httpSprite}${pokemon.num}.png`}
+            src={`${pokemonSprites.httpFrontSprite}${pokemon.num}.png`}
             alt="pokemon sprite"
             key={Math.random()}
           />
