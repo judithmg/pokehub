@@ -7,7 +7,7 @@ function TeamRouter() {
   router.route('/teams/:teamId').get(teamController.getOneTeam);
   router.route('/teams/:teamId').put(teamController.modifyTeam);
   router.route('/teams/:teamId').delete(teamController.deleteTeamFromTeamDb);
-  router.route('/teams/delete/:teamId').delete(teamController.deleteTeamByParams);
+  router.route('/teams/delete/:teamId').patch(teamController.deleteTeamByParams);
   router.route('/teams/delete').patch(teamController.deleteTeamFromUser);
 
   router.route('/teams').post(teamController.createTeam);

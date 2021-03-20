@@ -57,11 +57,12 @@ async function deleteTeamFromTeamDb(req, res) {
 
 function deleteTeamByParams(req, res) {
   const { teamId } = req.params;
+  const { userId } = req.body;
 
-  User.findOneAndUpdate({ }, { $pull: { teams: { _id: teamId } } },
+  User.updateOne({ _id: userId }, { $pull: { teams: { _id: teamId } } },
     { new: true }, (error, result) => {
       if (error) {
-        res.send(error);
+        res.send(`there was an error ${error}`);
       } else {
         res.json(result);
       }
