@@ -18,7 +18,7 @@ export default function TeamPokemonComponent({ pokemon }) {
         <span>{pokemon.name}</span>
         <Link to={`/pokemon/${pokemon.name.toLowerCase()}`}>
           <img
-            src={`${pokemonSprites.httpSprite}${pokemon.num}.png`}
+            src={`${pokemonSprites.httpFrontSprite}${pokemon.num}.png`}
             alt="pokemon sprite"
           />
         </Link>

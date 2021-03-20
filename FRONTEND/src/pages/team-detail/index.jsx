@@ -52,7 +52,7 @@ export function TeamDetailComponent({
 
   return (
     moves.length && learnsets.length && (
-      <section className="teamdetail__container">
+      <section data-aos="fade-in" className="teamdetail__container">
         {
       team
         && team?.pokemons?.map((pokemon) => (
