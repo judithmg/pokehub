@@ -18,10 +18,10 @@ export default function RadarChartComponent({ stats }) {
             'sp-def': +(stats?.spd / 230).toFixed(2),
             speed: +(stats?.spe / 180).toFixed(2),
           },
-          meta: { color: '#58FCEC' },
+          meta: { color: '#fdaa10' },
         },
       ]}
-      size={150}
+      size={200}
     />
   );
 }
