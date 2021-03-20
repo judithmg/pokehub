@@ -9,7 +9,7 @@ export default function VisualInfoComponent({ pokemon, pokedex }) {
   return (
     <div className="pokemon__abstract-visual">
       <div className="abstract__stats">
-        <RadarChart stats={pokemon?.baseStats} />
+        <RadarChart stats={pokemon?.baseStats} size={200} />
       </div>
 
       {(pokemon.evos || pokemon.prevo) && (
