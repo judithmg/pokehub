@@ -40,7 +40,7 @@ export function TeamCreatorComponent({
   }
 
   return (
-    <section className="team-creator__container">
+    <section data-aos="fade-in" className="team-creator__container">
       {teams
           && (
           <div className="team-creator__creator">
