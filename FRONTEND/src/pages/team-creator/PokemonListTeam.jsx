@@ -10,7 +10,7 @@ import { pokemonSprites } from '../../constants/images';
 
 export function PokemonListTeamComponent({ actions, pokedex }) {
   return (
-    <div className="team-creator__pokelist">
+    <div className="team-creator__pokelist" data-aos="fade-in">
       {[...Array(893)].map((x, i) => (
         <img
           alt="pokemon icon"
