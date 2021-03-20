@@ -66,9 +66,6 @@ export default function teamsReducer(state = initialState.teamsReducer, action) 
 
       return { ...state, team: { id: userteam.id, pokemons: modifiedTeam, _id: userteam._id } };
 
-    case actionTypes.TEAM_LOADING:
-      return { ...state, teamLoading: true };
-
     case actionTypes.ADD_POKEMON_TO_TEAM:
       /* find the num of the pokemon added on the pokedex list, then get its data
       remove that pokemon from the newly created team, and add the new one with its full info

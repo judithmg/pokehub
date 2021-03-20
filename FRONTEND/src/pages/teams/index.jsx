@@ -39,13 +39,13 @@ export function TeamManagerComponent({ teams, actions, user }) {
   );
 }
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   return {
     teams: state.teamsReducer.teams,
     user: state.userReducer.user,
   };
 }
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       loadTeams,

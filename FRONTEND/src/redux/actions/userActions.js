@@ -2,14 +2,14 @@ import axios from 'axios';
 import actionTypes from './actionTypes';
 import dbUrls from '../../constants/dbUrls';
 
-function loginSuccess(data) {
+export function loginSuccess(data) {
   return {
     type: actionTypes.LOGIN_SUCCESS,
     data,
   };
 }
 
-function userActionsError(error) {
+export function userActionsError(error) {
   return {
     type: actionTypes.USER_ERROR,
     error,
@@ -52,13 +52,7 @@ export function signupUser(email) {
   };
 }
 
-export function deleteUser() {
-  return {
-    type: actionTypes.DELETE_USER,
-  };
-}
-
-function modifyUserSucces(data) {
+export function modifyUserSucces(data) {
   return {
     type: actionTypes.MODIFY_USER_SUCCESS,
     data,

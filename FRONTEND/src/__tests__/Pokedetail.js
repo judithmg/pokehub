@@ -3,7 +3,7 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 
-import { PokeDetailComponent, mapStateToProps } from '../pages/pokedetail';
+import { PokeDetailComponent, mapStateToProps, mapDispatchToProps } from '../pages/pokedetail';
 
 describe('Given a Pokedetail component', () => {
   describe('When it is invoked', () => {
@@ -12,6 +12,8 @@ describe('Given a Pokedetail component', () => {
     const pokemonLearnset = [[{ type: 'fire' }]];
     const pokemon = {
       'name-jap': 'Bulbasaur',
+      weightkg: 5,
+      heightm: 5,
       name: 'Bulbasaur',
       num: 1,
       types: ['pokemon'],
@@ -33,10 +35,10 @@ describe('Given a Pokedetail component', () => {
       loadAbilities: jest.fn(),
       loadPokemonLearnset: jest.fn(),
     };
-    let pokedex = [{}];
-    let moves = [[{ type: 'fire' }]];
-    let abilities = [{}];
-    let learnsets = [{}];
+    const pokedex = [{}];
+    const moves = [[{ type: 'fire' }]];
+    const abilities = [{}];
+    const learnsets = [{}];
 
     beforeEach(() => {
       container = document.createElement('div');
@@ -83,42 +85,6 @@ describe('Given a Pokedetail component', () => {
         test('Then loadPokemonAbilities should be called', () => {
           expect(actions.loadPokemonAbilities).toHaveBeenCalled();
         });
-        describe('When data is not found on the state', () => {
-          beforeEach(() => {
-            pokedex = [];
-            moves = [];
-            abilities = [];
-            learnsets = '';
-            act(() => {
-              render(
-                <BrowserRouter>
-                  <PokeDetailComponent
-                    pokemonAbilities={pokemonAbilities}
-                    pokemonLearnset={pokemonLearnset}
-                    pokemon={pokemon}
-                    actions={actions}
-                    pokedex={pokedex}
-                    moves={moves}
-                    abilities={abilities}
-                    learnsets={learnsets}
-                  />
-                </BrowserRouter>, container,
-              );
-            });
-          });
-          test('Then loadLearnsets should be called', () => {
-            expect(actions.loadLearnsets).toHaveBeenCalled();
-          });
-          test('Then loadAbilities should be called', () => {
-            expect(actions.loadAbilities).toHaveBeenCalled();
-          });
-          test('Then loadMoves should be called', () => {
-            expect(actions.loadMoves).toHaveBeenCalled();
-          });
-          test('Then loadPokedex should be called', () => {
-            expect(actions.loadPokedex).toHaveBeenCalled();
-          });
-        });
       });
     });
   });
@@ -155,6 +121,16 @@ describe('Given a mapStateToProps function', () => {
         pokemonAbilities: state.pokedexReducer.pokemonAbilities,
         pokemonLearnset: state.pokedexReducer.pokemonLearnset,
       });
+    });
+  });
+});
+
+describe('Given a mapDispatchToProps', () => {
+  describe('When it is called', () => {
+    test('it should return an object', () => {
+      const dispatch = jest.fn();
+      const result = mapDispatchToProps(dispatch);
+      expect(result.actions.loadPokemonDetail).toBeTruthy();
     });
   });
 });

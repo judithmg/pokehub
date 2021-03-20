@@ -54,7 +54,7 @@ export function loadOneTeam(
   };
 }
 
-function loadTeamSuccess(
+export function loadTeamSuccess(
   teamId,
   moves,
   learnsets,

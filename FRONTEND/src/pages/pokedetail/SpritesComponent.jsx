@@ -101,7 +101,7 @@ export default function SpritesComponent({ pokemon }) {
           )}
             { pokemon.num < 810
           && (<option value="generation-vii/ultra-sun-ultra-moon/">ultra-sun-ultra-moon</option>)}
-            <option value="generation-viii/icons/" selected>icons</option>
+            <option value="generation-viii/icons/" defaultValue>icons</option>
           </select>
         </div>
       )}

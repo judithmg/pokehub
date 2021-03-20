@@ -43,12 +43,12 @@ export function submitTeam(team,
     ...team,
     id: name,
   };
+  const submit = {
+    team: updatedteam,
+    email: user.email,
+  };
   return async (dispatch) => {
     try {
-      const submit = {
-        team: updatedteam,
-        email: user.email,
-      };
       const { data } = await axios.put(`${dbUrls.baseUrl}${dbUrls.teamsUrl}`, submit);
       dispatch(submitTeamSuccess(data));
     } catch (error) {
@@ -59,7 +59,7 @@ export function submitTeam(team,
 
 // DELETE
 
-function deleteOneTeamSuccess(data) {
+export function deleteOneTeamSuccess(data) {
   return {
     type: actionTypes.DELETE_ONE_TEAM,
     data,
@@ -84,7 +84,7 @@ export function deleteOneTeam(team,
 
 // MODIFY ONE POKEMON
 
-function modifyOnePokemonSuccess(team) {
+export function modifyOnePokemonSuccess(team) {
   return {
     type: actionTypes.MODIFY_POKEMON,
     team,

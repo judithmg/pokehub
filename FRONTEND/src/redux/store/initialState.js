@@ -14,17 +14,12 @@ export default {
 
     pokemonTypeFiltered: '',
 
-    abilitiesLoadingBool: false,
-    pokedexLoadingBool: false,
-    movesLoadingBool: false,
-    learnsetsLoadingBool: false,
   },
 
   teamsReducer: {
     teams: [],
     team: {},
     newTeam: {},
-    teamLoading: true,
   },
 
   userReducer: {

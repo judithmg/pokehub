@@ -2,13 +2,17 @@ const {
   createTeam,
   getAllTeams,
   getOneTeam,
-  deleteTeam,
+  deleteTeamFromTeamDb,
+  deleteTeamFromUser,
   modifyTeam,
+  deleteTeamByParams,
 } = require('../controllers/teamController');
 
 const Team = require('../models/teamModel');
+const User = require('../models/userModel');
 
 jest.mock('../models/teamModel');
+jest.mock('../models/userModel');
 
 describe('Given a teamController', () => {
   let req;
@@ -18,6 +22,9 @@ describe('Given a teamController', () => {
     req = {
       body: {
         team: [],
+      },
+      params: {
+        teamId: 8,
       },
     };
     res = {
@@ -61,16 +68,52 @@ describe('Given a teamController', () => {
       expect(res.status).toHaveBeenCalled();
     });
   });
-  describe('When deleteTeam is called', () => {
+  describe('When deleteTeamFromTeamDb is called', () => {
     test('Then res.json should be called if deletion is successful', async () => {
       Team.findOneAndRemove.mockImplementationOnce((team, callback) => callback(false));
-      await deleteTeam(req, res);
+      await deleteTeamFromTeamDb(req, res);
       expect(res.json).toHaveBeenCalled();
     });
     test('Then res.json should be called if deletion can not be completed', async () => {
       Team.findOneAndRemove.mockImplementationOnce((team, callback) => callback(true));
-      await deleteTeam(req, res);
+      await deleteTeamFromTeamDb(req, res);
       expect(res.status).toHaveBeenCalled();
+    });
+  });
+  describe('When deleteTeamByParams is called', () => {
+    test('Then res.json should be called if deletion is successful', () => {
+      User.findOneAndUpdate.mockImplementationOnce((query,
+        update,
+        options,
+        callback) => callback(false));
+      deleteTeamByParams(req, res);
+      expect(res.json).toHaveBeenCalled();
+    });
+    test('Then res.send should be called if deletion can not be completed', () => {
+      User.findOneAndUpdate.mockImplementationOnce((query,
+        update,
+        options,
+        callback) => callback(true));
+      deleteTeamByParams(req, res);
+      expect(res.send).toHaveBeenCalled();
+    });
+  });
+  describe('When deleteTeamFromUser is called', () => {
+    test('Then res.json should be called if deletion is successful', () => {
+      User.findOneAndUpdate.mockImplementationOnce((query,
+        update,
+        options,
+        callback) => callback(false));
+      deleteTeamFromUser(req, res);
+      expect(res.json).toHaveBeenCalled();
+    });
+    test('Then res.send should be called if deletion can not be completed', () => {
+      User.findOneAndUpdate.mockImplementationOnce((query,
+        update,
+        options,
+        callback) => callback(true));
+      deleteTeamFromUser(req, res);
+      expect(res.send).toHaveBeenCalled();
     });
   });
   describe('When modifyTeam is called', () => {

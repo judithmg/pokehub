@@ -21,21 +21,16 @@ import PrivateRoute from './PrivateRoute';
 
 import Dashboard from './dashboard';
 import Footer from './footer';
-import ForgotPassword from './Login/ForgotPassword';
 import Header from './header';
 import Login from './Login';
 import Pokedex from './pokedex';
 import PokeDetail from './pokedetail';
-import Profile from './Profile';
 import SignUp from './SignUp';
 import Teams from './teams';
 import TeamDetail from './team-detail'; import MainComponent from './main';
 import TeamCreator from './team-creator';
-import UpdateUserProfile from './Profile/UpdateProfile';
 
 import '../styles/App.scss';
-
-import pruebas from '../bin/pruebas';
 
 function App({
   actions,
@@ -72,14 +67,10 @@ function App({
         <main>
           <MainComponent />
           <Switch>
-            <Route path="/login/forgot-password" component={ForgotPassword} />
             <Route path="/login" component={Login} />
             <Route path="/pokemon/:pokeId" component={PokeDetail} />
             <Route path="/pokedex" component={Pokedex} />
-            <Route path="/pruebas" component={pruebas} />
             <Route path="/signup" component={SignUp} />
-            <PrivateRoute path="/profile/update" component={UpdateUserProfile} />
-            <PrivateRoute path="/profile" component={Profile} />
             <PrivateRoute path="/team-creator" component={TeamCreator} />
             <PrivateRoute path="/team-detail/:teamId" component={TeamDetail} />
             <PrivateRoute path="/teams" component={Teams} />

@@ -44,7 +44,7 @@ export function TeamCreatorComponent({
       {teams
           && (
           <div className="team-creator__creator">
-            {!newTeam.id && <button type="button" onClick={() => actions.createTeam()}>new team</button>}
+            {!newTeam.id && <button type="button" className="teamcreator__btn" onClick={() => actions.createTeam()}>new team</button>}
 
             {newTeam.id && newTeam.pokemons.map((poke) => (
               poke.num
@@ -68,14 +68,14 @@ export function TeamCreatorComponent({
   );
 }
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   return {
     teams: state.teamsReducer.teams,
     newTeam: state.teamsReducer.newTeam,
     user: state.userReducer.user,
   };
 }
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       createTeam,

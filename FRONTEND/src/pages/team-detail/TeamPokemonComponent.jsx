@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import RadarChart from '../shared/RadarChartComponent';
-import TeamDetailPokemonMoves from './TeamMovesComponent';
+import TeamMoves from './TeamMovesComponent';
 import { pokemonSprites } from '../../constants/images';
 
 import '../../styles/teams.scss';
@@ -13,7 +13,7 @@ export default function TeamPokemonComponent({ pokemon }) {
   return (
     pokemon.learnset
     && (
-    <div className="teamdetail__pokemon">
+    <div className="teamdetail__pokemon" key={Math.random()}>
       <div className={`pokemon__sprite ${pokemon.types[0]}`}>
         <span>{pokemon.name}</span>
         <Link to={`/pokemon/${pokemon.name.toLowerCase()}`}>
@@ -72,7 +72,7 @@ export default function TeamPokemonComponent({ pokemon }) {
             No
           </div>
         </div>
-        <TeamDetailPokemonMoves pokemon={pokemon} />
+        <TeamMoves pokemon={pokemon} key={Math.random()} />
       </div>
     </div>
     )

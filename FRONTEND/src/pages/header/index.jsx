@@ -14,18 +14,13 @@ import Button from '../shared/ButtonComponent';
 export function HeaderComponent({ actions, user }) {
   const [menu, setMenu] = useState(false);
   const currentUser = useAuth();
-  const [setError] = useState('');
   const { logout } = useAuth();
   const history = useHistory();
 
   async function handleLogout() {
-    try {
-      await logout()
-        .then(() => actions.logoutUser());
-      history.push('/');
-    } catch (err) {
-      setError('Could not logout');
-    }
+    await logout();
+    actions.logoutUser();
+    history.push('/');
   }
 
   useEffect(() => {
@@ -48,8 +43,8 @@ export function HeaderComponent({ actions, user }) {
         <div className="header--right">
           {user?.email ? (
             <>
-              <Link to="/profile"><Button text="Profile" classes="header__login" /></Link>
-              <Link to="/" onClick={() => handleLogout()}><Button text="Logout" classes="header__login" /></Link>
+              <Link to="/profile" className="header__link"><Button text="Profile" classes="header__login" /></Link>
+              <Link to="/" onClick={() => handleLogout()} className="header__link"><Button text="Logout" classes="header__login" /></Link>
             </>
           ) : (<Link to="/login"><Button text="Login" classes="header__login" /></Link>)}
 
@@ -81,13 +76,13 @@ HeaderComponent.propTypes = {
   }).isRequired,
 };
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   return {
     user: state.userReducer.user,
   };
 }
 
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       getUserInfo,

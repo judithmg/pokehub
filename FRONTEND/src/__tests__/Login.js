@@ -9,33 +9,26 @@ import { Provider } from 'react-redux';
 import * as auth from '../context/AuthContext';
 
 import configureStore from '../redux/store/configureStore';
+import { LoginComponent, mapStateToProps, mapDispatchToProps } from '../pages/Login';
 
-import { HeaderComponent, mapStateToProps, mapDispatchToProps } from '../pages/header';
-
-describe('Given a Header component', () => {
+describe('Given a LoginComponent component', () => {
   let container = null;
-  let fn;
-  const user = {
-    email: 'jajas@gmail.com',
-  };
+  let store;
   const actions = {
-    logoutUser: jest.fn(),
     getUserInfo: jest.fn(),
   };
 
   beforeEach(() => {
     container = document.createElement('div');
     document.body.appendChild(container);
-    const store = configureStore();
+    store = configureStore();
     jest.spyOn(auth, 'useAuth').mockImplementation(() => ({ logout: jest.fn().mockResolvedValueOnce({}) }));
-
-    // jest.spyOn(auth, 'useAuth').mockImplementation(() => ({ logout: jest.fn().mockRejectedValueOnce({}) }));
 
     act(() => {
       render(
         <Provider store={store}>
           <BrowserRouter>
-            <HeaderComponent actions={actions} user={user} />
+            <LoginComponent actions={actions} />
           </BrowserRouter>
         </Provider>, container,
       );
@@ -49,28 +42,13 @@ describe('Given a Header component', () => {
   });
 
   describe('When it is invoked', () => {
-    test('Then there should be a header section', () => {
-      const header = container.querySelector('header');
-
-      expect(header).toBeTruthy();
-    });
-  });
-  describe('When the menu button is clicked', () => {
-    test('An aside should render', () => {
-      const img = container.querySelector('.header__pokeball');
-      fireEvent.click(img);
-      const aside = container.querySelector('aside');
-      expect(aside).toBeTruthy();
-    });
-    test('A button with a poketype should be rendered', () => {
-      const img = container.querySelector('.header__pokeball');
-      fireEvent.click(img);
-      const btn = container.querySelector('.btn-type--filter');
+    test('Then there should be a btn', () => {
+      const btn = document.querySelector('.login__btn');
       expect(btn).toBeTruthy();
     });
-    test('Logout fn should be called', () => {
-      fn = jest.spyOn(actions, 'logoutUser');
-      const btn = container.querySelectorAll('.header__link')[1];
+    test('Then there should be a btn that calls an action when it is clicked', () => {
+      const fn = jest.spyOn(actions, 'getUserInfo');
+      const btn = document.querySelector('button');
       act(() => {
         fireEvent.click(btn);
       });

@@ -8,7 +8,7 @@ import ModalAtk from './ModalMoveComponent';
 
 import '../../styles/pokedetail.scss';
 
-export default function MoveComponent({ move }) {
+export default function TableRowMove({ move }) {
   const [isShowing, setIsShowing] = useState(false);
   return (
     <tr
@@ -28,7 +28,7 @@ export default function MoveComponent({ move }) {
   );
 }
 
-MoveComponent.propTypes = {
+TableRowMove.propTypes = {
   move: PropTypes.shape({
     name: PropTypes.string,
     pp: PropTypes.number,

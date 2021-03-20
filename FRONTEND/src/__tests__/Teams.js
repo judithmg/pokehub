@@ -1,40 +1,116 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
+import { fireEvent } from '@testing-library/react';
+
 import { BrowserRouter } from 'react-router-dom';
 
-import { TeamManagerComponent } from '../pages/teams';
+import { Provider } from 'react-redux';
 
-xdescribe('Given a UserTeamsComponent component', () => {
+import * as auth from '../context/AuthContext';
+
+import configureStore from '../redux/store/configureStore';
+import {
+  TeamManagerComponent,
+  mapStateToProps,
+  mapDispatchToProps,
+} from '../pages/teams';
+import { TeamComponent } from '../pages/teams/TeamComponent';
+
+describe('Given a TeamManagerComponent component', () => {
+  let container = null;
+  let store;
+  let user = {
+    email: 'jajas@gmail.com',
+  };
+  const actions = {
+    loadTeams: jest.fn(),
+    getUserInfo: jest.fn(),
+    deleteOneTeam: jest.fn(),
+  };
+  const teams = [{ id: 8, pokemons: [{ num: 1, name: 'pichu' }] }, { id: 18 }];
+
+  beforeEach(() => {
+    container = document.createElement('div');
+    document.body.appendChild(container);
+
+    store = configureStore();
+    jest.spyOn(auth, 'useAuth').mockImplementation(() => ({ currentUser: jest.fn().mockResolvedValueOnce({}) }));
+    // jest.spyOn(auth, 'useAuth').mockImplementation(() => ({ logout: jest.fn().mockRejectedValueOnce({}) }));
+  });
+
+  afterEach(() => {
+    unmountComponentAtNode(container);
+    container.remove();
+    container = null;
+  });
+
   describe('When it is invoked', () => {
-    let container = null;
-
-    beforeEach(() => {
-      container = document.createElement('div');
-      document.body.appendChild(container);
-    });
-
-    afterEach(() => {
-      unmountComponentAtNode(container);
-      container.remove();
-      container = null;
-    });
-    const actions = {
-      loadTeams: jest.fn(),
-    };
-    const teams = [{}];
-    test('Then there should be a button element', () => {
+    test('Then there should be a teams__container section', () => {
       act(() => {
         render(
-          <BrowserRouter>
-            <TeamManagerComponent actions={actions} teams={teams} />
-            ,
-          </BrowserRouter>, container,
+          <Provider store={store}>
+            <BrowserRouter>
+              <TeamManagerComponent actions={actions} user={user} teams={teams} />
+            </BrowserRouter>
+          </Provider>, container,
         );
       });
-      const button = container.querySelector('button');
+      const header = container.querySelector('.teams__container');
 
-      expect(button).toBeTruthy();
+      expect(header).toBeTruthy();
     });
+  });
+  describe('When there is no email', () => {
+    test('Then getUserInfo is called', () => {
+      user = {};
+      act(() => {
+        render(
+          <Provider store={store}>
+            <BrowserRouter>
+              <TeamManagerComponent actions={actions} user={user} teams={teams} />
+            </BrowserRouter>
+          </Provider>, container,
+        );
+      });
+      expect(actions.getUserInfo).toHaveBeenCalled();
+    });
+  });
+  describe('When a Pokemon is deleted', () => {
+    test('Then getUserInfo is called', () => {
+      act(() => {
+        render(
+          <Provider store={store}>
+            <BrowserRouter>
+              <TeamComponent actions={actions} user={user} poketeam={teams[0]} />
+            </BrowserRouter>
+          </Provider>, container,
+        );
+      });
+      const btn = document.querySelector('.teams__delete-btn');
+      fireEvent.click(btn);
+      expect(actions.deleteOneTeam).toHaveBeenCalled();
+    });
+  });
+});
+
+describe('Given a mapStateToProps', () => {
+  test('it should return a state', () => {
+    const state = {
+      userReducer: { user: { email: '' } },
+      teamsReducer: { teams: [{}] },
+    };
+    const result = mapStateToProps(state);
+    expect(result).toEqual({
+      user: state.userReducer.user,
+      teams: state.teamsReducer.teams,
+    });
+  });
+});
+describe('Given a mapDispatchToProps', () => {
+  test('it should return an object', () => {
+    const dispatch = jest.fn();
+    const result = mapDispatchToProps(dispatch);
+    expect(result.actions.getUserInfo).toBeTruthy();
   });
 });

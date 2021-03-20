@@ -19,7 +19,6 @@ export default {
   learnsets: PropTypes.arrayOf(PropTypes.object).isRequired,
 
   pokemonAbilities: PropTypes.arrayOf(PropTypes.object).isRequired,
-  abilitiesLoadingBool: PropTypes.bool.isRequired,
   pokemonLearnset: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
     category: PropTypes.string,
@@ -39,15 +38,10 @@ export default {
   }).isRequired,
 
   actions: PropTypes.shape({
-    loadPokedex: PropTypes.func.isRequired,
-    loadMoves: PropTypes.func.isRequired,
-    loadLearnsets: PropTypes.func.isRequired,
-    loadAbilities: PropTypes.func.isRequired,
 
     loadPokemonLearnset: PropTypes.func.isRequired,
     loadPokemonDetail: PropTypes.func.isRequired,
     loadPokemonAbilities: PropTypes.func.isRequired,
 
-    abilitiesLoading: PropTypes.func.isRequired,
   }).isRequired,
 };

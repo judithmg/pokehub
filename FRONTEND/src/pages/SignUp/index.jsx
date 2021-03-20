@@ -2,12 +2,6 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  Form,
-  Button,
-  Card,
-  Alert,
-} from 'react-bootstrap';
 import { Link, useHistory, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -55,37 +49,42 @@ export function SignupComponent({ actions }) {
     currentUser ? <Redirect to="/profile" /> : (
 
       <>
-        <Card>
-          <Card.Body>
-            <h2 className="text-center mb-4">Sign Up</h2>
-            {error && <Alert variant="danger">{error}</Alert>}
-            <Form onSubmit={handleSubmit}>
-              <Form.Group id="nickname">
-                <Form.Label>Nickname</Form.Label>
-                <Form.Control type="text" ref={nickRef} required />
-              </Form.Group>
-              <Form.Group id="email">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" ref={emailRef} required />
-              </Form.Group>
-              <Form.Group id="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" ref={passwordRef} required />
-              </Form.Group>
-              <Form.Group id="password-confirm">
-                <Form.Label>Password Confirmation</Form.Label>
-                <Form.Control type="password" ref={passwordConfirmRef} required />
-              </Form.Group>
-              <Button disabled={loading} className="w-100" type="submit">
-                Sign Up
-              </Button>
-            </Form>
-          </Card.Body>
-        </Card>
-        <div className="w-100 text-center mt-2">
-          Already have an account?
+        <div>
+          <div>
+            <h2>Sign Up</h2>
+            {error && <span>{error}</span>}
+            <form onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="email">
+                  Email
+                  <input id="email" type="email" ref={emailRef} required />
+                </label>
+              </div>
+              <div id="password">
+                <label htmlFor="password">
+                  Password
+                  <input id="password" type="password" ref={passwordRef} required />
+                </label>
+              </div>
+              <div id="password-confirm">
+                <label htmlFor="password-confirm">
+                  Password
+                  <input id="password-confirm" type="password" ref={passwordRef} required />
+                </label>
+              </div>
+              <button className="login__btn" disabled={loading} type="submit">
+                Log In
+              </button>
+            </form>
+            <div>
+              <Link to="/login/">Already have an account?</Link>
+            </div>
+          </div>
+        </div>
+        <div>
+          Need an account?
           {' '}
-          <Link to="/login">Log In</Link>
+          <Link to="/signup">Sign Up</Link>
         </div>
       </>
     )
@@ -98,13 +97,13 @@ SignupComponent.propTypes = {
   }).isRequired,
 };
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   return {
     user: state.userReducer.user,
 
   };
 }
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       signupUser,

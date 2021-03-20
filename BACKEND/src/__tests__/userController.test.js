@@ -1,8 +1,10 @@
 const {
   createUser,
   getAllUsers,
-  getOneUser,
+  getOneUserByBody,
+  getOneUserByParams,
   deleteUser,
+  addTeamToUser,
   modifyUser,
 } = require('../controllers/userController');
 
@@ -19,6 +21,7 @@ describe('Given a userController', () => {
       body: {
         email: 'asdfg@gmail.com',
       },
+      params: { userId: 4 },
     };
     res = {
       status: jest.fn(),
@@ -47,17 +50,51 @@ describe('Given a userController', () => {
       expect(res.status).toHaveBeenCalled();
     });
   });
-  describe('When getOneUser is called', () => {
+  describe('When addTeamToUser is called', () => {
+    test('Then res.json should be called if all users are found', () => {
+      User.findOneAndUpdate.mockImplementationOnce((query,
+        update,
+        options,
+        callback) => callback(false));
+
+      addTeamToUser(req, res);
+      expect(res.json).toHaveBeenCalled();
+    });
+    test('Then res.send should be called if  users are not found', () => {
+      User.findOneAndUpdate.mockImplementationOnce((query,
+        update,
+        options,
+        callback) => callback(true));
+
+      addTeamToUser(req, res);
+      expect(res.send).toHaveBeenCalled();
+    });
+  });
+  describe('When getOneUserByBody is called', () => {
     test('Then res.json should be called if the user is found', async () => {
       User.findOne.mockImplementationOnce((email, callback) => callback(false));
 
-      await getOneUser(req, res);
+      await getOneUserByBody(req, res);
       expect(res.json).toHaveBeenCalled();
     });
     test('Then res.status should be called if the user is not found', async () => {
       User.findOne.mockImplementationOnce((email, callback) => callback(true));
 
-      await getOneUser(req, res);
+      await getOneUserByBody(req, res);
+      expect(res.status).toHaveBeenCalled();
+    });
+  });
+  describe('When getOneUserByParams is called', () => {
+    test('Then res.json should be called if the user is found', async () => {
+      User.findById.mockImplementationOnce((email, callback) => callback(false));
+
+      await getOneUserByParams(req, res);
+      expect(res.json).toHaveBeenCalled();
+    });
+    test('Then res.status should be called if the user is not found', async () => {
+      User.findById.mockImplementationOnce((email, callback) => callback(true));
+
+      await getOneUserByParams(req, res);
       expect(res.status).toHaveBeenCalled();
     });
   });
@@ -67,7 +104,7 @@ describe('Given a userController', () => {
       await deleteUser(req, res);
       expect(res.json).toHaveBeenCalled();
     });
-    test('Then res.json should be called if deletion can not be completed', async () => {
+    test('Then res.status should be called if deletion can not be completed', async () => {
       User.findOneAndRemove.mockImplementationOnce((user, callback) => callback(true));
       await deleteUser(req, res);
       expect(res.status).toHaveBeenCalled();
