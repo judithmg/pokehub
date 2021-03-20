@@ -85,7 +85,8 @@
   li {
     outline: none;
     margin: 0 5px;
-    padding: 4px;
+    padding: 7px;
+    font-size: 12px;
     border-radius: 10px;
     background-color: $headercolor;
   }
@@ -97,9 +98,11 @@
 
 @media only screen and (min-width: 768px) {
   .pokedex__container {
-    @include flex(row, flex-end, center);
+    margin: 20px 100px;
+    @include flex(column, flex-end, flex-end);
     table {
       width: 700px;
+      margin: 20px 0;
     }
   }
 
