@@ -31,10 +31,10 @@ export function PokedexComponent({
   }, [pagination, pokedex.length]);
   return (
     <>
-      <section className="pokedex__container" id="jump">
+      <section data-aos="fade-in" className="pokedex__container">
         <table>
           <thead>
-            <tr className="pokedex__header">
+            <tr data-aos="fade-in" className="pokedex__header">
               <th className="pokedex__pokemon-id --hidden">-</th>
               <th className="pokedex__pokemon-sprite --hidden">-</th>
               <th className="pokedex__pokemon-name --hidden">-</th>
@@ -55,6 +55,7 @@ export function PokedexComponent({
             ))}
           </tbody>
         </table>
+        { pokemonsShown.length < 21 && (
         <ReactPaginate
           pageCount={45}
           marginPagesDisplayed={2}
@@ -68,8 +69,13 @@ export function PokedexComponent({
           activeClassName="pokedex__pagination-active"
           nextLinkClassName="pokedex__pagination-next"
           previosLinkClassName="pokedex__pagination-previous"
-          onPageChange={({ selected }) => setPagination(selected)}
+          onPageChange={({ selected }) => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setPagination(selected);
+          }}
         />
+        )}
+
       </section>
     </>
   );

@@ -25,7 +25,7 @@ module.exports = {
     'eslint linebreak-style': [0, 'error', 'windows'],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react/jsx-props-no-spreading': 0,
+    'react/forbid-prop-types': 0,
     'no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
-
   },
 };

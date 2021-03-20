@@ -15,7 +15,7 @@ export function TeamComponent({ poketeam, actions, user }) {
         poketeam.pokemons
         && poketeam.pokemons.map((pokemon) => (
           <img
-            src={`${pokemonSprites.httpSprite}${pokemon.num}.png`}
+            src={`${pokemonSprites.httpFrontSprite}${pokemon.num}.png`}
             alt="pokemon sprite"
             key={Math.random()}
           />
@@ -23,14 +23,14 @@ export function TeamComponent({ poketeam, actions, user }) {
         }
       </div>
       {poketeam && (
-      <>
+      <div className="teams__info">
         <span className="teams__id">
           <Link to={`/team-detail/${poketeam.id}`}>
             {`# ${poketeam.id}`}
           </Link>
         </span>
         <button className="teams__delete-btn" type="button" onClick={() => actions.deleteOneTeam(poketeam, user)}>delete</button>
-      </>
+      </div>
       )}
     </div>
   );

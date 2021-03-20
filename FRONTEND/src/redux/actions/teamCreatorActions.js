@@ -99,6 +99,7 @@ export function modifyOnePokemon(team,
     ...pokemon,
     moveset,
   };
+  const userId = user._id;
   const { pokemons } = team;
   pokemons[pokemon.id - 1] = newpoke;
   const updatedteam = {
@@ -107,11 +108,11 @@ export function modifyOnePokemon(team,
   };
   return async (dispatch) => {
     try {
-      await axios.put(`${dbUrls.baseUrl}${dbUrls.teamsUrl}`, {
-        team: updatedteam,
-        email: user.email,
-      });
-      await axios.delete(`${dbUrls.baseUrl}${dbUrls.teamsUrl}/delete/${team._id}`);
+      await axios.patch(`${dbUrls.baseUrl}${dbUrls.teamsUrl}/delete/${team._id}`, { userId })
+        .then(() => axios.put(`${dbUrls.baseUrl}${dbUrls.teamsUrl}`, {
+          team: updatedteam,
+          email: user.email,
+        }));
       dispatch(modifyOnePokemonSuccess(updatedteam));
     } catch (error) {
       dispatch(teamActionsError(error));

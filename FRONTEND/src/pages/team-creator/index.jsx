@@ -40,30 +40,33 @@ export function TeamCreatorComponent({
   }
 
   return (
-    <section className="team-creator__container">
+    <section data-aos="fade-in" className="team-creator__container">
       {teams
           && (
-          <div className="team-creator__creator">
-            {!newTeam.id && <button type="button" className="teamcreator__btn" onClick={() => actions.createTeam()}>new team</button>}
+          <div data-aos="fade-in" className="team-creator__creator">
+            <div>
+              {!newTeam.id && <button type="button" className="teamcreator__btn" onClick={() => actions.createTeam()}>new team!</button>}
 
-            {newTeam.id && newTeam.pokemons.map((poke) => (
-              poke.num
-                ? (<img alt="pokemon ico" src={`${pokemonSprites.httpIcon}${poke.num}.png`} key={Math.random()} />
-                )
-                : (
-                  <Ditto fill="#458cdd" key={Math.random()} value={poke.id} />
-                )
-            ))}
+              {newTeam.id && newTeam.pokemons.map((poke) => (
+                poke.num
+                  ? (<img alt="pokemon ico" src={`${pokemonSprites.httpIcon}${poke.num}.png`} key={Math.random()} />
+                  )
+                  : (
+                    <Ditto fill="#458cdd" key={Math.random()} value={poke.id} />
+                  )
+              ))}
+            </div>
 
             {newTeam.id && (
               <form onSubmit={() => handleSubmit()}>
                 <input type="text" placeholder="team name" onChange={(event) => setTeamName(event.target.value)} required />
-                <input type="submit" value="add team" />
+                <input type="submit" value="create team!" />
               </form>
             )}
           </div>
           )}
-      <PokemonListTeam />
+      {newTeam.id && <PokemonListTeam />}
+
     </section>
   );
 }

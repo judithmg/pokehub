@@ -636,11 +636,9 @@
       "Field"
     ],
     "otherFormes": [
-      "Rattata-Alola"
     ],
     "formeOrder": [
       "Rattata",
-      "Rattata-Alola"
     ]
   },
   {
@@ -671,13 +669,9 @@
       "Field"
     ],
     "otherFormes": [
-      "Raticate-Alola",
-      "Raticate-Alola-Totem"
     ],
     "formeOrder": [
       "Raticate",
-      "Raticate-Alola",
-      "Raticate-Alola-Totem"
     ]
   },
   {
@@ -821,7 +815,6 @@
     "evoType": "levelFriendship",
     "evos": [
       "Raichu",
-      "Raichu-Alola"
     ],
     "eggGroups": [
       "Field",
@@ -839,7 +832,6 @@
       "Pikachu-Sinnoh",
       "Pikachu-Unova",
       "Pikachu-Kalos",
-      "Pikachu-Alola",
       "Pikachu-Partner",
       "Pikachu-Starter",
       "Pikachu-World"
@@ -851,7 +843,6 @@
       "Pikachu-Sinnoh",
       "Pikachu-Unova",
       "Pikachu-Kalos",
-      "Pikachu-Alola",
       "Pikachu-Partner",
       "Pikachu-Starter",
       "Pikachu-World",
@@ -893,11 +884,9 @@
       "Fairy"
     ],
     "otherFormes": [
-      "Raichu-Alola"
     ],
     "formeOrder": [
       "Raichu",
-      "Raichu-Alola"
     ]
   },
   {
@@ -928,11 +917,9 @@
       "Field"
     ],
     "otherFormes": [
-      "Sandshrew-Alola"
     ],
     "formeOrder": [
       "Sandshrew",
-      "Sandshrew-Alola"
     ]
   },
   {
@@ -962,11 +949,9 @@
       "Field"
     ],
     "otherFormes": [
-      "Sandslash-Alola"
     ],
     "formeOrder": [
       "Sandslash",
-      "Sandslash-Alola"
     ]
   },
   {
@@ -1259,11 +1244,9 @@
       "Field"
     ],
     "otherFormes": [
-      "Vulpix-Alola"
     ],
     "formeOrder": [
       "Vulpix",
-      "Vulpix-Alola"
     ]
   },
   {
@@ -1298,11 +1281,9 @@
       "Field"
     ],
     "otherFormes": [
-      "Ninetales-Alola"
     ],
     "formeOrder": [
       "Ninetales",
-      "Ninetales-Alola"
     ]
   },
   {
@@ -1674,11 +1655,9 @@
       "Field"
     ],
     "otherFormes": [
-      "Diglett-Alola"
     ],
     "formeOrder": [
       "Diglett",
-      "Diglett-Alola"
     ]
   },
   {
@@ -1709,11 +1688,9 @@
       "Field"
     ],
     "otherFormes": [
-      "Dugtrio-Alola"
     ],
     "formeOrder": [
       "Dugtrio",
-      "Dugtrio-Alola"
     ]
   },
   {
@@ -1745,12 +1722,10 @@
       "Field"
     ],
     "otherFormes": [
-      "Meowth-Alola",
       "Meowth-Galar"
     ],
     "formeOrder": [
       "Meowth",
-      "Meowth-Alola",
       "Meowth-Galar"
     ],
     "canGigantamax": "G-Max Gold Rush"
@@ -1783,11 +1758,9 @@
       "Field"
     ],
     "otherFormes": [
-      "Persian-Alola"
     ],
     "formeOrder": [
       "Persian",
-      "Persian-Alola"
     ]
   },
   {
@@ -2449,11 +2422,9 @@
       "Mineral"
     ],
     "otherFormes": [
-      "Geodude-Alola"
     ],
     "formeOrder": [
       "Geodude",
-      "Geodude-Alola"
     ]
   },
   {
@@ -2488,11 +2459,9 @@
       "Mineral"
     ],
     "otherFormes": [
-      "Graveler-Alola"
     ],
     "formeOrder": [
       "Graveler",
-      "Graveler-Alola"
     ]
   },
   {
@@ -2524,11 +2493,9 @@
       "Mineral"
     ],
     "otherFormes": [
-      "Golem-Alola"
     ],
     "formeOrder": [
       "Golem",
-      "Golem-Alola"
     ]
   },
   {
@@ -2927,11 +2894,9 @@
       "Amorphous"
     ],
     "otherFormes": [
-      "Grimer-Alola"
     ],
     "formeOrder": [
       "Grimer",
-      "Grimer-Alola"
     ]
   },
   {
@@ -2962,11 +2927,9 @@
       "Amorphous"
     ],
     "otherFormes": [
-      "Muk-Alola"
     ],
     "formeOrder": [
       "Muk",
-      "Muk-Alola"
     ]
   },
   {
@@ -3349,7 +3312,6 @@
     "color": "Pink",
     "evos": [
       "Exeggutor",
-      "Exeggutor-Alola"
     ],
     "eggGroups": [
       "Grass"
@@ -3384,11 +3346,9 @@
       "Grass"
     ],
     "otherFormes": [
-      "Exeggutor-Alola"
     ],
     "formeOrder": [
       "Exeggutor",
-      "Exeggutor-Alola"
     ]
   },
   {
@@ -3415,7 +3375,6 @@
     "color": "Brown",
     "evos": [
       "Marowak",
-      "Marowak-Alola"
     ],
     "eggGroups": [
       "Monster"
@@ -3449,13 +3408,9 @@
       "Monster"
     ],
     "otherFormes": [
-      "Marowak-Alola",
-      "Marowak-Alola-Totem"
     ],
     "formeOrder": [
       "Marowak",
-      "Marowak-Alola",
-      "Marowak-Alola-Totem"
     ]
   },
   {

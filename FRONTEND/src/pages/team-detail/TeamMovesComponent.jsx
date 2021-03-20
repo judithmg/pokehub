@@ -35,11 +35,11 @@ export function TeamMovesComponent({
 
   return (
     <>
-      <div className="pokemon__moves pokemon__info">
+      <div className="team-pokemon__moves pokemon__info">
         <h2>Moves</h2>
         <select
           onChange={(e) => setMove0(e.target.value)}
-          defaultValue=""
+          defaultValue={pokemon?.moveset[0]?.name}
         >
           {pokemon.learnset && pokemon.learnset.map((move) => (
             <option>
@@ -48,41 +48,37 @@ export function TeamMovesComponent({
           ))}
         </select>
         <select
-        // value={....moveset...}
           onChange={(e) => setMove1(e.target.value)}
-          defaultValue=""
+          defaultValue={pokemon?.moveset[1]?.name}
         >
           {pokemon.learnset && pokemon.learnset.map((move) => (
             <option>
-              {' '}
-              {move[0]?.name}
+              { move[0]?.name}
             </option>
           ))}
         </select>
         <select
           onChange={(e) => setMove2(e.target.value)}
-          defaultValue=""
+          defaultValue={pokemon?.moveset[2]?.name}
         >
           {pokemon.learnset && pokemon.learnset.map((move) => (
             <option>
-              {' '}
               {move[0]?.name}
             </option>
           ))}
         </select>
         <select
           onChange={(e) => setMove3(e.target.value)}
-          defaultValue=""
+          defaultValue={pokemon?.moveset[3]?.name}
         >
           {pokemon.learnset && pokemon.learnset.map((move) => (
             <option>
-              {' '}
               {move[0]?.name}
             </option>
           ))}
         </select>
       </div>
-      <div>
+      <div className="team-pokemon__save">
         <button
           type="button"
           onClick={() => handleSubmit()}
@@ -91,14 +87,7 @@ export function TeamMovesComponent({
         </button>
 
       </div>
-      <div className="pokemon__moves pokemon__info">
-        <h2>titulo</h2>
-        <span />
-        <span />
-        <span />
-        <span />
 
-      </div>
     </>
   );
 }

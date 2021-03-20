@@ -4,7 +4,7 @@ import React from 'react';
 import RadarChart from 'react-svg-radar-chart';
 import radarChartData from '../../constants/radarChartData';
 
-export default function RadarChartComponent({ stats }) {
+export default function RadarChartComponent({ stats, size }) {
   return (
     <RadarChart
       captions={radarChartData}
@@ -18,15 +18,16 @@ export default function RadarChartComponent({ stats }) {
             'sp-def': +(stats?.spd / 230).toFixed(2),
             speed: +(stats?.spe / 180).toFixed(2),
           },
-          meta: { color: '#58FCEC' },
+          meta: { color: '#fdaa10' },
         },
       ]}
-      size={150}
+      size={size}
     />
   );
 }
 
 RadarChartComponent.propTypes = {
+  size: PropTypes.number.isRequired,
   stats: PropTypes.shape(
     {
       hp: PropTypes.number,

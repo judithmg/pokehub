@@ -12,6 +12,7 @@ export function ButtonTypeFilterComponent({ actions, type }) {
   useEffect(() => {
     if (pokeType.length) {
       actions.loadPokemonFromType(pokeType);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [pokeType]);
   return (

@@ -3,106 +3,124 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import Pokeball from '../icons/Pokeball';
 import { pokemonSprites } from '../../constants/images';
 
 export default function SpritesComponent({ pokemon }) {
-  const [pokemonSprite, setPokemonSprite] = useState(true);
-  const [versionSprite, setVersionSprite] = useState('generation-viii/icons/');
+  const [versionSprite, setVersionSprite] = useState('');
   const [pokemonShiny, setPokemonShiny] = useState(false);
   return (
     <>
       {pokemon && (
 
         <div className="abstract__sprite">
-          <div className="svg-container"><Pokeball /></div>
-          <img
-            src={`${pokemonSprite
-              ? pokemonSprites.httpSprite : pokemonSprites.httpShinySprite}${pokemon.num}.png`}
-            alt="pokemon sprite"
-          />
-          <img
-            src={`${pokemonSprite
-              ? pokemonSprites.httpBackSprite : pokemonSprites.httpBackShinySprite}${pokemon.num}.png`}
-            alt="pokemon sprite"
-          />
 
+          <div className="sprites__container">
+            <>
+              <img
+                src={`${pokemonSprites.httpFrontSprite}${versionSprite}${pokemonShiny ? 'shiny/' : ''}${pokemon.num}.png`}
+                alt="pokemon sprite"
+              />
+              {/* {only show Pokemon back sprite if it is available} */}
+              {versionSprite !== 'versions/generation-i/red-blue/transparent/'
+          && versionSprite !== 'versions/generation-i/yellow/transparent/'
+          && versionSprite !== 'versions/generation-viii/icons/'
+          && versionSprite !== 'versions/generation-ii/gold/transparent/'
+          && versionSprite !== 'versions/generation-ii/silver/transparent/'
+          && versionSprite !== 'versions/generation-vi/omegaruby-alphasapphire/'
+          && versionSprite !== 'versions/generation-iii/emerald/'
+          && versionSprite !== 'versions/generation-vi/x-y/'
+          && versionSprite !== 'versions/generation-vii/ultra-sun-ultra-moon/'
+          && (
           <img
-            src={`${pokemonSprites.httpVersionsFront}${versionSprite}${pokemonShiny ? 'shiny/' : ''}${pokemon.num}.png`}
+            src={`${pokemonSprites.httpFrontSprite}${versionSprite}back/${pokemonShiny ? 'shiny/' : ''}${pokemon.num}.png`}
             alt="pokemon sprite"
           />
-          {
-          versionSprite !== 'generation-i/red-blue/transparent/'
-          && versionSprite !== 'generation-i/yellow/transparent/'
-          && versionSprite !== 'generation-viii/icons/'
-          && versionSprite !== 'generation-ii/gold/transparent/'
-          && versionSprite !== 'generation-ii/silver/transparent/'
+          )}
+            </>
+          </div>
+          <div>
+            <>
+              {
+          versionSprite !== 'versions/generation-i/red-blue/transparent/'
+          && versionSprite !== 'versions/generation-i/yellow/transparent/'
+          && versionSprite !== 'versions/generation-viii/icons/'
+          && versionSprite !== 'versions/generation-ii/gold/transparent/'
+          && versionSprite !== 'versions/generation-ii/silver/transparent/'
           && (
           <button
             type="button"
-            style={{ backgroundColor: 'red' }}
             onClick={() => setPokemonShiny(!pokemonShiny)}
           >
-              {pokemonSprite
-                ? <span>shiny</span>
-                : <span>default</span> }
+            { pokemonShiny
+              ? <span>unshiny</span>
+              : <span>shiny me</span> }
           </button>
           )
         }
-          <button type="button" onClick={() => setPokemonSprite(!pokemonSprite)}>{pokemonSprite ? <span>shiny</span> : <span>default</span> }</button>
 
-          <select id="sprites" onChange={(e) => setVersionSprite(e.target.value)}>
-            {pokemon.num <= 151
+              <select
+                id="sprites"
+                onChange={(e) => {
+                  setVersionSprite(e.target.value);
+                  setPokemonShiny(false);
+                }}
+              >
+                <option value="" defaultValue>default sprite</option>
+                {pokemon.num <= 151
           && (
           <>
-            <option value="generation-i/red-blue/transparent/">red-blue</option>
-            <option value="generation-i/yellow/transparent/">yellow</option>
-            <option value="generation-iii/firered-leafgreen/">firered-leafgreen</option>
-
-          </>
-          )}
-            { pokemon.num < 252
-          && (
-          <>
-
-            <option value="generation-ii/crystal/transparent/">crystal</option>
-            <option value="generation-ii/gold/transparent/">gold</option>
-            <option value="generation-ii/silver/transparent/">silver</option>
-          </>
-          )}
-            { pokemon.num < 387
-          && (
-          <>
-            <option value="generation-iii/emerald/">emerald</option>
-            <option value="generation-iii/ruby-sapphire/">ruby-sapphire</option>
-          </>
-          )}
-            { pokemon.num < 494
-          && (
-          <>
-            <option value="generation-iv/diamond-pearl/">diamond-pearl</option>
-            <option value="generation-iv/heartgold-soulsilver/">heartgold-soulsilver</option>
-            <option value="generation-iv/platinum/">platinum</option>
-          </>
-          )}
-            { pokemon.num < 650
-          && (
-          <>
-            <option value="generation-v/black-white/">black-white</option>
+            <option value="versions/generation-i/red-blue/transparent/">red-blue</option>
+            <option value="versions/generation-i/yellow/transparent/">yellow</option>
+            <option value="versions/generation-iii/firered-leafgreen/">firered-leafgreen</option>
 
           </>
           )}
-            { pokemon.num < 722
+                { pokemon.num < 252
           && (
           <>
-            <option value="generation-vi/omegaruby-alphasapphire/">omegaruby-alphasapphire</option>
-            <option value="generation-vi/x-y/">x-y</option>
+
+            <option value="versions/generation-ii/crystal/transparent/">crystal</option>
+            <option value="versions/generation-ii/gold/transparent/">gold</option>
+            <option value="versions/generation-ii/silver/transparent/">silver</option>
           </>
           )}
-            { pokemon.num < 810
-          && (<option value="generation-vii/ultra-sun-ultra-moon/">ultra-sun-ultra-moon</option>)}
-            <option value="generation-viii/icons/" defaultValue>icons</option>
-          </select>
+                { pokemon.num < 387
+          && (
+          <>
+            <option value="versions/generation-iii/emerald/">emerald</option>
+            <option value="versions/generation-iii/ruby-sapphire/">ruby-sapphire</option>
+          </>
+          )}
+                { pokemon.num < 494
+          && (
+          <>
+            <option value="versions/generation-iv/diamond-pearl/">diamond-pearl</option>
+            <option value="versions/generation-iv/heartgold-soulsilver/">heartgold-soulsilver</option>
+            <option value="versions/generation-iv/platinum/">platinum</option>
+          </>
+          )}
+                { pokemon.num < 650
+          && (
+          <>
+            <option value="versions/generation-v/black-white/">black-white</option>
+
+          </>
+          )}
+                { pokemon.num < 722
+          && (
+          <>
+            <option value="versions/generation-vi/omegaruby-alphasapphire/">omegaruby-alphasapphire</option>
+            <option value="versions/generation-vi/x-y/">x-y</option>
+          </>
+          )}
+                { pokemon.num < 810
+          && (<option value="versions/generation-vii/ultra-sun-ultra-moon/">ultra-sun-ultra-moon</option>)}
+
+                <option value="versions/generation-viii/icons/">icons</option>
+              </select>
+            </>
+          </div>
+
         </div>
       )}
     </>
@@ -112,5 +130,6 @@ export default function SpritesComponent({ pokemon }) {
 SpritesComponent.propTypes = {
   pokemon: PropTypes.shape({
     num: PropTypes.number.isRequired,
+    types: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
 };

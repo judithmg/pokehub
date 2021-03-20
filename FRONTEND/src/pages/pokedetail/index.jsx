@@ -8,6 +8,7 @@ import '../../styles/pokedetail.scss';
 import '../../styles/_types.scss';
 
 import Moveset from './MovesetComponent';
+import ButtonType from '../shared/ButtonType';
 import PokemonAbilities from './AbilitiesComponent';
 import MainInfo from './MainInfoComponent';
 import VisualInfoComponent from './VisualInfoComponent';
@@ -17,6 +18,8 @@ import {
   loadPokemonDetail,
   loadPokemonAbilities,
 } from '../../redux/actions/pokemonActions';
+
+import Pokeball from '../icons/Pokeball';
 
 export function PokeDetailComponent({
   pokemonAbilities,
@@ -39,19 +42,24 @@ export function PokeDetailComponent({
 
   return (
     <>
-      <section>
+      <section data-aos="fade-in" className="pokedetail__container">
 
         { pokemon && (
-        <>
-          <div className={`pokemon__abstract ${pokemon?.types && pokemon?.types[0].toLowerCase()}`}>
-            <MainInfo pokemon={pokemon} />
-            <VisualInfoComponent pokemon={pokemon} pokedex={pokedex} />
-          </div>
-
-          <div className="pokemon__details">
-            <div className="pokemon__ability">
-              <span className="pokemon__ability-title">ABILITY</span>
-              {
+          <>
+            <div className="pokemon--desktop">
+              <div className={`pokemon__abstract ${pokemon?.types && pokemon?.types[0].toLowerCase()}`}>
+                <div className="svg-container"><Pokeball /></div>
+                <MainInfo pokemon={pokemon} />
+                <VisualInfoComponent pokemon={pokemon} pokedex={pokedex} />
+              </div>
+              <div className="pokemon__details">
+                <div className="abstract__type">
+                  {pokemon?.types && pokemon.types
+                    .map((type) => <ButtonType type={type.toLowerCase()} />)}
+                </div>
+                <div className="pokemon__ability">
+                  <span className="pokemon__ability-title">ABILITY</span>
+                  {
               pokemonAbilities
               && pokemonAbilities.map((ability) => (
                 <PokemonAbilities
@@ -60,10 +68,12 @@ export function PokeDetailComponent({
                 />
               ))
               }
-            </div>
 
+                </div>
+              </div>
+            </div>
             <div className="pokemon__moves">
-              <span className="pokemon__moves-title">
+              <span className="pokemon__moves-title --hidden">
                 MOVES
               </span>
               {
@@ -71,8 +81,8 @@ export function PokeDetailComponent({
                   && <Moveset moves={pokemonLearnset} />
                 }
             </div>
-          </div>
-        </>
+
+          </>
         )}
       </section>
     </>

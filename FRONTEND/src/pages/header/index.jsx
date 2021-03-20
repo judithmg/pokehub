@@ -43,7 +43,7 @@ export function HeaderComponent({ actions, user }) {
         <div className="header--right">
           {user?.email ? (
             <>
-              <Link to="/profile" className="header__link"><Button text="Profile" classes="header__login" /></Link>
+              <Link to="/profile" className="header__link --desktop"><Button text="Profile" classes="header__login" /></Link>
               <Link to="/" onClick={() => handleLogout()} className="header__link"><Button text="Logout" classes="header__login" /></Link>
             </>
           ) : (<Link to="/login"><Button text="Login" classes="header__login" /></Link>)}

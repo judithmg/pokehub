@@ -9,6 +9,8 @@ import {
   loadLearnsets,
 } from '../../redux/actions/pokedexActions';
 
+import '../../styles/team-detail.scss';
+
 import { getUserInfo } from '../../redux/actions/userActions';
 import { useAuth } from '../../context/AuthContext';
 
@@ -52,7 +54,7 @@ export function TeamDetailComponent({
 
   return (
     moves.length && learnsets.length && (
-      <section className="teamdetail__container">
+      <section data-aos="fade-in" className="teamdetail__container">
         {
       team
         && team?.pokemons?.map((pokemon) => (

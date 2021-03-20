@@ -22,7 +22,7 @@ export default function EvolutionChainComponent({
   }
   return (
     <div className="abstract__evochain">
-      <span className="abstract__evochain-title">EVOLUTION CHAIN</span>
+      <span className="abstract__evochain-title --desktop">EVOLUTION CHAIN</span>
       <div className="abstract__evochain-sprites">
 
         {

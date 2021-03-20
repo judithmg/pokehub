@@ -14,22 +14,23 @@ export default function TeamPokemonComponent({ pokemon }) {
     pokemon.learnset
     && (
     <div className="teamdetail__pokemon" key={Math.random()}>
+
       <div className={`pokemon__sprite ${pokemon.types[0]}`}>
         <span>{pokemon.name}</span>
         <Link to={`/pokemon/${pokemon.name.toLowerCase()}`}>
           <img
-            src={`${pokemonSprites.httpSprite}${pokemon.num}.png`}
+            src={`${pokemonSprites.httpFrontSprite}${pokemon.num}.png`}
             alt="pokemon sprite"
           />
         </Link>
       </div>
       <div className="pokemon__data">
-        <div className="pokemon__stats">
-          <RadarChart stats={pokemon.baseStats} />
+        <div className="pokemon__stats --desktop">
+          <RadarChart stats={pokemon.baseStats} size={150} />
         </div>
-        <div className="pokemon__info">
+        <div className="pokemon__info --desktop">
           <h2>Base stats</h2>
-          <div className="pokemon__base-stats">
+          <div className="pokemon__base-stats ">
             <div>
               <span>HP</span>
               <span>{pokemon.baseStats.hp}</span>
@@ -54,22 +55,6 @@ export default function TeamPokemonComponent({ pokemon }) {
               <span>SPEED</span>
               <span>{pokemon.baseStats.spd}</span>
             </div>
-          </div>
-        </div>
-        <div>
-          <div className="pokemon__info">
-            <h2>Ability</h2>
-            {pokemon.abilities && pokemon.abilities.map((ability) => (
-              ability
-            ))}
-          </div>
-          <div className="pokemon__info">
-            <h2>Lvl</h2>
-            100
-          </div>
-          <div className="pokemon__info">
-            <h2>Shiny</h2>
-            No
           </div>
         </div>
         <TeamMoves pokemon={pokemon} key={Math.random()} />

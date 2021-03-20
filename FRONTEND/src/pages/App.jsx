@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import {
   Route, Switch, BrowserRouter as Router,
 } from 'react-router-dom';
@@ -32,6 +34,7 @@ import TeamCreator from './team-creator';
 
 import '../styles/App.scss';
 
+AOS.init();
 function App({
   actions,
   pokedex,

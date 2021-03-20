@@ -7,105 +7,12 @@ section {
   margin: 0 50px;
 
   .pokemon__abstract {
-    border: 2px solid green;
     border-radius: 10px;
-    margin: 10px;
     padding: 10px;
     color: #fff;
     text-shadow: $blackshadow;
-
-    .pokemon__abstract-main {
-      border: 2px solid yellow;
-      @include flex(row, flex-start, center);
-
-      .abstract__sprite {
-        border: 2px solid yellow;
-
-        width: 50%;
-        position: relative;
-        @include flex(row, center, center);
-
-        img,
-        button,
-        select {
-          z-index: 1;
-        }
-        img {
-          width: 80px;
-          height: 80px;
-          object-fit: none;
-        }
-        .svg-container {
-          border: 2px solid purple;
-
-          @include flex(row, center, center);
-          position: absolute;
-          top: -50;
-          svg {
-            border: 2px solid coral;
-
-            width: 70%;
-            fill: rgba(255, 255, 255, 0.4);
-          }
-        }
-      }
-      .abstract__data {
-        @include flex(column, center, flex-start);
-        border: 2px solid green;
-        width: 50%;
-        margin: 10px;
-
-        .abstract__name {
-          span {
-            text-transform: uppercase;
-            font-weight: 700;
-          }
-          @include flex(column, center, center);
-        }
-        .abstract__id {
-          font-weight: 700;
-        }
-        .abstract__size {
-          @include flex(column, center, center);
-        }
-      }
-    }
-    .pokemon__abstract-visual {
-      border: 2px solid green;
-
-      @include flex(row, center, center);
-      .abstract__stats {
-        width: 50%;
-
-        border: 2px solid yellow;
-
-        @include flex(row, center, center);
-        margin: 10px;
-      }
-      .abstract__evochain {
-        @include flex(column, center, center);
-
-        width: 50%;
-        font-weight: 700;
-        font-size: 14px;
-        border: 2px solid yellow;
-
-        background-color: rgba(255, 255, 255, 0.4);
-        border-radius: 10px;
-
-        margin: 10px;
-        padding: 15px;
-        .abstract__evochain-sprites {
-          @include flex(row, center, center);
-          img {
-            filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-            transform: translatey(0px);
-            animation: float 2s ease-in-out infinite;
-          }
-        }
-      }
-    }
   }
+
   @keyframes float {
     0% {
       transform: translatey(0px);
@@ -119,33 +26,150 @@ section {
   }
   .pokemon__details {
     .pokemon__ability {
+      margin-bottom: 20px;
+
       @include flex(column, center, flex-start);
       .pokemon__ability-title,
       .pokemon__ability-name {
         font-weight: 700;
+        margin: 5px 0;
       }
     }
     .pokemon__moves {
       @include flex(column, center, flex-start);
-      .pokemon__moves-egg,
       .pokemon__moves-title {
         font-weight: 700;
+        margin-bottom: 15px;
       }
     }
   }
 }
+.svg-container {
+  svg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 1;
+    width: 80%;
+    fill: rgba(255, 255, 255, 0.07);
+  }
+}
+.pokemon__abstract-main {
+  @include flex(row, flex-start, center);
 
+  .abstract__sprite {
+    width: 50%;
+    position: relative;
+    @include flex(column, space-between, space-between);
+
+    img,
+    button,
+    select {
+      z-index: 1;
+    }
+    div {
+      @include flex(row, center, center);
+
+      select {
+        width: 10%;
+      }
+      button {
+        background-color: rgba(118, 118, 118, 0.4);
+        text-shadow: $blackshadow;
+        font-family: $PressStart;
+        border-radius: 10px;
+        color: white;
+        padding: 4px;
+        margin: 0 10px;
+        border: 1px solid rgb(102, 102, 102);
+      }
+    }
+
+    .sprites__container {
+      z-index: 1;
+      img {
+        width: 80px;
+        height: 80px;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        object-fit: none;
+      }
+    }
+  }
+  .abstract__data {
+    @include flex(column, flex-start, flex-start);
+    width: 50%;
+    margin: 10px;
+    padding-left: 40px;
+
+    .abstract__name {
+      span {
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+      @include flex(column, center, center);
+    }
+    .abstract__id {
+      font-weight: 700;
+    }
+    .abstract__size {
+      @include flex(column, center, center);
+    }
+  }
+}
+.abstract__type {
+  @include flex(row, center, center);
+  button {
+    margin: 0 20px;
+  }
+}
+.pokemon__abstract-visual {
+  @include flex(row, center, flex-end);
+  .abstract__stats {
+    width: 50%;
+    @include flex(row, center, center);
+  }
+}
+
+.abstract__evochain {
+  @include flex(column, center, center);
+
+  width: 50%;
+  font-weight: 700;
+  font-size: 14px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+
+  margin: 10px;
+  padding: 15px;
+}
+.abstract__evochain-sprites {
+  @include flex(column, center, center);
+  img {
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    transform: translatey(0px);
+    animation: float 2s ease-in-out infinite;
+  }
+}
 .table__moveset {
+  margin: 0 auto;
+  margin-bottom: 100px;
+  width: 90vw;
   thead {
     .moveset__header {
       border-radius: 10px 10px 0 0;
       background-color: $grayodd;
       padding: 5px;
+      font-weight: 700;
     }
   }
   tbody {
-    tr:not(:last-child) {
+    tr {
       background-color: $grayeven;
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.46);
     }
   }
 }
@@ -153,11 +177,24 @@ section {
 .moveset__header,
 .pokemon__move {
   @include flex(row, flex-start, center);
+  cursor: zoom-in;
+  &:hover {
+    background-color: $grayodd;
+  }
 
   td,
   th {
-    width: 100px;
     padding: 0 5px;
+  }
+  .pokemon__move-name,
+  .pokemon__move-type,
+  .moveset__header-name,
+  .moveset__header-type {
+    width: 45%;
+  }
+  .pokemon__move-pp,
+  .moveset__header-pp {
+    width: 10%;
   }
 }
 tbody tr:last-child {
@@ -167,4 +204,76 @@ tbody tr:last-child {
 
 .pokemon__move-pp {
   position: relative;
+}
+
+.caption {
+  fill: #000;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: $Montserrat;
+  text-shadow: none;
+}
+.scale {
+  fill: rgba(255, 255, 255, 0.282);
+}
+
+@media only screen and (min-width: 768px) {
+  .pokemon__abstract {
+    width: 50%;
+    box-shadow: none;
+  }
+  .pokemon--desktop {
+    @include flex(row, center, center);
+    background-color: $grayeven;
+    margin: 20px;
+    padding: 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.385);
+  }
+  .pokemon__details {
+    padding: 20px;
+    @include flex(column-reverse, center, center);
+  }
+  .pokedetail__container {
+    @include flex(column, flex-end, flex-end);
+    width: 50vw;
+  }
+
+  .pokemon__abstract-main {
+    @include flex(row, center, center);
+  }
+
+  .pokemon__abstract-visual {
+    @include flex(column, center, center);
+  }
+  .sprites__container {
+    img {
+      margin: 0 10px;
+    }
+  }
+
+  .svg-container {
+    position: relative;
+    svg {
+      width: 70%;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      z-index: 1;
+      fill: rgba(255, 255, 255, 0.07);
+    }
+  }
+  .pokemon__moves {
+    width: 50vw;
+    table {
+      width: 95%;
+    }
+  }
+
+  .abstract__evochain-sprites {
+    @include flex(row, center, center);
+    padding: 0 20px;
+  }
 }
