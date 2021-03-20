@@ -25,7 +25,7 @@ export default function TeamPokemonComponent({ pokemon }) {
       </div>
       <div className="pokemon__data">
         <div className="pokemon__stats">
-          <RadarChart stats={pokemon.baseStats} />
+          <RadarChart stats={pokemon.baseStats} size={150} />
         </div>
         <div className="pokemon__info">
           <h2>Base stats</h2>
@@ -54,22 +54,6 @@ export default function TeamPokemonComponent({ pokemon }) {
               <span>SPEED</span>
               <span>{pokemon.baseStats.spd}</span>
             </div>
-          </div>
-        </div>
-        <div>
-          <div className="pokemon__info">
-            <h2>Ability</h2>
-            {pokemon.abilities && pokemon.abilities.map((ability) => (
-              ability
-            ))}
-          </div>
-          <div className="pokemon__info">
-            <h2>Lvl</h2>
-            100
-          </div>
-          <div className="pokemon__info">
-            <h2>Shiny</h2>
-            No
           </div>
         </div>
         <TeamMoves pokemon={pokemon} key={Math.random()} />

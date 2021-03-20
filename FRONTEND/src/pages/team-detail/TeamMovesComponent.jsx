@@ -35,7 +35,7 @@ export function TeamMovesComponent({
 
   return (
     <>
-      <div className="pokemon__moves pokemon__info">
+      <div className="team-pokemon__moves pokemon__info">
         <h2>Moves</h2>
         <select
           onChange={(e) => setMove0(e.target.value)}
@@ -48,7 +48,6 @@ export function TeamMovesComponent({
           ))}
         </select>
         <select
-        // value={....moveset...}
           onChange={(e) => setMove1(e.target.value)}
           defaultValue=""
         >
@@ -82,7 +81,7 @@ export function TeamMovesComponent({
           ))}
         </select>
       </div>
-      <div>
+      <div className="team-pokemon__save">
         <button
           type="button"
           onClick={() => handleSubmit()}
@@ -91,14 +90,7 @@ export function TeamMovesComponent({
         </button>
 
       </div>
-      <div className="pokemon__moves pokemon__info">
-        <h2>titulo</h2>
-        <span />
-        <span />
-        <span />
-        <span />
 
-      </div>
     </>
   );
 }
