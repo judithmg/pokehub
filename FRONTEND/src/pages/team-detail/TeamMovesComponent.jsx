@@ -39,7 +39,7 @@ export function TeamMovesComponent({
         <h2>Moves</h2>
         <select
           onChange={(e) => setMove0(e.target.value)}
-          defaultValue=""
+          defaultValue={pokemon?.moveset[0]?.name}
         >
           {pokemon.learnset && pokemon.learnset.map((move) => (
             <option>
@@ -49,33 +49,30 @@ export function TeamMovesComponent({
         </select>
         <select
           onChange={(e) => setMove1(e.target.value)}
-          defaultValue=""
+          defaultValue={pokemon?.moveset[1]?.name}
         >
           {pokemon.learnset && pokemon.learnset.map((move) => (
             <option>
-              {' '}
-              {move[0]?.name}
+              { move[0]?.name}
             </option>
           ))}
         </select>
         <select
           onChange={(e) => setMove2(e.target.value)}
-          defaultValue=""
+          defaultValue={pokemon?.moveset[2]?.name}
         >
           {pokemon.learnset && pokemon.learnset.map((move) => (
             <option>
-              {' '}
               {move[0]?.name}
             </option>
           ))}
         </select>
         <select
           onChange={(e) => setMove3(e.target.value)}
-          defaultValue=""
+          defaultValue={pokemon?.moveset[3]?.name}
         >
           {pokemon.learnset && pokemon.learnset.map((move) => (
             <option>
-              {' '}
               {move[0]?.name}
             </option>
           ))}

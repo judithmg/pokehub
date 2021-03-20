@@ -14,6 +14,7 @@ export default function TeamPokemonComponent({ pokemon }) {
     pokemon.learnset
     && (
     <div className="teamdetail__pokemon" key={Math.random()}>
+
       <div className={`pokemon__sprite ${pokemon.types[0]}`}>
         <span>{pokemon.name}</span>
         <Link to={`/pokemon/${pokemon.name.toLowerCase()}`}>
@@ -24,12 +25,12 @@ export default function TeamPokemonComponent({ pokemon }) {
         </Link>
       </div>
       <div className="pokemon__data">
-        <div className="pokemon__stats">
+        <div className="pokemon__stats --desktop">
           <RadarChart stats={pokemon.baseStats} size={150} />
         </div>
-        <div className="pokemon__info">
+        <div className="pokemon__info --desktop">
           <h2>Base stats</h2>
-          <div className="pokemon__base-stats">
+          <div className="pokemon__base-stats ">
             <div>
               <span>HP</span>
               <span>{pokemon.baseStats.hp}</span>
