@@ -49,7 +49,7 @@ export function submitTeam(team,
   };
   return async (dispatch) => {
     try {
-      const { data } = await axios.put(`${dbUrls.baseUrl}${dbUrls.teamsUrl}`, submit);
+      const { data } = await axios.put(`${dbUrls.baseUrl}${dbUrls.teamsUrl}/add`, submit);
       dispatch(submitTeamSuccess(data));
     } catch (error) {
       dispatch(teamActionsError(error));
@@ -109,7 +109,7 @@ export function modifyOnePokemon(team,
   return async (dispatch) => {
     try {
       await axios.patch(`${dbUrls.baseUrl}${dbUrls.teamsUrl}/delete/${team._id}`, { userId })
-        .then(() => axios.put(`${dbUrls.baseUrl}${dbUrls.teamsUrl}`, {
+        .then(() => axios.put(`${dbUrls.baseUrl}${dbUrls.teamsUrl}/add`, {
           team: updatedteam,
           email: user.email,
         }));

@@ -5,7 +5,8 @@ export default {
   learnsetsUrl: '/pokedex/learnsets',
   abilitiesUrl: '/pokedex/abilities',
 
-  teamsUrl: '/users/teams',
+  teamsUrl: '/teams',
+  usersUrl: '/users/teams',
 
   signUp: '/users/signup',
   login: '/users/user',
