@@ -31,6 +31,7 @@ import SignUp from './SignUp';
 import Teams from './teams';
 import TeamDetail from './team-detail'; import MainComponent from './main';
 import TeamCreator from './team-creator';
+import battle from './Battle';
 
 import '../styles/App.scss';
 
@@ -70,6 +71,7 @@ function App({
         <main>
           <MainComponent />
           <Switch>
+            <Route path="/battle" component={battle} />
             <Route path="/login" component={Login} />
             <Route path="/pokemon/:pokeId" component={PokeDetail} />
             <Route path="/pokedex" component={Pokedex} />
@@ -108,7 +110,7 @@ function mapStateToProps(state) {
 
     moves: state.pokedexReducer.moves,
     abilities: state.pokedexReducer.abilities,
-    learnset: state.pokedexReducer.learnset,
+    learnsets: state.pokedexReducer.learnsets,
     page: state.pokedexReducer.page,
   };
 }

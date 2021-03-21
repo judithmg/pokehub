@@ -53,8 +53,7 @@
   }
   .pokedex__pokemon-sprite {
     img {
-      transform: translatey(0px);
-      animation: float 2s ease-in-out infinite;
+      @include anifloat();
     }
   }
 }
@@ -65,17 +64,6 @@
   padding: 10px 0;
 }
 
-@keyframes float {
-  0% {
-    transform: translatey(0px);
-  }
-  50% {
-    transform: translatey(-10px);
-  }
-  100% {
-    transform: translatey(0px);
-  }
-}
 .pokedex__pagination {
   @include flex(row, center, center);
   cursor: pointer;

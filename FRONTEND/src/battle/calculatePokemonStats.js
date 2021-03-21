@@ -15,14 +15,16 @@ export default function calculatePokemonStats(
     spd: 84,
     spe: 84,
   },
-  level,
+  level = 100,
 ) {
   return {
-    hp: Math.floor(((iv.hp + (2 * pokemon.baseStats.hp) + (ev.hp / 4) + 100) * level) / 100) + 10,
-    atk: Math.floor((((iv.atk + (2 * pokemon.baseStats.atk) + (ev.atk / 4)) * level) / 100) + 5),
-    def: Math.floor((((iv.def + (2 * pokemon.baseStats.def) + (ev.def / 4)) * level) / 100) + 5),
-    spa: Math.floor((((iv.spa + (2 * pokemon.baseStats.spa) + (ev.spa / 4)) * level) / 100) + 5),
-    spd: Math.floor((((iv.spd + (2 * pokemon.baseStats.spd) + (ev.spd / 4)) * level) / 100) + 5),
-    spe: Math.floor((((iv.spe + (2 * pokemon.baseStats.spe) + (ev.spe / 4)) * level) / 100) + 5),
+    hp: Math.floor(((iv.hp + (2 * +pokemon.baseStats.hp) + (ev.hp / 4) + 100) * level) / 100) + 10,
+    maxhp: Math.floor(((iv.hp + (2 * +pokemon.baseStats.hp) + (ev.hp / 4) + 100) * level) / 100)
+    + 10,
+    atk: Math.floor((((iv.atk + (2 * +pokemon.baseStats.atk) + (ev.atk / 4)) * level) / 100) + 5),
+    def: Math.floor((((iv.def + (2 * +pokemon.baseStats.def) + (ev.def / 4)) * level) / 100) + 5),
+    spa: Math.floor((((iv.spa + (2 * +pokemon.baseStats.spa) + (ev.spa / 4)) * level) / 100) + 5),
+    spd: Math.floor((((iv.spd + (2 * +pokemon.baseStats.spd) + (ev.spd / 4)) * level) / 100) + 5),
+    spe: Math.floor((((iv.spe + (2 * +pokemon.baseStats.spe) + (ev.spe / 4)) * level) / 100) + 5),
   };
 }

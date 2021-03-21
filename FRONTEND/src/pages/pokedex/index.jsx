@@ -103,7 +103,7 @@ function mapStateToProps(state) {
 
     moves: state.pokedexReducer.moves,
     abilities: state.pokedexReducer.abilities,
-    learnset: state.pokedexReducer.learnset,
+    learnsets: state.pokedexReducer.learnsets,
     page: state.pokedexReducer.page,
   };
 }

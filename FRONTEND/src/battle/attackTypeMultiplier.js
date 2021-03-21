@@ -1,5 +1,6 @@
-export default function attackTypeMultiplier(attacker, deffendant) {
-  const attackingType = attacker.attack.type.toUpperCase();
+/* eslint-disable no-debugger */
+export default function attackTypeMultiplier(attack, deffendant) {
+  const attackingType = attack.type.toUpperCase();
   const targetType = deffendant.types.map((type) => type.toUpperCase());
 
   const modifiers = [];
