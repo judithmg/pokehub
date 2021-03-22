@@ -96,7 +96,7 @@ PokedexComponent.propTypes = {
   }).isRequired,
 };
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   return {
     pokedex: state.pokedexReducer.pokedex,
     pokemonsShown: state.pokedexReducer.pokemonsShown,
@@ -108,7 +108,7 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       loadPokedex,

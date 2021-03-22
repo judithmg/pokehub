@@ -34,13 +34,13 @@ ButtonTypeFilterComponent.propTypes = {
   }).isRequired,
 };
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   return {
     pokemonTypeFiltered: state.pokedexReducer.pokemonTypeFiltered,
   };
 }
 
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       loadPokemonFromType,

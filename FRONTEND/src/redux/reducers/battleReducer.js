@@ -109,7 +109,7 @@ export default function battleReducer(state = initialState.battleReducer, action
       playerPokemon = {
         ...action.playerPokemon,
         battleStats: action.stats,
-        level: 500,
+        level: 50,
       };
       return { ...state, playerPokemon };
 

@@ -15,7 +15,7 @@ import { HeaderComponent, mapStateToProps, mapDispatchToProps } from '../pages/h
 describe('Given a Header component', () => {
   let container = null;
   let fn;
-  const user = {
+  let user = {
     email: 'jajas@gmail.com',
   };
   const actions = {
@@ -23,23 +23,12 @@ describe('Given a Header component', () => {
     getUserInfo: jest.fn(),
   };
 
+  let store;
   beforeEach(() => {
     container = document.createElement('div');
     document.body.appendChild(container);
-    const store = configureStore();
     jest.spyOn(auth, 'useAuth').mockImplementation(() => ({ logout: jest.fn().mockResolvedValueOnce({}) }));
-
-    // jest.spyOn(auth, 'useAuth').mockImplementation(() => ({ logout: jest.fn().mockRejectedValueOnce({}) }));
-
-    act(() => {
-      render(
-        <Provider store={store}>
-          <BrowserRouter>
-            <HeaderComponent actions={actions} user={user} />
-          </BrowserRouter>
-        </Provider>, container,
-      );
-    });
+    store = configureStore();
   });
 
   afterEach(() => {
@@ -50,35 +39,55 @@ describe('Given a Header component', () => {
 
   describe('When it is invoked', () => {
     test('Then there should be a header section', () => {
+      act(() => {
+        render(
+          <Provider store={store}>
+            <BrowserRouter>
+              <HeaderComponent actions={actions} user={user} />
+            </BrowserRouter>
+          </Provider>, container,
+        );
+      });
       const header = container.querySelector('header');
 
       expect(header).toBeTruthy();
     });
   });
-  describe('When the menu button is clicked', () => {
-    test('An aside should render', () => {
-      const img = container.querySelector('.header__pokeball');
-      fireEvent.click(img);
-      const aside = container.querySelector('aside');
-      expect(aside).toBeTruthy();
+  test('Then an action is called it there is no user', () => {
+    user = {};
+    act(() => {
+      render(
+        <Provider store={store}>
+          <BrowserRouter>
+            <HeaderComponent actions={actions} user={user} />
+          </BrowserRouter>
+        </Provider>, container,
+      );
     });
-    test('A button with a poketype should be rendered', () => {
-      const img = container.querySelector('.header__pokeball');
-      fireEvent.click(img);
-      const btn = container.querySelector('.btn-type--filter');
-      expect(btn).toBeTruthy();
+
+    expect(actions.getUserInfo).toHaveBeenCalled();
+  });
+
+  test('Logout fn should be called', () => {
+    user = { email: 'hello@gmail.com' };
+    act(() => {
+      render(
+        <Provider store={store}>
+          <BrowserRouter>
+            <HeaderComponent actions={actions} user={user} />
+          </BrowserRouter>
+        </Provider>, container,
+      );
     });
-    test('Logout fn should be called', () => {
-      fn = jest.spyOn(actions, 'logoutUser');
-      const btn = container.querySelectorAll('.header__link')[1];
-      act(() => {
-        fireEvent.click(btn);
-      });
-      // se cubre la rama pero no da true??
-      waitFor(() => {
-        expect(fn).toHaveBeenCalled();
-      }, 3000);
+    fn = jest.spyOn(actions, 'logoutUser');
+    const btn = container.querySelectorAll('.header__link')[1];
+    act(() => {
+      fireEvent.click(btn);
     });
+    // se cubre la rama pero no da true??
+    waitFor(() => {
+      expect(fn).toHaveBeenCalled();
+    }, 3000);
   });
 });
 

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import ButtonType from '../menu/ButtonTypeFilter';
+import ButtonType from './ButtonTypeFilter';
 import { pokemonSprites } from '../../constants/images';
 
 export default function PokemonList({ pokemon }) {

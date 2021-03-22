@@ -1,14 +1,14 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
-import { fireEvent } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
 
 import { BrowserRouter } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
 import { SignupComponent, mapStateToProps, mapDispatchToProps } from '../pages/SignUp';
+import * as auth from '../context/AuthContext';
 
-import { AuthProvider } from '../context/AuthContext';
 import configureStore from '../redux/store/configureStore';
 
 describe('Given a SignupComponent component', () => {
@@ -17,19 +17,18 @@ describe('Given a SignupComponent component', () => {
   const actions = {
     getUserInfo: jest.fn(),
   };
-
+  let fn;
   beforeEach(() => {
     container = document.createElement('div');
     document.body.appendChild(container);
     store = configureStore();
+    jest.spyOn(auth, 'useAuth').mockImplementation(() => ({ logout: jest.fn().mockResolvedValueOnce({}) }));
     act(() => {
       render(
         <Provider store={store}>
-          <AuthProvider>
-            <BrowserRouter>
-              <SignupComponent actions={actions} />
-            </BrowserRouter>
-          </AuthProvider>
+          <BrowserRouter>
+            <SignupComponent actions={actions} />
+          </BrowserRouter>
         </Provider>, container,
       );
     });
@@ -44,14 +43,6 @@ describe('Given a SignupComponent component', () => {
     test('Then there should be a btn', () => {
       const btn = document.querySelector('.login__btn');
       expect(btn).toBeTruthy();
-    });
-    test('Then there should be a btn', () => {
-      const handleSubmit = jest.fn();
-      act(() => {
-        const btn = document.querySelector('.login__btn');
-        fireEvent.click(btn);
-      });
-      expect(handleSubmit).toHaveBeenCalled();
     });
   });
 });

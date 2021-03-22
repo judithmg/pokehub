@@ -23,7 +23,8 @@ describe('Given teamActions', () => {
   let user;
   let name;
   const moveset = [''];
-  const pokemon = { name: 'pikachu', num: 25 };
+  const pokemon = { name: 'pikachu', num: 25, id: 1 };
+  const teams = [{ id: 8, pokemons: [{}] }];
 
   beforeEach(() => {
     store = configureStore();
@@ -107,16 +108,29 @@ describe('Given teamActions', () => {
         { data, type: actionTypes.SUBMIT_TEAM },
       );
     });
+    test('Then there is an error if action does not succeeed', async () => {
+      axios.put = jest.fn().mockRejectedValueOnce('error');
+
+      store.dispatch = jest.fn();
+      const dispatchFunction = submitTeam(team,
+        user, name);
+      await dispatchFunction(store.dispatch);
+
+      expect(store.dispatch).toHaveBeenCalledWith(
+        { error: 'error', type: actionTypes.TEAM_ERROR },
+      );
+    });
   });
   describe('When modifyOnePokemon is called', () => {
     test('Then store.dispatch should be called ', async () => {
       user = { email: '@' };
       axios.put = jest.fn().mockImplementationOnce(() => Promise.resolve({
-        team, email: user.email,
+        teams,
       }));
 
       store.dispatch = jest.fn();
       const dispatchFunction = modifyOnePokemon(team,
+        teams,
         user,
         moveset,
         pokemon);
@@ -124,6 +138,21 @@ describe('Given teamActions', () => {
 
       expect(store.dispatch).toHaveBeenCalledWith(
         { team, type: actionTypes.MODIFY_POKEMON },
+      );
+    });
+    test('Then there is an error if action does not succeeed', async () => {
+      axios.put = jest.fn().mockRejectedValueOnce('error');
+
+      store.dispatch = jest.fn();
+      const dispatchFunction = modifyOnePokemon(team,
+        teams,
+        user,
+        moveset,
+        pokemon);
+      await dispatchFunction(store.dispatch);
+
+      expect(store.dispatch).toHaveBeenCalledWith(
+        { error: 'error', type: actionTypes.TEAM_ERROR },
       );
     });
   });
@@ -140,6 +169,18 @@ describe('Given teamActions', () => {
 
       expect(store.dispatch).toHaveBeenCalledWith(
         { data, type: actionTypes.DELETE_ONE_TEAM },
+      );
+    });
+    test('Then when it does not suceed there is an error', async () => {
+      axios.patch = jest.fn().mockRejectedValueOnce('error');
+
+      store.dispatch = jest.fn();
+      const dispatchFunction = deleteOneTeam(team,
+        user);
+      await dispatchFunction(store.dispatch);
+
+      expect(store.dispatch).toHaveBeenCalledWith(
+        { error: 'error', type: actionTypes.TEAM_ERROR },
       );
     });
   });
