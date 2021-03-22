@@ -1,9 +1,8 @@
 @import "./mixins";
 @import "./colors";
 @import "./fonts";
-
+@import "./fontawesome.scss";
 //GENERAL STYLES
-
 body {
   background-color: $backgroundcolor;
   margin: 0;

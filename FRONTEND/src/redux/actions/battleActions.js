@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import actionTypes from './actionTypes';
 import calculateTypeModifier from '../../battle/attackTypeMultiplier';
 import getAttackData from '../../battle/getAttackData';
@@ -13,16 +14,19 @@ function loadBattleTeam(playerTeam) {
 }
 
 function loadEnemyTeam() {
-  let enemyPokemon = enemyTeam[Math.floor(Math.random() * 5) + 1];
-  const stats = calculatePokemonStats(enemyPokemon);
-  enemyPokemon = {
-    ...enemyPokemon,
-    battleStats: stats,
-    level: 100,
-  };
+  const updatedEnemyTeam = enemyTeam.map((enemy) => {
+    const stats = calculatePokemonStats(enemy);
+    enemy = {
+      ...enemy,
+      battleStats: stats,
+      level: 100,
+    };
+    return enemy;
+  });
+  const enemyPokemon = updatedEnemyTeam[Math.floor(Math.random() * (5 - 0 + 1)) + 0];
   return {
     type: actionTypes.LOAD_ENEMY_TEAM,
-    enemyTeam,
+    updatedEnemyTeam,
     enemyPokemon,
   };
 }
@@ -31,13 +35,6 @@ function startNewFight(playerTeam) {
   return (dispatch) => {
     dispatch(loadBattleTeam(playerTeam));
     dispatch(loadEnemyTeam());
-  };
-}
-
-function loadTextBox(message) {
-  return {
-    type: actionTypes.LOAD_TEXT_BOX,
-    message,
   };
 }
 
@@ -61,6 +58,47 @@ function loadEnemy() {
   };
 }
 
+function newEnemyPokemonLoad() {
+  return {
+    type: actionTypes.NEW_ENEMY_POKEMON_LOAD,
+  };
+}
+
+function newEnemyPokemonMsg() {
+  return {
+    type: actionTypes.NEW_ENEMY_POKEMON_MSG,
+  };
+}
+function newEnemyPokemon() {
+  return (dispatch) => {
+    dispatch(newEnemyPokemonMsg());
+    setTimeout(() => {
+      dispatch(newEnemyPokemonLoad());
+    }, 2500);
+  };
+}
+
+function newPlayerPokemonLoad() {
+  return {
+    type: actionTypes.NEW_PLAYER_POKEMON_LOAD,
+  };
+}
+
+function newPlayerPokemonMsg() {
+  return {
+    type: actionTypes.NEW_PLAYER_POKEMON_MSG,
+  };
+}
+
+function newPlayerPokemon() {
+  return (dispatch) => {
+    dispatch(newPlayerPokemonMsg());
+    setTimeout(() => {
+      dispatch(newPlayerPokemonLoad());
+    }, 3000);
+  };
+}
+
 function loadPlayerPokemon(playerPokemon) {
   const stats = calculatePokemonStats(playerPokemon);
   return (dispatch) => {
@@ -78,27 +116,31 @@ function playerAttacks() {
 function resolveAttackEnemy(playerPokemon,
   enemyPokemon,
   attackPower,
-  moveName) {
+  moveName,
+  attackData) {
   return {
     type: actionTypes.RESOLVE_ATTACK_ENEMY,
     playerPokemon,
     enemyPokemon,
     attackPower,
     moveName,
+    attackData,
   };
 }
 function handleKOEnemy(playerPokemon,
   enemyPokemon,
-  attackPower) {
+  attackPower,
+  attackData) {
   return {
     type: actionTypes.HANDLE_KO_ENEMY,
     playerPokemon,
     enemyPokemon,
     attackPower,
+    attackData,
   };
 }
 
-function getUpdatedHPEnemy(playerPokemon, enemyPokemon, attackPower, moveName) {
+function getUpdatedHPEnemy(playerPokemon, enemyPokemon, attackPower, moveName, attackData) {
   const updatedPlayerPokemon = { ...playerPokemon };
   updatedPlayerPokemon.battleStats.hp -= attackPower;
 
@@ -110,9 +152,10 @@ function getUpdatedHPEnemy(playerPokemon, enemyPokemon, attackPower, moveName) {
           enemyPokemon,
           attackPower,
           moveName,
+          attackData,
         ),
       )
-      : dispatch(handleKOEnemy(updatedPlayerPokemon, enemyPokemon, attackPower));
+      : dispatch(handleKOEnemy(updatedPlayerPokemon, enemyPokemon, attackPower, attackData));
   };
 }
 
@@ -127,14 +170,21 @@ function getAttackPowerEnemy(attackData,
     playerPokemon,
     modifier,
   );
-
+  attackData = {
+    ...attackData,
+    attackPower,
+  };
   return (dispatch) => {
-    dispatch(getUpdatedHPEnemy(playerPokemon, enemyPokemon, attackPower, moveName));
+    dispatch(getUpdatedHPEnemy(playerPokemon, enemyPokemon, attackPower, moveName, attackData));
   };
 }
 
 function getTypeModifierEnemy(attackData, playerPokemon, enemyPokemon, moveName) {
   const modifier = calculateTypeModifier(attackData, playerPokemon);
+  attackData = {
+    ...attackData,
+    modifier,
+  };
   return (dispatch) => {
     dispatch(
       getAttackPowerEnemy(
@@ -161,12 +211,6 @@ function randomEnemyAttack(playerPokemon, enemyPokemon, moves) {
   const enemyMove = enemyPokemon.moveset[Math.floor(Math.random() * 3) + 1].name;
   return (dispatch) => {
     dispatch(getAttackTypeEnemy(playerPokemon, enemyPokemon, enemyMove, moves));
-  };
-}
-
-function resetClasses() {
-  return {
-    type: actionTypes.RESET_CLASSES,
   };
 }
 
@@ -265,10 +309,10 @@ export {
   getAttackType,
   getAttackPower,
   getTypeModifier,
-  loadTextBox,
   loadAttackBox,
   handleAttack,
   resolveAttack,
   handleKO,
-  resetClasses,
+  newEnemyPokemon,
+  newPlayerPokemon,
 };

@@ -2,21 +2,21 @@
 @import "./colors";
 @import "./fonts";
 
-section {
+.pokemon__abstract {
+  margin-top: 50px;
+  border-radius: 10px;
+  padding: 10px;
+  color: #fff;
+  text-shadow: $blackshadow;
+  position: relative;
+  svg {
+    width: 70%;
+  }
+}
+
+.pokedetail__container {
   font-family: $Montserrat;
   margin: 0 50px;
-
-  .pokemon__abstract {
-    margin-top: 50px;
-    border-radius: 10px;
-    padding: 10px;
-    color: #fff;
-    text-shadow: $blackshadow;
-    position: relative;
-    svg {
-      width: 70%;
-    }
-  }
 
   .pokemon__details {
     .pokemon__ability {
@@ -211,6 +211,7 @@ tbody tr:last-child {
 
 @media only screen and (min-width: 768px) {
   .pokemon__abstract {
+    margin-top: 0px;
     width: 50%;
     box-shadow: none;
     position: relative;

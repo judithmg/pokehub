@@ -31,10 +31,11 @@ export default function battleReducer(state = initialState.battleReducer, action
   let enemyPokemon;
   let playerAttackMsg;
   let enemyAttackMsg;
+  let enemyTeam;
+  let updatedEnemyTeam;
+  let playerTeam;
+  let updatedPlayerTeam;
   switch (action.type) {
-    case actionTypes.LOAD_TEXT_BOX:
-      return { ...state, boxMessages: action.message };
-
     case actionTypes.LOAD_ATTACK_BOX:
       moveset = action.playerPokemon.moveset;
       attackBox = {
@@ -43,16 +44,64 @@ export default function battleReducer(state = initialState.battleReducer, action
         attackThree: { name: moveset[2].name },
         attackFour: { name: moveset[3].name },
       };
-      return { ...state, attackBox };
+      return {
+        ...state,
+        attackBox,
+        playerClass: '',
+        enemyClass: '',
+      };
 
     case actionTypes.LOAD_BATTLE_TEAM:
       return {
         ...state, playerTeam: action.playerTeam,
       };
+
+    case actionTypes.NEW_PLAYER_POKEMON_MSG:
+      return {
+        ...state,
+        blockClicks: 'block-clicks',
+        playerDiesMsg: 'Send a new Pokemon to battle!',
+        playerClass: 'poke-fainted ',
+        enemyClass: '',
+      };
+
+    case actionTypes.NEW_PLAYER_POKEMON_LOAD:
+      playerTeam = [...state.playerTeam];
+      updatedPlayerTeam = playerTeam.filter((poke) => poke.name !== state.playerPokemon.name);
+      return {
+        ...state,
+        playerTeam: updatedPlayerTeam,
+        playerPokemon: {},
+      };
+
+    case actionTypes.NEW_ENEMY_POKEMON_MSG:
+      return {
+        ...state,
+        blockClicks: 'block-clicks',
+        enemyDiesMsg: 'A new Pokemon will fight you!',
+        enemyClass: 'poke-fainted ',
+        playerClass: '',
+      };
+
+    case actionTypes.NEW_ENEMY_POKEMON_LOAD:
+      enemyTeam = [...state.enemyTeam];
+      updatedEnemyTeam = enemyTeam.filter((enemy) => enemy.name !== state.enemyPokemon.name);
+      enemyPokemon = updatedEnemyTeam[Math.floor(Math.random()
+        * (updatedEnemyTeam.length - 1)) + 1];
+      return {
+        ...state,
+        blockClicks: '',
+        enemyClass: '',
+        enemyAttackMsg: `Pokemon ${enemyPokemon.name} wants to fight you!`,
+        enemyTeam: updatedEnemyTeam,
+        enemyPokemon,
+
+      };
+
     case actionTypes.LOAD_ENEMY_TEAM:
       return {
         ...state,
-        enemyTeam: action.enemyTeam,
+        enemyTeam: action.updatedEnemyTeam,
         enemyPokemon: action.enemyPokemon,
       };
 
@@ -60,7 +109,7 @@ export default function battleReducer(state = initialState.battleReducer, action
       playerPokemon = {
         ...action.playerPokemon,
         battleStats: action.stats,
-        level: 100,
+        level: 500,
       };
       return { ...state, playerPokemon };
 
@@ -76,19 +125,24 @@ export default function battleReducer(state = initialState.battleReducer, action
         enemyPokemon,
         attackBox: null,
         enemyAttackMsg: '',
-        playerAttackMsg: `${enemyPokemon.name.toUpperCase()} fainted!`,
+        playerDiesMsg: '',
+        enemyDiesMsg: `${enemyPokemon.name.toUpperCase()} fainted!`,
+        playerAttackMsg: '',
 
       };
+
     case actionTypes.HANDLE_KO_ENEMY:
       playerPokemon = { ...state.playerPokemon };
       playerPokemon.battleStats.hp = 0;
       return {
         ...state,
+        attackData: action.attackData,
         playerClass: 'animate__animated animate__fadeOutDown',
         playerPokemon,
         attackBox: null,
         playerAttackMsg: '',
-        enemyAttackMsg: `Oh, no! ${playerPokemon.name.toUpperCase()} whited out!`,
+        enemyAttackMsg: '',
+        playerDiesMsg: `Oh, no! ${playerPokemon.name.toUpperCase()} whited out!`,
 
       };
 
@@ -99,29 +153,28 @@ export default function battleReducer(state = initialState.battleReducer, action
       return {
         ...state,
         enemyPokemon,
-        playerClass: 'animate__animated animate__rubberBand',
-        enemyClass: 'animate__bounce animate__animated',
+        enemyClass: 'animate__animated animate__rubberBand',
+        playerClass: 'animate__bounce animate__animated',
         attackBox: null,
         playerAttackMsg,
         enemyAttackMsg: '',
       };
+
     case actionTypes.RESOLVE_ATTACK_ENEMY:
       action.attackPower > 0
-        ? enemyAttackMsg = `Enemy Pokemon ${state.enemyPokemon.name.toUpperCase()} attacked! ${state.enemyPokemon.name.toUpperCase()} used ${action.moveName}!`
-        : playerAttackMsg = `Enemy Pokemon ${state.enemyPokemon.name.toUpperCase()} attacked! ${state.enemyPokemon.name.toUpperCase()} used ${action.moveName}!`;
+        ? enemyAttackMsg = `Enemy Pokemon ${action.enemyPokemon.name.toUpperCase()} attacked! ${action.enemyPokemon.name.toUpperCase()} used ${action.moveName}!`
+        : enemyAttackMsg = `Enemy Pokemon ${action.enemyPokemon.name.toUpperCase()} attacked! ${action.enemyPokemon.name.toUpperCase()} used ${action.moveName}! But it did nothing...`;
       enemyPokemon = action.enemyPokemon;
       playerPokemon = action.playerPokemon;
       return {
         ...state,
+        attackData: action.attackData,
         enemyPokemon,
-        enemyClass: 'animate__animated animate__rubberBand',
-        playerClass: 'animate__bounce animate__animated',
+        playerClass: 'animate__animated animate__rubberBand',
+        enemyClass: 'animate__bounce animate__animated',
         playerAttackMsg: '',
         enemyAttackMsg,
       };
-
-    case actionTypes.RESET_CLASSES:
-      return { ...state, enemyClass: '', playerClass: '' };
 
     default:
       return state;

@@ -35,6 +35,7 @@ export default [
       },
     ],
   },
+
   {
     baseStats: {
       hp: 100,
@@ -71,6 +72,7 @@ export default [
       },
     ],
   },
+
   {
     baseStats: {
       hp: 91,
@@ -107,6 +109,7 @@ export default [
       },
     ],
   },
+
   {
     baseStats: {
       hp: 130,
@@ -143,6 +146,7 @@ export default [
       },
     ],
   },
+
   {
     baseStats: {
       hp: 115,
@@ -179,6 +183,7 @@ export default [
       },
     ],
   },
+
   {
     baseStats: {
       hp: 105,
@@ -215,4 +220,5 @@ export default [
       },
     ],
   },
+
 ];

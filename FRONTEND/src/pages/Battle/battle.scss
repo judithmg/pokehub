@@ -8,24 +8,60 @@
   flex-wrap: wrap;
 }
 .battle__selector {
+  height: 280px;
+  width: 500px;
+  flex-wrap: wrap;
+  @include flex(row, center, center);
+  background-image: url("../../images/battlebgIndoorC.png");
+}
+
+.battle__selector-text {
+  font-size: 30px;
+  width: 500px;
+  height: 100px;
+  background-color: rgb(207, 81, 50);
+  @include flex(row, center, center);
+
+  .battle__selector-text--inner {
+    @include flex(row, space-around, center);
+    border-radius: 20px;
+    flex-wrap: wrap;
+    height: 95%;
+    width: 95%;
+    background-color: rgb(88, 144, 152);
+  }
+}
+
+.battle__selector-pokes {
+  margin: 0 40px;
   cursor: pointer;
   @include flex(row, flex-start, flex-start);
   background-repeat: no-repeat;
-  margin: 10px;
   background-image: url("../../images/pkmn-bg.png");
   width: 126px;
   height: 55px;
   img {
     margin-left: 15px;
-    width: 50%;
-    @include anifloat();
+    object-fit: none;
+    height: 53px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    @include anifloat();
   }
 }
-.battle__container {
+.battle__container,
+.battle__selector-container {
+  text-shadow: 0px 1px 1px #ffffff62;
   width: 500px;
   margin: 50px;
   font-family: $Pokemon;
+}
+
+.poke-fainted {
+  display: none;
+}
+
+.block-clicks {
+  pointer-events: none;
 }
 
 .battle__background {
@@ -80,17 +116,26 @@
   @include flex(row, center, center);
 
   .battle__text--inner {
-    @include flex(row, space-around, space-around);
+    @include flex(row, space-around, center);
     border-radius: 20px;
     flex-wrap: wrap;
     height: 95%;
     width: 95%;
     background-color: rgb(88, 144, 152);
+    span {
+      cursor: default;
+      text-align: center;
+      .svg-msg-box {
+        width: 20px;
+        margin-left: 2px;
+        fill: rgba(255, 0, 0, 0.515);
+      }
+    }
     div {
       @include flex(column, center, space-around);
       button {
         font-family: $Pokemon;
-
+        cursor: pointer;
         font-size: 20px;
         @include flex(row, center, center);
         height: 30px;

@@ -7,8 +7,8 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
-import './styles.scss';
-import './mine.scss';
+import './progress.scss';
+import './battle.scss';
 import '../../styles/animate.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -16,11 +16,12 @@ import {
   startNewFight,
   loadPlayerPokemon,
   randomEnemyAttack,
-  loadTextBox,
   handleAttack,
   loadAttackBox,
-
+  newPlayerPokemon,
+  newEnemyPokemon,
 } from '../../redux/actions/battleActions';
+import Pokeball from '../icons/Pokeball';
 
 import { loadTeams } from '../../redux/actions/teamManagerActions';
 import { getUserInfo } from '../../redux/actions/userActions';
@@ -41,6 +42,9 @@ export function BattleComponent({
   enemyPokemon,
   playerClass,
   enemyClass,
+  enemyDiesMsg,
+  playerDiesMsg,
+  blockClicks,
 }) {
 // load teams if not already on the state
   const { currentUser } = useAuth();
@@ -63,43 +67,18 @@ export function BattleComponent({
     }
   }, [teams?.length]);
 
-  useEffect(() => {
-    if (playerTeam?.length) {
-      actions.loadTextBox('ENEMY ATTACKS');
-    }
-  }, [playerTeam?.length]);
-
   return (
     teams?.length && playerTeam.length
     && moves?.length && teams[1]?.pokemons && (
-      <div className="nope">
-        <div className="battle__teams">
-
-          {playerTeam && playerTeam.map((poke, index) => (
-            poke?.num
-          && (
-            <div className="battle__selector" key={Math.random()} onClick={() => actions.loadPlayerPokemon(playerTeam[index])}>
-              {/* on click, choose that pokemon and get it ready to battle
-              this initiates the battle */}
-              <img
-                alt="pokemon ico"
-                src={`${pokemonSprites.httpIcon}${poke?.num}.png`}
-              />
-            </div>
-          )
-          ))}
-        </div>
+      <div>
+        <div className="battle__teams" />
         {
-          playerPokemon.num && (
+          playerPokemon.num ? (
             <>
-              <div>
-                ready to battle with
-                {' '}
-                {playerPokemon.name}
-                !
-              </div>
-
-              <div className="battle__container">
+              <div
+                className="battle__container"
+                data-aos="fade-in"
+              >
                 <div className="battle__background">
 
                   <div className="battle__enemy">
@@ -183,8 +162,7 @@ export function BattleComponent({
                   <div className="battle__text--inner">
                     {attackBox ? (
                       <>
-                        <div>
-
+                        <div data-aos="fade-in">
                           <button
                             type="button"
                             onClick={() => {
@@ -197,7 +175,6 @@ export function BattleComponent({
                           >
                             {attackBox?.attackOne?.name}
                           </button>
-
                           <button
                             type="button"
                             onClick={() => actions.handleAttack(playerPokemon,
@@ -209,7 +186,7 @@ export function BattleComponent({
                             {attackBox?.attackTwo?.name}
                           </button>
                         </div>
-                        <div>
+                        <div data-aos="fade-in">
                           <button
                             type="button"
                             onClick={() => actions.handleAttack(playerPokemon,
@@ -220,7 +197,6 @@ export function BattleComponent({
                           >
                             {attackBox?.attackThree?.name}
                           </button>
-
                           <button
                             type="button"
                             onClick={() => actions.handleAttack(playerPokemon,
@@ -234,23 +210,70 @@ export function BattleComponent({
                         </div>
                       </>
                     ) : playerAttackMsg ? (
-                      <span onClick={() => actions.randomEnemyAttack(playerPokemon,
-                        enemyPokemon,
-                        moves)}
+                      <span
+                        onClick={() => actions.randomEnemyAttack(playerPokemon,
+                          enemyPokemon,
+                          moves)}
                       >
                         {playerAttackMsg}
+                        <Pokeball className="svg-msg-box animate__flash animate__animated animate__infinite infinite animate__fast" />
                       </span>
-                    ) : ((
-                      <span onClick={() => actions.loadAttackBox(playerPokemon)}>
+                    ) : enemyAttackMsg ? ((
+                      <span
+                        onClick={() => actions.loadAttackBox(playerPokemon)}
+                      >
                         {enemyAttackMsg}
+                        <Pokeball className="svg-msg-box animate__flash animate__animated animate__infinite infinite animate__fast" />
                       </span>
-                    ))}
+                    )) : enemyDiesMsg ? (
+                      <span
+                        className={blockClicks}
+                        onClick={() => actions.newEnemyPokemon()}
+                      >
+                        {enemyDiesMsg}
+                      </span>
+                    ) : (
+                      <span
+                        className={blockClicks}
+                        onClick={() => actions.newPlayerPokemon()}
+                      >
+                        {playerDiesMsg}
+                      </span>
+                    )}
 
                   </div>
 
                 </div>
               </div>
             </>
+          ) : (
+            <div className="battle__selector-container">
+              <div className="battle__selector">
+                { playerTeam && playerTeam.map((poke, index) => (
+                  poke?.num
+          && (
+          <div
+            className="battle__selector-pokes"
+            data-aos="fade-in"
+            key={Math.random()}
+            onClick={() => actions.loadPlayerPokemon(playerTeam[index])}
+          >
+            {/* on click, choose that pokemon and get it ready to battle
+              This initiates the battle!! */}
+            <img
+              alt="pokemon ico"
+              src={`${pokemonSprites.httpIcon}${poke?.num}.png`}
+            />
+          </div>
+          )
+                ))}
+              </div>
+              <div className="battle__selector-text">
+                <div className="battle__selector-text--inner">
+                  <span>Select a Pokemon</span>
+                </div>
+              </div>
+            </div>
           )
         }
       </div>
@@ -275,6 +298,9 @@ export function mapStateToProps(state) {
     enemyClass: state.battleReducer.enemyClass,
     playerAttackMsg: state.battleReducer.playerAttackMsg,
     enemyAttackMsg: state.battleReducer.enemyAttackMsg,
+    enemyDiesMsg: state.battleReducer.enemyDiesMsg,
+    playerDiesMsg: state.battleReducer.playerDiesMsg,
+    blockClicks: state.battleReducer.blockClicks,
   };
 }
 export function mapDispatchToProps(dispatch) {
@@ -283,12 +309,13 @@ export function mapDispatchToProps(dispatch) {
       {
         startNewFight,
         loadPlayerPokemon,
-        loadTextBox,
         randomEnemyAttack,
         loadTeams,
         getUserInfo,
         handleAttack,
         loadAttackBox,
+        newEnemyPokemon,
+        newPlayerPokemon,
       },
       dispatch,
     ),
