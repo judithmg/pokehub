@@ -3,6 +3,7 @@ import * as React from 'react';
 function SvgPokeball(props) {
   return (
     <svg
+      className="svg-pokeball"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 384.008 384.008"
       {...props}

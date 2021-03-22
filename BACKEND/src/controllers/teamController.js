@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 const Team = require('../models/teamModel');
 const User = require('../models/userModel');
 
@@ -45,13 +46,26 @@ function deleteTeamFromUser(req, res) {
     });
 }
 
+function updateTeamById(req, res) {
+  const { userId } = req.params;
+  const updatedTeam = req.body;
+  console.log(updatedTeam);
+  console.log(userId);
+  User.findByIdAndUpdate(userId, updatedTeam,
+    { new: true, upsert: true }, (error, result) => {
+      if (error) {
+        res.send(error);
+      } else {
+        res.json(result);
+      }
+    });
+}
+
 async function deleteTeamFromTeamDb(req, res) {
   await Team.findOneAndRemove(req.body, (error, deleted) => {
-    if (error) {
-      res.status(404);
-    } else {
-      res.json(deleted);
-    }
+    error
+      ? res.status(404)
+      : res.json(deleted);
   });
 }
 
@@ -89,4 +103,5 @@ module.exports = {
   deleteTeamFromUser,
   modifyTeam,
   deleteTeamByParams,
+  updateTeamById,
 };

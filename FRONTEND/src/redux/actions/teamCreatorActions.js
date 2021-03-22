@@ -91,7 +91,7 @@ export function modifyOnePokemonSuccess(team) {
   };
 }
 
-export function modifyOnePokemon(team,
+export function modifyOnePokemonNO(team,
   user,
   moveset,
   pokemon) {
@@ -113,6 +113,35 @@ export function modifyOnePokemon(team,
           team: updatedteam,
           email: user.email,
         }));
+      dispatch(modifyOnePokemonSuccess(updatedteam));
+    } catch (error) {
+      dispatch(teamActionsError(error));
+    }
+  };
+}
+
+export function modifyOnePokemon(team,
+  teams,
+  user,
+  moveset,
+  pokemon) {
+  const newpoke = {
+    ...pokemon,
+    moveset,
+  };
+  const userId = user._id;
+  const { pokemons } = team;
+  pokemons[pokemon.id - 1] = newpoke;
+  const updatedteam = {
+    _id: team._id,
+    id: team.id,
+    pokemons,
+  };
+  const updatedTeamsArray = teams.filter((teamarr) => teamarr._id !== updatedteam._id);
+  updatedTeamsArray.push(updatedteam);
+  return async (dispatch) => {
+    try {
+      await axios.put(`${dbUrls.baseUrl}${dbUrls.teamsUrl}/probando/${userId}`, { teams: updatedTeamsArray });
       dispatch(modifyOnePokemonSuccess(updatedteam));
     } catch (error) {
       dispatch(teamActionsError(error));

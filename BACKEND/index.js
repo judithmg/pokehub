@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extend: true, limit: '50mb' }));
 app.use(express.json({ limit: '10mb', extended: true }));
 
 app.use('/pokehub/pokedex', pokemonRoutes);
-app.use('/pokehub/users', teamRoutes);
+app.use('/pokehub/teams', teamRoutes);
 app.use('/pokehub/users', userRoutes);
 
 app.listen(port, () => {

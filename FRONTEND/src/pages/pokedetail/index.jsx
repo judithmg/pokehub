@@ -48,7 +48,7 @@ export function PokeDetailComponent({
           <>
             <div className="pokemon--desktop">
               <div className={`pokemon__abstract ${pokemon?.types && pokemon?.types[0].toLowerCase()}`}>
-                <div className="svg-container"><Pokeball /></div>
+                <Pokeball />
                 <MainInfo pokemon={pokemon} />
                 <VisualInfoComponent pokemon={pokemon} pokedex={pokedex} />
               </div>

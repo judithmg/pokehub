@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { modifyOnePokemon } from '../../redux/actions/teamCreatorActions';
 
 export function TeamMovesComponent({
-  actions, pokemon, team, user,
+  actions, pokemon, team, user, teams,
 }) {
   const [move0, setMove0] = useState(pokemon?.moveset[0]?.name || '');
   const [move1, setMove1] = useState(pokemon?.moveset[1]?.name || '');
@@ -15,6 +15,7 @@ export function TeamMovesComponent({
 
   function handleSubmit() {
     actions.modifyOnePokemon(team,
+      teams,
       user,
       [
         {

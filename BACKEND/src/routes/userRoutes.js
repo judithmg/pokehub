@@ -7,8 +7,7 @@ function UserRouter() {
   router.route('/signup').post(userController.createUser);
   router.route('/user').post(userController.getOneUserByBody);
   router.route('/user/:userId').get(userController.getOneUserByParams);
-  router.route('/teams').put(userController.addTeamToUser);
-  router.route('/').put(userController.modifyUser);
+
   router.route('/').get(userController.getAllUsers);
   return router;
 }

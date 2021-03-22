@@ -7,10 +7,15 @@ section {
   margin: 0 50px;
 
   .pokemon__abstract {
+    margin-top: 50px;
     border-radius: 10px;
     padding: 10px;
     color: #fff;
     text-shadow: $blackshadow;
+    position: relative;
+    svg {
+      width: 70%;
+    }
   }
 
   .pokemon__details {
@@ -33,18 +38,17 @@ section {
     }
   }
 }
-.svg-container {
-  svg {
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 1;
-    width: 80%;
-    fill: rgba(255, 255, 255, 0.07);
-  }
+
+.svg-pokeball {
+  position: absolute;
+  width: 90%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  fill: rgba(255, 255, 255, 0.07);
 }
+
 .pokemon__abstract-main {
   @include flex(row, flex-start, center);
 
@@ -209,6 +213,7 @@ tbody tr:last-child {
   .pokemon__abstract {
     width: 50%;
     box-shadow: none;
+    position: relative;
   }
   .pokemon--desktop {
     @include flex(row, center, center);
@@ -240,19 +245,6 @@ tbody tr:last-child {
     }
   }
 
-  .svg-container {
-    position: relative;
-    svg {
-      width: 70%;
-      position: absolute;
-      left: 0;
-      right: 0;
-      margin-left: auto;
-      margin-right: auto;
-      z-index: 1;
-      fill: rgba(255, 255, 255, 0.07);
-    }
-  }
   .pokemon__moves {
     width: 50vw;
     table {

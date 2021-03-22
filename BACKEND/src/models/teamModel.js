@@ -9,11 +9,44 @@ const teamSchema = new Schema({
   pokemons: [
     {
       id: Number,
+      abbilities: Schema.Types.Mixed,
+      types: [String],
+      baseStats: {
+        hp: {
+          type: Number,
+          max: 255,
+        },
+        atk: {
+          type: Number,
+          max: 255,
+
+        },
+        def: {
+          type: Number,
+          max: 255,
+
+        },
+        spa: {
+          type: Number,
+          max: 255,
+
+        },
+        spd: {
+          type: Number,
+          max: 255,
+
+        },
+        spe: {
+          type: Number,
+          max: 255,
+
+        },
+      },
+      name: String,
       moveset: [{
         name: String,
-        moveId: Number,
       }],
-      pokeData: { type: Schema.Types.ObjectId, ref: 'Pokemon' },
+      num: Number,
     },
   ],
 });
