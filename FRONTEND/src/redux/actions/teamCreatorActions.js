@@ -91,35 +91,6 @@ export function modifyOnePokemonSuccess(team) {
   };
 }
 
-export function modifyOnePokemonNO(team,
-  user,
-  moveset,
-  pokemon) {
-  const newpoke = {
-    ...pokemon,
-    moveset,
-  };
-  const userId = user._id;
-  const { pokemons } = team;
-  pokemons[pokemon.id - 1] = newpoke;
-  const updatedteam = {
-    id: team.id,
-    pokemons,
-  };
-  return async (dispatch) => {
-    try {
-      await axios.patch(`${dbUrls.baseUrl}${dbUrls.teamsUrl}/delete/${team._id}`, { userId })
-        .then(() => axios.put(`${dbUrls.baseUrl}${dbUrls.teamsUrl}/add`, {
-          team: updatedteam,
-          email: user.email,
-        }));
-      dispatch(modifyOnePokemonSuccess(updatedteam));
-    } catch (error) {
-      dispatch(teamActionsError(error));
-    }
-  };
-}
-
 export function modifyOnePokemon(team,
   teams,
   user,
@@ -129,7 +100,6 @@ export function modifyOnePokemon(team,
     ...pokemon,
     moveset,
   };
-  const userId = user._id;
   const { pokemons } = team;
   pokemons[pokemon.id - 1] = newpoke;
   const updatedteam = {
@@ -141,7 +111,7 @@ export function modifyOnePokemon(team,
   updatedTeamsArray.push(updatedteam);
   return async (dispatch) => {
     try {
-      await axios.put(`${dbUrls.baseUrl}${dbUrls.teamsUrl}/probando/${userId}`, { teams: updatedTeamsArray });
+      await axios.put(`${dbUrls.baseUrl}${dbUrls.teamsUrl}/modify-poke/${user._id}`, { teams: updatedTeamsArray });
       dispatch(modifyOnePokemonSuccess(updatedteam));
     } catch (error) {
       dispatch(teamActionsError(error));

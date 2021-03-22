@@ -12,7 +12,7 @@ function TeamRouter() {
   router.route('/delete/:teamId').patch(teamController.deleteTeamByParams);
   router.route('/delete').patch(teamController.deleteTeamFromUser);
 
-  router.route('/probando/:userId').put(teamController.updateTeamById);
+  router.route('/modify-poke/:userId').put(teamController.updateTeamById);
 
   router.route('/teams').post(teamController.createTeam);
   router.route('/').get(teamController.getAllTeams);

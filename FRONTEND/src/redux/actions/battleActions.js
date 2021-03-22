@@ -3,11 +3,34 @@ import calculateTypeModifier from '../../battle/attackTypeMultiplier';
 import getAttackData from '../../battle/getAttackData';
 import calculatePokemonStats from '../../battle/calculatePokemonStats';
 import calculateAttackPower from '../../battle/calculateAttackPower';
+import enemyTeam from '../../data/enemy';
 
 function loadBattleTeam(playerTeam) {
   return {
     type: actionTypes.LOAD_BATTLE_TEAM,
     playerTeam,
+  };
+}
+
+function loadEnemyTeam() {
+  let enemyPokemon = enemyTeam[Math.floor(Math.random() * 5) + 1];
+  const stats = calculatePokemonStats(enemyPokemon);
+  enemyPokemon = {
+    ...enemyPokemon,
+    battleStats: stats,
+    level: 100,
+  };
+  return {
+    type: actionTypes.LOAD_ENEMY_TEAM,
+    enemyTeam,
+    enemyPokemon,
+  };
+}
+
+function startNewFight(playerTeam) {
+  return (dispatch) => {
+    dispatch(loadBattleTeam(playerTeam));
+    dispatch(loadEnemyTeam());
   };
 }
 
@@ -43,7 +66,6 @@ function loadPlayerPokemon(playerPokemon) {
   return (dispatch) => {
     dispatch(loadAttackBox(playerPokemon));
     dispatch(loadPlayerPokemonSuccess(playerPokemon, stats));
-    dispatch(loadEnemy());
   };
 }
 
@@ -234,6 +256,7 @@ function handleAttack(playerPokemon, enemyPokemon, moves, moveName) {
 }
 
 export {
+  startNewFight,
   loadBattleTeam,
   loadPlayerPokemon,
   loadEnemy,

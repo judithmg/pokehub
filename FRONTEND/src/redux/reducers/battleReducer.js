@@ -29,6 +29,8 @@ export default function battleReducer(state = initialState.battleReducer, action
   let playerPokemon;
   let moveset;
   let enemyPokemon;
+  let playerAttackMsg;
+  let enemyAttackMsg;
   switch (action.type) {
     case actionTypes.LOAD_TEXT_BOX:
       return { ...state, boxMessages: action.message };
@@ -44,7 +46,15 @@ export default function battleReducer(state = initialState.battleReducer, action
       return { ...state, attackBox };
 
     case actionTypes.LOAD_BATTLE_TEAM:
-      return { ...state, playerTeam: action.playerTeam };
+      return {
+        ...state, playerTeam: action.playerTeam,
+      };
+    case actionTypes.LOAD_ENEMY_TEAM:
+      return {
+        ...state,
+        enemyTeam: action.enemyTeam,
+        enemyPokemon: action.enemyPokemon,
+      };
 
     case actionTypes.LOAD_PLAYER_POKEMON:
       playerPokemon = {
@@ -64,6 +74,10 @@ export default function battleReducer(state = initialState.battleReducer, action
         ...state,
         enemyClass: 'animate__animated animate__fadeOutDown',
         enemyPokemon,
+        attackBox: null,
+        enemyAttackMsg: '',
+        playerAttackMsg: `${enemyPokemon.name.toUpperCase()} fainted!`,
+
       };
     case actionTypes.HANDLE_KO_ENEMY:
       playerPokemon = { ...state.playerPokemon };
@@ -72,9 +86,14 @@ export default function battleReducer(state = initialState.battleReducer, action
         ...state,
         playerClass: 'animate__animated animate__fadeOutDown',
         playerPokemon,
+        attackBox: null,
+        playerAttackMsg: '',
+        enemyAttackMsg: `Oh, no! ${playerPokemon.name.toUpperCase()} whited out!`,
+
       };
 
     case actionTypes.RESOLVE_ATTACK_PLAYER:
+      action.attackPower > 0 ? playerAttackMsg = `${action.playerPokemon.name.toUpperCase()} used ${action.moveName}!` : playerAttackMsg = `${action.playerPokemon.name.toUpperCase()} used ${action.moveName}! But it did nothing...`;
       enemyPokemon = action.enemyPokemon;
       playerPokemon = action.playerPokemon;
       return {
@@ -83,10 +102,13 @@ export default function battleReducer(state = initialState.battleReducer, action
         playerClass: 'animate__animated animate__rubberBand',
         enemyClass: 'animate__bounce animate__animated',
         attackBox: null,
-        playerAttackMsg: `${playerPokemon.name.toUpperCase()} used ${action.moveName}!`,
+        playerAttackMsg,
         enemyAttackMsg: '',
       };
     case actionTypes.RESOLVE_ATTACK_ENEMY:
+      action.attackPower > 0
+        ? enemyAttackMsg = `Enemy Pokemon ${state.enemyPokemon.name.toUpperCase()} attacked! ${state.enemyPokemon.name.toUpperCase()} used ${action.moveName}!`
+        : playerAttackMsg = `Enemy Pokemon ${state.enemyPokemon.name.toUpperCase()} attacked! ${state.enemyPokemon.name.toUpperCase()} used ${action.moveName}!`;
       enemyPokemon = action.enemyPokemon;
       playerPokemon = action.playerPokemon;
       return {
@@ -95,7 +117,7 @@ export default function battleReducer(state = initialState.battleReducer, action
         enemyClass: 'animate__animated animate__rubberBand',
         playerClass: 'animate__bounce animate__animated',
         playerAttackMsg: '',
-        enemyAttackMsg: `Enemy Pokemon ${state.enemyPokemon.name.toUpperCase()} attacked! ${state.enemyPokemon.name.toUpperCase()} used ${action.moveName}!`,
+        enemyAttackMsg,
       };
 
     case actionTypes.RESET_CLASSES:

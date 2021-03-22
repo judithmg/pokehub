@@ -13,7 +13,7 @@ import '../../styles/animate.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
-  loadBattleTeam,
+  startNewFight,
   loadPlayerPokemon,
   randomEnemyAttack,
   loadTextBox,
@@ -59,7 +59,7 @@ export function BattleComponent({
 
   useEffect(() => {
     if (teams?.length) {
-      actions.loadBattleTeam(teams[1].pokemons);
+      actions.startNewFight(teams[1].pokemons);
     }
   }, [teams?.length]);
 
@@ -272,6 +272,7 @@ export function mapStateToProps(state) {
     enemyPokemon: state.battleReducer.enemyPokemon,
     attackBox: state.battleReducer.attackBox,
     playerClass: state.battleReducer.playerClass,
+    enemyClass: state.battleReducer.enemyClass,
     playerAttackMsg: state.battleReducer.playerAttackMsg,
     enemyAttackMsg: state.battleReducer.enemyAttackMsg,
   };
@@ -280,7 +281,7 @@ export function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(
       {
-        loadBattleTeam,
+        startNewFight,
         loadPlayerPokemon,
         loadTextBox,
         randomEnemyAttack,
