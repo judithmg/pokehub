@@ -3,6 +3,13 @@
 @import "./mixins.scss";
 @import "./types.scss";
 
+.teamdetail__pokeball {
+  @include flex(row, center, center);
+  .child-to-body {
+    margin: 15px;
+  }
+}
+
 .teamdetail__pokemon {
   height: 150px;
   background-color: $grayeven;

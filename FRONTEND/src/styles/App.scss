@@ -1,13 +1,13 @@
 @import "./mixins";
 @import "./colors";
 @import "./fonts";
-@import "./fontawesome.scss";
 //GENERAL STYLES
 body {
   background-color: $backgroundcolor;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: $Montserrat;
 }
 
 table,

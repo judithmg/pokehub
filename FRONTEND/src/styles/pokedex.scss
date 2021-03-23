@@ -16,10 +16,6 @@
   text-transform: uppercase;
   font-size: 13px;
   @include flex(row, center, center);
-
-  th:not(:last-child),
-  td:not(:last-child) {
-  }
 }
 .pokedex__pokemon-id {
   width: 15%;
