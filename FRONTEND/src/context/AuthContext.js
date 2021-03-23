@@ -1,4 +1,5 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
+
 import React, { useContext, useState, useEffect } from 'react';
 import { auth } from '../firebase/firebase';
 
@@ -63,3 +64,7 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
+
+AuthProvider.propTypes = {
+  children: PropTypes.func.isRequired,
+};
