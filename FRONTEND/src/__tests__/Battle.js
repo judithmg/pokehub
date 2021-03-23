@@ -28,7 +28,7 @@ describe('Given a Header component', () => {
   const user = { email: '', _id: '' };
   const moves = [{ name: '' }, {}];
   const playerTeam = [{}, {}];
-  let playerPokemon = {
+  const playerPokemon = {
     battleStats: {
       hp: 55,
       maxhp: 100,
@@ -65,9 +65,9 @@ describe('Given a Header component', () => {
       },
     ],
   };
-  let playerAttackMsg = '';
-  let attackBox = [{}];
-  let enemyAttackMsg = '';
+  const playerAttackMsg = '';
+  const attackBox = [{}];
+  const enemyAttackMsg = '';
   const enemyPokemon = { name: 'Charmander', level: 100 };
   const playerClass = '';
   const enemyClass = '';
@@ -284,8 +284,6 @@ describe('Given a Header component', () => {
       expect(fn).toHaveBeenCalled();
     });
     test('Then there should be a svg-msg when there is no attack box', () => {
-      attackBox = '';
-      playerAttackMsg = 'message';
       act(() => {
         render(
           <Provider store={store}>
@@ -296,9 +294,9 @@ describe('Given a Header component', () => {
                 user={user}
                 moves={moves}
                 playerTeam={playerTeam}
+                attackBox=""
                 playerPokemon={playerPokemon}
-                playerAttackMsg={playerAttackMsg}
-                attackBox={attackBox}
+                playerAttackMsg="message"
                 enemyAttackMsg={enemyAttackMsg}
                 enemyPokemon={enemyPokemon}
                 playerClass={playerClass}
@@ -316,9 +314,6 @@ describe('Given a Header component', () => {
       expect(svg).toBeTruthy();
     });
     test('Then there should be a svg-msg when there is no attack box', () => {
-      attackBox = '';
-      playerAttackMsg = '';
-      enemyAttackMsg = 'message';
       act(() => {
         render(
           <Provider store={store}>
@@ -330,9 +325,9 @@ describe('Given a Header component', () => {
                 moves={moves}
                 playerTeam={playerTeam}
                 playerPokemon={playerPokemon}
-                playerAttackMsg={playerAttackMsg}
-                attackBox={attackBox}
-                enemyAttackMsg={enemyAttackMsg}
+                playerAttackMsg=""
+                attackBox=""
+                enemyAttackMsg="message"
                 enemyPokemon={enemyPokemon}
                 playerClass={playerClass}
                 enemyClass={enemyClass}
@@ -349,7 +344,6 @@ describe('Given a Header component', () => {
     });
   });
   test('Then there should be a battle selector when there is no playerPokemon on the state', () => {
-    playerPokemon = {};
     act(() => {
       render(
         <Provider store={store}>
@@ -360,7 +354,7 @@ describe('Given a Header component', () => {
               user={user}
               moves={moves}
               playerTeam={playerTeam}
-              playerPokemon={playerPokemon}
+              playerPokemon={{}}
               playerAttackMsg={playerAttackMsg}
               attackBox={attackBox}
               enemyAttackMsg={enemyAttackMsg}

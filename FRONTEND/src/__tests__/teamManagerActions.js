@@ -7,7 +7,6 @@ import {
   deleteOneTeam,
   modifyTeam,
   loadOneTeam,
-  loadTeamSuccess,
   loadTeam,
 } from '../redux/actions/teamManagerActions';
 
@@ -84,21 +83,6 @@ describe('Given teamActions', () => {
         learnsets,
       }));
       expect(loadOneTeam()).toEqual({
-        type: actionTypes.LOAD_ONE_TEAM,
-        teamId,
-        moves,
-        learnsets,
-      });
-    });
-  });
-  describe('When loadTeamSuccess is called', () => {
-    test('Then', () => {
-      axios.get = jest.fn().mockImplementationOnce(() => Promise.resolve({
-        teamId,
-        moves,
-        learnsets,
-      }));
-      expect(loadTeamSuccess()).toEqual({
         type: actionTypes.LOAD_ONE_TEAM,
         teamId,
         moves,

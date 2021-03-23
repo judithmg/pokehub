@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
-import { fireEvent, waitFor } from '@testing-library/react';
 
 import { BrowserRouter } from 'react-router-dom';
 
