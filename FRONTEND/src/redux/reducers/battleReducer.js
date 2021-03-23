@@ -148,11 +148,9 @@ export default function battleReducer(state = initialState.battleReducer, action
 
     case actionTypes.RESOLVE_ATTACK_PLAYER:
       action.attackPower > 0 ? playerAttackMsg = `${action.playerPokemon.name.toUpperCase()} used ${action.moveName}!` : playerAttackMsg = `${action.playerPokemon.name.toUpperCase()} used ${action.moveName}! But it did nothing...`;
-      enemyPokemon = action.enemyPokemon;
-      playerPokemon = action.playerPokemon;
       return {
         ...state,
-        enemyPokemon,
+        enemyPokemon: action.enemyPokemon,
         enemyClass: 'animate__animated animate__rubberBand',
         playerClass: 'animate__bounce animate__animated',
         attackBox: null,
@@ -164,12 +162,10 @@ export default function battleReducer(state = initialState.battleReducer, action
       action.attackPower > 0
         ? enemyAttackMsg = `Enemy Pokemon ${action.enemyPokemon.name.toUpperCase()} attacked! ${action.enemyPokemon.name.toUpperCase()} used ${action.moveName}!`
         : enemyAttackMsg = `Enemy Pokemon ${action.enemyPokemon.name.toUpperCase()} attacked! ${action.enemyPokemon.name.toUpperCase()} used ${action.moveName}! But it did nothing...`;
-      enemyPokemon = action.enemyPokemon;
-      playerPokemon = action.playerPokemon;
       return {
         ...state,
         attackData: action.attackData,
-        enemyPokemon,
+        enemyPokemon: action.enemyPokemon,
         playerClass: 'animate__animated animate__rubberBand',
         enemyClass: 'animate__bounce animate__animated',
         playerAttackMsg: '',

@@ -83,7 +83,7 @@
 @media only screen and (min-width: 768px) {
   .pokedex__container {
     margin: 20px 100px;
-    @include flex(column, flex-end, flex-end);
+    @include flex(column, center, center);
     table {
       width: 700px;
       margin: 20px 0;

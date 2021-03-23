@@ -1,0 +1,48 @@
+@import "./mixins";
+@import "./colors";
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 0.5;
+}
+
+.modal-wrapper {
+  @include flex(column, center, center);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+}
+
+.modal {
+  @include flex(column, center, center);
+  z-index: 100;
+  width: 600px;
+  background: white;
+
+  position: relative;
+  border-radius: 20px;
+  height: 250px;
+
+  .modal-close {
+    font-size: 20px;
+    background-color: $headercolor;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 500;
+  }
+}
