@@ -25,7 +25,7 @@ const enemyStatic = {
   level: 100,
 };
 
-export default function battleReducer(state = initialState.battleReducer, action) {
+export default function battleReducer(state = initialState.battleReducer, action = {}) {
   let playerPokemon;
   let moveset;
   let enemyPokemon;
@@ -109,7 +109,7 @@ export default function battleReducer(state = initialState.battleReducer, action
       playerPokemon = {
         ...action.playerPokemon,
         battleStats: action.stats,
-        level: 50,
+        level: 90,
       };
       return { ...state, playerPokemon };
 

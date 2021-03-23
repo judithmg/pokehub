@@ -1,7 +1,7 @@
 import actionTypes from '../actions/actionTypes';
 import initialState from '../store/initialState';
 
-export default function pokedexReducer(state = initialState.pokedexReducer, action) {
+export default function pokedexReducer(state = initialState.pokedexReducer, action = {}) {
   let pokemon;
   let pokedex;
   let pokemonsShown;

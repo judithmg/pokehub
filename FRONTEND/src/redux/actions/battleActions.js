@@ -19,7 +19,7 @@ function loadEnemyTeam() {
     enemy = {
       ...enemy,
       battleStats: stats,
-      level: 100,
+      level: Math.floor(Math.random() * (100 - 90 + 1)) + 90,
     };
     return enemy;
   });

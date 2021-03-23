@@ -1,7 +1,7 @@
 import actionTypes from '../actions/actionTypes';
 import initialState from '../store/initialState';
 
-export default function userReducer(state = initialState.userReducer, action) {
+export default function userReducer(state = initialState.userReducer, action = {}) {
   switch (action.type) {
     case actionTypes.LOGIN_SUCCESS:
       return { ...state, user: action.data };

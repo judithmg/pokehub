@@ -54,26 +54,13 @@ export function loadOneTeam(
   };
 }
 
-export function loadTeamSuccess(
-  teamId,
-  moves,
-  learnsets,
-) {
-  return {
-    type: actionTypes.LOAD_ONE_TEAM,
-    teamId,
-    moves,
-    learnsets,
-  };
-}
-
 export function loadTeam(teamId) {
   return async (dispatch) => {
     try {
       const moves = await axios.get(`${baseUrl}${movesUrl}`);
       const learnsets = await axios.get(`${baseUrl}${learnsetsUrl}`);
 
-      dispatch(loadTeamSuccess(teamId, moves.data, learnsets.data));
+      dispatch(loadOneTeam(teamId, moves.data, learnsets.data));
     } catch (error) {
       teamActionsError(error);
     }

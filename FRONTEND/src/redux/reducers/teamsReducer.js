@@ -2,7 +2,7 @@
 import actionTypes from '../actions/actionTypes';
 import initialState from '../store/initialState';
 
-export default function teamsReducer(state = initialState.teamsReducer, action) {
+export default function teamsReducer(state = initialState.teamsReducer, action = {}) {
   let teams;
   let userteam;
   let newTeam;
