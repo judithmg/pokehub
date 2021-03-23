@@ -8,9 +8,13 @@
   position: relative;
 }
 .button-text {
+  @include flex(row, center, center);
   margin: 0 auto;
 }
 
+.pokebtn-group .ball button:hover .pokemon-ball {
+  background-color: #efc24f;
+}
 .pokebtn-group .ball button:hover .pokemon-ball::before {
   transform: translate3d(0, -100%, 0);
   transition: transform 0.25s;
@@ -64,7 +68,7 @@
 .pokebtn-group .ball button p {
   color: #50514f;
   font-weight: 600;
-  font-size: 1.5em;
+  font-size: 15px;
   transition: color 0.5s 0.25s;
   overflow: hidden;
   display: inline-block;
@@ -111,20 +115,18 @@
 }
 .pokebtn-group {
   height: 100px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  @include flex(row, center, center);
 }
 .pokebtn {
+  @include flex(row, center, center);
+
   margin: 0 30px 30px 30px;
   display: block;
 }
 
 .pokemonbutton {
+  text-align: center;
   cursor: pointer;
-  width: 300px;
-  height: 100px;
   overflow: visible;
   outline: none;
   color: #fff;

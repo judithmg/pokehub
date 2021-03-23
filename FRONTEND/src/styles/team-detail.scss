@@ -5,6 +5,7 @@
 
 .teamdetail__pokeball {
   @include flex(row, center, center);
+  margin: 50px;
   .child-to-body {
     margin: 15px;
   }
