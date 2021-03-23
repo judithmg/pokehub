@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from '../redux/store/configureStore';
 
-import MenuComponent from '../pages/menu';
+import MenuComponent from '../pages/Menu';
 
 describe('Given a Menu component', () => {
   describe('When it is invoked', () => {

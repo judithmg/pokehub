@@ -3,7 +3,7 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 
-import MainComponent from '../pages/main';
+import MainComponent from '../pages/Main';
 
 describe('Given a Main component', () => {
   describe('Given a Header component', () => {

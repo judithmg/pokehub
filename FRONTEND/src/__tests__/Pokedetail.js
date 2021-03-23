@@ -3,7 +3,7 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 
-import { PokeDetailComponent, mapStateToProps, mapDispatchToProps } from '../pages/pokedetail';
+import { PokeDetailComponent, mapStateToProps, mapDispatchToProps } from '../pages/Pokedetail';
 
 describe('Given a Pokedetail component', () => {
   describe('When it is invoked', () => {

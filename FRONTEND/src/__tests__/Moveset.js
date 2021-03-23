@@ -3,7 +3,7 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 
-import MovesetComponent from '../pages/pokedetail/MovesetComponent';
+import MovesetComponent from '../pages/Pokedetail/MovesetComponent';
 
 describe('Given a Move component', () => {
   let container = null;

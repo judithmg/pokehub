@@ -3,7 +3,7 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 
-import VisualInfoComponent from '../pages/pokedetail/VisualInfoComponent';
+import VisualInfoComponent from '../pages/Pokedetail/VisualInfoComponent';
 
 describe('Given a VisualInfo component', () => {
   describe('When it is invoked', () => {

@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from '../redux/store/configureStore';
 
-import { ButtonTypeFilterComponent, mapStateToProps, mapDispatchToProps } from '../pages/pokedex/ButtonTypeFilter';
+import { ButtonTypeFilterComponent, mapStateToProps, mapDispatchToProps } from '../pages/Pokedex/ButtonTypeFilter';
 
 describe('Given a ButtonTypeFilterComponent', () => {
   describe('When it is invoked', () => {

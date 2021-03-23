@@ -4,7 +4,7 @@ import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 import { fireEvent } from '@testing-library/react';
 
-import TableRowMove from '../pages/pokedetail/TableRowMove';
+import TableRowMove from '../pages/Pokedetail/TableRowMove';
 
 const move = {
   num: 446,

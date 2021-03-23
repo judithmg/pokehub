@@ -1,5 +1,4 @@
 import React from 'react';
-import { fireEvent } from '@testing-library/react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
@@ -12,7 +11,7 @@ import {
   TeamCreatorComponent,
   mapStateToProps,
   mapDispatchToProps,
-} from '../pages/team-creator';
+} from '../pages/TeamCreator';
 
 describe('Given a TeamCreatorComponent component', () => {
   describe('When it is invoked', () => {

@@ -14,8 +14,8 @@ import {
   TeamManagerComponent,
   mapStateToProps,
   mapDispatchToProps,
-} from '../pages/teams';
-import { TeamComponent } from '../pages/teams/TeamComponent';
+} from '../pages/Teams';
+import { TeamComponent } from '../pages/Teams/TeamComponent';
 
 describe('Given a TeamManagerComponent component', () => {
   let container = null;
@@ -36,7 +36,6 @@ describe('Given a TeamManagerComponent component', () => {
 
     store = configureStore();
     jest.spyOn(auth, 'useAuth').mockImplementation(() => ({ currentUser: jest.fn().mockResolvedValueOnce({}) }));
-    // jest.spyOn(auth, 'useAuth').mockImplementation(() => ({ logout: jest.fn().mockRejectedValueOnce({}) }));
   });
 
   afterEach(() => {

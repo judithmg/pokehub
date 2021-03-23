@@ -3,7 +3,7 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 
-import DashboardElement from '../pages/dashboard';
+import DashboardElement from '../pages/Dashboard';
 
 describe('Given a Dashboard component', () => {
   let container = null;

@@ -2,7 +2,7 @@ import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
-import Footer from '../pages/footer';
+import Footer from '../pages/Footer';
 
 describe('Given a Footer component', () => {
   describe('When it is invoked', () => {

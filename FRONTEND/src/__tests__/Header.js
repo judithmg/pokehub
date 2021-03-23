@@ -10,7 +10,7 @@ import * as auth from '../context/AuthContext';
 
 import configureStore from '../redux/store/configureStore';
 
-import { HeaderComponent, mapStateToProps, mapDispatchToProps } from '../pages/header';
+import { HeaderComponent, mapStateToProps, mapDispatchToProps } from '../pages/Header';
 
 describe('Given a Header component', () => {
   let container = null;

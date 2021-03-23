@@ -14,7 +14,7 @@ import {
   TeamDetailComponent,
   mapStateToProps,
   mapDispatchToProps,
-} from '../pages/team-detail/index';
+} from '../pages/TeamDetail/index';
 
 describe('Given a TeamManagerComponent component', () => {
   let container = null;

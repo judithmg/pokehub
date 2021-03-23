@@ -4,7 +4,7 @@ import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from '../redux/store/configureStore';
-import { PokedexComponent, mapStateToProps, mapDispatchToProps } from '../pages/pokedex';
+import { PokedexComponent, mapStateToProps, mapDispatchToProps } from '../pages/Pokedex';
 
 describe('Given a Pokedex component', () => {
   let pokedex = [{
