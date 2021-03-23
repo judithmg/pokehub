@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
 import { connect } from 'react-redux';
@@ -12,7 +12,7 @@ import { createTeam, submitTeam } from '../../redux/actions/teamCreatorActions';
 import { useAuth } from '../../context/AuthContext';
 
 import { pokemonSprites } from '../../constants/images';
-import Ditto from '../icons/Ditto';
+import { Ditto } from '../icons';
 import '../../styles/team-creator.scss';
 
 import PokemonListTeam from './PokemonListTeam';
@@ -32,7 +32,7 @@ export function TeamCreatorComponent({
     if (!user?.email) {
       actions.getUserInfo(useremail);
     }
-  }, [user?.length]);
+  }, [user]);
 
   function handleSubmit() {
     actions.submitTeam(newTeam, user, teamName);
@@ -89,3 +89,20 @@ export function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeamCreatorComponent);
+
+TeamCreatorComponent.propTypes = {
+  newTeam: PropTypes.shape({
+    id: PropTypes.number,
+    pokemons: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
+  actions: PropTypes.shape({
+    createTeam: PropTypes.func.isRequired,
+    submitTeam: PropTypes.func.isRequired,
+    getUserInfo: PropTypes.func.isRequired,
+  }).isRequired,
+  user: PropTypes.shape({
+    email: PropTypes.string,
+  }).isRequired,
+  teams: PropTypes.arrayOf(PropTypes.object).isRequired,
+
+};

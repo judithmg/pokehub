@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -50,3 +50,16 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeamComponent);
+
+TeamComponent.propTypes = {
+  actions: PropTypes.shape({
+    deleteOneTeam: PropTypes.func.isRequired,
+  }).isRequired,
+  user: PropTypes.shape({
+    email: PropTypes.string,
+  }).isRequired,
+  poketeam: PropTypes.shape({
+    id: PropTypes.string,
+    pokemons: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
+};

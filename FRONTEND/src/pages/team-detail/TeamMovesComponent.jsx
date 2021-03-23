@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -35,7 +34,7 @@ export function TeamMovesComponent({
   }
 
   return (
-    <>
+    <div key={Math.random()}>
       <div className="team-pokemon__moves pokemon__info">
         <h2>Moves</h2>
         <select
@@ -89,7 +88,7 @@ export function TeamMovesComponent({
 
       </div>
 
-    </>
+    </div>
   );
 }
 
@@ -101,11 +100,9 @@ TeamMovesComponent.propTypes = {
     name: PropTypes.string,
     moveset: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string,
-
     })),
     learnset: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string,
-
       category: PropTypes.string,
       desc: PropTypes.string,
       shortDesc: PropTypes.string,
@@ -116,8 +113,19 @@ TeamMovesComponent.propTypes = {
         PropTypes.bool,
         PropTypes.number,
       ])),
-    }))).isRequired,
+    }))),
   }).isRequired,
+  team: PropTypes.shape({
+    id: PropTypes.string,
+    pokemons: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
+  user: PropTypes.shape({
+    _id: PropTypes.string,
+    email: PropTypes.string,
+    teams: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
+  teams: PropTypes.arrayOf(PropTypes.object).isRequired,
+
 };
 
 function mapStateToProps(state) {

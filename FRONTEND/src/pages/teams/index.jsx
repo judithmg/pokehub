@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
@@ -17,11 +17,11 @@ export function TeamManagerComponent({ teams, actions, user }) {
     if (!user.email) {
       actions.getUserInfo(useremail);
     }
-  }, [user?.length]);
+  }, [user]);
 
   useEffect(() => {
     actions.loadTeams(user?._id);
-  }, [teams?.length, user?.length, user.email]);
+  }, [teams?.length, user, user.email]);
 
   teams?.sort((a, b) => a.id - b.id);
 
@@ -55,3 +55,17 @@ export function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeamManagerComponent);
+
+TeamManagerComponent.propTypes = {
+
+  actions: PropTypes.shape({
+    loadTeams: PropTypes.func.isRequired,
+    getUserInfo: PropTypes.func.isRequired,
+  }).isRequired,
+  user: PropTypes.shape({
+    _id: PropTypes.string,
+    email: PropTypes.string,
+  }).isRequired,
+  teams: PropTypes.arrayOf(PropTypes.object).isRequired,
+
+};

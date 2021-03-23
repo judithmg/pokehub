@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
+
 import React from 'react';
 
 import { connect } from 'react-redux';
@@ -43,3 +44,10 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PokemonListTeamComponent);
+
+PokemonListTeamComponent.propTypes = {
+  actions: PropTypes.shape({
+    addPokemonToTeam: PropTypes.func.isRequired,
+  }).isRequired,
+  pokedex: PropTypes.arrayOf(PropTypes.object).isRequired,
+};

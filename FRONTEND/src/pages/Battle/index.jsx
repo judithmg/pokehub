@@ -7,8 +7,8 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
-import './progress.scss';
-import './battle.scss';
+import '../../styles/progress.scss';
+import '../../styles/battle.scss';
 import '../../styles/animate.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -31,6 +31,7 @@ import { pokemonSprites } from '../../constants/images';
 
 export function BattleComponent({
   teams,
+  team,
   actions,
   user,
   moves,
@@ -63,13 +64,13 @@ export function BattleComponent({
 
   useEffect(() => {
     if (teams?.length) {
-      actions.startNewFight(teams[1].pokemons);
+      actions.startNewFight(team?.pokemons);
     }
   }, [teams?.length]);
 
   return (
     teams?.length && playerTeam.length
-    && moves?.length && teams[1]?.pokemons && (
+    && moves?.length && team?.pokemons && (
       <div>
         <div className="battle__teams" />
         {
@@ -286,6 +287,7 @@ export function mapStateToProps(state) {
   return {
     user: state.userReducer.user,
     teams: state.teamsReducer.teams,
+    team: state.teamsReducer.team,
     moves: state.pokedexReducer.moves,
     boxMessages: state.battleReducer.boxMessages,
     attack: state.battleReducer.attack,

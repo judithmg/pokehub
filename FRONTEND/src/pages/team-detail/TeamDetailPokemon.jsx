@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -65,7 +64,19 @@ export default function TeamDetailPokemon({ pokemon }) {
 }
 TeamDetailPokemon.propTypes = {
   pokemon: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
+    num: PropTypes.number,
+    name: PropTypes.string,
+    learnset: PropTypes.arrayOf(PropTypes.array),
+    baseStats: PropTypes.shape(
+      {
+        hp: PropTypes.number,
+        spa: PropTypes.number,
+        atk: PropTypes.number,
+        spe: PropTypes.number,
+        def: PropTypes.number,
+        spd: PropTypes.number,
+      },
+    ),
+    types: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
 };

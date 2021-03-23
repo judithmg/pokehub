@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useParams, Link } from 'react-router-dom';
@@ -57,7 +57,7 @@ export function TeamDetailComponent({
     moves.length && learnsets.length && (
       <section data-aos="fade-in" className="teamdetail__container">
         <div className="teamdetail__pokeball">
-          <Link to="/battle"><PokemonButton text="BATTLE!" /></Link>
+          <Link to="/battle"><PokemonButton text="BATTLE!" height="100" width="300" /></Link>
         </div>
 
         {
@@ -99,3 +99,23 @@ export function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeamDetailComponent);
+
+TeamDetailComponent.propTypes = {
+  team: PropTypes.shape({
+    id: PropTypes.string,
+    pokemons: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
+  moves: PropTypes.arrayOf(PropTypes.object).isRequired,
+  learnsets: PropTypes.arrayOf(PropTypes.object).isRequired,
+  actions: PropTypes.shape({
+    loadOneTeam: PropTypes.func.isRequired,
+    loadMoves: PropTypes.func.isRequired,
+    loadLearnsets: PropTypes.func.isRequired,
+    getUserInfo: PropTypes.func.isRequired,
+  }).isRequired,
+  user: PropTypes.shape({
+    email: PropTypes.string,
+  }).isRequired,
+  teams: PropTypes.arrayOf(PropTypes.object).isRequired,
+
+};
