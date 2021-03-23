@@ -49,8 +49,6 @@ function deleteTeamFromUser(req, res) {
 function updateTeamById(req, res) {
   const { userId } = req.params;
   const updatedTeam = req.body;
-  console.log(updatedTeam);
-  console.log(userId);
   User.findByIdAndUpdate(userId, updatedTeam,
     { new: true, upsert: true }, (error, result) => {
       if (error) {

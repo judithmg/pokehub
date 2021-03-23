@@ -3,6 +3,7 @@ const {
   getAbilitiesList,
   getMoveList,
   getLearnsetList,
+  getOnePokemon,
 } = require('../controllers/pokemonController');
 
 const Abilities = require('../models/abilitiesModel');
@@ -24,6 +25,9 @@ describe('Given a pokemonController', () => {
       body: {
         _id: 9,
       },
+      params: {
+        pokeId: 8,
+      },
     };
     res = {
       status: jest.fn(),
@@ -31,6 +35,20 @@ describe('Given a pokemonController', () => {
       json: jest.fn(),
 
     };
+  });
+  describe('When getOnePokemon is called', () => {
+    test('Then res.json should be called if the Team is found', async () => {
+      Pokemon.findById.mockImplementationOnce((pokeId, callback) => callback(false));
+
+      await getOnePokemon(req, res);
+      expect(res.status).toHaveBeenCalled();
+    });
+    test('Then res.status should be called if the Pokemon is not found', async () => {
+      Pokemon.findById.mockImplementationOnce((pokeId, callback) => callback(true));
+
+      await getOnePokemon(req, res);
+      expect(res.status).toHaveBeenCalled();
+    });
   });
   describe('When getPokemonList is called', () => {
     test('Then res.json should be called if the result is found', () => {

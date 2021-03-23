@@ -55,7 +55,12 @@ export function PokeDetailComponent({
               <div className="pokemon__details">
                 <div className="abstract__type">
                   {pokemon?.types && pokemon.types
-                    .map((type) => <ButtonType type={type.toLowerCase()} />)}
+                    .map((type) => (
+                      <ButtonType
+                        type={type.toLowerCase()}
+                        key={Math.random()}
+                      />
+                    ))}
                 </div>
                 <div className="pokemon__ability">
                   <span className="pokemon__ability-title">ABILITY</span>

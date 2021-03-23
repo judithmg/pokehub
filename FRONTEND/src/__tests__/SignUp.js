@@ -14,9 +14,8 @@ describe('Given a SignupComponent component', () => {
   let container = null;
   let store;
   const actions = {
-    getUserInfo: jest.fn(),
+    signupUser: jest.fn(),
   };
-  let fn;
   beforeEach(() => {
     container = document.createElement('div');
     document.body.appendChild(container);

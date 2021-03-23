@@ -12,8 +12,48 @@ import configureStore from '../redux/store/configureStore';
 
 import { BattleComponent, mapStateToProps, mapDispatchToProps } from '../pages/Battle';
 
-describe('Given a Header component', () => {
+describe('Given a BATTLE component', () => {
   const teams = [{}, { pokemons: [] }];
+  const team = {
+    pokemons: [{
+      level: 100,
+      battleStats: {
+        hp: 55,
+        maxhp: 100,
+        atk: 90,
+        def: 80,
+        spa: 50,
+        spd: 105,
+        spe: 96,
+      },
+      types: [
+        'Ghost',
+        'Fairy',
+      ],
+      _id: '604909308168be57082e41cf',
+      num: 778,
+      name: 'Mimikyu',
+      id: 1,
+      moveset: [
+        {
+          _id: '6057b8c6aa531b2e783c54da',
+          name: 'Swords Dance',
+        },
+        {
+          _id: '6057b8c6aa531b2e783c54db',
+          name: 'Play Rough',
+        },
+        {
+          _id: '6057b8c6aa531b2e783c54dc',
+          name: 'Shadow Sneak',
+        },
+        {
+          _id: '6057b8c6aa531b2e783c54dd',
+          name: 'Shadow Claw',
+        },
+      ],
+    }],
+  };
   const actions = {
     startNewFight: jest.fn(),
     loadPlayerPokemon: jest.fn(),
@@ -29,6 +69,7 @@ describe('Given a Header component', () => {
   const moves = [{ name: '' }, {}];
   const playerTeam = [{}, {}];
   const playerPokemon = {
+    level: 100,
     battleStats: {
       hp: 55,
       maxhp: 100,
@@ -98,6 +139,7 @@ describe('Given a Header component', () => {
             <BrowserRouter>
               <BattleComponent
                 teams={teams}
+                team={team}
                 actions={actions}
                 user={user}
                 moves={moves}
@@ -128,6 +170,7 @@ describe('Given a Header component', () => {
             <BrowserRouter>
               <BattleComponent
                 teams={teams}
+                team={team}
                 actions={actions}
                 user={user}
                 moves={moves}
@@ -158,6 +201,7 @@ describe('Given a Header component', () => {
             <BrowserRouter>
               <BattleComponent
                 teams={teams}
+                team={team}
                 actions={actions}
                 user={user}
                 moves={moves}
@@ -191,6 +235,7 @@ describe('Given a Header component', () => {
             <BrowserRouter>
               <BattleComponent
                 teams={teams}
+                team={team}
                 actions={actions}
                 user={user}
                 moves={moves}
@@ -224,6 +269,7 @@ describe('Given a Header component', () => {
             <BrowserRouter>
               <BattleComponent
                 teams={teams}
+                team={team}
                 actions={actions}
                 user={user}
                 moves={moves}
@@ -257,6 +303,7 @@ describe('Given a Header component', () => {
             <BrowserRouter>
               <BattleComponent
                 teams={teams}
+                team={team}
                 actions={actions}
                 user={user}
                 moves={moves}
@@ -290,6 +337,7 @@ describe('Given a Header component', () => {
             <BrowserRouter>
               <BattleComponent
                 teams={teams}
+                team={team}
                 actions={actions}
                 user={user}
                 moves={moves}
@@ -320,6 +368,7 @@ describe('Given a Header component', () => {
             <BrowserRouter>
               <BattleComponent
                 teams={teams}
+                team={team}
                 actions={actions}
                 user={user}
                 moves={moves}
@@ -350,6 +399,7 @@ describe('Given a Header component', () => {
           <BrowserRouter>
             <BattleComponent
               teams={teams}
+              team={team}
               actions={actions}
               user={user}
               moves={moves}

@@ -116,7 +116,7 @@ describe('Given a TeamManagerComponent component', () => {
       expect(actions.getUserInfo).toHaveBeenCalled();
     });
     test('Then an action loadMoves is called if there is no movelist', () => {
-      moves = '';
+      moves = [];
       act(() => {
         render(
           <Provider store={store}>
@@ -137,7 +137,7 @@ describe('Given a TeamManagerComponent component', () => {
       expect(actions.loadMoves).toHaveBeenCalled();
     });
     test('Then an action loadLearnsets is called if there is no learnsets', () => {
-      learnsets = '';
+      learnsets = [];
       act(() => {
         render(
           <Provider store={store}>

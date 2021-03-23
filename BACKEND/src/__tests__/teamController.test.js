@@ -6,6 +6,7 @@ const {
   deleteTeamFromUser,
   modifyTeam,
   deleteTeamByParams,
+  updateTeamById,
 } = require('../controllers/teamController');
 
 const Team = require('../models/teamModel');
@@ -68,6 +69,26 @@ describe('Given a teamController', () => {
       expect(res.status).toHaveBeenCalled();
     });
   });
+  describe('When updateTeamById is called', () => {
+    test('Then res.json should be called if the Team is found', () => {
+      User.findByIdAndUpdate.mockImplementationOnce((query,
+        update,
+        options,
+        callback) => callback(true));
+
+      updateTeamById(req, res);
+      expect(res.send).toHaveBeenCalled();
+    });
+    test('Then res.status should be called if the Team is not found', () => {
+      User.findByIdAndUpdate.mockImplementationOnce((query,
+        update,
+        options,
+        callback) => callback(false));
+
+      updateTeamById(req, res);
+      expect(res.json).toHaveBeenCalled();
+    });
+  });
   describe('When deleteTeamFromTeamDb is called', () => {
     test('Then res.json should be called if deletion is successful', async () => {
       Team.findOneAndRemove.mockImplementationOnce((team, callback) => callback(false));
@@ -82,7 +103,7 @@ describe('Given a teamController', () => {
   });
   describe('When deleteTeamByParams is called', () => {
     test('Then res.json should be called if deletion is successful', () => {
-      User.findOneAndUpdate.mockImplementationOnce((query,
+      User.updateOne.mockImplementationOnce((query,
         update,
         options,
         callback) => callback(false));
@@ -90,7 +111,7 @@ describe('Given a teamController', () => {
       expect(res.json).toHaveBeenCalled();
     });
     test('Then res.send should be called if deletion can not be completed', () => {
-      User.findOneAndUpdate.mockImplementationOnce((query,
+      User.updateOne.mockImplementationOnce((query,
         update,
         options,
         callback) => callback(true));
@@ -127,6 +148,20 @@ describe('Given a teamController', () => {
       expect(res.json).toHaveBeenCalled();
     });
     test('Then res.send should be called if the Team is not modified', async () => {
+      Team.findOneAndUpdate.mockImplementationOnce((query,
+        update,
+        options,
+        callback) => callback(true));
+
+      await modifyTeam(req, res);
+      expect(res.send).toHaveBeenCalled();
+    });
+    test('Then res.send should be called if the Team is not modified and query is gotten from the req body if there are no params', async () => {
+      req = {
+        body: {
+          email: '',
+        },
+      };
       Team.findOneAndUpdate.mockImplementationOnce((query,
         update,
         options,

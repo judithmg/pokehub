@@ -24,7 +24,7 @@ describe('Given a VisualInfo component', () => {
       evos: ['Venusaur'],
       eggGroups: ['Monster', 'Grass'],
     }];
-    const pokemon = pokedex;
+    const pokemon = pokedex[0];
 
     let container = null;
 
