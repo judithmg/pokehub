@@ -2,19 +2,20 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+
 import { loadOneTeam } from '../../redux/actions/teamManagerActions';
 import {
   loadMoves,
   loadLearnsets,
 } from '../../redux/actions/pokedexActions';
 
+import PokemonButton from '../shared/PokemonButton';
 import '../../styles/team-detail.scss';
 
 import { getUserInfo } from '../../redux/actions/userActions';
 import { useAuth } from '../../context/AuthContext';
-
-import TeamDetailPokemon from './TeamPokemonComponent';
+import TeamDetailPokemon from './TeamDetailPokemon';
 
 export function TeamDetailComponent({
   team,
@@ -55,6 +56,10 @@ export function TeamDetailComponent({
   return (
     moves.length && learnsets.length && (
       <section data-aos="fade-in" className="teamdetail__container">
+        <div className="teamdetail__pokeball">
+          <Link to="/battle"><PokemonButton text="BATTLE!" /></Link>
+        </div>
+
         {
       team
         && team?.pokemons?.map((pokemon) => (
@@ -67,7 +72,7 @@ export function TeamDetailComponent({
             </>
           )
         ))
-}
+      }
       </section>
     )
   );

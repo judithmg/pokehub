@@ -9,7 +9,7 @@ import { pokemonSprites } from '../../constants/images';
 
 import '../../styles/teams.scss';
 
-export default function TeamPokemonComponent({ pokemon }) {
+export default function TeamDetailPokemon({ pokemon }) {
   return (
     pokemon.learnset
     && (
@@ -63,7 +63,7 @@ export default function TeamPokemonComponent({ pokemon }) {
     )
   );
 }
-TeamPokemonComponent.propTypes = {
+TeamDetailPokemon.propTypes = {
   pokemon: PropTypes.shape({
     name: PropTypes.string.isRequired,
     types: PropTypes.arrayOf(PropTypes.string).isRequired,
