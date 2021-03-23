@@ -8,7 +8,6 @@ export default function DashboardComponent() {
       <Link to="/pokedex"><Button text="POKEDEX" /></Link>
       <Link to="/teams"><Button text="TEAMS" /></Link>
       <Link to="/team-creator"><Button text="TEAM CREATOR" /></Link>
-      <Link to="/battle"><Button text="BATTLE" /></Link>
     </section>
   );
 }

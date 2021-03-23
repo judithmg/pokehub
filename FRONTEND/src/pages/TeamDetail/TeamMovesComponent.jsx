@@ -4,6 +4,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { modifyOnePokemon } from '../../redux/actions/teamCreatorActions';
 
+function mapLearnset(poke) {
+  return poke.learnset && poke.learnset.map((move) => (
+    <option>
+      {move[0]?.name}
+    </option>
+  ));
+}
+
 export function TeamMovesComponent({
   actions, pokemon, team, user, teams,
 }) {
@@ -34,58 +42,40 @@ export function TeamMovesComponent({
   }
 
   return (
-    <div key={Math.random()}>
+    <div>
       <div className="team-pokemon__moves pokemon__info">
         <h2>Moves</h2>
         <select
           onChange={(e) => setMove0(e.target.value)}
           defaultValue={pokemon?.moveset[0]?.name}
         >
-          {pokemon.learnset && pokemon.learnset.map((move) => (
-            <option>
-              {move[0]?.name}
-            </option>
-          ))}
+          {mapLearnset(pokemon)}
         </select>
         <select
           onChange={(e) => setMove1(e.target.value)}
           defaultValue={pokemon?.moveset[1]?.name}
         >
-          {pokemon.learnset && pokemon.learnset.map((move) => (
-            <option>
-              { move[0]?.name}
-            </option>
-          ))}
+          {mapLearnset(pokemon)}
         </select>
         <select
           onChange={(e) => setMove2(e.target.value)}
           defaultValue={pokemon?.moveset[2]?.name}
         >
-          {pokemon.learnset && pokemon.learnset.map((move) => (
-            <option>
-              {move[0]?.name}
-            </option>
-          ))}
+          {mapLearnset(pokemon)}
         </select>
         <select
           onChange={(e) => setMove3(e.target.value)}
           defaultValue={pokemon?.moveset[3]?.name}
         >
-          {pokemon.learnset && pokemon.learnset.map((move) => (
-            <option>
-              {move[0]?.name}
-            </option>
-          ))}
+          {mapLearnset(pokemon)}
         </select>
-      </div>
-      <div className="team-pokemon__save">
         <button
           type="button"
           onClick={() => handleSubmit()}
+          className="btn-teammoves"
         >
           SAVE
         </button>
-
       </div>
 
     </div>

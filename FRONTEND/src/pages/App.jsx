@@ -21,17 +21,18 @@ import {
 
 import PrivateRoute from './PrivateRoute';
 
-import Dashboard from './dashboard';
-import Footer from './footer';
-import Header from './header';
+import Dashboard from './Dashboard';
+import Footer from './Footer';
+import Header from './Header';
 import Login from './Login';
-import Pokedex from './pokedex';
-import PokeDetail from './pokedetail';
+import Pokedex from './Pokedex';
+import PokeDetail from './Pokedetail';
 import SignUp from './SignUp';
-import Teams from './teams';
-import TeamDetail from './team-detail'; import MainComponent from './main';
-import TeamCreator from './team-creator';
-import battle from './Battle';
+import Teams from './Teams';
+import TeamDetail from './TeamDetail';
+import MainComponent from './Main';
+import TeamCreator from './TeamCreator';
+import Battle from './Battle';
 
 import '../styles/App.scss';
 
@@ -71,7 +72,7 @@ function App({
         <main>
           <MainComponent />
           <Switch>
-            <Route path="/battle" component={battle} />
+            <Route path="/battle" component={Battle} />
             <Route path="/login" component={Login} />
             <Route path="/pokemon/:pokeId" component={PokeDetail} />
             <Route path="/pokedex" component={Pokedex} />

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import PokedexBall from '../icons/PokedexBall';
+import PokedexBall from '../Icons/PokedexBall';
 
 import '../../styles/dashboard.scss';
 

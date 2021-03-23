@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux';
 import { useAuth } from '../../context/AuthContext';
 import { getUserInfo, logoutUser } from '../../redux/actions/userActions';
 import { websiteImages } from '../../constants/images';
-import Menu from '../menu';
+import Menu from '../Menu';
 import Button from '../shared/ButtonComponent';
 
 export function HeaderComponent({ actions, user }) {
@@ -43,7 +43,6 @@ export function HeaderComponent({ actions, user }) {
         <div className="header--right">
           {user?.email ? (
             <>
-              <Link to="/profile" className="header__link --desktop"><Button text="Profile" classes="header__login" /></Link>
               <Link to="/" onClick={() => handleLogout()} className="header__link"><Button text="Logout" classes="header__login" /></Link>
             </>
           ) : (<Link to="/login"><Button text="Login" classes="header__login" /></Link>)}

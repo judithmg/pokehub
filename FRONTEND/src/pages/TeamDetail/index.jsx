@@ -1,8 +1,10 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { loadOneTeam } from '../../redux/actions/teamManagerActions';
 import {
@@ -16,6 +18,8 @@ import '../../styles/team-detail.scss';
 import { getUserInfo } from '../../redux/actions/userActions';
 import { useAuth } from '../../context/AuthContext';
 import TeamDetailPokemon from './TeamDetailPokemon';
+import useModal from '../../hooks/useModal';
+import Modal from './Modal';
 
 export function TeamDetailComponent({
   team,
@@ -28,6 +32,7 @@ export function TeamDetailComponent({
   const { teamId } = useParams();
   const { currentUser } = useAuth();
   const useremail = currentUser.email;
+  const { isShowing, toggle } = useModal();
 
   useEffect(() => {
     if (!user.email) {
@@ -57,8 +62,12 @@ export function TeamDetailComponent({
     moves.length && learnsets.length && (
       <section data-aos="fade-in" className="teamdetail__container">
         <div className="teamdetail__pokeball">
-          <Link to="/battle"><PokemonButton text="BATTLE!" height="100" width="300" /></Link>
+          <PokemonButton callback={toggle} text="BATTLE!" height="100" width="300" />
         </div>
+        <Modal
+          isShowing={isShowing}
+          hide={toggle}
+        />
 
         {
       team

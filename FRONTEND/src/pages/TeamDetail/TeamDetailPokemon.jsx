@@ -14,7 +14,7 @@ export default function TeamDetailPokemon({ pokemon }) {
     && (
     <div className="teamdetail__pokemon" key={Math.random()}>
 
-      <div className={`pokemon__sprite ${pokemon.types[0]}`}>
+      <div className={`pokemon__sprite ${pokemon.types[0].toLowerCase()}`}>
         <span>{pokemon.name}</span>
         <Link to={`/pokemon/${pokemon.name.toLowerCase()}`}>
           <img

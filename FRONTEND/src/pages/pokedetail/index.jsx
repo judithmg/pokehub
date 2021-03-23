@@ -1,8 +1,9 @@
+/* eslint-disable no-mixed-operators */
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import PropTypes from './propTypes';
+import PropTypes from 'prop-types';
 import 'react-svg-radar-chart/build/css/index.css';
 import '../../styles/pokedetail.scss';
 import '../../styles/_types.scss';
@@ -19,7 +20,28 @@ import {
   loadPokemonAbilities,
 } from '../../redux/actions/pokemonActions';
 
-import Pokeball from '../icons/Pokeball';
+import { Pokeball } from '../Icons';
+
+const colors = {
+  normal: '#babaae',
+  fighting: '#a75543',
+  flying: '#7992c9',
+  poison: '#a95ca0',
+  ground: '#eecc55',
+  rock: '#ccbd72',
+  bug: '#c2d21e',
+  ghost: '#7975d7',
+  steel: '#c4c2db',
+  fire: '#fa5643',
+  water: '#56adff',
+  grass: '#8cd750',
+  electric: '#fde139',
+  psychic: '#fa65b4',
+  ice: '#96f1ff',
+  dragon: '#8673ff',
+  dark: '#8d6855',
+  fairy: '#f9aeff',
+};
 
 export function PokeDetailComponent({
   pokemonAbilities,
@@ -47,13 +69,14 @@ export function PokeDetailComponent({
         { pokemon && (
           <>
             <div className="pokemon--desktop">
-              <div className={`pokemon__abstract ${pokemon?.types && pokemon?.types[0].toLowerCase()}`}>
+              <div className="pokemon__abstract" style={{ background: `linear-gradient(to right, ${colors[pokemon?.types && pokemon?.types[0].toLowerCase()]} 50%, ${colors[pokemon?.types && pokemon?.types[1].toLowerCase()] || colors[pokemon?.types && pokemon?.types[0].toLowerCase()]} 50%)` }}>
+
                 <Pokeball />
                 <MainInfo pokemon={pokemon} />
                 <VisualInfoComponent pokemon={pokemon} pokedex={pokedex} />
               </div>
               <div className="pokemon__details">
-                <div className="abstract__type">
+                <div className="abstract__type --desktop">
                   {pokemon?.types && pokemon.types
                     .map((type) => (
                       <ButtonType
@@ -62,6 +85,19 @@ export function PokeDetailComponent({
                       />
                     ))}
                 </div>
+                {pokemon?.genderRatio ? (
+                  <div className="pokemon__genderratio">
+                    <span>
+                      {`${pokemon?.genderRatio?.M * 100}%`}
+                      <span className="symbol--male">♂</span>
+                    </span>
+                    <span>
+                      {`${pokemon?.genderRatio?.F * 100}%`}
+                      <span className="symbol--female">⧬</span>
+                    </span>
+
+                  </div>
+                ) : ''}
                 <div className="pokemon__ability">
                   <span className="pokemon__ability-title">ABILITY</span>
                   {

@@ -52,13 +52,10 @@ export function LoginComponent({ actions }) {
                   <input id="password" type="password" ref={passwordRef} required />
                 </label>
               </div>
-              <button className="login__btn" disabled={loading} type="submit">
+              <button className="login__btn btn-teammoves" disabled={loading} type="submit">
                 Log In
               </button>
             </form>
-            <div>
-              <Link to="/login/forgot-password">Forgot Password?</Link>
-            </div>
           </div>
         </div>
         <div>

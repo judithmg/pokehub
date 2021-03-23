@@ -12,7 +12,7 @@ import { createTeam, submitTeam } from '../../redux/actions/teamCreatorActions';
 import { useAuth } from '../../context/AuthContext';
 
 import { pokemonSprites } from '../../constants/images';
-import { Ditto } from '../icons';
+import { Ditto } from '../Icons';
 import '../../styles/team-creator.scss';
 
 import PokemonListTeam from './PokemonListTeam';
