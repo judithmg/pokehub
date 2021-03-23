@@ -21,7 +21,7 @@ import {
   newPlayerPokemon,
   newEnemyPokemon,
 } from '../../redux/actions/battleActions';
-import Pokeball from '../icons/Pokeball';
+import { Pokeball } from '../Icons';
 
 import { loadTeams } from '../../redux/actions/teamManagerActions';
 import { getUserInfo } from '../../redux/actions/userActions';
@@ -78,7 +78,6 @@ export function BattleComponent({
             <>
               <div
                 className="battle__container"
-                data-aos="fade-in"
               >
                 <div className="battle__background">
 
@@ -163,7 +162,7 @@ export function BattleComponent({
                   <div className="battle__text--inner">
                     {attackBox ? (
                       <>
-                        <div data-aos="fade-in">
+                        <div>
                           <button
                             type="button"
                             onClick={() => {
@@ -187,7 +186,7 @@ export function BattleComponent({
                             {attackBox?.attackTwo?.name}
                           </button>
                         </div>
-                        <div data-aos="fade-in">
+                        <div>
                           <button
                             type="button"
                             onClick={() => actions.handleAttack(playerPokemon,
@@ -255,7 +254,6 @@ export function BattleComponent({
           && (
           <div
             className="battle__selector-pokes"
-            data-aos="fade-in"
             key={Math.random()}
             onClick={() => actions.loadPlayerPokemon(playerTeam[index])}
           >
