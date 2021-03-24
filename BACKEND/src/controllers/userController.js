@@ -18,10 +18,10 @@ function getAllUsers(req, res) {
   });
 }
 
-async function getOneUserByBody(req, res) {
+function getOneUserByBody(req, res) {
   const { email } = req.body;
 
-  await User.findOne({ email }, (error, user) => {
+  User.findOne({ email }, (error, user) => {
     if (error) {
       res.status(404);
       res.send(`There was an error finding by req.body ${user}`);
@@ -31,10 +31,10 @@ async function getOneUserByBody(req, res) {
     }
   });
 }
-async function getOneUserByParams(req, res) {
+function getOneUserByParams(req, res) {
   const { userId } = req.params;
 
-  await User.findById(userId, (error, user) => {
+  User.findById(userId, (error, user) => {
     if (error) {
       res.status(404);
       res.send(`There was an error finding by req.params ${user}`);
@@ -45,8 +45,8 @@ async function getOneUserByParams(req, res) {
   });
 }
 
-async function deleteUser(req, res) {
-  await User.findOneAndRemove(req.body, (error, deleted) => {
+function deleteUser(req, res) {
+  User.findOneAndRemove(req.body, (error, deleted) => {
     if (error) {
       res.status(404);
     } else {
@@ -68,9 +68,9 @@ function addTeamToUser(req, res) {
     });
 }
 
-async function modifyUser(req, res) {
+function modifyUser(req, res) {
   const { email } = req.body;
-  await User.findOneAndUpdate({ email }, req.body, { new: true }, (error, result) => {
+  User.findOneAndUpdate({ email }, req.body, { new: true }, (error, result) => {
     if (error) {
       res.send(error);
     } else {

@@ -95,10 +95,10 @@ describe('Given a teamController', () => {
       await deleteTeamFromTeamDb(req, res);
       expect(res.json).toHaveBeenCalled();
     });
-    test('Then res.json should be called if deletion can not be completed', async () => {
+    test('Then res.send should be called if deletion can not be completed', async () => {
       Team.findOneAndRemove.mockImplementationOnce((team, callback) => callback(true));
       await deleteTeamFromTeamDb(req, res);
-      expect(res.status).toHaveBeenCalled();
+      expect(res.send).toHaveBeenCalled();
     });
   });
   describe('When deleteTeamByParams is called', () => {

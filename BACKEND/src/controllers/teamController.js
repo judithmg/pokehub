@@ -19,10 +19,10 @@ function getAllTeams(req, res) {
   });
 }
 
-async function getOneTeam(req, res) {
+function getOneTeam(req, res) {
   const { email } = req.body;
 
-  await Team.findOne({ email }, (error, team) => {
+  Team.findOne({ email }, (error, team) => {
     if (error) {
       res.status(404);
       res.send(`There was an error finding by req.body ${team}`);
@@ -58,8 +58,8 @@ function updateTeamById(req, res) {
     });
 }
 
-async function deleteTeamFromTeamDb(req, res) {
-  await Team.findOneAndRemove(req.body, (error, deleted) => {
+function deleteTeamFromTeamDb(req, res) {
+  Team.findOneAndRemove(req.body, (error, deleted) => {
     if (error) {
       res.send(`there was an error ${error}`);
     } else {
@@ -82,10 +82,10 @@ function deleteTeamByParams(req, res) {
     });
 }
 
-async function modifyTeam(req, res) {
+function modifyTeam(req, res) {
   const email = req.params?.teamId || req.body.email;
 
-  await Team.findOneAndUpdate({ email }, req.body, { new: true }, (error, result) => {
+  Team.findOneAndUpdate({ email }, req.body, { new: true }, (error, result) => {
     if (error) {
       res.send(error);
     } else {
