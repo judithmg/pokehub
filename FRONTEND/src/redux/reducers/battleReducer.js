@@ -70,6 +70,9 @@ export default function battleReducer(state = initialState.battleReducer, action
       updatedPlayerTeam = playerTeam.filter((poke) => poke.name !== state.playerPokemon.name);
       return {
         ...state,
+        blockClicks: '',
+        playerClass: '',
+        playerDiesMsg: null,
         playerTeam: updatedPlayerTeam,
         playerPokemon: {},
       };
@@ -91,6 +94,7 @@ export default function battleReducer(state = initialState.battleReducer, action
       return {
         ...state,
         blockClicks: '',
+        enemyDiesMsg: null,
         enemyClass: '',
         enemyAttackMsg: `Pokemon ${enemyPokemon.name} wants to fight you!`,
         enemyTeam: updatedEnemyTeam,

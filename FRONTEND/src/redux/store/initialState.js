@@ -39,9 +39,9 @@ export default {
     enemyClass: '',
     blockClicks: '',
 
-    playerAttackMsg: '',
-    enemyAttackMsg: '',
-    playerDiesMsg: '',
-    enemyDiesMsg: '',
+    playerAttackMsg: null,
+    enemyAttackMsg: null,
+    playerDiesMsg: null,
+    enemyDiesMsg: null,
   },
 };

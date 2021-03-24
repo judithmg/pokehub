@@ -74,7 +74,7 @@ function newEnemyPokemon() {
     dispatch(newEnemyPokemonMsg());
     setTimeout(() => {
       dispatch(newEnemyPokemonLoad());
-    }, 2500);
+    }, 2000);
   };
 }
 
@@ -95,7 +95,7 @@ function newPlayerPokemon() {
     dispatch(newPlayerPokemonMsg());
     setTimeout(() => {
       dispatch(newPlayerPokemonLoad());
-    }, 3000);
+    }, 2000);
   };
 }
 
