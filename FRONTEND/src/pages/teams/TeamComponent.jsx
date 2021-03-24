@@ -55,9 +55,7 @@ TeamComponent.propTypes = {
   actions: PropTypes.shape({
     deleteOneTeam: PropTypes.func.isRequired,
   }).isRequired,
-  user: PropTypes.shape({
-    email: PropTypes.string,
-  }).isRequired,
+  user: PropTypes.string.isRequired,
   poketeam: PropTypes.shape({
     id: PropTypes.string,
     pokemons: PropTypes.arrayOf(PropTypes.object),
