@@ -42,7 +42,7 @@ VisualInfoComponent.propTypes = {
         def: PropTypes.number,
         spd: PropTypes.number,
       },
-    ).isRequired,
+    ),
   }).isRequired,
 
 };

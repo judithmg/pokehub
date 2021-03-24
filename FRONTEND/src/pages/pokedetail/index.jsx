@@ -1,18 +1,8 @@
-/* eslint-disable no-mixed-operators */
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import 'react-svg-radar-chart/build/css/index.css';
-import '../../styles/pokedetail.scss';
-import '../../styles/_types.scss';
-
-import Moveset from './MovesetComponent';
-import ButtonType from '../shared/ButtonType';
-import PokemonAbilities from './AbilitiesComponent';
-import MainInfo from './MainInfoComponent';
-import VisualInfoComponent from './VisualInfoComponent';
 
 import {
   loadPokemonLearnset,
@@ -20,28 +10,17 @@ import {
   loadPokemonAbilities,
 } from '../../redux/actions/pokemonActions';
 
-import { Pokeball } from '../Icons';
+import 'react-svg-radar-chart/build/css/index.css';
+import '../../styles/pokedetail.scss';
+import '../../styles/_types.scss';
+import colors from '../../constants/colors';
 
-const colors = {
-  normal: '#babaae',
-  fighting: '#a75543',
-  flying: '#7992c9',
-  poison: '#a95ca0',
-  ground: '#eecc55',
-  rock: '#ccbd72',
-  bug: '#c2d21e',
-  ghost: '#7975d7',
-  steel: '#c4c2db',
-  fire: '#fa5643',
-  water: '#56adff',
-  grass: '#8cd750',
-  electric: '#fde139',
-  psychic: '#fa65b4',
-  ice: '#96f1ff',
-  dragon: '#8673ff',
-  dark: '#8d6855',
-  fairy: '#f9aeff',
-};
+import Moveset from './MovesetComponent';
+import ButtonType from '../shared/ButtonType';
+import PokemonAbilities from './AbilitiesComponent';
+import MainInfo from './MainInfoComponent';
+import VisualInfoComponent from './VisualInfoComponent';
+import { Pokeball } from '../Icons';
 
 export function PokeDetailComponent({
   pokemonAbilities,
@@ -54,7 +33,6 @@ export function PokeDetailComponent({
   learnsets,
 }) {
   const { pokeId } = useParams();
-
   useEffect(() => {
     const id = pokeId?.toLowerCase();
     actions.loadPokemonDetail(id);
@@ -69,7 +47,7 @@ export function PokeDetailComponent({
         { pokemon && (
           <>
             <div className="pokemon--desktop">
-              <div className="pokemon__abstract" style={{ background: `linear-gradient(to right, ${colors[pokemon?.types && pokemon?.types[0].toLowerCase()]} 50%, ${colors[pokemon?.types && pokemon?.types[1].toLowerCase()] || colors[pokemon?.types && pokemon?.types[0].toLowerCase()]} 50%)` }}>
+              <div className="pokemon__abstract" style={{ background: `linear-gradient(to right, ${colors[pokemon?.types && pokemon?.types[0].toLowerCase()]} 50%, ${colors[pokemon?.types && pokemon?.types[1]?.toLowerCase()] || colors[pokemon?.types && pokemon?.types[0].toLowerCase()]} 50%)` }}>
 
                 <Pokeball />
                 <MainInfo pokemon={pokemon} />
@@ -130,7 +108,59 @@ export function PokeDetailComponent({
   );
 }
 
-PokeDetailComponent.propTypes = PropTypes;
+PokeDetailComponent.propTypes = {
+  pokedex: PropTypes.arrayOf(PropTypes.object).isRequired,
+  abilities: PropTypes.arrayOf(PropTypes.object).isRequired,
+  moves: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    category: PropTypes.string,
+    desc: PropTypes.string,
+    shortDesc: PropTypes.string,
+    pp: PropTypes.number,
+    basePower: PropTypes.number,
+    type: PropTypes.string,
+    accuracy: PropTypes.arrayOf(PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.number,
+    ])),
+  })).isRequired,
+  learnsets: PropTypes.arrayOf(PropTypes.object).isRequired,
+
+  pokemonLearnset: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
+    category: PropTypes.string,
+    desc: PropTypes.string,
+    shortDesc: PropTypes.string,
+    pp: PropTypes.number,
+    basePower: PropTypes.number,
+    type: PropTypes.string,
+    accuracy: PropTypes.arrayOf(PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.number,
+    ])),
+  }))),
+  pokemonAbilities: PropTypes.arrayOf(PropTypes.object).isRequired,
+  pokemon: PropTypes.shape({
+    genderRatio: PropTypes.shape({
+      M: PropTypes.number,
+      F: PropTypes.number,
+    }),
+    name: PropTypes.string,
+    types: PropTypes.arrayOf(PropTypes.string),
+  }),
+
+  actions: PropTypes.shape({
+
+    loadPokemonLearnset: PropTypes.func.isRequired,
+    loadPokemonDetail: PropTypes.func.isRequired,
+    loadPokemonAbilities: PropTypes.func.isRequired,
+
+  }).isRequired,
+};
+
+PokeDetailComponent.defaultProps = {
+  pokemon: undefined,
+  pokemonLearnset: undefined,
+};
 
 export function mapStateToProps(state) {
   return {

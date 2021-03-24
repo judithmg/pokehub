@@ -1,5 +1,3 @@
-/* eslint-disable no-mixed-operators */
-/* eslint-disable no-unused-expressions */
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
@@ -10,7 +8,7 @@ export default function SpritesComponent({ pokemon }) {
   const [pokemonShiny, setPokemonShiny] = useState(false);
   return (
     <>
-      {pokemon && (
+      {pokemon?.num && (
 
         <div className="abstract__sprite">
 
@@ -129,7 +127,7 @@ export default function SpritesComponent({ pokemon }) {
 
 SpritesComponent.propTypes = {
   pokemon: PropTypes.shape({
-    num: PropTypes.number.isRequired,
+    num: PropTypes.number,
     types: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
 };

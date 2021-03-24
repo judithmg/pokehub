@@ -37,11 +37,11 @@ export default function MainInfoComponent({ pokemon }) {
 
 MainInfoComponent.propTypes = {
   pokemon: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    'name-jap': PropTypes.string.isRequired,
-    num: PropTypes.number.isRequired,
-    weightkg: PropTypes.number.isRequired,
-    heightm: PropTypes.number.isRequired,
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
+    name: PropTypes.string,
+    'name-jap': PropTypes.string,
+    num: PropTypes.number,
+    weightkg: PropTypes.number,
+    heightm: PropTypes.number,
+    types: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
 };
