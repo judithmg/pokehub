@@ -27,6 +27,7 @@ export default function pokedexReducer(state = initialState.pokedexReducer, acti
       return {
         ...state,
         pokemonsShown: state.pokedex.slice((action.page) * 20, (action.page + 1) * 20),
+        pokemonNameFiltered: '',
       };
 
     case actionTypes.LOAD_POKEMON_DETAIL:
@@ -59,6 +60,16 @@ export default function pokedexReducer(state = initialState.pokedexReducer, acti
       return {
         ...state,
         pokemonTypeFiltered: action.pokemonTypeFiltered,
+        pokemonsShown,
+      };
+
+    case actionTypes.FILTER_BY_NAME:
+      pokemonsShown = state.pokedex
+        .filter((poke) => poke.name.toLowerCase().includes(action
+          .pokemonNameFiltered.toLowerCase()));
+      return {
+        ...state,
+        pokemonNameFiltered: action.pokemonNameFiltered,
         pokemonsShown,
       };
 

@@ -36,7 +36,7 @@ describe('Given a Pokedetail component', () => {
       loadPokemonLearnset: jest.fn(),
     };
     const pokedex = [{}];
-    const moves = [[{ type: 'fire' }]];
+    const moves = [{ type: 'fire' }];
     const abilities = [{}];
     const learnsets = [{}];
 

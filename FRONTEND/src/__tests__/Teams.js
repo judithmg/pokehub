@@ -28,7 +28,7 @@ describe('Given a TeamManagerComponent component', () => {
     getUserInfo: jest.fn(),
     deleteOneTeam: jest.fn(),
   };
-  const teams = [{ id: 8, pokemons: [{ num: 1, name: 'pichu' }] }, { id: 18 }];
+  const teams = [{ id: 'champ', pokemons: [{ num: 1, name: 'pichu' }] }, { id: 'champ' }];
 
   beforeEach(() => {
     container = document.createElement('div');
@@ -60,6 +60,22 @@ describe('Given a TeamManagerComponent component', () => {
       expect(header).toBeTruthy();
     });
   });
+  describe('When a Pokemon is deleted', () => {
+    test('Then getUserInfo is called', () => {
+      act(() => {
+        render(
+          <Provider store={store}>
+            <BrowserRouter>
+              <TeamComponent actions={actions} user={user.email} poketeam={teams[0]} />
+            </BrowserRouter>
+          </Provider>, container,
+        );
+      });
+      const btn = document.querySelector('.teams__delete-btn');
+      fireEvent.click(btn);
+      expect(actions.deleteOneTeam).toHaveBeenCalled();
+    });
+  });
   describe('When there is no email', () => {
     test('Then getUserInfo is called', () => {
       user = {};
@@ -73,22 +89,6 @@ describe('Given a TeamManagerComponent component', () => {
         );
       });
       expect(actions.getUserInfo).toHaveBeenCalled();
-    });
-  });
-  describe('When a Pokemon is deleted', () => {
-    test('Then getUserInfo is called', () => {
-      act(() => {
-        render(
-          <Provider store={store}>
-            <BrowserRouter>
-              <TeamComponent actions={actions} user={user} poketeam={teams[0]} />
-            </BrowserRouter>
-          </Provider>, container,
-        );
-      });
-      const btn = document.querySelector('.teams__delete-btn');
-      fireEvent.click(btn);
-      expect(actions.deleteOneTeam).toHaveBeenCalled();
     });
   });
 });

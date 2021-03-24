@@ -58,6 +58,12 @@ function loadPokemonFromType(pokemonTypeFiltered) {
     pokemonTypeFiltered,
   };
 }
+function filterByName(pokemonNameFiltered) {
+  return {
+    type: actionTypes.FILTER_BY_NAME,
+    pokemonNameFiltered,
+  };
+}
 
 export {
   loadPokedex,
@@ -66,4 +72,5 @@ export {
   loadLearnsets,
   loadAbilities,
   loadPokemonFromType,
+  filterByName,
 };

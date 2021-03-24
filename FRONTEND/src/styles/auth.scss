@@ -1,0 +1,18 @@
+@import "./colors";
+@import "./fonts";
+@import "./types";
+@import "./mixins";
+
+.auth__container {
+  @include flex(column, center, center);
+  input {
+    margin: 5px;
+  }
+  form {
+    margin: 5px;
+    @include flex(column, center, center);
+    button {
+      @include btn-slide($menucolor);
+    }
+  }
+}

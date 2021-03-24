@@ -80,7 +80,7 @@ describe('Given a Header component', () => {
       );
     });
     fn = jest.spyOn(actions, 'logoutUser');
-    const btn = container.querySelectorAll('.header__link')[1];
+    const btn = container.querySelectorAll('.header__link')[0];
     act(() => {
       fireEvent.click(btn);
     });

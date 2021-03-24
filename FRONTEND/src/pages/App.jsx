@@ -25,6 +25,7 @@ import Dashboard from './Dashboard';
 import Footer from './Footer';
 import Header from './Header';
 import Login from './Login';
+import NotFound from './NotFound';
 import Pokedex from './Pokedex';
 import PokeDetail from './Pokedetail';
 import SignUp from './SignUp';
@@ -81,6 +82,7 @@ function App({
             <PrivateRoute path="/team-detail/:teamId" component={TeamDetail} />
             <PrivateRoute path="/teams" component={Teams} />
             <Route exact path="/" component={Dashboard} />
+            <Route component={NotFound} />
           </Switch>
         </main>
         <Footer />

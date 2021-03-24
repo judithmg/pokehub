@@ -13,7 +13,7 @@ export default {
     pokemonAbilities: [],
 
     pokemonTypeFiltered: '',
-
+    pokemonNameFiltered: '',
   },
 
   teamsReducer: {

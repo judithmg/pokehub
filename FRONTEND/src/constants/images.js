@@ -10,7 +10,10 @@ const pokemonSprites = {
 
 };
 
+const errorImg = 'https://i.emezeta.com/weblog/missingno/missingno-real.png';
+
 export {
   websiteImages,
   pokemonSprites,
+  errorImg,
 };

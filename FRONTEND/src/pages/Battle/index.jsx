@@ -1,8 +1,4 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable react/prop-types */
+/* eslint-disable */
 import React, { useEffect } from 'react';
 import '../../styles/progress.scss';
 import '../../styles/battle.scss';

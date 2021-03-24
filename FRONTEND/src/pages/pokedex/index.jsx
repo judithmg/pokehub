@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
@@ -7,8 +8,10 @@ import ReactPaginate from 'react-paginate';
 import {
   loadPokedex,
   loadPokemonsShown,
+  filterByName,
 } from '../../redux/actions/pokedexActions';
 import PokemonList from './PokemonList';
+import { PokedexBall } from '../Icons';
 
 import '../../styles/pokedex.scss';
 
@@ -19,6 +22,9 @@ export function PokedexComponent({
   pokedex,
 }) {
   const [pagination, setPagination] = useState(1);
+  const [querySearch, setQuerySearch] = useState('');
+  const [isShowing, setIsShowing] = useState(false);
+
   useEffect(() => {
     if (!pokedex?.length) {
       actions.loadPokedex();
@@ -29,13 +35,30 @@ export function PokedexComponent({
   useEffect(() => {
     actions.loadPokemonsShown(pagination);
   }, [pagination, pokedex.length]);
+
+  const handleShowAll = () => {
+    setQuerySearch('');
+    actions.loadPokemonsShown(0);
+  };
+
   return (
     <>
       <section data-aos="fade-in" className="pokedex__container">
+
         <table>
           <thead>
             <tr data-aos="fade-in" className="pokedex__header">
-              <th className="pokedex__pokemon-id --hidden">-</th>
+              <th>
+                <PokedexBall onClick={() => setIsShowing(!isShowing)} className="pokedex__search-svg" />
+                {isShowing && (
+                <div className="pokedex__search-wrapper">
+                  <button className="pokedex__btn --close-btn" type="button" onClick={() => setIsShowing(!isShowing)}>X</button>
+                  <input type="text" onChange={(e) => setQuerySearch(e.target.value)} />
+                  <button className="pokedex__btn" type="button" onClick={() => actions.filterByName(querySearch)}>search</button>
+                  <button className="pokedex__btn" type="button" onClick={() => handleShowAll()}>show all</button>
+                </div>
+                )}
+              </th>
               <th className="pokedex__pokemon-sprite --hidden">-</th>
               <th className="pokedex__pokemon-name --hidden">-</th>
               <th className="pokedex__pokemon-type --hidden">-</th>
@@ -55,7 +78,7 @@ export function PokedexComponent({
             ))}
           </tbody>
         </table>
-        { pokemonsShown.length < 21 && (
+        { pokemonsShown.length < 21 && !querySearch && (
         <ReactPaginate
           pageCount={45}
           marginPagesDisplayed={2}
@@ -88,6 +111,7 @@ PokedexComponent.propTypes = {
   actions: PropTypes.shape({
     loadPokedex: PropTypes.func.isRequired,
     loadPokemonsShown: PropTypes.func.isRequired,
+    filterByName: PropTypes.func.isRequired,
   }).isRequired,
 };
 
@@ -99,6 +123,7 @@ export function mapStateToProps(state) {
   return {
     pokedex: state.pokedexReducer.pokedex,
     pokemonsShown: state.pokedexReducer.pokemonsShown,
+    pokemonNameFiltered: state.pokedexReducer.pokemonNameFiltered,
 
     moves: state.pokedexReducer.moves,
     abilities: state.pokedexReducer.abilities,
@@ -112,6 +137,7 @@ export function mapDispatchToProps(dispatch) {
     actions: bindActionCreators({
       loadPokedex,
       loadPokemonsShown,
+      filterByName,
     }, dispatch),
   };
 }

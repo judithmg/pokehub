@@ -71,12 +71,10 @@ export function TeamDetailComponent({
       team
         && team?.pokemons?.map((pokemon) => (
           pokemon.learnset && (
-            <>
-              <TeamDetailPokemon
-                pokemon={pokemon}
-                key={Math.random()}
-              />
-            </>
+          <TeamDetailPokemon
+            pokemon={pokemon}
+            key={Math.random()}
+          />
           )
         ))
       }

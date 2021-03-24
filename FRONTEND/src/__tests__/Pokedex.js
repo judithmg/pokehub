@@ -28,6 +28,7 @@ describe('Given a Pokedex component', () => {
     loadLearnsets: jest.fn(),
     loadAbilities: jest.fn(),
     loadPokemonsShown: jest.fn(),
+    filterByName: jest.fn(),
   };
   const page = 1;
   let pokemonsShown = [{

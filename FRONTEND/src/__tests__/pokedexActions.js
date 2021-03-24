@@ -6,6 +6,7 @@ import {
   loadLearnsets,
   loadAbilities,
   loadPokemonFromType,
+  filterByName,
 } from '../redux/actions/pokedexActions';
 
 import configureStore from '../redux/store/configureStore';
@@ -88,6 +89,15 @@ describe('Given pokedexActions', () => {
       expect(mockReturnValue).toEqual({
         type: actionTypes.LOAD_POKEMON_FROM_TYPE,
         pokemonTypeFiltered: 'fakeData',
+      });
+    });
+  });
+  describe('When filterByName is invoked', () => {
+    test('Then it returns an action', () => {
+      const mockReturnValue = filterByName('fakeData');
+      expect(mockReturnValue).toEqual({
+        type: actionTypes.FILTER_BY_NAME,
+        pokemonNameFiltered: 'fakeData',
       });
     });
   });

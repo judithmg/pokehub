@@ -15,7 +15,7 @@ export default function PokemonList({ pokemon }) {
         <img src={`${pokemonSprites.httpIcon}${pokemon.num}.png`} alt={pokemon.name} />
       </td>
       <td className="pokedex__pokemon-name">
-        <Link to={`/pokemon/${pokemon.name.toLowerCase()}`}>
+        <Link to={`/pokemon/${pokemon.name.toLowerCase()}`} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
           {pokemon.name}
         </Link>
       </td>

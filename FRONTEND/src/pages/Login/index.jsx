@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useAuth } from '../../context/AuthContext';
 import { getUserInfo } from '../../redux/actions/userActions';
+import '../../styles/auth.scss';
 
 export function LoginComponent({ actions }) {
   const emailRef = useRef();
@@ -34,36 +35,32 @@ export function LoginComponent({ actions }) {
 
   return (
     currentUser ? <Redirect to="/profile" /> : (
-      <>
+      <section className="auth__container">
         <div>
-          <div>
-            <h2>Log In</h2>
-            {error && <span>{error}</span>}
-            <form onSubmit={handleSubmit}>
-              <div>
-                <label htmlFor="email">
-                  Email
-                  <input id="email" type="email" ref={emailRef} required />
-                </label>
-              </div>
-              <div id="password">
-                <label htmlFor="password">
-                  Password
-                  <input id="password" type="password" ref={passwordRef} required />
-                </label>
-              </div>
-              <button className="login__btn btn-teammoves" disabled={loading} type="submit">
-                Log In
-              </button>
-            </form>
-          </div>
+          <h2>Log In</h2>
+          {error && <span>{error}</span>}
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="email">
+                Email
+                <input id="email" type="email" ref={emailRef} required />
+              </label>
+            </div>
+            <div id="password">
+              <label htmlFor="password">
+                Password
+                <input id="password" type="password" ref={passwordRef} required />
+              </label>
+            </div>
+            <button className="login__btn btn-teammoves" disabled={loading} type="submit">
+              Log In
+            </button>
+          </form>
         </div>
-        <div>
-          Need an account?
-          {' '}
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      </>
+        Need an account?
+        {' '}
+        <Link to="/signup">Sign Up</Link>
+      </section>
 
     )
 

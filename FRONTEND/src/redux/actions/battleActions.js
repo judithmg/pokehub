@@ -313,6 +313,13 @@ export {
   handleAttack,
   resolveAttack,
   handleKO,
+  handleKOEnemy,
   newEnemyPokemon,
   newPlayerPokemon,
+  loadPlayerPokemonSuccess,
+  newEnemyPokemonLoad,
+  newPlayerPokemonLoad,
+  newEnemyPokemonMsg,
+  newPlayerPokemonMsg,
+  resolveAttackEnemy,
 };

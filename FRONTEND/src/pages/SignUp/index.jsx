@@ -6,6 +6,7 @@ import { Link, useHistory, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useAuth } from '../../context/AuthContext';
+import '../../styles/auth.scss';
 
 import { signupUser } from '../../redux/actions/userActions';
 
@@ -47,46 +48,36 @@ export function SignupComponent({ actions }) {
 
   return (
     currentUser ? <Redirect to="/profile" /> : (
-
-      <>
-        <div>
+      <section className="auth__container">
+        <h2>Sign Up</h2>
+        {error && <span>{error}</span>}
+        <form onSubmit={handleSubmit}>
           <div>
-            <h2>Sign Up</h2>
-            {error && <span>{error}</span>}
-            <form onSubmit={handleSubmit}>
-              <div>
-                <label htmlFor="email">
-                  Email
-                  <input id="email" type="email" ref={emailRef} required />
-                </label>
-              </div>
-              <div id="password">
-                <label htmlFor="password">
-                  Password
-                  <input id="password" type="password" ref={passwordRef} required />
-                </label>
-              </div>
-              <div id="password-confirm">
-                <label htmlFor="password-confirm">
-                  Password
-                  <input id="password-confirm" type="password" ref={passwordRef} required />
-                </label>
-              </div>
-              <button className="login__btn" disabled={loading} type="submit">
-                Log In
-              </button>
-            </form>
-            <div>
-              <Link to="/login/">Already have an account?</Link>
-            </div>
+            <label htmlFor="email">
+              Email
+              <input id="email" type="email" ref={emailRef} required />
+            </label>
           </div>
-        </div>
+          <div id="password">
+            <label htmlFor="password">
+              Password
+              <input id="password" type="password" ref={passwordRef} required />
+            </label>
+          </div>
+          <div id="password-confirm">
+            <label htmlFor="password-confirm">
+              Password
+              <input id="password-confirm" type="password" ref={passwordRef} required />
+            </label>
+          </div>
+          <button className="login__btn" disabled={loading} type="submit">
+            Log In
+          </button>
+        </form>
         <div>
-          Need an account?
-          {' '}
-          <Link to="/signup">Sign Up</Link>
+          <Link to="/login/">Already have an account?</Link>
         </div>
-      </>
+      </section>
     )
   );
 }
