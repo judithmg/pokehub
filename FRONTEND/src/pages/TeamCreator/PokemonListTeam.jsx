@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import PropTypes from 'prop-types';
 
 import React from 'react';
@@ -14,6 +12,7 @@ export function PokemonListTeamComponent({ actions, pokedex }) {
     <div className="team-creator__pokelist" data-aos="fade-in">
       {[...Array(893)].map((x, i) => (
         <img
+          role="presentation"
           alt="pokemon icon"
           className="team-creator__pokeico"
           id={i + 1}

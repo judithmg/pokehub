@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import actionTypes from '../actions/actionTypes';
 import initialState from '../store/initialState';
 

@@ -1,0 +1,21 @@
+@import "./mixins";
+@import "./colors";
+
+.modal-pokemon {
+  @include flex(column, center, center);
+  z-index: 100;
+  width: 600px;
+
+  position: relative;
+  border-radius: 20px;
+  height: 250px;
+  .modal-close {
+    font-size: 20px;
+    background-color: $headercolor;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 500;
+  }
+}

@@ -60,7 +60,7 @@ export function TeamCreatorComponent({
             {newTeam.id && (
               <form onSubmit={() => handleSubmit()}>
                 <input type="text" placeholder="team name" onChange={(event) => setTeamName(event.target.value)} required />
-                <input type="submit" value="create team!" />
+                <input className="teamcreator__btn" type="submit" value="create team!" />
               </form>
             )}
           </div>

@@ -4,49 +4,46 @@
 @import "./types.scss";
 
 // USER TEAMS
-.teams__container {
-  .teams__team {
-    width: 100%;
-    border-radius: 20px;
-    margin: 10px;
+.teams__team {
+  width: 97%;
+  border-radius: 20px;
+  margin: 10px;
+  @include flex(row, center, flex-end);
 
-    &:nth-child(odd) {
-      background-color: $grayeven;
+  &:nth-child(odd) {
+    background-color: $grayeven;
+  }
+  &:nth-child(even) {
+    background-color: $grayodd;
+  }
+  .teams__sprites {
+    img {
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      margin: 5px 18px;
     }
-    &:nth-child(even) {
-      background-color: $grayodd;
-    }
-    .teams__sprites {
-      img {
-        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-        margin: 5px 18px;
-      }
-    }
-    .teams__id {
-      text-shadow: $blackshadow;
-      color: #fff;
-      font-weight: bold;
-      font-size: 30px;
-      margin-right: 10px;
-    }
+  }
+  .teams__id {
+    text-shadow: $blackshadow;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 10px;
   }
 }
 .teams__delete-btn {
-  background-color: rgba(118, 118, 118, 0.4);
-  text-shadow: $blackshadow;
-  border-radius: 10px;
-  color: white;
-  padding: 4px;
-  margin: 0 10px;
-  border: 1px solid rgb(102, 102, 102);
+  @include btn-slide($headercolor);
 }
 .teams__info {
-  @include flex(column, flex-end, flex-end);
+  @include flex(column, center, center);
 }
 
 @media only screen and (min-width: 768px) {
   .teams__team {
     @include flex(row, space-between, center);
+    width: 100%;
     margin: 10px;
+  }
+  .teams__info {
+    @include flex(column, flex-end, flex-end);
   }
 }

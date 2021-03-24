@@ -72,11 +72,11 @@ function App({
         <main>
           <MainComponent />
           <Switch>
-            <Route path="/battle" component={Battle} />
             <Route path="/login" component={Login} />
             <Route path="/pokemon/:pokeId" component={PokeDetail} />
             <Route path="/pokedex" component={Pokedex} />
             <Route path="/signup" component={SignUp} />
+            <PrivateRoute path="/battle" component={Battle} />
             <PrivateRoute path="/team-creator" component={TeamCreator} />
             <PrivateRoute path="/team-detail/:teamId" component={TeamDetail} />
             <PrivateRoute path="/teams" component={Teams} />

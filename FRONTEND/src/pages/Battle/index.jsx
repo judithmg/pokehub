@@ -1,8 +1,5 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable no-mixed-operators */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable react/style-prop-object */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/prop-types */
@@ -10,8 +7,11 @@ import React, { useEffect } from 'react';
 import '../../styles/progress.scss';
 import '../../styles/battle.scss';
 import '../../styles/animate.css';
-import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import useModal from '../../hooks/useModal';
+import Modal from './ModalPokemon';
+
 import {
   startNewFight,
   loadPlayerPokemon,
@@ -50,6 +50,7 @@ export function BattleComponent({
 // load teams if not already on the state
   const { currentUser } = useAuth();
   const useremail = currentUser.email;
+  const { isShowing, toggle } = useModal();
 
   useEffect(() => {
     if (!user.email) {
@@ -112,6 +113,13 @@ export function BattleComponent({
                           src={`${pokemonSprites.httpFrontSprite}${enemyPokemon?.num}.png`}
                           key={Math.random()}
                           className={enemyClass}
+                          onClick={toggle}
+                        />
+                        <Modal
+                          pokemonBattle={enemyPokemon}
+                          isShowing={isShowing}
+                          hide={toggle}
+                          pokemonPlayer={playerPokemon}
 
                         />
                       </div>
@@ -126,6 +134,13 @@ export function BattleComponent({
                         src={`${pokemonSprites.httpFrontSprite}/back/${playerPokemon.num}.png`}
                         key={Math.random()}
                         className={playerClass}
+                        onClick={toggle}
+                      />
+                      <Modal
+                        pokemonBattle={enemyPokemon}
+                        isShowing={isShowing}
+                        hide={toggle}
+                        pokemonPlayer={playerPokemon}
                       />
                     </div>
 
@@ -249,7 +264,7 @@ export function BattleComponent({
           ) : (
             <div className="battle__selector-container">
               <div className="battle__selector">
-                { playerTeam && playerTeam.map((poke, index) => (
+                { playerTeam.length ? playerTeam.map((poke, index) => (
                   poke?.num
           && (
           <div
@@ -265,7 +280,7 @@ export function BattleComponent({
             />
           </div>
           )
-                ))}
+                )) : (<span>Battle is over!!</span>)}
               </div>
               <div className="battle__selector-text">
                 <div className="battle__selector-text--inner">

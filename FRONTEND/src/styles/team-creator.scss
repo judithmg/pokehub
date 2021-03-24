@@ -20,16 +20,6 @@
     border-bottom: 5px solid $headercolor;
     margin: 20px;
     min-height: 100px;
-    button {
-      background-color: rgba(118, 118, 118, 0.4);
-      text-shadow: $blackshadow;
-      border-radius: 10px;
-      color: white;
-      padding: 4px;
-      margin: 0 10px;
-      border: 1px solid rgb(102, 102, 102);
-      font-family: "Press Start 2P", cursive;
-    }
 
     svg {
       width: 50px;
@@ -41,6 +31,9 @@
       border: 1px solid #00000065;
     }
   }
+}
+.teamcreator__btn {
+  @include btn-slide($headercolor);
 }
 
 .team-creator__pokelist {
