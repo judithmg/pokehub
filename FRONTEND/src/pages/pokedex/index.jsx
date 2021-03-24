@@ -84,16 +84,15 @@ export function PokedexComponent({
 PokedexComponent.propTypes = {
   pokedex: PropTypes.arrayOf(PropTypes.object).isRequired,
   pokemonsShown: PropTypes.arrayOf(PropTypes.object).isRequired,
-
-  page: PropTypes.number.isRequired,
+  page: PropTypes.number,
   actions: PropTypes.shape({
     loadPokedex: PropTypes.func.isRequired,
-    loadMoves: PropTypes.func.isRequired,
-    loadLearnsets: PropTypes.func.isRequired,
-    loadAbilities: PropTypes.func.isRequired,
-
     loadPokemonsShown: PropTypes.func.isRequired,
   }).isRequired,
+};
+
+PokedexComponent.defaultProps = {
+  page: 0,
 };
 
 export function mapStateToProps(state) {
