@@ -1,0 +1,70 @@
+@import "./mixins";
+@import "./colors";
+@import "./fonts";
+
+//BUTTON
+
+.dashboard__button {
+  @include flex(row, center, center);
+
+  position: relative;
+  background: $headercolor;
+  box-shadow: 0 6px $menucolor;
+  border-radius: 25px;
+  text-align: center;
+  padding: 50px;
+  margin: 20px;
+
+  width: 160px;
+  height: 100px;
+
+  cursor: pointer;
+
+  &:hover {
+    span {
+      color: $menucolor;
+    }
+    box-shadow: 0 4px $menucolor;
+    top: 2px;
+  }
+  &:hover svg {
+    fill: $menucolor;
+  }
+
+  &:active {
+    box-shadow: 0 0 $menucolor;
+    top: 6px;
+  }
+
+  span {
+    z-index: 1;
+
+    font-family: $Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    color: #fff;
+
+    text-shadow: $blackshadow;
+  }
+
+  .svg-container {
+    @include flex(row, center, center);
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    svg {
+      width: 70%;
+      height: 70%;
+    }
+  }
+}
+
+//DASHBOARD
+
+@media only screen and (min-width: 768px) {
+  .dashboard__component {
+    @include flex(row, center, center);
+  }
+}

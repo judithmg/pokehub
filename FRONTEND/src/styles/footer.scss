@@ -1,0 +1,20 @@
+@import "./mixins";
+@import "./colors";
+@import "./fonts";
+
+footer {
+  @include flex(row, center, center);
+  box-sizing: border-box;
+
+  width: 100%;
+  margin: auto 0;
+  background-color: $headercolor;
+  padding: 5px;
+  text-align: center;
+  color: #fff;
+  font-family: $Montserrat;
+
+  a {
+    font-weight: 700;
+  }
+}

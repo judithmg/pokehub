@@ -1,0 +1,47 @@
+@import "./mixins";
+@import "./colors";
+@import "./fonts";
+
+.menu__dropdown {
+  z-index: 1;
+  font-family: $Montserrat;
+  background-color: #fff;
+  font-size: 13px;
+  font-weight: 400;
+  color: #526484;
+  position: absolute;
+  top: 70px;
+  right: 100px;
+  width: 360px;
+  border-radius: 4px;
+  border-top: 4px solid #465fff;
+  border-bottom: 4px solid #465fff;
+  box-shadow: 0 3px 12px 1px rgb(44 55 130 / 15%);
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    border-bottom: 1px solid #e5e9f2;
+  }
+}
+
+ul {
+  padding: 0;
+  overflow: auto;
+  max-height: 240px;
+  li {
+    padding: 9px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: flex-start;
+    &:hover {
+      color: #6576ff;
+      transition: color 0.4s;
+      transition-property: color;
+      transition-duration: 0.4s;
+      transition-timing-function: ease;
+      transition-delay: 0s;
+    }
+  }
+}

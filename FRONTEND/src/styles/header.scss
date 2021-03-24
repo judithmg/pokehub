@@ -1,0 +1,29 @@
+@import "./mixins.scss";
+@import "./colors.scss";
+
+header {
+  position: sticky;
+  background-color: $headercolor;
+  height: 60px;
+  @include flex(row, space-between, center);
+
+  .header__logo {
+    height: 50px;
+    margin: 0px 20px;
+  }
+
+  .header--right {
+    @include flex(row, space-between, center);
+    img {
+      width: 50px;
+      margin: 0 20px;
+      cursor: pointer;
+    }
+  }
+}
+
+.header__button-menu {
+  outline: none;
+  border: none;
+  background: none;
+}

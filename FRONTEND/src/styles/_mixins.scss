@@ -1,0 +1,94 @@
+@import "./fonts";
+
+@mixin flex($direction, $justify, $align) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin box-shadow($shadow) {
+  box-shadow: $shadow;
+  -webkit-box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+}
+
+@mixin transition($transition) {
+  -webkit-transition: #{$transition};
+  -moz-transition: #{$transition};
+  -o-transition: #{$transition};
+  transition: #{$transition};
+}
+
+@mixin animation($animation) {
+  -webkit-animation: #{$animation};
+  animation: #{$animation};
+}
+
+@mixin transform($transform) {
+  -webkit-transform: #{$transform};
+  -ms-transform: #{$transform};
+  transform: #{$transform};
+}
+
+@mixin anifloat() {
+  transform: translatey(0px);
+  animation: float 2s ease-in-out infinite;
+
+  @keyframes float {
+    0% {
+      transform: translatey(0px);
+    }
+    50% {
+      transform: translatey(-10px);
+    }
+    100% {
+      transform: translatey(0px);
+    }
+  }
+}
+
+@mixin btn-slide($color) {
+  font-family: $PressStart;
+  margin: 3px auto;
+  cursor: pointer;
+  border-radius: 10rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 13px;
+  padding: 2px 10px;
+  letter-spacing: 0.15rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $color;
+    border-radius: 10rem;
+    z-index: -2;
+  }
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: darken($color, 15%);
+    transition: all 0.3s;
+    border-radius: 10rem;
+    z-index: -1;
+  }
+  &:hover {
+    color: #fff;
+    &:before {
+      width: 100%;
+    }
+  }
+}

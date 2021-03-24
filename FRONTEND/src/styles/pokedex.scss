@@ -1,0 +1,160 @@
+@import "./mixins";
+@import "./colors";
+@import "./fonts";
+
+.pokedex__container {
+  margin: 20px;
+  width: 100%;
+  @include flex(column, center, center);
+  table {
+    width: 80%;
+  }
+}
+
+.pokedex__search-svg {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  position: relative;
+  fill: white;
+}
+.pokedex__search-wrapper {
+  position: absolute;
+  background-color: $greencolor;
+  opacity: 90%;
+  top: -60%;
+  left: 60px;
+  width: 300px;
+  padding: 10px;
+  border-radius: 4px;
+  border-top: 4px solid $menucolor;
+  border-bottom: 4px solid $menucolor;
+  box-shadow: 0 3px 12px 1px rgb(44 55 130 / 15%);
+  @include flex(column, center, center);
+  .--close-btn {
+    font-size: 10px;
+    left: 140px;
+  }
+  input {
+    background-color: rgba(255, 255, 255, 0.604);
+  }
+  button {
+    font-family: $Pokemon;
+    font-size: 20px;
+  }
+}
+
+.pokedex__btn {
+  @include btn-slide($menucolor);
+}
+
+.pokedex__pokemon,
+.pokedex__header {
+  text-transform: uppercase;
+  font-size: 13px;
+  @include flex(row, center, center);
+}
+.pokedex__pokemon-id {
+  width: 15%;
+}
+.pokedex__pokemon-sprite {
+  @include flex(row, center, center);
+  width: 20%;
+}
+.pokedex__pokemon-name {
+  width: 30%;
+}
+.pokedex__pokemon-type {
+  @include flex(row, center, center);
+  width: 50%;
+  button {
+    margin: 0 5px;
+  }
+}
+.pokedex__pokemon-stats {
+  @include flex(row, center, center);
+  width: 10%;
+}
+
+.pokedex__pokemon {
+  cursor: pointer;
+  &:nth-child(odd) {
+    background-color: $grayodd;
+  }
+  &:nth-child(even) {
+    background-color: $grayeven;
+  }
+  .pokedex__pokemon-sprite {
+    img {
+      @include anifloat();
+    }
+  }
+}
+
+.pokedex__header {
+  background-color: $headercolor;
+  border-radius: 20px 20px 0 0;
+  padding: 10px 0;
+}
+
+.pokedex__pagination {
+  @include flex(row, center, center);
+  cursor: pointer;
+  margin: 5px 0;
+  color: #fff;
+  text-shadow: $blackshadow;
+  li {
+    outline: none;
+    margin: 0 5px;
+    padding: 7px;
+    font-size: 12px;
+    border-radius: 10px;
+    background-color: $headercolor;
+  }
+  .pokedex__pagination-active {
+    background-color: $menucolor;
+    font-weight: 700;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .pokedex__container {
+    margin: 20px 100px;
+    @include flex(column, center, center);
+    table {
+      width: 700px;
+      margin: 20px 0;
+    }
+  }
+
+  .pokedex__pokemon-id {
+    width: 7%;
+  }
+  .pokedex__pokemon-sprite {
+    @include flex(row, center, center);
+    width: 10%;
+  }
+  .pokedex__pokemon-name {
+    width: 15%;
+  }
+  .pokedex__pokemon-type {
+    width: 23%;
+    @include flex(row, center, center);
+    button {
+      margin: 0 5px;
+    }
+  }
+  .pokedex__pokemon-stats {
+    width: 45%;
+    &.pokedex__pokemon-header {
+      font-size: 10px;
+    }
+    p {
+      width: 20%;
+    }
+  }
+}
+
+.--hidden {
+  visibility: hidden;
+}

@@ -1,0 +1,15 @@
+@import "./colors";
+@import "./mixins";
+
+.notfound__container {
+  @include flex(column, center, center);
+  img {
+    width: 500px;
+    border-radius: 20px;
+  }
+  button {
+    @include btn-slide($menucolor);
+    font-size: 30px;
+    margin: 20px;
+  }
+}
