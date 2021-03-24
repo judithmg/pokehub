@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 const Team = require('../models/teamModel');
 const User = require('../models/userModel');
 
@@ -61,9 +60,11 @@ function updateTeamById(req, res) {
 
 async function deleteTeamFromTeamDb(req, res) {
   await Team.findOneAndRemove(req.body, (error, deleted) => {
-    error
-      ? res.status(404)
-      : res.json(deleted);
+    if (error) {
+      res.send(`there was an error ${error}`);
+    } else {
+      res.json(deleted);
+    }
   });
 }
 

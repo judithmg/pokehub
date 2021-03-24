@@ -27,5 +27,19 @@ module.exports = {
     'react/jsx-props-no-spreading': 0,
     'react/forbid-prop-types': 0,
     'no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
+    'no-nested-ternary': ['off', 'error', 0],
+    'no-mixed-operators': [
+      'error',
+      {
+        groups: [
+          ['+', '-', '*', '/', '%', '**'],
+          ['&', '|', '^', '~', '<<', '>>', '>>>'],
+          ['==', '!=', '===', '!==', '>', '>=', '<', '<='],
+          ['&&', '||'],
+          ['in', 'instanceof'],
+        ],
+        allowSamePrecedence: true,
+      },
+    ],
   },
 };
