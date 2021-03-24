@@ -37,5 +37,8 @@ RadarChartComponent.propTypes = {
       def: PropTypes.number,
       spd: PropTypes.number,
     },
-  ).isRequired,
+  ),
+};
+RadarChartComponent.defaultProps = {
+  stats: undefined,
 };
