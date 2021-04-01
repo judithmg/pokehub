@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 
 import {
   handleAttack,
-} from '../../redux/actions/battleActionsPlayer';
+} from '../../redux/actions/battleActions';
 
 export function BattleTextAttackBox({
   actions,

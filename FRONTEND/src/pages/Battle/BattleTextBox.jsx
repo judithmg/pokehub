@@ -14,17 +14,12 @@ import {
   startNewFight,
   loadPlayerPokemon,
   loadAttackBox,
-} from '../../redux/actions/battleActions';
 
-import {
   randomEnemyAttack,
   newEnemyPokemon,
-} from '../../redux/actions/battleActionsEnemy';
-
-import {
   newPlayerPokemon,
   handleAttack,
-} from '../../redux/actions/battleActionsPlayer';
+} from '../../redux/actions/battleActions';
 
 import { Pokeball } from '../Icons';
 import { getUserInfo } from '../../redux/actions/userActions';
