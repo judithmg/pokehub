@@ -12,19 +12,23 @@ import {
   startNewFight,
   loadPlayerPokemon,
   loadAttackBox,
+} from '../../redux/actions/battleActions';
 
+import {
   randomEnemyAttack,
   newEnemyPokemon,
+} from '../../redux/actions/battleActionsEnemy';
 
+import {
   newPlayerPokemon,
   handleAttack,
-} from '../../redux/actions/battleActions';
+} from '../../redux/actions/battleActionsPlayer';
 
 import { getUserInfo } from '../../redux/actions/userActions';
 import { useAuth } from '../../context/AuthContext';
 
 import BattleTextBox from './BattleTextBox';
-import BattlePokemon from './BattlePokemonSelector';
+import BattlePokemonSelect from './BattlePokemonSelector';
 import BattleGround from './BattleGround';
 
 export function BattleComponent({
@@ -81,7 +85,7 @@ export function BattleComponent({
             </div>
           </>
         ) : (
-          <BattlePokemon />
+          <BattlePokemonSelect />
         )}
       </div>
     )

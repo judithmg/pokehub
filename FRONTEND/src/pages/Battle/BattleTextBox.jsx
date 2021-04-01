@@ -8,21 +8,20 @@ import '../../styles/animate.css';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { loadTeams } from '../../redux/actions/teamManagerActions';
-
 import {
-  startNewFight,
-  loadPlayerPokemon,
   loadAttackBox,
-
-  randomEnemyAttack,
-  newEnemyPokemon,
-  newPlayerPokemon,
-  handleAttack,
 } from '../../redux/actions/battleActions';
 
+import {
+  randomEnemyAttack,
+  newEnemyPokemon,
+} from '../../redux/actions/battleActionsEnemy';
+
+import {
+  newPlayerPokemon,
+} from '../../redux/actions/battleActionsPlayer';
+
 import { Pokeball } from '../Icons';
-import { getUserInfo } from '../../redux/actions/userActions';
 import BattleTextAttack from './BattleTextAttackBox';
 
 export function BattleComponent({
@@ -36,6 +35,9 @@ export function BattleComponent({
   enemyDiesMsg,
   playerDiesMsg,
   blockClicks,
+  playerTeam,
+  enemyWinsBattle,
+  playerWinsBattle,
 }) {
   return (
 
@@ -48,6 +50,7 @@ export function BattleComponent({
                 playerPokemon,
                 enemyPokemon,
                 moves,
+                playerTeam.length,
               )}
             >
               {playerAttackMsg}
@@ -65,13 +68,25 @@ export function BattleComponent({
             >
               {enemyDiesMsg}
             </span>
-          ) : (
+          ) : playerDiesMsg ? (
             <span
               className={blockClicks}
               onClick={() => actions.newPlayerPokemon()}
             >
               {playerDiesMsg}
             </span>
+          ) : enemyWinsBattle ? (
+            <span
+              className={blockClicks}
+            >
+              {enemyWinsBattle}
+            </span>
+          ) : { playerWinsBattle }(
+            <span
+              className={blockClicks}
+            >
+              {playerWinsBattle}
+            </span>,
           )}
       </div>
     </div>
@@ -83,6 +98,7 @@ export function mapStateToProps(state) {
   return {
     moves: state.pokedexReducer.moves,
     playerPokemon: state.battleReducer.playerPokemon,
+    playerTeam: state.battleReducer.playerTeam,
     enemyPokemon: state.battleReducer.enemyPokemon,
     attackBox: state.battleReducer.attackBox,
     playerAttackMsg: state.battleReducer.playerAttackMsg,
@@ -90,6 +106,9 @@ export function mapStateToProps(state) {
     enemyDiesMsg: state.battleReducer.enemyDiesMsg,
     playerDiesMsg: state.battleReducer.playerDiesMsg,
     blockClicks: state.battleReducer.blockClicks,
+    playerWinsBattle: state.battleReducer.playerWinsBattle,
+    enemyWinsBattle: state.battleReducer.enemyWinsBattle,
+
   };
 }
 
@@ -97,12 +116,7 @@ export function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(
       {
-        startNewFight,
-        loadPlayerPokemon,
         randomEnemyAttack,
-        loadTeams,
-        getUserInfo,
-        handleAttack,
         loadAttackBox,
         newEnemyPokemon,
         newPlayerPokemon,
