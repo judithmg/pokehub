@@ -31,6 +31,23 @@ function playerAttacks() {
     type: actionTypes.PLAYER_ATTACKS,
   };
 }
+/**
+ * With all data the attack is resolved
+ * This only takes place if the attack didn't end in a KO
+ * @param  {object} playerPokemon Pokemon from the player inbattle
+ * @param  {object} enemyPokemon Enemy Pokemon inbattle
+ * @param  {object} attackData contains all data from the attack
+ * @param  {number} attackData.attackPower calculated
+ * @param  {number} attackData.basePower taken from move description
+ * @param  {string} attackData.category physical/special
+ * @param  {number} attackData.modifier takes into account attacker and defendant types
+ * @param  {string} attackData.moveName
+ * @param  {string} attackData.name
+ * @param  {number} attackData.pp
+ * @param  {string} attackData.shortDesc
+ * @param  {string} attackData.type
+ * @param  {number} attackData.teamLenght
+ */
 function resolveAttack(playerPokemon, enemyPokemon, attackData) {
   return {
     type: actionTypes.RESOLVE_ATTACK_PLAYER,
@@ -48,6 +65,14 @@ function handleKO(playerPokemon, enemyPokemon, attackData) {
   };
 }
 
+function playerHandleLoss(playerPokemon, enemyPokemon, attackData) {
+  console.log(playerPokemon, enemyPokemon, attackData);
+  console.log('YOU LOST');
+  return {
+    type: actionTypes.PLAYER_HANDLE_LOSS,
+  };
+}
+
 function getUpdatedHP(playerPokemon, enemyPokemon, attackData) {
   const updatedenemyPokemon = { ...enemyPokemon };
   updatedenemyPokemon.battleStats.hp -= attackData.attackPower;
@@ -61,7 +86,9 @@ function getUpdatedHP(playerPokemon, enemyPokemon, attackData) {
           attackData,
         ),
       )
-      : dispatch(handleKO(playerPokemon, enemyPokemon, attackData));
+      : attackData.teamLenght === 1
+        ? dispatch(playerHandleLoss(playerPokemon, enemyPokemon, attackData))
+        : dispatch(handleKO(playerPokemon, enemyPokemon, attackData));
   };
 }
 
@@ -114,10 +141,18 @@ function getAttackType(playerPokemon, enemyPokemon, data, moves) {
     );
   };
 }
-
-function handleAttack(playerPokemon, enemyPokemon, moves, moveName, playerTeam) {
+/**
+ * Initiates all actions that get data from the attack performed by the player
+ * @param  {object} playerPokemon Pokemon from the player inbattle
+ * @param  {object} enemyPokemon Enemy Pokemon inbattle
+ * @param  {object} moves Array with info from all moves
+ * @param  {string} moveName Name of move used by the player
+ * @param  {number} enemyTeam How many members has the enemy team currently?
+ * Used later to decide wether battle is over or not
+ */
+function handleAttack(playerPokemon, enemyPokemon, moves, moveName, enemyTeam) {
   const data = {
-    teamLenght: playerTeam,
+    teamLenght: enemyTeam,
     moveName,
   };
   return (dispatch) => {

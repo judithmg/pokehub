@@ -8,23 +8,6 @@ let attackBox = {
   attackFour: { name: '' },
 };
 
-const enemyStatic = {
-  battleStats: {
-    hp: 341,
-    maxhp: 341,
-    atk: 259,
-    def: 2636,
-    spa: 212,
-    spd: 236,
-    spe: 236,
-  },
-  types: ['Psychic'],
-  name: 'Mew',
-  moveset: [{ name: 'Icy Wind' }, { name: 'Take Down' }, { name: 'Thunderbolt' }, { name: 'Knock Off' }],
-  num: 151,
-  level: 100,
-};
-
 export default function battleReducer(state = initialState.battleReducer, action = {}) {
   let playerPokemon;
   let moveset;
@@ -113,26 +96,23 @@ export default function battleReducer(state = initialState.battleReducer, action
       playerPokemon = {
         ...action.playerPokemon,
         battleStats: action.stats,
-        level: 90,
+        level: action.level,
       };
       return { ...state, playerPokemon };
-
-    case actionTypes.LOAD_ENEMY:
-      return { ...state, enemyPokemon: enemyStatic };
 
     case actionTypes.HANDLE_KO:
       enemyPokemon = { ...state.enemyPokemon };
       enemyPokemon.battleStats.hp = 0;
       return {
         ...state,
+        attackData: action.attackData,
         enemyClass: 'animate__animated animate__fadeOutDown',
         enemyPokemon,
         attackBox: null,
+        playerAttackMsg: '',
         enemyAttackMsg: '',
         playerDiesMsg: '',
-        enemyDiesMsg: `${enemyPokemon.name.toUpperCase()} fainted!`,
-        playerAttackMsg: '',
-
+        enemyDiesMsg: `${action.playerPokemon.name.toUpperCase()} used ${action.attackData.moveName}! ${enemyPokemon.name.toUpperCase()} fainted!`,
       };
 
     case actionTypes.HANDLE_KO_ENEMY:
@@ -146,18 +126,22 @@ export default function battleReducer(state = initialState.battleReducer, action
         attackBox: null,
         playerAttackMsg: '',
         enemyAttackMsg: '',
-        playerDiesMsg: `Oh, no! ${playerPokemon.name.toUpperCase()} whited out!`,
-
+        playerDiesMsg: `Enemy ${action.enemyPokemon.name.toUpperCase()} used ${action.attackData.moveName}! Oh, no! ${playerPokemon.name.toUpperCase()} whited out!`,
       };
 
     case actionTypes.RESOLVE_ATTACK_PLAYER:
       action.attackData.attackPower > 0
         ? playerAttackMsg = `${action.playerPokemon.name.toUpperCase()} used ${action.attackData.moveName}!`
         : playerAttackMsg = `${action.playerPokemon.name.toUpperCase()} used ${action.attackData.moveName}! But it did nothing...`;
-      if (action.attackData.modifier > 1) playerAttackMsg += ' It was super effective!';
-      if (action.attackData.modifier < 1 && action.attackData.modifier > 0) playerAttackMsg += " It wasn't very effective...";
+
+      if (action.attackData.modifier > 1
+        && action.attackData.basePower !== 0) playerAttackMsg += ' It was super effective!';
+      if (action.attackData.modifier < 1
+        && action.attackData.modifier > 0
+        && action.attackData.basePower !== 0) playerAttackMsg += " It wasn't very effective...";
       return {
         ...state,
+        attackData: action.attackData,
         enemyPokemon: action.enemyPokemon,
         enemyClass: 'animate__animated animate__rubberBand',
         playerClass: 'animate__bounce animate__animated',
@@ -168,8 +152,14 @@ export default function battleReducer(state = initialState.battleReducer, action
 
     case actionTypes.RESOLVE_ATTACK_ENEMY:
       action.attackPower > 0
-        ? enemyAttackMsg = `Enemy Pokemon ${action.enemyPokemon.name.toUpperCase()} attacked! ${action.enemyPokemon.name.toUpperCase()} used ${action.moveName}!`
-        : enemyAttackMsg = `Enemy Pokemon ${action.enemyPokemon.name.toUpperCase()} attacked! ${action.enemyPokemon.name.toUpperCase()} used ${action.moveName}! But it did nothing...`;
+        ? enemyAttackMsg = `Enemy Pokemon ${action.enemyPokemon.name.toUpperCase()} attacked! ${action.enemyPokemon.name.toUpperCase()} used ${action.attackData.moveName}!`
+        : enemyAttackMsg = `Enemy Pokemon ${action.enemyPokemon.name.toUpperCase()} attacked! ${action.enemyPokemon.name.toUpperCase()} used ${action.attackData.moveName}! But it did nothing...`;
+
+      if (action.attackData.modifier > 1
+        && action.attackData.attackPower !== 0) enemyAttackMsg += ' It was super effective!';
+      if (action.attackData.modifier < 1
+        && action.attackData.modifier > 0
+        && action.attackData.attackPower !== 0) enemyAttackMsg += " It wasn't very effective...";
       return {
         ...state,
         attackData: action.attackData,
@@ -178,6 +168,27 @@ export default function battleReducer(state = initialState.battleReducer, action
         enemyClass: 'animate__bounce animate__animated',
         playerAttackMsg: '',
         enemyAttackMsg,
+      };
+
+    case actionTypes.ENEMY_WINS_BATTLE:
+      return {
+        ...state,
+        blockClicks: 'block-clicks',
+        attackData: action.attackData,
+        playerClass: 'animate__animated animate__fadeOutDown',
+        playerPokemon,
+        attackBox: null,
+        playerAttackMsg: '',
+        enemyAttackMsg: '',
+        playerDiesMsg: `Enemy ${action.enemyPokemon.name.toUpperCase()} used ${action.attackData.moveName}! Oh, no! ${playerPokemon.name.toUpperCase()} whited out!`,
+      };
+
+    case actionTypes.HANDLE_PLAYER_LOSS:
+      return {
+        ...state,
+        playerAttackMsg: '',
+        enemyAttackMsg: '',
+        enemyWinsBattle: 'You lost!!!',
       };
 
     default:

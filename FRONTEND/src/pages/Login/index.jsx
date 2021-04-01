@@ -34,7 +34,7 @@ export function LoginComponent({ actions }) {
   }
 
   return (
-    currentUser ? <Redirect to="/profile" /> : (
+    currentUser ? <Redirect to="/" /> : (
       <section className="auth__container">
         <div>
           <h2>Log In</h2>

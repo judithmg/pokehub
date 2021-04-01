@@ -28,7 +28,7 @@ import { getUserInfo } from '../../redux/actions/userActions';
 import { useAuth } from '../../context/AuthContext';
 
 import BattleTextBox from './BattleTextBox';
-import BattlePokemonSelector from './BattlePokemonSelector';
+import BattlePokemonSelect from './BattlePokemonSelector';
 import BattleGround from './BattleGround';
 
 export function BattleComponent({
@@ -85,7 +85,7 @@ export function BattleComponent({
             </div>
           </>
         ) : (
-          <BattlePokemonSelector />
+          <BattlePokemonSelect />
         )}
       </div>
     )

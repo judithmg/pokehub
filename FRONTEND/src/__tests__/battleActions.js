@@ -3,20 +3,26 @@ import configureStore from '../redux/store/configureStore';
 import {
   startNewFight,
   loadBattleTeam,
+  loadAttackBox,
+  loadPlayerPokemonSuccess,
+} from '../redux/actions/battleActions';
+
+import {
+  loadEnemy,
+  handleKOEnemy,
+  newEnemyPokemon,
+  newEnemyPokemonLoad,
+  newEnemyPokemonMsg,
   resolveAttackEnemy,
+} from '../redux/actions/battleActionsEnemy';
+
+import {
   newPlayerPokemonLoad,
   newPlayerPokemonMsg,
-  loadEnemy,
   playerAttacks,
-  handleKOEnemy,
-  loadAttackBox,
   resolveAttack,
   handleKO,
-  newEnemyPokemon,
-  loadPlayerPokemonSuccess,
-  newEnemyPokemonMsg,
-  newEnemyPokemonLoad,
-} from '../redux/actions/battleActions';
+} from '../redux/actions/battleActionsPlayer';
 
 jest.mock('axios');
 

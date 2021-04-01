@@ -18,6 +18,7 @@ export function BattleTextAttackBox({
   playerPokemon,
   attackBox,
   enemyPokemon,
+  enemyTeam,
 }) {
   return (
     <>
@@ -30,7 +31,7 @@ export function BattleTextAttackBox({
               enemyPokemon,
               moves,
               attackBox?.attackOne?.name,
-              moves,
+              enemyTeam.length,
             );
           }}
           className="battle__atack"
@@ -44,7 +45,7 @@ export function BattleTextAttackBox({
             enemyPokemon,
             moves,
             attackBox?.attackTwo?.name,
-            moves,
+            enemyTeam.length,
           )}
           className="battle__atack"
         >
@@ -59,7 +60,7 @@ export function BattleTextAttackBox({
             enemyPokemon,
             moves,
             attackBox?.attackThree?.name,
-            moves,
+            enemyTeam.length,
           )}
           className="battle__atack"
         >
@@ -72,7 +73,7 @@ export function BattleTextAttackBox({
             enemyPokemon,
             moves,
             attackBox?.attackFour?.name,
-            moves,
+            enemyTeam.length,
           )}
           className="battle__atack"
         >
@@ -89,6 +90,7 @@ export function mapStateToProps(state) {
     playerPokemon: state.battleReducer.playerPokemon,
     enemyPokemon: state.battleReducer.enemyPokemon,
     attackBox: state.battleReducer.attackBox,
+    enemyTeam: state.battleReducer.enemyTeam,
   };
 }
 

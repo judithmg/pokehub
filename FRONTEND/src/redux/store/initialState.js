@@ -43,5 +43,8 @@ export default {
     enemyAttackMsg: null,
     playerDiesMsg: null,
     enemyDiesMsg: null,
+
+    enemyWinsBattle: '',
+    playerWinsBattle: '',
   },
 };

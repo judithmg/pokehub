@@ -40,14 +40,14 @@ export function SignupComponent({ actions }) {
         });
       history.push('/');
     } catch {
-      setError('There is already a user with this username or email. Try again.');
+      setError('There was an error signing up with this email and/or password. Try again.');
     }
 
     setLoading(false);
   }
 
   return (
-    currentUser ? <Redirect to="/profile" /> : (
+    currentUser ? <Redirect to="/" /> : (
       <section className="auth__container">
         <h2>Sign Up</h2>
         {error && <span>{error}</span>}
@@ -67,7 +67,7 @@ export function SignupComponent({ actions }) {
           <div id="password-confirm">
             <label htmlFor="password-confirm">
               Password
-              <input id="password-confirm" type="password" ref={passwordRef} required />
+              <input id="password-confirm" type="password" ref={passwordConfirmRef} required />
             </label>
           </div>
           <button className="login__btn" disabled={loading} type="submit">

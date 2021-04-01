@@ -4,12 +4,14 @@ import calculatePokemonStats from '../../battle/calculatePokemonStats';
 import enemyTeam from '../../data/enemy';
 
 function loadEnemyTeam() {
+  const level = 999;
   const updatedEnemyTeam = enemyTeam.map((enemy) => {
-    const stats = calculatePokemonStats(enemy);
+    const stats = calculatePokemonStats(enemy, level);
     enemy = {
       ...enemy,
       battleStats: stats,
-      level: Math.floor(Math.random() * (100 - 90 + 1)) + 90,
+      level,
+      // level: Math.floor(Math.random() * (100 - 90 + 1)) + 90,
     };
     return enemy;
   });
@@ -41,19 +43,21 @@ function loadAttackBox(playerPokemon) {
     playerPokemon,
   };
 }
-function loadPlayerPokemonSuccess(playerPokemon, stats) {
+function loadPlayerPokemonSuccess(playerPokemon, stats, level) {
   return {
     type: actionTypes.LOAD_PLAYER_POKEMON,
     playerPokemon,
     stats,
+    level,
   };
 }
 
 function loadPlayerPokemon(playerPokemon) {
-  const stats = calculatePokemonStats(playerPokemon);
+  const level = 90;
+  const stats = calculatePokemonStats(playerPokemon, level);
   return (dispatch) => {
     dispatch(loadAttackBox(playerPokemon));
-    dispatch(loadPlayerPokemonSuccess(playerPokemon, stats));
+    dispatch(loadPlayerPokemonSuccess(playerPokemon, stats, level));
   };
 }
 
