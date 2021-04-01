@@ -151,7 +151,11 @@ export default function battleReducer(state = initialState.battleReducer, action
       };
 
     case actionTypes.RESOLVE_ATTACK_PLAYER:
-      action.attackPower > 0 ? playerAttackMsg = `${action.playerPokemon.name.toUpperCase()} used ${action.moveName}!` : playerAttackMsg = `${action.playerPokemon.name.toUpperCase()} used ${action.moveName}! But it did nothing...`;
+      action.attackData.attackPower > 0
+        ? playerAttackMsg = `${action.playerPokemon.name.toUpperCase()} used ${action.attackData.moveName}!`
+        : playerAttackMsg = `${action.playerPokemon.name.toUpperCase()} used ${action.attackData.moveName}! But it did nothing...`;
+      if (action.attackData.modifier > 1) playerAttackMsg += ' It was super effective!';
+      if (action.attackData.modifier < 1 && action.attackData.modifier > 0) playerAttackMsg += " It wasn't very effective...";
       return {
         ...state,
         enemyPokemon: action.enemyPokemon,
