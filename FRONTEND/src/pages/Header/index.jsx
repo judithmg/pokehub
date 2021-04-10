@@ -9,7 +9,7 @@ import { useAuth } from '../../context/AuthContext';
 import { getUserInfo, logoutUser } from '../../redux/actions/userActions';
 import { websiteImages } from '../../constants/images';
 import Menu from '../Menu';
-import Button from '../shared/ButtonComponent';
+import Button from '../Shared/ButtonComponent';
 
 export function HeaderComponent({ actions, user }) {
   const [menu, setMenu] = useState(false);

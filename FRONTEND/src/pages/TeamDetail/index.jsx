@@ -10,7 +10,7 @@ import {
   loadLearnsets,
 } from '../../redux/actions/pokedexActions';
 
-import PokemonButton from '../shared/PokemonButton';
+import PokemonButton from '../Shared/PokemonButton';
 import '../../styles/team-detail.scss';
 
 import { getUserInfo } from '../../redux/actions/userActions';

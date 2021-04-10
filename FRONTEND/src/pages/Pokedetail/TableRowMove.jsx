@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import 'react-svg-radar-chart/build/css/index.css';
 
-import ButtonType from '../shared/ButtonType';
+import ButtonType from '../Shared/ButtonType';
 import ModalAtk from './ModalMoveComponent';
 
 import '../../styles/pokedetail.scss';
