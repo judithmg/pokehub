@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '../../styles/modal.scss';
 import { Link } from 'react-router-dom';
-import Pokeball from '../shared/PokeballComponent';
+import Pokeball from '../Shared/PokeballComponent';
 
 const Modal = ({ isShowing, hide }) => (isShowing ? ReactDOM.createPortal(
   <>

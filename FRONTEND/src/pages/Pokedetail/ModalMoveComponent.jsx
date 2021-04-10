@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ButtonType from '../shared/ButtonType';
+import ButtonType from '../Shared/ButtonType';
 import '../../styles/modal-atk.scss';
 
 export default function ModalMoveComponent({ move }) {

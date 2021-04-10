@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import RadarChart from '../shared/RadarChartComponent';
+import RadarChart from '../Shared/RadarChartComponent';
 import TeamMoves from './TeamMovesComponent';
 import { pokemonSprites } from '../../constants/images';
 

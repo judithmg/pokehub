@@ -16,7 +16,7 @@ import '../../styles/_types.scss';
 import colors from '../../constants/colors';
 
 import Moveset from './MovesetComponent';
-import ButtonType from '../shared/ButtonType';
+import ButtonType from '../Shared/ButtonType';
 import PokemonAbilities from './AbilitiesComponent';
 import MainInfo from './MainInfoComponent';
 import VisualInfoComponent from './VisualInfoComponent';
