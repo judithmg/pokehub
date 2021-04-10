@@ -4,14 +4,13 @@ import calculatePokemonStats from '../../battle/calculatePokemonStats';
 import enemyTeam from '../../data/enemy';
 
 function loadEnemyTeam() {
-  const level = 999;
+  const level = Math.floor(Math.random() * (100 - 90 + 1)) + 90;
   const updatedEnemyTeam = enemyTeam.map((enemy) => {
     const stats = calculatePokemonStats(enemy, level);
     enemy = {
       ...enemy,
       battleStats: stats,
       level,
-      // level: Math.floor(Math.random() * (100 - 90 + 1)) + 90,
     };
     return enemy;
   });

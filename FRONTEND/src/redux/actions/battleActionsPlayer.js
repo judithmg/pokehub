@@ -92,6 +92,8 @@ function getAttackPower(
     playerPokemon,
     enemyPokemon,
   );
+  console.log('playerattacks', attackPower);
+
   const data = {
     ...attackData,
     attackPower,

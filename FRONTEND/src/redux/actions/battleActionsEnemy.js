@@ -80,6 +80,7 @@ function getAttackPowerEnemy(
     enemyPokemon,
     playerPokemon,
   );
+  console.log('enemyattacks', attackPower);
   const data = {
     ...attackData,
     attackPower,

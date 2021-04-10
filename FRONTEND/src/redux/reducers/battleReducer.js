@@ -125,6 +125,7 @@ export default function battleReducer(state = initialState.battleReducer, action
       enemyPokemon.battleStats.hp = 0;
       return {
         ...state,
+        playerAttack: action.attackData,
         enemyClass: 'animate__animated animate__fadeOutDown',
         enemyPokemon,
         attackBox: null,
@@ -140,7 +141,7 @@ export default function battleReducer(state = initialState.battleReducer, action
       playerPokemon.battleStats.hp = 0;
       return {
         ...state,
-        attackData: action.attackData,
+        enemyAttack: action.attackData,
         playerClass: 'animate__animated animate__fadeOutDown',
         playerPokemon,
         attackBox: null,
@@ -151,9 +152,19 @@ export default function battleReducer(state = initialState.battleReducer, action
       };
 
     case actionTypes.RESOLVE_ATTACK_PLAYER:
-      action.attackPower > 0 ? playerAttackMsg = `${action.playerPokemon.name.toUpperCase()} used ${action.moveName}!` : playerAttackMsg = `${action.playerPokemon.name.toUpperCase()} used ${action.moveName}! But it did nothing...`;
+      console.log(action.attackData);
+      action.attackData.attackPower > 0
+        ? playerAttackMsg = `${action.playerPokemon.name.toUpperCase()} used ${action.attackData.moveName}!`
+        : playerAttackMsg = `${action.playerPokemon.name.toUpperCase()} used ${action.attackData.moveName}! But it did nothing...`;
+
+      if (action.attackData.modifier > 1
+        && action.attackData.attackPower !== 0) playerAttackMsg += ' It was super effective!';
+      if (action.attackData.modifier < 1
+        && action.attackData.modifier > 0
+        && action.attackData.attackPower !== 0) playerAttackMsg += " It wasn't very effective...";
       return {
         ...state,
+        playerAttack: action.attackData,
         enemyPokemon: action.enemyPokemon,
         enemyClass: 'animate__animated animate__rubberBand',
         playerClass: 'animate__bounce animate__animated',
@@ -163,12 +174,20 @@ export default function battleReducer(state = initialState.battleReducer, action
       };
 
     case actionTypes.RESOLVE_ATTACK_ENEMY:
-      action.attackPower > 0
-        ? enemyAttackMsg = `Enemy Pokemon ${action.enemyPokemon.name.toUpperCase()} attacked! ${action.enemyPokemon.name.toUpperCase()} used ${action.moveName}!`
-        : enemyAttackMsg = `Enemy Pokemon ${action.enemyPokemon.name.toUpperCase()} attacked! ${action.enemyPokemon.name.toUpperCase()} used ${action.moveName}! But it did nothing...`;
+      console.log(action.attackData);
+
+      action.attackData.attackPower > 0
+        ? enemyAttackMsg = `Enemy Pokemon ${action.enemyPokemon.name.toUpperCase()} attacked! ${action.enemyPokemon.name.toUpperCase()} used ${action.attackData.moveName}!`
+        : enemyAttackMsg = `Enemy Pokemon ${action.enemyPokemon.name.toUpperCase()} attacked! ${action.enemyPokemon.name.toUpperCase()} used ${action.attackData.moveName}! But it did nothing...`;
+
+      if (action.attackData.modifier > 1
+        && action.attackData.attackPower !== 0) enemyAttackMsg += ' It was super effective!';
+      if (action.attackData.modifier < 1
+        && action.attackData.modifier > 0
+        && action.attackData.attackPower !== 0) enemyAttackMsg += " It wasn't very effective...";
       return {
         ...state,
-        attackData: action.attackData,
+        enemyAttack: action.attackData,
         enemyPokemon: action.enemyPokemon,
         playerClass: 'animate__animated animate__rubberBand',
         enemyClass: 'animate__bounce animate__animated',
