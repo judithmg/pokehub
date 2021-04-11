@@ -30,6 +30,7 @@ import { useAuth } from '../../context/AuthContext';
 import BattleTextBox from './BattleTextBox';
 import BattlePokemonSelect from './BattlePokemonSelector';
 import BattleGround from './BattleGround';
+import BattleOver from './BattleOver';
 
 export function BattleComponent({
   actions,
@@ -38,10 +39,12 @@ export function BattleComponent({
   user,
   moves,
   playerTeam,
+  enemyTeam,
   playerPokemon,
   enemyPokemon,
   playerClass,
   enemyClass,
+  battleOver,
 }) {
   // load teams if not already on the state
   const { currentUser } = useAuth();
@@ -65,28 +68,31 @@ export function BattleComponent({
   }, [teams?.length]);
 
   return (
-    teams?.length
-    && playerTeam.length
-    && moves?.length
+    teams
+    && playerTeam
+    && moves
     && team?.pokemons && (
       <div>
         <div className="battle__teams" />
-        {playerPokemon.num ? (
-          <>
-            <div className="battle__container">
-              <BattleGround
-                playerPokemon={playerPokemon}
-                enemyPokemon={enemyPokemon}
-                playerClass={playerClass}
-                enemyClass={enemyClass}
-              />
+        {battleOver ? <BattleOver />
+          : playerPokemon.num ? (
+            <>
+              <div className="battle__container">
+                <BattleGround
+                  playerPokemon={playerPokemon}
+                  enemyPokemon={enemyPokemon}
+                  playerClass={playerClass}
+                  enemyClass={enemyClass}
+                  playerTeam={playerTeam}
+                  enemyTeam={enemyTeam}
+                />
 
-              <BattleTextBox />
-            </div>
-          </>
-        ) : (
-          <BattlePokemonSelect />
-        )}
+                <BattleTextBox />
+              </div>
+            </>
+          ) : (
+            <BattlePokemonSelect />
+          )}
       </div>
     )
   );
@@ -99,10 +105,12 @@ export function mapStateToProps(state) {
     user: state.userReducer.user,
     moves: state.pokedexReducer.moves,
     playerTeam: state.battleReducer.playerTeam,
+    enemyTeam: state.battleReducer.enemyTeam,
     playerPokemon: state.battleReducer.playerPokemon,
     enemyPokemon: state.battleReducer.enemyPokemon,
     playerClass: state.battleReducer.playerClass,
     enemyClass: state.battleReducer.enemyClass,
+    battleOver: state.battleReducer.battleOver,
   };
 }
 export function mapDispatchToProps(dispatch) {

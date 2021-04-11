@@ -23,6 +23,7 @@ import {
 
 import { Pokeball } from '../Icons';
 import BattleTextAttack from './BattleTextAttackBox';
+import BattleOver from './BattleOver';
 
 export function BattleComponent({
   actions,
@@ -36,60 +37,49 @@ export function BattleComponent({
   playerDiesMsg,
   blockClicks,
   playerTeam,
-  enemyWinsBattle,
-  playerWinsBattle,
+  battleOver,
 }) {
   return (
-
-    <div className="battle__text">
-      <div className="battle__text--inner">
-        {attackBox
-          ? <BattleTextAttack /> : playerAttackMsg ? (
-            <span
-              onClick={() => actions.randomEnemyAttack(
-                playerPokemon,
-                enemyPokemon,
-                moves,
-                playerTeam.length,
-              )}
-            >
-              {playerAttackMsg}
-              <Pokeball className="svg-msg-box animate__flash animate__animated animate__infinite infinite animate__fast" />
-            </span>
-          ) : enemyAttackMsg ? (
-            <span onClick={() => actions.loadAttackBox(playerPokemon)}>
-              {enemyAttackMsg}
-              <Pokeball className="svg-msg-box animate__flash animate__animated animate__infinite infinite animate__fast" />
-            </span>
-          ) : enemyDiesMsg ? (
-            <span
-              className={blockClicks}
-              onClick={() => actions.newEnemyPokemon()}
-            >
-              {enemyDiesMsg}
-            </span>
-          ) : playerDiesMsg ? (
-            <span
-              className={blockClicks}
-              onClick={() => actions.newPlayerPokemon()}
-            >
-              {playerDiesMsg}
-            </span>
-          ) : enemyWinsBattle ? (
-            <span
-              className={blockClicks}
-            >
-              {enemyWinsBattle}
-            </span>
-          ) : { playerWinsBattle }(
-            <span
-              className={blockClicks}
-            >
-              {playerWinsBattle}
-            </span>,
-          )}
-      </div>
-    </div>
+    battleOver ? <BattleOver />
+      : (
+        <div className="battle__text">
+          <div className="battle__text--inner">
+            {attackBox
+              ? <BattleTextAttack /> : playerAttackMsg ? (
+                <span
+                  onClick={() => actions.randomEnemyAttack(
+                    playerPokemon,
+                    enemyPokemon,
+                    moves,
+                    playerTeam.length,
+                  )}
+                >
+                  {playerAttackMsg}
+                  <Pokeball className="svg-msg-box animate__flash animate__animated animate__infinite infinite animate__fast" />
+                </span>
+              ) : enemyAttackMsg ? (
+                <span onClick={() => actions.loadAttackBox(playerPokemon)}>
+                  {enemyAttackMsg}
+                  <Pokeball className="svg-msg-box animate__flash animate__animated animate__infinite infinite animate__fast" />
+                </span>
+              ) : enemyDiesMsg ? (
+                <span
+                  className={blockClicks}
+                  onClick={() => actions.newEnemyPokemon()}
+                >
+                  {enemyDiesMsg}
+                </span>
+              ) : playerDiesMsg ? (
+                <span
+                  className={blockClicks}
+                  onClick={() => actions.newPlayerPokemon()}
+                >
+                  {playerDiesMsg}
+                </span>
+              ) : ('')}
+          </div>
+        </div>
+      )
 
   );
 }
@@ -106,9 +96,7 @@ export function mapStateToProps(state) {
     enemyDiesMsg: state.battleReducer.enemyDiesMsg,
     playerDiesMsg: state.battleReducer.playerDiesMsg,
     blockClicks: state.battleReducer.blockClicks,
-    playerWinsBattle: state.battleReducer.playerWinsBattle,
-    enemyWinsBattle: state.battleReducer.enemyWinsBattle,
-
+    battleOver: state.battleReducer.battleOver,
   };
 }
 

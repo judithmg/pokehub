@@ -17,12 +17,13 @@ import { pokemonSprites } from '../../constants/images';
 export function BattlePokemonSelector({
   actions,
   playerTeam,
+  enemyTeam,
 }) {
   return (
     (
       <div className="battle__selector-container">
         <div className="battle__selector">
-          {playerTeam.length ? (
+          {playerTeam.length && enemyTeam.length ? (
             playerTeam.map(
               (poke, index) => poke?.num && (
               <div
@@ -45,7 +46,10 @@ export function BattlePokemonSelector({
         </div>
         <div className="battle__selector-text">
           <div className="battle__selector-text--inner">
-            <span>Select a Pokemon</span>
+            {playerTeam.length && enemyTeam.length
+              ? <span>Select a Pokemon</span>
+              : <span>Good job!</span>}
+
           </div>
         </div>
       </div>
@@ -56,6 +60,7 @@ export function BattlePokemonSelector({
 export function mapStateToProps(state) {
   return {
     playerTeam: state.battleReducer.playerTeam,
+    enemyTeam: state.battleReducer.enemyTeam,
     user: state.userReducer.user,
     teams: state.teamsReducer.teams,
     team: state.teamsReducer.team,
