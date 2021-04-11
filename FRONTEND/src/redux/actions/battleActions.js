@@ -4,7 +4,8 @@ import calculatePokemonStats from '../../battle/calculatePokemonStats';
 import enemyTeam from '../../data/enemy';
 
 function loadEnemyTeam() {
-  const level = Math.floor(Math.random() * (100 - 90 + 1)) + 90;
+  const level = 9;
+  // const level = Math.floor(Math.random() * (100 - 90 + 1)) + 90;
   const updatedEnemyTeam = enemyTeam.map((enemy) => {
     const stats = calculatePokemonStats(enemy, level);
     enemy = {
@@ -14,7 +15,8 @@ function loadEnemyTeam() {
     };
     return enemy;
   });
-  const enemyPokemon = updatedEnemyTeam[Math.floor(Math.random() * (5 - 0 + 1)) + 0];
+  const enemyPokemon = updatedEnemyTeam[Math.floor(Math.random()
+    * (updatedEnemyTeam.length - 1 - 0 + 1)) + 0];
   return {
     type: actionTypes.LOAD_ENEMY_TEAM,
     updatedEnemyTeam,
@@ -52,7 +54,7 @@ function loadPlayerPokemonSuccess(playerPokemon, stats, level) {
 }
 
 function loadPlayerPokemon(playerPokemon) {
-  const level = 90;
+  const level = 990;
   const stats = calculatePokemonStats(playerPokemon, level);
   return (dispatch) => {
     dispatch(loadAttackBox(playerPokemon));

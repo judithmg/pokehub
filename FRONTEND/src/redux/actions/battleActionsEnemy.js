@@ -5,12 +5,6 @@ import calculateTypeModifier from '../../battle/attackTypeMultiplier';
 import getAttackData from '../../battle/getAttackData';
 import calculateAttackPower from '../../battle/calculateAttackPower';
 
-function loadEnemy() {
-  return {
-    type: actionTypes.LOAD_ENEMY,
-  };
-}
-
 function newEnemyPokemonLoad() {
   return {
     type: actionTypes.NEW_ENEMY_POKEMON_LOAD,
@@ -133,7 +127,7 @@ function randomEnemyAttack(playerPokemon, enemyPokemon, moves, playerTeam) {
 }
 
 export {
-  loadEnemy,
+
   randomEnemyAttack,
   handleKOEnemy,
   newEnemyPokemon,

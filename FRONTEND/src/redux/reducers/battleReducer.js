@@ -7,35 +7,44 @@ let attackBox = {
   attackThree: { name: '' },
   attackFour: { name: '' },
 };
-
-const enemyStatic = {
-  battleStats: {
-    hp: 341,
-    maxhp: 341,
-    atk: 259,
-    def: 2636,
-    spa: 212,
-    spd: 236,
-    spe: 236,
-  },
-  types: ['Psychic'],
-  name: 'Mew',
-  moveset: [{ name: 'Icy Wind' }, { name: 'Take Down' }, { name: 'Thunderbolt' }, { name: 'Knock Off' }],
-  num: 151,
-  level: 100,
-};
+let playerPokemon;
+let moveset;
+let enemyPokemon;
+let playerAttackMsg;
+let enemyAttackMsg;
+let enemyTeam;
+let updatedEnemyTeam;
+let playerTeam;
+let updatedPlayerTeam;
 
 export default function battleReducer(state = initialState.battleReducer, action = {}) {
-  let playerPokemon;
-  let moveset;
-  let enemyPokemon;
-  let playerAttackMsg;
-  let enemyAttackMsg;
-  let enemyTeam;
-  let updatedEnemyTeam;
-  let playerTeam;
-  let updatedPlayerTeam;
   switch (action.type) {
+    // HANDLE INIT BATTLE
+
+    case actionTypes.LOAD_BATTLE_TEAM:
+      return {
+        ...state,
+        playerTeam: action.playerTeam,
+        battleOver: null,
+      };
+
+    case actionTypes.LOAD_ENEMY_TEAM:
+      return {
+        ...state,
+        enemyTeam: action.updatedEnemyTeam,
+        enemyPokemon: action.enemyPokemon,
+      };
+
+    case actionTypes.LOAD_PLAYER_POKEMON:
+      playerPokemon = {
+        ...action.playerPokemon,
+        battleStats: action.stats,
+        level: action.level,
+      };
+      return { ...state, playerPokemon };
+
+      // HANDLE CHANGE POKEMON
+
     case actionTypes.LOAD_ATTACK_BOX:
       moveset = action.playerPokemon.moveset;
       attackBox = {
@@ -49,11 +58,6 @@ export default function battleReducer(state = initialState.battleReducer, action
         attackBox,
         playerClass: '',
         enemyClass: '',
-      };
-
-    case actionTypes.LOAD_BATTLE_TEAM:
-      return {
-        ...state, playerTeam: action.playerTeam,
       };
 
     case actionTypes.NEW_PLAYER_POKEMON_MSG:
@@ -90,50 +94,84 @@ export default function battleReducer(state = initialState.battleReducer, action
       enemyTeam = [...state.enemyTeam];
       updatedEnemyTeam = enemyTeam.filter((enemy) => enemy.name !== state.enemyPokemon.name);
       enemyPokemon = updatedEnemyTeam[Math.floor(Math.random()
-        * (updatedEnemyTeam.length - 1)) + 1];
+        * (updatedEnemyTeam.length)) + 0];
       return {
         ...state,
         blockClicks: '',
         enemyDiesMsg: null,
         enemyClass: '',
-        enemyAttackMsg: `Pokemon ${enemyPokemon.name} wants to fight you!`,
+        enemyAttackMsg: `Pokemon ${enemyPokemon?.name} wants to fight you!`,
         enemyTeam: updatedEnemyTeam,
         enemyPokemon,
-
       };
 
-    case actionTypes.LOAD_ENEMY_TEAM:
+      // HANDLE ATTACKS
+
+    case actionTypes.RESOLVE_ATTACK_PLAYER:
+      action.attackData.attackPower > 0
+        ? playerAttackMsg = `${action.playerPokemon.name.toUpperCase()} used ${action.attackData.moveName}!`
+        : playerAttackMsg = `${action.playerPokemon.name.toUpperCase()} used ${action.attackData.moveName}! But it did nothing...`;
+
+      if (action.attackData.modifier > 1
+        && action.attackData.attackPower !== 0) playerAttackMsg += ' It was super effective!';
+      if (action.attackData.modifier < 1
+        && action.attackData.modifier > 0
+        && action.attackData.attackPower !== 0) playerAttackMsg += " It wasn't very effective...";
+
+      if (action.attackData.modifier === 0) playerAttackMsg = `${action.playerPokemon.name.toUpperCase()} used ${action.attackData.moveName}! But it didn't affect ${action.enemyPokemon.name}...`;
+
       return {
         ...state,
-        enemyTeam: action.updatedEnemyTeam,
+        playerAttack: action.attackData,
         enemyPokemon: action.enemyPokemon,
+        enemyClass: 'animate__animated animate__rubberBand',
+        playerClass: 'animate__bounce animate__animated',
+        attackBox: null,
+        playerAttackMsg,
+        enemyAttackMsg: '',
       };
 
-    case actionTypes.LOAD_PLAYER_POKEMON:
-      playerPokemon = {
-        ...action.playerPokemon,
-        battleStats: action.stats,
-        level: 90,
-      };
-      return { ...state, playerPokemon };
+    case actionTypes.RESOLVE_ATTACK_ENEMY:
+      action.attackData.attackPower > 0
+        ? enemyAttackMsg = `Enemy Pokemon ${action.enemyPokemon.name.toUpperCase()} attacked! ${action.enemyPokemon.name.toUpperCase()} used ${action.attackData.moveName}!`
+        : enemyAttackMsg = `Enemy Pokemon ${action.enemyPokemon.name.toUpperCase()} attacked! ${action.enemyPokemon.name.toUpperCase()} used ${action.attackData.moveName}! It did nothing!`;
 
-    case actionTypes.LOAD_ENEMY:
-      return { ...state, enemyPokemon: enemyStatic };
+      if (action.attackData.modifier > 1
+        && action.attackData.attackPower !== 0) enemyAttackMsg += ' It was super effective!';
+      if (action.attackData.modifier < 1
+        && action.attackData.modifier > 0
+        && action.attackData.attackPower !== 0) enemyAttackMsg += " It wasn't very effective...";
+
+      if (action.attackData.modifier === 0) enemyAttackMsg = `Enemy Pokemon ${action.enemyPokemon.name.toUpperCase()} attacked! ${action.enemyPokemon.name.toUpperCase()} used ${action.attackData.moveName}! It didn't affect ${action.playerPokemon.name}!`;
+      return {
+        ...state,
+        enemyAttack: action.attackData,
+        enemyPokemon: action.enemyPokemon,
+        playerClass: 'animate__animated animate__rubberBand',
+        enemyClass: 'animate__bounce animate__animated',
+        playerAttackMsg: '',
+        enemyAttackMsg,
+      };
+
+      // HANDLE POKEMON KO
 
     case actionTypes.HANDLE_KO:
+      // tengo que buscar una forma de realizar esta acción de tal manera que si el combate
+      // está finalizado el mensaje de fin de combate sea uno u otro y que cuando le des
+      // clic, no te lance al new_msg
       enemyPokemon = { ...state.enemyPokemon };
       enemyPokemon.battleStats.hp = 0;
       return {
         ...state,
         playerAttack: action.attackData,
+        playerClass: 'animate__bounce animate__animated',
         enemyClass: 'animate__animated animate__fadeOutDown',
         enemyPokemon,
         attackBox: null,
         enemyAttackMsg: '',
         playerDiesMsg: '',
-        enemyDiesMsg: `${enemyPokemon.name.toUpperCase()} fainted!`,
+        enemyDiesMsg: `${action.playerPokemon.name.toUpperCase()} used ${action.attackData.moveName}! ${enemyPokemon.name.toUpperCase()} fainted!`,
         playerAttackMsg: '',
-
       };
 
     case actionTypes.HANDLE_KO_ENEMY:
@@ -147,52 +185,15 @@ export default function battleReducer(state = initialState.battleReducer, action
         attackBox: null,
         playerAttackMsg: '',
         enemyAttackMsg: '',
-        playerDiesMsg: `Oh, no! ${playerPokemon.name.toUpperCase()} whited out!`,
-
+        playerDiesMsg: `Oh, no! ${action.enemyPokemon.name.toUpperCase()} used ${action.attackData.moveName} and ${playerPokemon.name.toUpperCase()} whited out!`,
       };
 
-    case actionTypes.RESOLVE_ATTACK_PLAYER:
-      console.log(action.attackData);
-      action.attackData.attackPower > 0
-        ? playerAttackMsg = `${action.playerPokemon.name.toUpperCase()} used ${action.attackData.moveName}!`
-        : playerAttackMsg = `${action.playerPokemon.name.toUpperCase()} used ${action.attackData.moveName}! But it did nothing...`;
+      // HANDLE BATTLE OVER
 
-      if (action.attackData.modifier > 1
-        && action.attackData.attackPower !== 0) playerAttackMsg += ' It was super effective!';
-      if (action.attackData.modifier < 1
-        && action.attackData.modifier > 0
-        && action.attackData.attackPower !== 0) playerAttackMsg += " It wasn't very effective...";
+    case actionTypes.BATTLE_OVER:
       return {
         ...state,
-        playerAttack: action.attackData,
-        enemyPokemon: action.enemyPokemon,
-        enemyClass: 'animate__animated animate__rubberBand',
-        playerClass: 'animate__bounce animate__animated',
-        attackBox: null,
-        playerAttackMsg,
-        enemyAttackMsg: '',
-      };
-
-    case actionTypes.RESOLVE_ATTACK_ENEMY:
-      console.log(action.attackData);
-
-      action.attackData.attackPower > 0
-        ? enemyAttackMsg = `Enemy Pokemon ${action.enemyPokemon.name.toUpperCase()} attacked! ${action.enemyPokemon.name.toUpperCase()} used ${action.attackData.moveName}!`
-        : enemyAttackMsg = `Enemy Pokemon ${action.enemyPokemon.name.toUpperCase()} attacked! ${action.enemyPokemon.name.toUpperCase()} used ${action.attackData.moveName}! But it did nothing...`;
-
-      if (action.attackData.modifier > 1
-        && action.attackData.attackPower !== 0) enemyAttackMsg += ' It was super effective!';
-      if (action.attackData.modifier < 1
-        && action.attackData.modifier > 0
-        && action.attackData.attackPower !== 0) enemyAttackMsg += " It wasn't very effective...";
-      return {
-        ...state,
-        enemyAttack: action.attackData,
-        enemyPokemon: action.enemyPokemon,
-        playerClass: 'animate__animated animate__rubberBand',
-        enemyClass: 'animate__bounce animate__animated',
-        playerAttackMsg: '',
-        enemyAttackMsg,
+        battleOver: action.battleOver,
       };
 
     default:
