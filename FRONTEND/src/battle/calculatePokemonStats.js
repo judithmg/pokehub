@@ -1,5 +1,6 @@
 export default function calculatePokemonStats(
   pokemon,
+  level = 100,
   iv = {
     hp: 31,
     atk: 31,
@@ -15,7 +16,6 @@ export default function calculatePokemonStats(
     spd: 84,
     spe: 84,
   },
-  level = 100,
 ) {
   return {
     hp: Math.floor(((iv.hp + (2 * +pokemon.baseStats.hp) + (ev.hp / 4) + 100) * level) / 100) + 10,
