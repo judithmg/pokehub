@@ -44,5 +44,7 @@ export default {
     enemyAttackMsg: null,
     playerDiesMsg: null,
     enemyDiesMsg: null,
+
+    battleOver: null,
   },
 };
