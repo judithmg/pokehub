@@ -65,10 +65,10 @@ export function BattleComponent({
   }, [teams?.length]);
 
   return (
-    teams?.length
-    && playerTeam.length
-    && moves?.length
-    && team?.pokemons && (
+    (teams
+    && playerTeam
+    && moves
+    && team?.pokemons) ? (
       <div>
         <div className="battle__teams" />
         {playerPokemon.num ? (
@@ -88,7 +88,7 @@ export function BattleComponent({
           <BattlePokemonSelect />
         )}
       </div>
-    )
+      ) : <span>GO TO TEAMS AND SELECT A TEAM</span>
   );
 }
 

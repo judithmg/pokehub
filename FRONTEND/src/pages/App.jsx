@@ -18,6 +18,7 @@ import {
   loadAbilities,
   loadPokemonsShown,
 } from '../redux/actions/pokedexActions';
+import { loadTeams } from '../redux/actions/teamManagerActions';
 
 import PrivateRoute from './PrivateRoute';
 
@@ -44,6 +45,7 @@ function App({
   moves,
   abilities,
   learnsets,
+  user, teams,
 }) {
   useEffect(() => {
     if (!pokedex?.length) {
@@ -66,6 +68,11 @@ function App({
       actions.loadLearnsets();
     }
   }, [learnsets?.length]);
+
+  useEffect(() => {
+    actions.loadTeams(user?._id);
+  }, [teams?.length, user, user.email]);
+
   return (
     <AuthProvider>
       <Router>
@@ -94,12 +101,17 @@ function App({
 
 App.propTypes = {
   pokedex: PropTypes.arrayOf(PropTypes.object).isRequired,
-
+  user: PropTypes.shape({
+    _id: PropTypes.string,
+    email: PropTypes.string,
+  }).isRequired,
+  teams: PropTypes.arrayOf(PropTypes.object).isRequired,
   abilities: PropTypes.arrayOf(PropTypes.object).isRequired,
   moves: PropTypes.arrayOf(PropTypes.object).isRequired,
   learnsets: PropTypes.arrayOf(PropTypes.object).isRequired,
   actions: PropTypes.shape({
     loadPokedex: PropTypes.func.isRequired,
+    loadTeams: PropTypes.func.isRequired,
     loadMoves: PropTypes.func.isRequired,
     loadLearnsets: PropTypes.func.isRequired,
     loadAbilities: PropTypes.func.isRequired,
@@ -110,7 +122,8 @@ function mapStateToProps(state) {
   return {
     pokedex: state.pokedexReducer.pokedex,
     pokemonsShown: state.pokedexReducer.pokemonsShown,
-
+    teams: state.teamsReducer.teams,
+    user: state.userReducer.user,
     moves: state.pokedexReducer.moves,
     abilities: state.pokedexReducer.abilities,
     learnsets: state.pokedexReducer.learnsets,
@@ -126,6 +139,7 @@ function mapDispatchToProps(dispatch) {
       loadLearnsets,
       loadAbilities,
       loadPokemonsShown,
+      loadTeams,
     }, dispatch),
   };
 }
