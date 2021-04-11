@@ -68,10 +68,10 @@ export function BattleComponent({
   }, [teams?.length]);
 
   return (
-    teams
+    (teams
     && playerTeam
     && moves
-    && team?.pokemons && (
+    && team?.pokemons) ? (
       <div>
         <div className="battle__teams" />
         {battleOver ? <BattleOver />
@@ -94,7 +94,7 @@ export function BattleComponent({
             <BattlePokemonSelect />
           )}
       </div>
-    )
+      ) : <span>GO TO TEAMS AND SELECT A TEAM</span>
   );
 }
 
