@@ -28,7 +28,8 @@ export default {
 
   battleReducer: {
     boxMessages: '',
-    attackData: {},
+    enemyAttack: {},
+    playerAttack: {},
     playerTeam: [],
     enemyTeam: [],
     playerPokemon: {},
