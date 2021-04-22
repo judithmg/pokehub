@@ -1,4 +1,6 @@
 
+<img src="https://raw.githubusercontent.com/judithmg/pokehub/main/FRONTEND/public/pokeshelfdrib.png?token=ARDDQ5Y7XM4Y7DUA5OFTCB3AQEWBE"/>
+
 # Pokemon Hub
 
 This is my final project built during my stay at Skylab Coders Academy.
