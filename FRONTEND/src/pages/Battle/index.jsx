@@ -5,8 +5,8 @@ import '../../styles/battle.scss';
 import '../../styles/animate.css';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
-import { loadTeams } from '../../redux/actions/teamManagerActions';
+import { useParams } from 'react-router-dom';
+import { loadOneTeam } from '../../redux/actions/teamManagerActions';
 
 import {
   startNewFight,
@@ -24,85 +24,82 @@ import {
   handleAttack,
 } from '../../redux/actions/battleActionsPlayer';
 
-import { getUserInfo } from '../../redux/actions/userActions';
-import { useAuth } from '../../context/AuthContext';
-
 import BattleTextBox from './BattleTextBox';
 import BattlePokemonSelect from './BattlePokemonSelector';
 import BattleGround from './BattleGround';
+import BattleOver from './BattleOver';
 
 export function BattleComponent({
   actions,
+  moves,
+  learnsets,
+  user,
   teams,
   team,
-  user,
-  moves,
   playerTeam,
+  enemyTeam,
   playerPokemon,
   enemyPokemon,
   playerClass,
   enemyClass,
+  battleOver,
 }) {
-  // load teams if not already on the state
-  const { currentUser } = useAuth();
-  const useremail = currentUser.email;
-
+  const { teamId } = useParams();
   useEffect(() => {
-    if (!user.email) {
-      actions.getUserInfo(useremail);
+    if (teams.length && user.email && !team.pokemons) {
+      actions.loadOneTeam(teamId, moves, learnsets);
     }
-  }, [user?.length]);
+  }, [teamId, moves.length, learnsets.length, teams.length]);
 
   useEffect(() => {
-    actions.loadTeams(user?._id);
-  }, [teams?.length, user?.length, user.email]);
-  // on page load, load userteam and show all pokemons from that team
-
-  useEffect(() => {
-    if (teams?.length) {
+    if (team.pokemons) {
       actions.startNewFight(team?.pokemons);
     }
-  }, [teams?.length]);
+  }, [teamId, team]);
 
   return (
-    teams?.length
-    && playerTeam.length
-    && moves?.length
-    && team?.pokemons && (
+    (playerTeam
+    && team?.pokemons) ? (
       <div>
         <div className="battle__teams" />
-        {playerPokemon.num ? (
-          <>
-            <div className="battle__container">
-              <BattleGround
-                playerPokemon={playerPokemon}
-                enemyPokemon={enemyPokemon}
-                playerClass={playerClass}
-                enemyClass={enemyClass}
-              />
+        {battleOver ? <BattleOver />
+          : playerPokemon.num ? (
+            <>
+              <div className="battle__container">
+                <BattleGround
+                  playerPokemon={playerPokemon}
+                  enemyPokemon={enemyPokemon}
+                  playerClass={playerClass}
+                  enemyClass={enemyClass}
+                  playerTeam={playerTeam}
+                  enemyTeam={enemyTeam}
+                />
 
-              <BattleTextBox />
-            </div>
-          </>
-        ) : (
-          <BattlePokemonSelect />
-        )}
+                <BattleTextBox />
+              </div>
+            </>
+          ) : (
+            <BattlePokemonSelect />
+          )}
       </div>
-    )
+      ) : <span>GO TO TEAMS AND SELECT A TEAM</span>
   );
 }
 
 export function mapStateToProps(state) {
   return {
     teams: state.teamsReducer.teams,
+    learnsets: state.pokedexReducer.learnsets,
     team: state.teamsReducer.team,
     user: state.userReducer.user,
     moves: state.pokedexReducer.moves,
     playerTeam: state.battleReducer.playerTeam,
+    enemyTeam: state.battleReducer.enemyTeam,
     playerPokemon: state.battleReducer.playerPokemon,
     enemyPokemon: state.battleReducer.enemyPokemon,
     playerClass: state.battleReducer.playerClass,
     enemyClass: state.battleReducer.enemyClass,
+    battleOver: state.battleReducer.battleOver,
   };
 }
 export function mapDispatchToProps(dispatch) {
@@ -112,12 +109,11 @@ export function mapDispatchToProps(dispatch) {
         startNewFight,
         loadPlayerPokemon,
         randomEnemyAttack,
-        loadTeams,
-        getUserInfo,
         handleAttack,
         loadAttackBox,
         newEnemyPokemon,
         newPlayerPokemon,
+        loadOneTeam,
       },
       dispatch,
     ),

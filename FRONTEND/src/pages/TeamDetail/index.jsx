@@ -5,16 +5,10 @@ import { bindActionCreators } from 'redux';
 import { useParams } from 'react-router-dom';
 
 import { loadOneTeam } from '../../redux/actions/teamManagerActions';
-import {
-  loadMoves,
-  loadLearnsets,
-} from '../../redux/actions/pokedexActions';
 
 import PokemonButton from '../Shared/PokemonButton';
 import '../../styles/team-detail.scss';
 
-import { getUserInfo } from '../../redux/actions/userActions';
-import { useAuth } from '../../context/AuthContext';
 import TeamDetailPokemon from './TeamDetailPokemon';
 import useModal from '../../hooks/useModal';
 import Modal from './Modal';
@@ -28,27 +22,7 @@ export function TeamDetailComponent({
   user,
 }) {
   const { teamId } = useParams();
-  const { currentUser } = useAuth();
-  const useremail = currentUser.email;
   const { isShowing, toggle } = useModal();
-
-  useEffect(() => {
-    if (!user.email) {
-      actions.getUserInfo(useremail);
-    }
-  }, [user]);
-
-  useEffect(() => {
-    if (!moves.length) {
-      actions.loadMoves();
-    }
-  }, [moves.length]);
-
-  useEffect(() => {
-    if (!learnsets.length) {
-      actions.loadLearnsets();
-    }
-  }, [learnsets.length]);
 
   useEffect(() => {
     if (teams.length && user.email) {
@@ -57,7 +31,7 @@ export function TeamDetailComponent({
   }, [teamId, moves.length, learnsets.length, teams.length]);
 
   return (
-    moves.length && learnsets.length && (
+    moves && learnsets && team && (
       <section data-aos="fade-in" className="teamdetail__container">
         <div className="teamdetail__pokeball">
           <PokemonButton callback={toggle} text="BATTLE!" height="100" width="300" />
@@ -65,6 +39,7 @@ export function TeamDetailComponent({
         <Modal
           isShowing={isShowing}
           hide={toggle}
+          teamId={teamId}
         />
 
         {
@@ -96,9 +71,6 @@ export function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       loadOneTeam,
-      loadMoves,
-      loadLearnsets,
-      getUserInfo,
     }, dispatch),
   };
 }
@@ -114,9 +86,6 @@ TeamDetailComponent.propTypes = {
   learnsets: PropTypes.arrayOf(PropTypes.object).isRequired,
   actions: PropTypes.shape({
     loadOneTeam: PropTypes.func.isRequired,
-    loadMoves: PropTypes.func.isRequired,
-    loadLearnsets: PropTypes.func.isRequired,
-    getUserInfo: PropTypes.func.isRequired,
   }).isRequired,
   user: PropTypes.shape({
     email: PropTypes.string,

@@ -6,8 +6,7 @@ import {
   resolveAttackEnemy,
   newPlayerPokemonLoad,
   newPlayerPokemonMsg,
-  loadEnemy,
-  playerAttacks,
+
   handleKOEnemy,
   loadAttackBox,
   resolveAttack,
@@ -55,15 +54,6 @@ describe('Given battleActions', () => {
     });
   });
 
-  describe('When loadEnemy is called', () => {
-    test('Then an action is returned', () => {
-      expect(loadEnemy(data)).toEqual({
-        type: actionTypes.LOAD_ENEMY,
-        data,
-      });
-    });
-  });
-
   describe('When newEnemyPokemonLoad is called', () => {
     test('Then an action is returned', () => {
       expect(newEnemyPokemonLoad(data)).toEqual({
@@ -91,14 +81,6 @@ describe('Given battleActions', () => {
     });
   });
 
-  describe('When playerAttacks is called', () => {
-    test('Then an action is returned', () => {
-      expect(playerAttacks(data)).toEqual({
-        type: actionTypes.PLAYER_ATTACKS,
-        data,
-      });
-    });
-  });
   describe('When newPlayerPokemonMsg is called', () => {
     test('Then an action is returned', () => {
       expect(newPlayerPokemonMsg(data)).toEqual({

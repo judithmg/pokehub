@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { getUserInfo } from '../../redux/actions/userActions';
-
 import { createTeam, submitTeam } from '../../redux/actions/teamCreatorActions';
-
-import { useAuth } from '../../context/AuthContext';
 
 import { pokemonSprites } from '../../constants/images';
 import { Ditto } from '../Icons';
@@ -23,16 +19,8 @@ export function TeamCreatorComponent({
   newTeam,
   user,
 }) {
-  const { currentUser } = useAuth();
-  const useremail = currentUser.email;
   const [teamName, setTeamName] = useState(newTeam.id);
   const history = useHistory();
-
-  useEffect(() => {
-    if (!user?.email) {
-      actions.getUserInfo(useremail);
-    }
-  }, [user]);
 
   function handleSubmit() {
     actions.submitTeam(newTeam, user, teamName);
@@ -83,7 +71,6 @@ export function mapDispatchToProps(dispatch) {
     actions: bindActionCreators({
       createTeam,
       submitTeam,
-      getUserInfo,
     }, dispatch),
   };
 }
@@ -98,7 +85,6 @@ TeamCreatorComponent.propTypes = {
   actions: PropTypes.shape({
     createTeam: PropTypes.func.isRequired,
     submitTeam: PropTypes.func.isRequired,
-    getUserInfo: PropTypes.func.isRequired,
   }).isRequired,
   user: PropTypes.shape({
     email: PropTypes.string,
