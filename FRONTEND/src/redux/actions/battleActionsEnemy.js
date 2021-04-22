@@ -1,9 +1,11 @@
 /* eslint-disable no-param-reassign */
 
+import axios from 'axios';
 import actionTypes from './actionTypes';
 import calculateTypeModifier from '../../battle/attackTypeMultiplier';
 import getAttackData from '../../battle/getAttackData';
 import calculateAttackPower from '../../battle/calculateAttackPower';
+import dbUrls from '../../constants/dbUrls';
 
 function newEnemyPokemonLoad() {
   return {
@@ -26,22 +28,50 @@ function newEnemyPokemon() {
   };
 }
 
-function resolveAttackEnemy(playerPokemon,
+function handleKOEnemy(playerPokemon,
   enemyPokemon,
   attackData) {
   return {
-    type: actionTypes.RESOLVE_ATTACK_ENEMY,
+    type: actionTypes.HANDLE_KO_ENEMY,
     playerPokemon,
     enemyPokemon,
     attackData,
   };
 }
 
-function handleKOEnemy(playerPokemon,
+function enemyWins(playerPokemon, enemyPokemon, attackData) {
+  return {
+    type: actionTypes.BATTLE_OVER,
+    playerPokemon,
+    enemyPokemon,
+    attackData,
+    battleOver: {
+      enemyWins: 'YOU LOST!',
+    },
+  };
+}
+
+function battleOver(playerPokemon, enemyPokemon, attackData) {
+  return async (dispatch) => {
+    await axios.put(`${dbUrls.baseUrl}${dbUrls.rankingUrl}/add`, { battle: { lost: 1 }, email: 'eloy@eloy.com' });
+    dispatch(handleKOEnemy(playerPokemon, enemyPokemon, attackData));
+    setTimeout(() => (dispatch(enemyWins(playerPokemon, enemyPokemon, attackData))), 1500);
+  };
+}
+
+function checkOver(playerPokemon, enemyPokemon, attackData) {
+  return (dispatch) => {
+    attackData.teamLenght === 1
+      ? dispatch(battleOver(playerPokemon, enemyPokemon, attackData))
+      : dispatch(handleKOEnemy(playerPokemon, enemyPokemon, attackData));
+  };
+}
+
+function resolveAttackEnemy(playerPokemon,
   enemyPokemon,
   attackData) {
   return {
-    type: actionTypes.HANDLE_KO_ENEMY,
+    type: actionTypes.RESOLVE_ATTACK_ENEMY,
     playerPokemon,
     enemyPokemon,
     attackData,
@@ -60,7 +90,7 @@ function getUpdatedHPEnemy(playerPokemon, enemyPokemon, attackData) {
           attackData,
         ),
       )
-      : dispatch(handleKOEnemy(updatedPlayerPokemon, enemyPokemon, attackData));
+      : dispatch(checkOver(updatedPlayerPokemon, enemyPokemon, attackData));
   };
 }
 

@@ -25,6 +25,7 @@ export default function battleReducer(state = initialState.battleReducer, action
       return {
         ...state,
         playerTeam: action.playerTeam,
+        playerPokemon: {},
         battleOver: null,
       };
 

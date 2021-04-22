@@ -1,8 +1,12 @@
 /* eslint-disable no-param-reassign */
+import axios from 'axios';
 import actionTypes from './actionTypes';
 import calculateTypeModifier from '../../battle/attackTypeMultiplier';
 import getAttackData from '../../battle/getAttackData';
 import calculateAttackPower from '../../battle/calculateAttackPower';
+import dbUrls from '../../constants/dbUrls';
+
+// INIT
 
 function newPlayerPokemonLoad() {
   return {
@@ -25,14 +29,7 @@ function newPlayerPokemon() {
   };
 }
 
-function resolveAttack(playerPokemon, enemyPokemon, attackData) {
-  return {
-    type: actionTypes.RESOLVE_ATTACK_PLAYER,
-    playerPokemon,
-    enemyPokemon,
-    attackData,
-  };
-}
+// OVER
 
 function handleKO(playerPokemon, enemyPokemon, attackData) {
   return {
@@ -56,7 +53,8 @@ function playerWins(playerPokemon, enemyPokemon, attackData) {
 }
 
 function battleOver(playerPokemon, enemyPokemon, attackData) {
-  return (dispatch) => {
+  return async (dispatch) => {
+    await axios.put(`${dbUrls.baseUrl}${dbUrls.rankingUrl}/add`, { battle: { won: 1 }, email: 'eloy@eloy.com' });
     dispatch(handleKO(playerPokemon, enemyPokemon, attackData));
     setTimeout(() => (dispatch(playerWins(playerPokemon, enemyPokemon, attackData))), 1500);
   };
@@ -67,6 +65,17 @@ function checkOver(playerPokemon, enemyPokemon, attackData) {
     attackData.teamLenght === 1
       ? dispatch(battleOver(playerPokemon, enemyPokemon, attackData))
       : dispatch(handleKO(playerPokemon, enemyPokemon, attackData));
+  };
+}
+
+// ATTACKING
+
+function resolveAttack(playerPokemon, enemyPokemon, attackData) {
+  return {
+    type: actionTypes.RESOLVE_ATTACK_PLAYER,
+    playerPokemon,
+    enemyPokemon,
+    attackData,
   };
 }
 
@@ -83,7 +92,7 @@ function getUpdatedHP(playerPokemon, enemyPokemon, attackData) {
           attackData,
         ),
       )
-      : dispatch(checkOver(playerPokemon, enemyPokemon, attackData));
+      : dispatch(checkOver(playerPokemon, updatedenemyPokemon, attackData));
   };
 }
 
