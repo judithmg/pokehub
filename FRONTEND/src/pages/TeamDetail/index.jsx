@@ -39,6 +39,7 @@ export function TeamDetailComponent({
         <Modal
           isShowing={isShowing}
           hide={toggle}
+          teamId={teamId}
         />
 
         {

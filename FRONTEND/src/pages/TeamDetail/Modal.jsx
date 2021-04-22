@@ -4,7 +4,7 @@ import '../../styles/modal.scss';
 import { Link } from 'react-router-dom';
 import Pokeball from '../Shared/PokeballComponent';
 
-const Modal = ({ isShowing, hide }) => (isShowing ? ReactDOM.createPortal(
+const Modal = ({ isShowing, hide, teamId }) => (isShowing ? ReactDOM.createPortal(
   <>
     <div className="modal-overlay" />
     <div className="modal-wrapper">
@@ -13,7 +13,7 @@ const Modal = ({ isShowing, hide }) => (isShowing ? ReactDOM.createPortal(
         <button type="button" className="modal-close" onClick={hide}>X</button>
         <p>Make sure you assigned a moveset for each Pokemon!</p>
         <p>Click to go to battle if you are ready</p>
-        <Link to="/battle"><Pokeball /></Link>
+        <Link to={`/battle/${teamId}`}><Pokeball /></Link>
       </div>
     </div>
   </>, document.body,

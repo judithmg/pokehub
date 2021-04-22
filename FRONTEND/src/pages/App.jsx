@@ -45,7 +45,7 @@ function App({
   moves,
   abilities,
   learnsets,
-  user, teams,
+  user,
 }) {
   useEffect(() => {
     if (!pokedex?.length) {
@@ -71,7 +71,7 @@ function App({
 
   useEffect(() => {
     actions.loadTeams(user?._id);
-  }, [teams?.length, user, user.email]);
+  }, [user.email]);
 
   return (
     <AuthProvider>
@@ -84,7 +84,7 @@ function App({
             <Route path="/pokemon/:pokeId" component={PokeDetail} />
             <Route path="/pokedex" component={Pokedex} />
             <Route path="/signup" component={SignUp} />
-            <PrivateRoute path="/battle" component={Battle} />
+            <PrivateRoute path="/battle/:teamId" component={Battle} />
             <PrivateRoute path="/team-creator" component={TeamCreator} />
             <PrivateRoute path="/team-detail/:teamId" component={TeamDetail} />
             <PrivateRoute path="/teams" component={Teams} />
@@ -105,7 +105,6 @@ App.propTypes = {
     _id: PropTypes.string,
     email: PropTypes.string,
   }).isRequired,
-  teams: PropTypes.arrayOf(PropTypes.object).isRequired,
   abilities: PropTypes.arrayOf(PropTypes.object).isRequired,
   moves: PropTypes.arrayOf(PropTypes.object).isRequired,
   learnsets: PropTypes.arrayOf(PropTypes.object).isRequired,
