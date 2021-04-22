@@ -1,7 +1,16 @@
 {
-  "name": "PokeHub",
+  "name": "Pokemon Hub",
+  "author": "Judith Martínez",
   "version": "0.1.0",
   "private": true,
+  "keywords": [
+    "pokemon",
+    "redux",
+    "react",
+    "battle",
+    "poke",
+    "pokedex"
+  ],
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
