@@ -1,11 +1,11 @@
 /* eslint-disable no-param-reassign */
-
 import axios from 'axios';
-import actionTypes from './actionTypes';
+
 import calculateTypeModifier from '../../battle/attackTypeMultiplier';
-import getAttackData from '../../battle/getAttackData';
 import calculateAttackPower from '../../battle/calculateAttackPower';
+import getAttackData from '../../battle/getAttackData';
 import dbUrls from '../../constants/dbUrls';
+import actionTypes from './actionTypes';
 
 function newEnemyPokemonLoad() {
   return {
@@ -104,7 +104,6 @@ function getAttackPowerEnemy(
     enemyPokemon,
     playerPokemon,
   );
-  console.log('enemyattacks', attackPower);
   const data = {
     ...attackData,
     attackPower,

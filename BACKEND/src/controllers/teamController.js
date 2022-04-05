@@ -83,7 +83,7 @@ function deleteTeamByParams(req, res) {
 }
 
 function modifyTeam(req, res) {
-  const email = req.params?.teamId || req.body.email;
+  const { email } = req.body;
 
   Team.findOneAndUpdate({ email }, req.body, { new: true }, (error, result) => {
     if (error) {

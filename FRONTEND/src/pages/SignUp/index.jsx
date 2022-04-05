@@ -1,13 +1,13 @@
 /* eslint-disable consistent-return */
-import React, { useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-
-import { Link, useHistory, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { useAuth } from '../../context/AuthContext';
 import '../../styles/auth.scss';
 
+import PropTypes from 'prop-types';
+import React, { useRef, useState } from 'react';
+import { connect } from 'react-redux';
+import { Link, Redirect, useHistory } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+
+import { useAuth } from '../../context/AuthContext';
 import { signupUser } from '../../redux/actions/userActions';
 
 export function SignupComponent({ actions }) {
@@ -67,7 +67,7 @@ export function SignupComponent({ actions }) {
           <div id="password-confirm">
             <label htmlFor="password-confirm">
               Password
-              <input id="password-confirm" type="password" ref={passwordRef} required />
+              <input id="password-confirm" type="password" ref={passwordConfirmRef} required />
             </label>
           </div>
           <button className="login__btn" disabled={loading} type="submit">

@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from 'react';
 import '../../styles/header.scss';
-import { PropTypes } from 'prop-types';
 
-import { Link, useHistory } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
+
+import { websiteImages } from '../../constants/images';
 import { useAuth } from '../../context/AuthContext';
 import { getUserInfo, logoutUser } from '../../redux/actions/userActions';
-import { websiteImages } from '../../constants/images';
 import Menu from '../Menu';
 import Button from '../Shared/ButtonComponent';
 
 export function HeaderComponent({ actions, user }) {
   const [menu, setMenu] = useState(false);
-  const currentUser = useAuth();
+  const { currentUser } = useAuth();
   const { logout } = useAuth();
   const history = useHistory();
 
@@ -24,8 +25,8 @@ export function HeaderComponent({ actions, user }) {
   }
 
   useEffect(() => {
-    if (!user?.email) {
-      const useremail = currentUser?.currentUser?.email;
+    if (!user?.email && currentUser?.email) {
+      const useremail = currentUser?.email;
       actions.getUserInfo(useremail);
     }
   }, [user]);
